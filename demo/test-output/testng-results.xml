@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="testCase.xlsx" duration-ms="15922" started-at="2018-05-03T06:07:06Z" finished-at="2018-05-03T06:07:22Z">
+    <groups>
+    </groups>
+    <test name="SEARCHING_01" duration-ms="15922" started-at="2018-05-03T06:07:06Z" finished-at="2018-05-03T06:07:22Z">
+      <class name="com.aaa.olb.automation.util.TestClass">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="beforeSuite" is-config="true" duration-ms="11" started-at="2018-05-03T14:07:06Z" finished-at="2018-05-03T14:07:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="beforeClass" is-config="true" duration-ms="1" started-at="2018-05-03T14:07:06Z" finished-at="2018-05-03T14:07:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="init(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="init" is-config="true" duration-ms="10741" started-at="2018-05-03T14:07:06Z" finished-at="2018-05-03T14:07:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[testCase.xlsx]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[SEARCHING_01]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="testMethod()[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="testMethod" duration-ms="5048" started-at="2018-05-03T14:07:17Z" finished-at="2018-05-03T14:07:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="beforeMethod" is-config="true" duration-ms="0" started-at="2018-05-03T14:07:17Z" finished-at="2018-05-03T14:07:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="clear()[pri:0, instance:com.aaa.olb.automation.util.TestClass@6d2a209c]" name="clear" is-config="true" duration-ms="120" started-at="2018-05-03T14:07:22Z" finished-at="2018-05-03T14:07:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clear -->
+      </class> <!-- com.aaa.olb.automation.util.TestClass -->
+    </test> <!-- SEARCHING_01 -->
+  </suite> <!-- testCase.xlsx -->
+</testng-results>

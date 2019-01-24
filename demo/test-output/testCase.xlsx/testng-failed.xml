@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [testCase.xlsx]">
+  <test name="SEARCHING_01(failed)">
+    <parameter name="index" value="0"/>
+    <parameter name="testName" value="SEARCHING_01"/>
+    <parameter name="suiteName" value="testCase.xlsx"/>
+    <classes>
+      <class name="com.aaa.olb.automation.util.TestClass">
+        <methods>
+          <include name="clear"/>
+          <include name="testMethod"/>
+          <include name="beforeClass"/>
+          <include name="beforeSuite"/>
+          <include name="beforeMethod"/>
+          <include name="init"/>
+        </methods>
+      </class> <!-- com.aaa.olb.automation.util.TestClass -->
+    </classes>
+  </test> <!-- SEARCHING_01(failed) -->
+</suite> <!-- Failed suite [testCase.xlsx] -->
