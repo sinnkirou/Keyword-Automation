@@ -5,6 +5,10 @@ import com.aaa.olb.automation.flow.FlowDeclaration;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.flow.FlowTemplateRepository;
 
+/*
+ * if there is a new template created, make sure
+ * append a case to add the template to the template repository
+ * */
 public class TemplateProvider {
 	public static void addTemplate(FlowDeclaration flow) {
 		if (flow.isTemplate()) {

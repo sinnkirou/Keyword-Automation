@@ -6,6 +6,9 @@ import com.aaa.olb.automation.behaviors.BehaviorProvider;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.SearchboxForm;
 
+/*
+ * With the given provider in behaviorIndication, so as to get the needed customized Behavior
+ * */
 public class CustomizedBehaviorProvider implements BehaviorProvider {
 	@Override
 	public Behavior get(BehaviorFacet facet) {

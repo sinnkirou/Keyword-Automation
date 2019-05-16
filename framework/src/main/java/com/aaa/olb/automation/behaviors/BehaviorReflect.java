@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 
 import org.openqa.selenium.NotFoundException;
 
+/*
+ * invoke a customized action defined in control type clazz by reflect
+ * */
 public class BehaviorReflect {
 	public static Object action(BehaviorFacet facet)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
@@ -13,6 +16,10 @@ public class BehaviorReflect {
 		int parameterAmounts = facet.getParameters() != null ? facet.getParameters().length : 0;
 		for (Method method : fieldMethods) {
 
+			/*
+			 * get the right method with same method name and consistent parameters, 
+			 * then invoke it by the instance stored in BehaviorFacet
+			 * */
 			if (method.getName().equals(facet.getBehaviorName())) {
 				if (facet.getParameters() != null && method.getParameterTypes().length == parameterAmounts
 						&& checkIsParameterMatched(method, facet)) {

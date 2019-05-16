@@ -23,14 +23,20 @@ public class ReflectionRoute extends Route{
 		this.field = field;
 	}
 	
+	/*
+	 *Class<?> getType() 返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型。
+     *Type getGenericType() 返回一个 Type 对象，它表示此 Field 对象所表示字段的声明类型。 
+	 * */
 	public static ReflectionRoute create(Field field) {
 		boolean isControl = false;
 		ReflectionRoute route = new ReflectionRoute();
 		route.setField(field);
 		route.setFieldType(field.getType());
 		route.setFieldName(field.getName());
-		ById byId = field.getAnnotation(ById.class);
 		
+		/*
+		 * handle the list control such as List<Input>
+		 * */
 		if(field.getType().isAssignableFrom(List.class)){
 			ParameterizedType fieldType= (ParameterizedType) field.getGenericType();
 			if(fieldType == null) {
@@ -39,6 +45,8 @@ public class ReflectionRoute extends Route{
 			route.setGeneric(true);
 			route.setFieldType(fieldType.getActualTypeArguments()[0]);
 		}
+		
+		ById byId = field.getAnnotation(ById.class);
 		if (byId != null) {
 			isControl = true;
 			route.setLocationKind(LocationKind.ID);

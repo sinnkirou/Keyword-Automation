@@ -12,6 +12,11 @@ public class ControlBehavior implements Behavior {
 		this.facet = facet;
 	}
 
+	/*
+	 * execute the action,
+	 * perform the default behavior defined in Control type,
+	 * otherwise invoke it by reflect, see more on BehaviorReflect.action(facet)
+	 * */
 	@Override
 	public Object Execute() throws Exception {
 		// TODO Auto-generated method stub

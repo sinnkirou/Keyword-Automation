@@ -8,6 +8,9 @@ import com.aaa.olb.automation.configuration.RuntimeSettings;
 
 public class RuntimeSettingProvider {
 	
+	/*
+	 * set runtime setting by timeout config sheet data
+	 * */
 	public static void read(DataProvider provider) {
 		List<Map<String, CellEntity>> sources = provider.getData();
 		

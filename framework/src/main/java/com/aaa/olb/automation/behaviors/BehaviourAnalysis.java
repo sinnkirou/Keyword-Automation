@@ -19,6 +19,10 @@ public class BehaviourAnalysis {
 		Class<?> pageClazz = PageRepository.getInstance().getPage(testStep.getPageName());
 
 		if (pageClazz != null) {
+			/*
+			 * should initialize page if the page is not initialized or page redirected is performed,
+			 * using PageRepository.create to initialize page instance
+			 * */
 			if (page == null || initializePage) {
 				page = PageRepository.create(driver, pageClazz);
 				page.waitForAvailable();
@@ -26,6 +30,9 @@ public class BehaviourAnalysis {
 			Method[] methods = page.getClass().getMethods();
 
 			for (Method method : methods) {
+				/*
+				 * find the specific method and invoke it to get the web element instance, then execute the action
+				 * */
 				if (method.getAnnotation(ColumnName.class) != null && methodMathced(testStep.getTargetName(), method)) {
 					Object target = method.invoke(page);
 
@@ -54,6 +61,11 @@ public class BehaviourAnalysis {
 		}
 	}
 
+	/*
+	 * get BehaviorIndication by the method's annotation
+	 * if null, get BehaviorIndication from the method's return type
+	 * using the BehaviorIndication.provider() to get the specific BehaviorProvider clazz
+	 * */
 	public static BehaviorProvider getBehaviorProvider(Method method) throws Exception {
 		BehaviorIndication indication = method.getAnnotation(BehaviorIndication.class);
 
@@ -71,6 +83,11 @@ public class BehaviourAnalysis {
 		return new DefaultBehaviorProvider();
 	}
 
+	/*
+	 * get behavior name from test step action value by highest priority,
+	 * get behavior name from method's BehaviorIndication annotaion by medium priority,
+	 * get behavior name from method return type's BehaviorIndication annotaion by low priority,
+	 * */
 	public static String getBehaviorName(Method method, TestStepEntity testStep) {
 		if (testStep.getActionKeyWord() != "" && testStep.getActionKeyWord() != null) {
 			return testStep.getActionKeyWord();
@@ -82,6 +99,9 @@ public class BehaviourAnalysis {
 		return null;
 	}
 
+	/*
+	 * create the BehaviorFacet by inputting target, teststep and method
+	 * */
 	public static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method)
 			throws Exception {
 		BehaviorFacet facet = new BehaviorFacet();
@@ -91,8 +111,12 @@ public class BehaviourAnalysis {
 		facet.setAsync(method.getAnnotation(ColumnName.class).async());
 		facet.setBlur(method.getAnnotation(ColumnName.class).blur());
 
+		/*
+		 * handle the elements list
+		 * Besides the default facet values above,
+		 * index should also be set from teststep target name, like SuggestItems[1]
+		 * */
 		if (testStep.getTargetName().contains("[")) {
-
 			ListItemBehaviorFacet listFacet = new ListItemBehaviorFacet();
 			listFacet.setDefault(facet);
 
@@ -111,6 +135,9 @@ public class BehaviourAnalysis {
 		return facet;
 	}
 
+	/*
+	 * invoke BehaviorProvider.get(BehaviorFacet) to get specific behavior
+	 * */
 	public static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) throws Exception {
 		return (Behavior) provider.getClass().getMethod("get", BehaviorFacet.class).invoke(provider, facet);
 	}

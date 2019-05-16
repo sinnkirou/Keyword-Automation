@@ -25,12 +25,19 @@ public class TestClass extends BaseTestClass {
 		this.currentPage = "";
 	}
 
+	/*
+	 * BehaviourAnalysis.action performs each action by test step
+	 * */
 	@Test()
 	@Parameters()
 	public void testMethod() throws Throwable {
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
 			Object result = BehaviourAnalysis.action(browser.getDriver(), ts, initializePage);
+			
+			/*
+			 * with [value] or [text] etc defined in test step, it means we should compare the value on real value with expected value
+			 * */
 			if (result != null && ts.getActionKeyWord().contains("[")) {
 				Assert.assertEquals(result.toString().replaceAll("\\u00a0|\\s*", ""),
 						ts.getValue().replaceAll("\\u00a0|\\s*", ""));

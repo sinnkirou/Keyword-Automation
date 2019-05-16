@@ -24,6 +24,9 @@ import com.aaa.olb.automation.util.TestngListener;
 
 public class TestCaseKeyWord {
 
+	/*
+	 * entry point
+	 * */
 	public static void main(String[] args) throws Exception {
 		new TestCaseKeyWord().run();
 	}
@@ -31,15 +34,27 @@ public class TestCaseKeyWord {
 	@SuppressWarnings("deprecation")
 	public void run() throws Exception {
 		DOMConfigurator.configure("log4j.xml");
+		
+		/*
+		 * generate testcases from excel file
+		 * */
 		String filePath = Constant.Path_TestData + Constant.TS_File_Name;
 		Map<String, TestCaseEntity> testCaseEntities = new TestCaseGenerator().createTestCases(filePath);
 
+		/*
+		 * XmlSuite > XmlTest > XmlClass
+		 * */
 		TestSuiteWrapper testSuite = new TestSuiteWrapper(Constant.TS_File_Name);
 		List<TestCaseWrapper> testCases = new ArrayList<>();
 		int index = 0;
 		for (String key : testCaseEntities.keySet()) {
 			TestCaseEntity tc = testCaseEntities.get(key);
 			TestCaseWrapper testCase = new TestCaseWrapper(testSuite, tc, index++);
+			/*
+			 * notice we put TestClass into the TestClassWrapper,
+			 * each action process is defined inside TestClass,
+			 * by running the testng suite will perform the corresponding actions performed on website
+			 * */
 			TestClassWrapper testClass = new TestClassWrapper(TestClass.class);
 			testCase.setTestCase(Arrays.asList(testClass));
 			testCases.add(testCase);

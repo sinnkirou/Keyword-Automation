@@ -12,6 +12,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import com.aaa.olb.automation.controls.Control;
 
+/*
+ * 可以通过修改InvocationHandler里面的处理,比如 java element = this.locator.findElement(); 
+ * */
 public class ElementCollectionInvocationHandler implements InvocationHandler {
 
 	private final ElementLocator locator;

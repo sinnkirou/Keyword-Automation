@@ -26,6 +26,9 @@ import com.aaa.olb.automation.utils.ExcelUtils;
 
 public class TestCaseGenerator implements BaseTestCaseGenerator {
 
+	/*
+	 * param: excel file path
+	 * */
 	public Map<String, TestCaseEntity> createTestCases(String filePath) throws Exception {
 		DataProvider timeoutProvider = new ExcelProvider(
 				ExcelUtils.getSheet(filePath, ConfigurationOptions.CONFIG_SHEET_NAME));
@@ -86,6 +89,10 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 		return ts;
 	}
 
+	
+	/*
+	 * get specific test steps by inputting flow entities 
+	 * */
 	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception {
 		List<TestStepEntity> allTestSteps = new ArrayList<>();
 		Map<String, List<TestStepEntity>> groups = new HashMap<>();
@@ -95,8 +102,14 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			String templateName = flow.getName();
 			XSSFSheet sheet = ExcelUtils.getSheet(filePath, templateName);
 
+			/*
+			 * create page instance that the pageClazz will retrieved by name afterwards
+			 * */
 			PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
 
+			/*
+			 * when the template is enabled, 
+			 * */
 			if (flow.isTemplate() && sheet != null) {
 				templateName = flow.getName();
 				TemplateProvider.addTemplate(flow);
@@ -110,7 +123,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 				try {
 					provider = new ExcelProvider(sheet);
 				} catch (Exception ex) {
-					System.out.println("please check whether the sheet " + templateName + " is filled suitale");
+					System.out.println("please check whether the sheet " + templateName + " is filled suitable");
 					throw ex;
 				}
 

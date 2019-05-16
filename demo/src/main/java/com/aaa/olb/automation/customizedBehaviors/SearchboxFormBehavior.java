@@ -6,6 +6,9 @@ import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.SearchboxForm;
 import com.aaa.olb.automation.configuration.SystemConstants;
 
+/*
+ * generate different actions cases depends on each given behavior name defined in BehaviorIndication
+ * */
 public class SearchboxFormBehavior extends ControlBehavior {
 
 	public SearchboxFormBehavior(BehaviorFacet facet) {

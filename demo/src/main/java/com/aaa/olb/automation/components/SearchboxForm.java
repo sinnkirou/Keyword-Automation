@@ -10,6 +10,10 @@ import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
 
+/*
+ * Basically it's used like a page clazz,
+ * a component which contains various of basic fields, mainly used for datepicker, radiobuttons, etc
+ * */
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
 public class SearchboxForm extends Component {
 

@@ -14,8 +14,10 @@ public abstract class BasePage extends ActionRepository {
 
 	protected SeleniumContext context;
 
+	/*
+	 * using PageFactory to create page instance
+	 * */
 	public BasePage(WebDriver driver) {
-
 		super();
 		this.driver = driver;
 		this.context = new SeleniumContext();

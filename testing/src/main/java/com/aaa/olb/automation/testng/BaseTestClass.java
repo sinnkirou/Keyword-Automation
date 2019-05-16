@@ -13,6 +13,9 @@ import com.aaa.olb.automation.listeners.RetryCounter;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.DeleteFile;
 
+/*
+ * default browser operations are defined here and then inherited by child class
+ * */
 public abstract class BaseTestClass {
 
 	protected int Index;
