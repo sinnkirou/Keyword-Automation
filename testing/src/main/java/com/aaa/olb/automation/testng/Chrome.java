@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class Chrome extends Browser {
 
 	public Chrome(String remoteHub) throws MalformedURLException {
-		super("./driverLib/chromedriver.exe", remoteHub);
+		super("./driverLib/chromedriver", remoteHub);
 	}
 
 	@Override
