@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class Firefox extends Browser {
 
 	public Firefox(String remoteHub) throws MalformedURLException {
-		super("./driverLib/geckodriver.exe", remoteHub);
+		super("./driverLib/geckodriver", remoteHub);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import com.aaa.olb.automation.annotations.ById;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.controls.A;
-import com.aaa.olb.automation.controls.Span;
 import com.aaa.olb.automation.framework.BasePage;
 
 public class SearchResultPage extends BasePage{

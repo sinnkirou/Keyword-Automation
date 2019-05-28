@@ -14,6 +14,10 @@ public abstract class Browser {
 	private WebDriver driver;
 
 	public Browser(String driverPath, String remoteHub) throws MalformedURLException{
+		String os = System.getProperty("os.name");  
+		if(os.toLowerCase().startsWith("win")){  
+			driverPath+=".exe";
+		}  
 		this.driver = this.initialize(driverPath, remoteHub);
 	}
 

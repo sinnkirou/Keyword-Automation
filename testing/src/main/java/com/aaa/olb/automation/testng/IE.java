@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class IE extends Browser {
 
 	public IE(String remoteHub) throws MalformedURLException {
-		super("./driverLib/IEDriverServer.exe", remoteHub);
+		super("./driverLib/IEDriverServer", remoteHub);
 	}
 
 	@Override
