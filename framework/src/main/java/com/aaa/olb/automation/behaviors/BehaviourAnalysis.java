@@ -10,6 +10,7 @@ import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.PageRepository;
+import com.aaa.olb.automation.log.Log;
 
 public class BehaviourAnalysis {
 	private static BasePage page = null;
@@ -43,6 +44,7 @@ public class BehaviourAnalysis {
 					try {
 						return behavior.getClass().getMethod("Execute").invoke(behavior);
 					} catch (InvocationTargetException e) {
+						Log.info(e.getCause().getMessage());
 						throw e.getCause();
 					}
 

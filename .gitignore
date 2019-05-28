@@ -8,3 +8,7 @@ demo/ExtentReports/Extent\.html
 demo/logfile\.log
 
 demo/\.settings/
+
+extent\.db
+
+*.png
