@@ -12,3 +12,5 @@ demo/\.settings/
 extent\.db
 
 *.png
+
+\.idea/

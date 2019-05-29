@@ -407,12 +407,12 @@ public class Control extends ActionRepository {
 		}
 	}
 	
-	public void RightClick() {
+	public void rightClick() {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		Actions action = new Actions(this.driver); 
-		action.contextClick(we);
-		this.info(this, generateAction("doubleClick", startTime, LocalDateTime.now()));
+		action.moveToElement(we).contextClick().perform();
+		this.info(this, generateAction("rightClick", startTime, LocalDateTime.now()));
 	}
 
 	/**
@@ -425,7 +425,7 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		Actions actions = new Actions(this.driver);
-		actions.doubleClick();
+		actions.moveToElement(we).doubleClick().perform();
 		this.info(this, generateAction("doubleClick", startTime, LocalDateTime.now()));
 	}
 
@@ -483,18 +483,18 @@ public class Control extends ActionRepository {
 	}
 	
 	/*
-	 * 鼠标拖拽动作
+	 * 鼠标拖拽元素动作
 	 * 将 source 元素拖放到 target 元素的位置
 	 * */
 	public void dragAndDrop(WebElement target) {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver); 
-		action.dragAndDrop(we, target);
+		action.moveToElement(we).dragAndDrop(we, target).perform();;
 		this.info(this, generateAction("dragAndDrop", startTime, LocalDateTime.now()));
 	}
 	
 	/*
-	 * 鼠标拖拽动作
+	 * 鼠标拖拽元素动作
 	 * 将 source 元素拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
 	 * */
 	public void dragAndDropByOffset(String text) {
@@ -502,8 +502,21 @@ public class Control extends ActionRepository {
 		int xOffset = Integer.parseInt(text.split(",")[0]);
 		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
 		Actions action = new Actions(this.driver); 
-		action.dragAndDropBy(we, xOffset, yOffset);
+		action.moveToElement(we).dragAndDropBy(we, xOffset, yOffset).perform();
 		this.info(this, generateAction("dragAndDropBy with offset: "+ text, startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 鼠标在当前位置拖拽,到当前元素的(xOffset, yOffset) 位置
+	 * */
+	public void dragAndDropByOffsetFromCurrent(String text) {
+		LocalDateTime startTime = LocalDateTime.now();
+		int xOffset = Integer.parseInt(text.split(",")[0]);
+		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		Actions action = new Actions(this.driver); 
+		action.clickAndHold().moveToElement(we, xOffset, yOffset).perform(); 
+		action.release().perform();
+		this.info(this, generateAction("dragAndDropByOffsetAtCurrent with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 	
 	/*
@@ -512,7 +525,7 @@ public class Control extends ActionRepository {
 	public void clickAndHold() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver); 
-		action.clickAndHold(we);
+		action.moveToElement(we).clickAndHold(we).perform();
 		this.info(this, generateAction("clickAndHold", startTime, LocalDateTime.now()));
 	}
 	
@@ -522,7 +535,7 @@ public class Control extends ActionRepository {
 	public void moveToElement() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver); 
-		action.moveToElement(we);
+		action.moveToElement(we).perform();
 		this.info(this, generateAction("moveToElement", startTime, LocalDateTime.now()));
 	}
 	
@@ -534,7 +547,7 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		int xOffset = Integer.parseInt(text.split(",")[0]);
 		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
-		action.moveByOffset(xOffset,yOffset);
+		action.moveByOffset(xOffset,yOffset).perform();
 		this.info(this, generateAction("moveByOffsetFromStart with offset: "+text, startTime, LocalDateTime.now()));
 	}
 	
@@ -547,7 +560,7 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		int xOffset = Integer.parseInt(text.split(",")[0]);
 		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
-		action.moveToElement(we,xOffset,yOffset);
+		action.moveToElement(we,xOffset,yOffset).perform();
 		this.info(this, generateAction("moveByOffsetFromElement with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 	
@@ -557,7 +570,17 @@ public class Control extends ActionRepository {
 	public void clickAtCurrentPosition() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver);
-		action.click();
+		action.click().perform();
+		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 鼠标左键在当前停留的位置做右击操作 
+	 * */
+	public void rightClickAtCurrentPosition() {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(this.driver);
+		action.contextClick().perform();
 		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
 	
@@ -567,7 +590,7 @@ public class Control extends ActionRepository {
 	public void release() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver); 
-		action.release();
+		action.release().perform();
 		this.info(this, generateAction("release", startTime, LocalDateTime.now()));
 	}
 }

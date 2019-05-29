@@ -57,4 +57,20 @@ public class RichTextBox extends Input {
 		we.sendKeys(Keys.ENTER);
 		this.info(this, generateAction("sendEnter", startTime, LocalDateTime.now()));
 	}
+	
+	/*
+	 * @param
+	 * startxOffset, startyOffset, endxOffset, endyOffset
+	 * */
+	public void drogAndDropRichBox(String text) {
+		LocalDateTime startTime = LocalDateTime.now();
+		int startxOffset = Integer.parseInt(text.split(",")[0]);
+		int startyOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		int endxOffset = text.split(",").length > 2 ? Integer.parseInt(text.split(",")[2]) : 0;
+		int endyOffset = text.split(",").length > 3 ? Integer.parseInt(text.split(",")[3]) : 0;
+		moveByOffsetFromElement(startxOffset+","+startyOffset);
+		dragAndDropByOffsetFromCurrent(endxOffset+","+endyOffset);
+		rightClickAtCurrentPosition();
+		this.info(this, generateAction("drogAndDropRichBox", startTime, LocalDateTime.now()));
+	}
 }
