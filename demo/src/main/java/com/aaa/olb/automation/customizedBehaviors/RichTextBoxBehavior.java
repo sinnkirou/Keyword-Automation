@@ -36,6 +36,16 @@ public class RichTextBoxBehavior extends ControlBehavior {
 				
 			}
 			return null;
+		case SystemConstants.BEHAVIOR_SEND_ENTER:
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.waitForVisible();
+					target.sendEnter();
+				}
+			});
+			return null;
 		default:
 			return super.Execute();
 		}

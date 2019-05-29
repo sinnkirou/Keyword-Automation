@@ -406,6 +406,14 @@ public class Control extends ActionRepository {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void RightClick() {
+		LocalDateTime startTime = LocalDateTime.now();
+		scrollToViewElement();
+		Actions action = new Actions(this.driver); 
+		action.contextClick(we);
+		this.info(this, generateAction("doubleClick", startTime, LocalDateTime.now()));
+	}
 
 	/**
 	 * double click control
@@ -480,7 +488,7 @@ public class Control extends ActionRepository {
 	 * */
 	public void dragAndDrop(WebElement target) {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(driver); 
+		Actions action = new Actions(this.driver); 
 		action.dragAndDrop(we, target);
 		this.info(this, generateAction("dragAndDrop", startTime, LocalDateTime.now()));
 	}
@@ -493,9 +501,9 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		int xOffset = Integer.parseInt(text.split(",")[0]);
 		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
-		Actions action = new Actions(driver); 
+		Actions action = new Actions(this.driver); 
 		action.dragAndDropBy(we, xOffset, yOffset);
-		this.info(this, generateAction("dragAndDropBy", startTime, LocalDateTime.now()));
+		this.info(this, generateAction("dragAndDropBy with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 	
 	/*
@@ -503,8 +511,63 @@ public class Control extends ActionRepository {
 	 * */
 	public void clickAndHold() {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(driver); 
+		Actions action = new Actions(this.driver); 
 		action.clickAndHold(we);
 		this.info(this, generateAction("clickAndHold", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 将鼠标移到元素中点
+	 * */
+	public void moveToElement() {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(this.driver); 
+		action.moveToElement(we);
+		this.info(this, generateAction("moveToElement", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 以鼠标当前位置或者 (0,0) 为中心开始移动到 (xOffset, yOffset) 坐标轴
+	 * */
+	public void moveByOffsetFromStart(String text) {
+		Actions action = new Actions(this.driver); 
+		LocalDateTime startTime = LocalDateTime.now();
+		int xOffset = Integer.parseInt(text.split(",")[0]);
+		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		action.moveByOffset(xOffset,yOffset);
+		this.info(this, generateAction("moveByOffsetFromStart with offset: "+text, startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 *  将鼠标移到元素 toElement 的 (xOffset, yOffset) 位置，
+	 *  这里的 (xOffset, yOffset) 是以元素 toElement 的左上角为 (0,0) 开始的 (x, y) 坐标轴。
+	 * */
+	public void moveByOffsetFromElement(String text) {
+		Actions action = new Actions(this.driver); 
+		LocalDateTime startTime = LocalDateTime.now();
+		int xOffset = Integer.parseInt(text.split(",")[0]);
+		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		action.moveToElement(we,xOffset,yOffset);
+		this.info(this, generateAction("moveByOffsetFromElement with offset: "+ text, startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 鼠标左键在当前停留的位置做单击操作 
+	 * */
+	public void clickAtCurrentPosition() {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(this.driver);
+		action.click();
+		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 释放鼠标
+	 * */
+	public void release() {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(this.driver); 
+		action.release();
+		this.info(this, generateAction("release", startTime, LocalDateTime.now()));
 	}
 }

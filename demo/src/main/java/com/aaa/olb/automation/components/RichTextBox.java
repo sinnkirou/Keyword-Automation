@@ -3,6 +3,7 @@ package com.aaa.olb.automation.components;
 import java.time.LocalDateTime;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -49,5 +50,11 @@ public class RichTextBox extends Input {
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public void sendEnter() {
+		LocalDateTime startTime = LocalDateTime.now();
+		we.sendKeys(Keys.ENTER);
+		this.info(this, generateAction("sendEnter", startTime, LocalDateTime.now()));
 	}
 }

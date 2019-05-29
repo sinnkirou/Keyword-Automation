@@ -80,4 +80,6 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickAndHold";
 	
+	public final static String BEHAVIOR_SEND_ENTER = "sendEnter";
+	
 }
