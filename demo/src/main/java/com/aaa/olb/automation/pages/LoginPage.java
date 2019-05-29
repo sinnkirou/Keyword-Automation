@@ -20,7 +20,7 @@ public class LoginPage extends BasePage{
 	private Input email;
 	
 	@ById("idSIButton9")
-	private Button idSIButton9;
+	private Button nextButton;
 	
 	@ById("i0118")
 	private Input password;
@@ -38,7 +38,7 @@ public class LoginPage extends BasePage{
 	
 	@ColumnName("NextButton")
 	public Button getNextButton() {
-		return idSIButton9;
+		return nextButton;
 	}
 	
 	@ColumnName("Password")

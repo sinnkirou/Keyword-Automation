@@ -4,6 +4,7 @@ import com.aaa.olb.automation.behaviors.Behavior;
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.BehaviorProvider;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
+import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.components.SearchboxForm;
 
 /*
@@ -16,6 +17,10 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 
 		if (facet.getTarget() instanceof SearchboxForm) {
 			return new SearchboxFormBehavior(facet);
+		} 
+		
+		if (facet.getTarget() instanceof RichTextBox) {
+			return new RichTextBoxBehavior(facet);
 		} 
 		
 		return new ControlBehavior(facet);

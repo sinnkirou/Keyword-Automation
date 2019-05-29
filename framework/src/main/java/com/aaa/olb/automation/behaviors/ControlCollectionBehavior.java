@@ -22,16 +22,16 @@ public class ControlCollectionBehavior implements Behavior {
 			behaviorName = SystemConstants.LIST_BEHAVIOR_GET;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.LIST_BEHAVIOR_GET: {
-			int index = (int) this.facet.getParameters()[0];
-			return target.get(index);
-		}
-		case SystemConstants.LIST_BEHAVIOR_SIZE: {
-			return target.size();
-		}
-		default: {
-			throw new UnsupportedOperationException("unable to action this operation.");
-		}
+			case SystemConstants.LIST_BEHAVIOR_GET: {
+				int index = (int) this.facet.getParameters()[0];
+				return target.get(index);
+			}
+			case SystemConstants.LIST_BEHAVIOR_SIZE: {
+				return target.size();
+			}
+			default: {
+				throw new UnsupportedOperationException("unable to action this operation.");
+			}
 		}
 	}
 

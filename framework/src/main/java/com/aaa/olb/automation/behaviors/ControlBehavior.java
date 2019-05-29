@@ -64,7 +64,7 @@ public class ControlBehavior implements Behavior {
 			target.hover();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_WAIT_FOR_READY: {
+		case SystemConstants.BEHAVIOR_WAIT_FOR_VISIBLE: {
 			target.waitForVisible();
 			return null;
 		}
@@ -75,7 +75,7 @@ public class ControlBehavior implements Behavior {
 		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT: {
 			String attribute = (String) this.facet.getParameters()[0];
 			String value = (String) this.facet.getParameters()[1];
-			target.waitForAttributeContained(attribute, value);
+			target.waitToPresent(attribute, value);
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_WATI_TO_HIDE: {

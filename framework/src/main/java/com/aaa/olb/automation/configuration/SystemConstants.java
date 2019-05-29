@@ -30,7 +30,7 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_ENTER="enter";
 	
-	public final static String BEHAVIOR_DOUBLECLICK="double click";
+	public final static String BEHAVIOR_DOUBLECLICK="doubleClick";
 	
 	public final static String BEHAVIOR_FOCUS="focus";
 	
@@ -42,17 +42,17 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_INDEX="index";
 	
-	public final static String BEHAVIOR_WAIT_FOR_READY="wait for ready";
+	public final static String BEHAVIOR_WAIT_FOR_VISIBLE="waitForVisible";
 	
-	public final static String BEHAVIOR_WATI_TO_CLICK="wait to click";
+	public final static String BEHAVIOR_WATI_TO_CLICK="waitForClickable";
 	
-	public final static String BEHAVIOR_WATI_TO_CHECK="wait to check";
+	public final static String BEHAVIOR_WATI_TO_CHECK="waitForCheck";
 	
-	public final static String BEHAVIOR_WATI_TO_SELECT="wait to select";
+	public final static String BEHAVIOR_WATI_TO_SELECT="waitUtilSelected";
 	
-	public final static String BEHAVIOR_WATI_TO_PRESENT="wait to present";
+	public final static String BEHAVIOR_WATI_TO_PRESENT="waitToPresent";
 	
-	public final static String BEHAVIOR_WATI_TO_HIDE="wait to hide";
+	public final static String BEHAVIOR_WATI_TO_HIDE="waitForHidden";
 	
 	public final static String BEHAVIOR_ATTRIBUTE="[attr]";
 	
@@ -70,7 +70,10 @@ public final class SystemConstants {
 	
 	public final static String LIST_BEHAVIOR_SIZE="size";
 	
-	public final static String BEHAVIOR_CLICK_IF_VISIBLE="click if visible";
+	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickIfVisible";
+	
+	public final static String BEHAVIOR_CHOOSE="selectPartialContent";
+	
 	
 
 }

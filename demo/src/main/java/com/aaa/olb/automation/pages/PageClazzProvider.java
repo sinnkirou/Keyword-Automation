@@ -2,16 +2,18 @@ package com.aaa.olb.automation.pages;
 
 public class PageClazzProvider {
 	/*
-	 * get the page clazz with corresponding page name
+	 * get the page class with corresponding page name
 	 * */
-	public static Class<?> getPageClazz(String pageName) {
+	public static Class<?> getPageClazz(String pageName) throws ClassNotFoundException {
 		if (pageName.equals(HomePage.class.getSimpleName()))
 			return HomePage.class;
 		if (pageName.equals(SearchResultPage.class.getSimpleName()))
 			return SearchResultPage.class;
 		if(pageName.equals(LoginPage.class.getSimpleName()))
 			return LoginPage.class;
+		if(pageName.equals(RichTextTestPage.class.getSimpleName()))
+			return RichTextTestPage.class;
 
-		return null;
+		return Class.forName("com.aaa.olb.automation.pages." + pageName);
 	}
 }

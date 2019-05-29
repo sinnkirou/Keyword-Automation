@@ -258,7 +258,7 @@ public class Control extends ActionRepository {
 				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
 	}
 
-	public void waitForAttributeContained(String attribute, String value) {
+	public void waitToPresent(String attribute, String value) {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 

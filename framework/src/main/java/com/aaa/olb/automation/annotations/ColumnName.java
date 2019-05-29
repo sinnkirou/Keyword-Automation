@@ -4,11 +4,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /*
- * value should be consistant with template target name;
+ * value should be consistent with template target name;
  * 
- * set aysnc to true, will wait for specific time;
+ * set async to true, will wait for specific time;
  * 
- * set blur to true for input fileds, will blur after entering;
+ * set blur to true for input fields, will blur after entering;
  * 
  * */
 @Retention(RetentionPolicy.RUNTIME)

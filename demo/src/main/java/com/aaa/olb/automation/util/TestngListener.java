@@ -1,5 +1,8 @@
 package com.aaa.olb.automation.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.testng.ITestResult;
 
 import com.aaa.olb.automation.listeners.BaseTestngListener;
@@ -13,7 +16,9 @@ public class TestngListener extends BaseTestngListener {
 
 	private void takeScreenShot(ITestResult tr) {
 		TestClass baseTestcase = (TestClass) tr.getInstance();
-		baseTestcase.takescreen(getTestCaseName(tr) + "_" + tr.getStartMillis());
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String timestamp = df.format(new Date());// new Date()为获取当前系统时间
+		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp);
 	}
 
 	@Override
