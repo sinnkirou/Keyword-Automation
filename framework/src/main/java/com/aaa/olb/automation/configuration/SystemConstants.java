@@ -50,7 +50,7 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_WATI_TO_SELECT="waitUtilSelected";
 	
-	public final static String BEHAVIOR_WATI_TO_PRESENT="waitToPresent";
+	public final static String BEHAVIOR_WATI_TO_PRESENT="waitTextToBePresented";
 	
 	public final static String BEHAVIOR_WATI_TO_HIDE="waitForHidden";
 	
@@ -74,6 +74,10 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CHOOSE="selectPartialContent";
 	
+	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="dragAndDropByOffset";
 	
-
+	public final static String BEHAVIOR_DRAG_AND_DROP="dragAndDrop";
+	
+	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickAndHold";
+	
 }

@@ -417,8 +417,7 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		Actions actions = new Actions(this.driver);
-		actions.moveToElement(we).click().perform();
-		actions.moveToElement(we).click().perform();
+		actions.doubleClick();
 		this.info(this, generateAction("doubleClick", startTime, LocalDateTime.now()));
 	}
 
@@ -473,5 +472,39 @@ public class Control extends ActionRepository {
 	 */
 	public WebElement getWebElement() {
 		return we;
+	}
+	
+	/*
+	 * 鼠标拖拽动作
+	 * 将 source 元素拖放到 target 元素的位置
+	 * */
+	public void dragAndDrop(WebElement target) {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(driver); 
+		action.dragAndDrop(we, target);
+		this.info(this, generateAction("dragAndDrop", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 鼠标拖拽动作
+	 * 将 source 元素拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
+	 * */
+	public void dragAndDropByOffset(String text) {
+		LocalDateTime startTime = LocalDateTime.now();
+		int xOffset = Integer.parseInt(text.split(",")[0]);
+		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		Actions action = new Actions(driver); 
+		action.dragAndDropBy(we, xOffset, yOffset);
+		this.info(this, generateAction("dragAndDropBy", startTime, LocalDateTime.now()));
+	}
+	
+	/*
+	 * 鼠标悬停操作
+	 * */
+	public void clickAndHold() {
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(driver); 
+		action.clickAndHold(we);
+		this.info(this, generateAction("clickAndHold", startTime, LocalDateTime.now()));
 	}
 }

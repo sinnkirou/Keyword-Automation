@@ -25,7 +25,7 @@ public class TextBoxBehavior extends ControlBehavior {
 		}
 		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT:{
 			String text = (String)this.facet.getParameters()[0];
-			target.waitForTextPresented(text);
+			target.waitTextToBePresented(text);
 			return null;
 		}
 		default:

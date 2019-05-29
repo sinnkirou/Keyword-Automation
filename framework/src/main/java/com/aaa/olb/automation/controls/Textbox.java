@@ -19,14 +19,14 @@ public class Textbox extends Control {
 		return we.getText();
 	}
 
-	public void waitForTextPresented(String text) {
+	public void waitTextToBePresented(String text) {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElement(we, text));
 		this.info(this, generateAction(String.format("wait for text - %s", text), startTime, LocalDateTime.now()));
 	}
 
-	public void waitForTextPresented(String text, long seconds) {
+	public void waitTextToBePresented(String text, long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElement(we, text));

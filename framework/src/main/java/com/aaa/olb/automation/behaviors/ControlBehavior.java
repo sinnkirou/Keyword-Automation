@@ -72,12 +72,6 @@ public class ControlBehavior implements Behavior {
 			target.waitForClickable();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT: {
-			String attribute = (String) this.facet.getParameters()[0];
-			String value = (String) this.facet.getParameters()[1];
-			target.waitToPresent(attribute, value);
-			return null;
-		}
 		case SystemConstants.BEHAVIOR_WATI_TO_HIDE: {
 			target.waitForHidden();
 			return null;
@@ -103,6 +97,15 @@ public class ControlBehavior implements Behavior {
 				}
 			});
 
+			return null;
+		}
+		case SystemConstants.BEHAVIOR_DRAG_AND_DROP_BY_OFFSET: {
+			String text = (String) this.facet.getParameters()[0];
+			target.dragAndDropByOffset(text);;
+			return null;
+		}
+		case SystemConstants.BEHAVIOR_CLICK_AND_HOLD: {
+			target.clickAndHold();
 			return null;
 		}
 		default:
