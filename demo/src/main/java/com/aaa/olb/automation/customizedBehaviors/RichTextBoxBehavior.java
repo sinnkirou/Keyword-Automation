@@ -20,31 +20,21 @@ public class RichTextBoxBehavior extends ControlBehavior {
 		
 		String behaviorName=this.facet.getBehaviorName();
 		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_CHOOSE;
+			behaviorName= SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_CHOOSE:
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT:
 			if (text != "") {
 				behaves(new ControlAction() {
 
 					@Override
 					public void act() {
 						target.waitForVisible();
-						target.selectPartialContent(text);
+						target.selectPartialContext(text);
 					}
 				});
 				
 			}
-			return null;
-		case SystemConstants.BEHAVIOR_SEND_ENTER:
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.waitForVisible();
-					target.sendEnter();
-				}
-			});
 			return null;
 		default:
 			return super.Execute();

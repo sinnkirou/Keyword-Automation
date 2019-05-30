@@ -72,7 +72,7 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickIfVisible";
 	
-	public final static String BEHAVIOR_CHOOSE="selectPartialContent";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT="selectPartialContext";
 	
 	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="dragAndDropByOffset";
 	
@@ -80,6 +80,6 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickAndHold";
 	
-	public final static String BEHAVIOR_SEND_ENTER = "sendEnter";
+	public final static String BEHAVIOR_SEND_KEY = "sendKey";
 	
 }

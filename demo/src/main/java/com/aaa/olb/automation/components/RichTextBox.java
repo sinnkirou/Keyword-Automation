@@ -3,7 +3,6 @@ package com.aaa.olb.automation.components;
 import java.time.LocalDateTime;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -14,7 +13,7 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.framework.SeleniumContext;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_CHOOSE, provider="com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT, provider="com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
 public class RichTextBox extends Input {
 
 	public RichTextBox(SeleniumContext context, WebElement webElement) {
@@ -22,7 +21,7 @@ public class RichTextBox extends Input {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void selectPartialContent (String text) {
+	public void selectPartialContextForInput (String text) {
 		String start = text.split(",")[0] != null ? text.split(",")[0] : "0";
 		String end = text.split(",").length > 1 ? text.split(",")[1] : String.valueOf(we.getText().length());
 		String script = "if( arguments[0].createTextRange ) {\n" + 
@@ -44,7 +43,7 @@ public class RichTextBox extends Input {
 			LocalDateTime startTime = LocalDateTime.now();
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript(script, we);
-			this.info(this, generateAction("selectPartialContent", startTime, LocalDateTime.now()));
+			this.info(this, generateAction("selectPartialContextForInput", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
 			throw ex;
 		} catch (TimeoutException ex) {
@@ -52,10 +51,26 @@ public class RichTextBox extends Input {
 		}
 	}
 	
-	public void sendEnter() {
-		LocalDateTime startTime = LocalDateTime.now();
-		we.sendKeys(Keys.ENTER);
-		this.info(this, generateAction("sendEnter", startTime, LocalDateTime.now()));
+	public void selectPartialContext(String text) {
+		String start = text.split(",")[0] != null ? text.split(",")[0] : "0";
+		String end = text.split(",").length > 1 ? text.split(",")[1] : String.valueOf(we.getText().length());
+		String script = "var leafNode = arguments[0].firstChild.firstChild;\n" + 
+				"			var range = document.createRange();\n" + 
+				"			range.setStart(leafNode, "+ start +");" + 
+				"			range.setEnd(leafNode, "+ end +");" + 
+				"			var sel = window.getSelection();\n" + 
+				"			sel.removeAllRanges();\n" + 
+				"			sel.addRange(range);";
+		try {
+			LocalDateTime startTime = LocalDateTime.now();
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript(script, we);
+			this.info(this, generateAction("selectPartialContext", startTime, LocalDateTime.now()));
+		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			throw ex;
+		} catch (TimeoutException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/*
@@ -70,7 +85,6 @@ public class RichTextBox extends Input {
 		int endyOffset = text.split(",").length > 3 ? Integer.parseInt(text.split(",")[3]) : 0;
 		moveByOffsetFromElement(startxOffset+","+startyOffset);
 		dragAndDropByOffsetFromCurrent(endxOffset+","+endyOffset);
-		rightClickAtCurrentPosition();
-		this.info(this, generateAction("drogAndDropRichBox", startTime, LocalDateTime.now()));
+		this.info(this, generateAction("drogAndDropRichBox with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 }

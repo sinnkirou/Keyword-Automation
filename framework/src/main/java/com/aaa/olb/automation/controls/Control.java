@@ -1,9 +1,10 @@
 package com.aaa.olb.automation.controls;
 
+import java.awt.Robot;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -581,7 +582,7 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver);
 		action.contextClick().perform();
-		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
+		this.info(this, generateAction("rightClickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
 	
 	/*
@@ -593,4 +594,27 @@ public class Control extends ActionRepository {
 		action.release().perform();
 		this.info(this, generateAction("release", startTime, LocalDateTime.now()));
 	}
+	
+	/*
+	 * 键盘模拟
+	 * */
+	public void sendKey(String keyname) {
+		LocalDateTime startTime = LocalDateTime.now();
+		CharSequence cs = Keys.valueOf(keyname) != null ? Keys.valueOf(keyname) : keyname;
+		Actions action = new Actions(this.driver); 
+		action.moveToElement(we).sendKeys(cs).perform();
+		this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
+	}
+	
+	@SuppressWarnings({ "unused", "restriction", "deprecation" })
+	public void sendKeyByRobot(String keyname) throws Exception { 
+		LocalDateTime startTime = LocalDateTime.now();
+		Actions action = new Actions(this.driver); 
+		action.moveToElement(we).perform();
+		Robot robot = new Robot(); 
+		int code = javafx.scene.input.KeyCode.valueOf(keyname).impl_getCode();
+		robot.keyPress(code);
+		robot.keyRelease(code);
+		this.info(this, generateAction("sendComposeKeys: " + keyname, startTime, LocalDateTime.now()));
+	 }
 }

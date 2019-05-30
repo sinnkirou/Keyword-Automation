@@ -88,6 +88,9 @@ public class ExcelUtils {
 					if (value != null && value.substring(value.indexOf(".")).equals(".0")) {
 						value = value.substring(0, value.indexOf("."));
 					}
+					if (value.toString().indexOf("E") > 0){
+						value = String.valueOf((int)Cell.getNumericCellValue());
+					}
 					return value;
 				case HSSFCell.CELL_TYPE_BOOLEAN:
 					return String.valueOf(Cell.getBooleanCellValue());

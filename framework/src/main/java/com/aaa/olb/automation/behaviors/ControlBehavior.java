@@ -108,16 +108,21 @@ public class ControlBehavior implements Behavior {
 			target.clickAndHold();
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_SEND_KEY: {
+			String keyname = (String) this.facet.getParameters()[0];
+			target.sendKey(keyname);
+			return null;
+		}
 		default:
 			return BehaviorReflect.action(facet);
 		}
 	}
 
 	public void behaves(ControlAction func) throws InterruptedException {
-		func.act();
 		if (this.facet.getAsync()) {
 			Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
 		}
+		func.act();
 	}
 
 }

@@ -78,6 +78,15 @@ public class Route {
 			case TAG: {
 				return By.tagName(this.getLocation());
 			}
+			case LINKTEXT: {
+				return By.linkText(this.getLocation());
+			}
+			case PARTIALLINKTEXT: {
+				return By.partialLinkText(this.getLocation());
+			}
+			case NAME: {
+				return By.name(this.getLocation());
+			}
 			default: {
 				return By.xpath(this.getLocation());
 			}

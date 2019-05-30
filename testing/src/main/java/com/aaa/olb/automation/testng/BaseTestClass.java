@@ -54,7 +54,7 @@ public abstract class BaseTestClass {
 
 	@AfterMethod
 	public void clear() {
-		this.browser.close();
+		//this.browser.close();
 		Log.endTestCase(this.tc.getTestCaseID());
 	}
 

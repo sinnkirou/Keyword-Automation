@@ -7,6 +7,9 @@ import java.util.List;
 import com.aaa.olb.automation.annotations.ByClassName;
 import com.aaa.olb.automation.annotations.ByCss;
 import com.aaa.olb.automation.annotations.ById;
+import com.aaa.olb.automation.annotations.ByLinkText;
+import com.aaa.olb.automation.annotations.ByName;
+import com.aaa.olb.automation.annotations.ByPartialLinkText;
 import com.aaa.olb.automation.annotations.ByTag;
 import com.aaa.olb.automation.annotations.ByXPath;
 
@@ -79,6 +82,27 @@ public class ReflectionRoute extends Route{
 			isControl = true;
 			route.setLocationKind(LocationKind.TAG);
 			route.setLocation(byTag.value());
+		}
+		
+		ByLinkText byLinkText = field.getAnnotation(ByLinkText.class);
+		if (byLinkText != null) {
+			isControl = true;
+			route.setLocationKind(LocationKind.LINKTEXT);
+			route.setLocation(byLinkText.value());
+		}
+		
+		ByPartialLinkText byPLinkText = field.getAnnotation(ByPartialLinkText.class);
+		if (byPLinkText != null) {
+			isControl = true;
+			route.setLocationKind(LocationKind.PARTIALLINKTEXT);
+			route.setLocation(byPLinkText.value());
+		}
+		
+		ByName byName = field.getAnnotation(ByName.class);
+		if (byName != null) {
+			isControl = true;
+			route.setLocationKind(LocationKind.NAME);
+			route.setLocation(byName.value());
 		}
 
 		if (isControl) {
