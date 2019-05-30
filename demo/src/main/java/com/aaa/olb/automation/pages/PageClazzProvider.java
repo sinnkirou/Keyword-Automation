@@ -11,8 +11,6 @@ public class PageClazzProvider {
 			return SearchResultPage.class;
 		if(pageName.equals(LoginPage.class.getSimpleName()))
 			return LoginPage.class;
-		if(pageName.equals(RichTextTestPage.class.getSimpleName()))
-			return RichTextTestPage.class;
 
 		return Class.forName("com.aaa.olb.automation.pages." + pageName);
 	}
