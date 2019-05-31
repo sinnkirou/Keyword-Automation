@@ -1,5 +1,8 @@
 package com.aaa.olb.automation.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
@@ -45,6 +48,12 @@ public class TestClass extends BaseTestClass {
 				Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 				System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			}
+			if(ts.getActionKeyWord().equals("takescreen")) {
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		        String timestamp = df.format(new Date());// new Date()为获取当前系统时间
+				String takescreen = ts.getTestCaseID() + timestamp;
+				takescreen(takescreen, "ToVerifyTestCasesScreenshots");
+			}
 		}
 	}
 
@@ -57,10 +66,10 @@ public class TestClass extends BaseTestClass {
 		return false;
 	}
 
-	public void takescreen(String filename) {
+	public void takescreen(String filename, String dir) {
 		if (this.browser != null) {
 			SearchContext driver = this.browser.getDriver();
-			ScreenScr.getScreen((TakesScreenshot) driver, filename);
+			ScreenScr.getScreen((TakesScreenshot) driver, filename, dir);
 		}
 	}
 }

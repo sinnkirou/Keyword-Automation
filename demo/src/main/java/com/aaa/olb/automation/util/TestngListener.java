@@ -18,7 +18,7 @@ public class TestngListener extends BaseTestngListener {
 		TestClass baseTestcase = (TestClass) tr.getInstance();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String timestamp = df.format(new Date());// new Date()为获取当前系统时间
-		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp);
+		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp, "FailedTestCasesScreenshoots");
 	}
 
 	@Override

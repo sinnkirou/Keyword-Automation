@@ -103,7 +103,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			XSSFSheet sheet = ExcelUtils.getSheet(filePath, templateName);
 
 			/*
-			 * create page instance that the pageClazz will retrieved by name afterwards
+			 * create page instance that the pageClass will retrieved by name afterwards
 			 * */
 			PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
 

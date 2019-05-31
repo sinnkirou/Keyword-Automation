@@ -10,6 +10,7 @@ import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
@@ -38,8 +39,7 @@ public class RichTextBox extends Component {
 			target = getChildren(route);
 			target.selectPartialContextByContext(text);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.error(e.getMessage());
 		}
 	}
 	

@@ -121,6 +121,9 @@ public class ControlBehavior implements Behavior {
 			target.sendKey(parameter);
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: {
+			return null;
+		}
 		default:
 			return BehaviorReflect.action(facet);
 		}

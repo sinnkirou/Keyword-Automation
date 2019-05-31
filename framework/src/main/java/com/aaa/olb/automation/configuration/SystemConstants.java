@@ -86,4 +86,5 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_SEND_KEY_BY_ROBOT = "sendKeyByRobot";
 	
+	public final static String BEHAVIOR_TAKE_SCREENSHOT = "takescreen";
 }
