@@ -54,7 +54,7 @@ public class RichTextBox extends Input {
 	public void selectPartialContext(String text) {
 		String start = text.split(",")[0] != null ? text.split(",")[0] : "0";
 		String end = text.split(",").length > 1 ? text.split(",")[1] : String.valueOf(we.getText().length());
-		String script = "var leafNode = arguments[0].firstChild.firstChild;\n" + 
+		String script = "var leafNode = arguments[0].lastChild.firstChild;\n" + 
 				"			var range = document.createRange();\n" + 
 				"			range.setStart(leafNode, "+ start +");" + 
 				"			range.setEnd(leafNode, "+ end +");" + 

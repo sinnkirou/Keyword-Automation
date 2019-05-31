@@ -22,10 +22,14 @@ public class ControlBehavior implements Behavior {
 		// TODO Auto-generated method stub
 		Control target = (Control) this.facet.getTarget();
 		String behaviorName = this.facet.getBehaviorName();
+		String parameter = (String) this.facet.getParameters()[0];
 		if (behaviorName == null) {
 			behaviorName = SystemConstants.BEHAVIOR_CLICK;
 		}
-
+		if(behaviorName.contains("[css]") || behaviorName.contains("[attr]")) {
+			parameter = behaviorName.substring(behaviorName.indexOf("(")+1, behaviorName.length()-1);
+			behaviorName = behaviorName.substring(0,behaviorName.indexOf("("));
+		}
 		switch (behaviorName.toLowerCase()) {
 		case SystemConstants.BEHAVIOR_CLICK: {
 			behaves(new ControlAction() {
@@ -77,12 +81,10 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_ATTRIBUTE: {
-			String attribute = (String) this.facet.getParameters()[0];
-			return target.getAttribute(attribute);
+			return target.getAttribute(parameter);
 		}
 		case SystemConstants.BEHAVIOR_STYLE: {
-			String styleName = (String) this.facet.getParameters()[0];
-			return target.getCssValue(styleName);
+			return target.getCssValue(parameter);
 		}
 		case SystemConstants.BEHAVIOR_CLASS: {
 			return target.getClassName();
@@ -100,17 +102,23 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_DRAG_AND_DROP_BY_OFFSET: {
-			String text = (String) this.facet.getParameters()[0];
-			target.dragAndDropByOffset(text);;
+			target.dragAndDropByOffset(parameter);;
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_CLICK_AND_HOLD: {
 			target.clickAndHold();
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_RIGHT_CLICK: {
+			target.rightClick();
+			return null;
+		}
+		case SystemConstants.BEHAVIOR_SEND_KEY_BY_ROBOT: {
+			target.sendKeyByRobot(parameter);
+			return null;
+		}
 		case SystemConstants.BEHAVIOR_SEND_KEY: {
-			String keyname = (String) this.facet.getParameters()[0];
-			target.sendKey(keyname);
+			target.sendKey(parameter);
 			return null;
 		}
 		default:

@@ -39,8 +39,9 @@ public class TestClass extends BaseTestClass {
 			 * with [value] or [text] etc defined in test step, it means we should compare the value on real value with expected value
 			 * */
 			if (result != null && ts.getActionKeyWord().contains("[")) {
-				Assert.assertEquals(result.toString().replaceAll("\\u00a0|\\s*", ""),
-						ts.getValue().replaceAll("\\u00a0|\\s*", ""));
+				result = result.toString().replaceAll("\\u00a0|\\s*", "");
+				String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "");
+				Assert.assertEquals(result, expect);
 				Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 				System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			}

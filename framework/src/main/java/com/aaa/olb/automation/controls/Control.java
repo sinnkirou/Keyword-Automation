@@ -606,7 +606,13 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
 	}
 	
-	@SuppressWarnings({ "unused", "restriction", "deprecation" })
+	/*
+	 * Robot模拟键盘模拟
+	 * 字母键 a、b、c、d … z，
+	 * 一些符号键比如：‘ {}\[] ’、‘ \ ’、‘。’、‘ ? ’、‘：’、‘ + ’、‘ - ’、‘ = ’、、‘“”’，
+	 * 还有一些不常用到的功能键如 PrtSc、ScrLk/NmLk
+	 * */
+	@SuppressWarnings({ "restriction", "deprecation" })
 	public void sendKeyByRobot(String keyname) throws Exception { 
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver); 
@@ -615,6 +621,6 @@ public class Control extends ActionRepository {
 		int code = javafx.scene.input.KeyCode.valueOf(keyname).impl_getCode();
 		robot.keyPress(code);
 		robot.keyRelease(code);
-		this.info(this, generateAction("sendComposeKeys: " + keyname, startTime, LocalDateTime.now()));
+		this.info(this, generateAction("sendKeyByRobot: " + keyname, startTime, LocalDateTime.now()));
 	 }
 }
