@@ -17,11 +17,10 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 
 		if (facet.getTarget() instanceof SearchboxForm) {
 			return new SearchboxFormBehavior(facet);
-		} 
-		
+		}
 		if (facet.getTarget() instanceof RichTextBox) {
 			return new RichTextBoxBehavior(facet);
-		} 
+		}
 		
 		return new ControlBehavior(facet);
 	}

@@ -15,17 +15,17 @@ public class DropDownBehavior extends ControlBehavior {
 		// TODO Auto-generated method stub
 		DropDown target = (DropDown) this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();
+		String parameter = (String) this.facet.getParameters()[0];
 		if(behaviorName == null) {
 			behaviorName= SystemConstants.BEHAVIOR_SELECT;
 		}
 		switch (behaviorName.toLowerCase()) {
 		case SystemConstants.BEHAVIOR_SELECT:{
-			String optionText= (String)this.facet.getParameters()[0];
 			behaves(new ControlAction() {
 
 				@Override
 				public void act() {
-					target.selectByText(optionText);
+					target.selectByText(parameter);
 					target.waitForNotEmptyAttribute("value");
 				}
 			});
@@ -33,7 +33,7 @@ public class DropDownBehavior extends ControlBehavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_INDEX:{
-			int index=(int)this.facet.getParameters()[0];
+			int index= Integer.parseInt(parameter);
 			behaves(new ControlAction() {
 
 				@Override

@@ -28,6 +28,11 @@ public class TextBoxBehavior extends ControlBehavior {
 			target.waitTextToBePresented(text);
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT:{
+			String text = (String)this.facet.getParameters()[0];
+			target.selectPartialContextByIndex(text);
+			return null;
+		}
 		default:
 			return super.Execute();
 		}

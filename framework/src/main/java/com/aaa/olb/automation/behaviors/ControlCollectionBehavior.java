@@ -18,12 +18,13 @@ public class ControlCollectionBehavior implements Behavior {
 		// TODO Auto-generated method stub
 		List<?> target = (List<?>) this.facet.getTarget();
 		String behaviorName = this.facet.getBehaviorName();
+		String parameter = (String) this.facet.getParameters()[0];
 		if (behaviorName == null) {
 			behaviorName = SystemConstants.LIST_BEHAVIOR_GET;
 		}
 		switch (behaviorName.toLowerCase()) {
 			case SystemConstants.LIST_BEHAVIOR_GET: {
-				int index = (int) this.facet.getParameters()[0];
+				int index= Integer.parseInt(parameter);
 				return target.get(index);
 			}
 			case SystemConstants.LIST_BEHAVIOR_SIZE: {

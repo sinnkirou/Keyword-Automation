@@ -22,6 +22,7 @@ import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.ActionRepository;
 import com.aaa.olb.automation.log.BaseAction;
+import com.aaa.olb.automation.utils.PatameterExacter;
 
 public class Control extends ActionRepository {
 	protected WebElement we;
@@ -500,10 +501,9 @@ public class Control extends ActionRepository {
 	 * */
 	public void dragAndDropByOffset(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		int xOffset = Integer.parseInt(text.split(",")[0]);
-		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		int[] parameters = PatameterExacter.getIntParameters(text, 2);
 		Actions action = new Actions(this.driver); 
-		action.moveToElement(we).dragAndDropBy(we, xOffset, yOffset).perform();
+		action.moveToElement(we).dragAndDropBy(we, parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("dragAndDropBy with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 	
@@ -512,10 +512,9 @@ public class Control extends ActionRepository {
 	 * */
 	public void dragAndDropByOffsetFromCurrent(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		int xOffset = Integer.parseInt(text.split(",")[0]);
-		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
+		int[] parameters = PatameterExacter.getIntParameters(text, 2);
 		Actions action = new Actions(this.driver); 
-		action.clickAndHold().moveToElement(we, xOffset, yOffset).perform(); 
+		action.clickAndHold().moveToElement(we, parameters[0], parameters[1]).perform(); 
 		action.release().perform();
 		this.info(this, generateAction("dragAndDropByOffsetAtCurrent with offset: "+ text, startTime, LocalDateTime.now()));
 	}
@@ -546,9 +545,8 @@ public class Control extends ActionRepository {
 	public void moveByOffsetFromStart(String text) {
 		Actions action = new Actions(this.driver); 
 		LocalDateTime startTime = LocalDateTime.now();
-		int xOffset = Integer.parseInt(text.split(",")[0]);
-		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
-		action.moveByOffset(xOffset,yOffset).perform();
+		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		action.moveByOffset(parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("moveByOffsetFromStart with offset: "+text, startTime, LocalDateTime.now()));
 	}
 	
@@ -559,9 +557,8 @@ public class Control extends ActionRepository {
 	public void moveByOffsetFromElement(String text) {
 		Actions action = new Actions(this.driver); 
 		LocalDateTime startTime = LocalDateTime.now();
-		int xOffset = Integer.parseInt(text.split(",")[0]);
-		int yOffset = text.split(",").length > 1 ? Integer.parseInt(text.split(",")[1]) : 0;
-		action.moveToElement(we,xOffset,yOffset).perform();
+		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		action.moveToElement(we, parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("moveByOffsetFromElement with offset: "+ text, startTime, LocalDateTime.now()));
 	}
 	
@@ -623,4 +620,5 @@ public class Control extends ActionRepository {
 		robot.keyRelease(code);
 		this.info(this, generateAction("sendKeyByRobot: " + keyname, startTime, LocalDateTime.now()));
 	 }
+	
 }

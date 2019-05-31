@@ -74,9 +74,9 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT="selectPartialContext";
 	
-	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="dragAndDropByOffset";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT="selectPartialContextForInput";
 	
-	public final static String BEHAVIOR_DRAG_AND_DROP="dragAndDrop";
+	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="dragAndDropByOffset";
 	
 	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickAndHold";
 	
