@@ -11,7 +11,7 @@ public class DropDownBehavior extends ControlBehavior {
 	}
 	
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		DropDown target = (DropDown) this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();

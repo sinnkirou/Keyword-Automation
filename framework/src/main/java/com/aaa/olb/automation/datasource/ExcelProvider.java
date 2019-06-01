@@ -15,13 +15,13 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 
 	private XSSFSheet sheet;
 
-	public ExcelProvider(XSSFSheet sheet) throws Exception {
+	public ExcelProvider(XSSFSheet sheet)  {
 		// TODO Auto-generated constructor stub
 		this.sheet = sheet;
 		read();
 	}
 
-	private List<String> readColumn(XSSFSheet sheet) throws Exception {
+	private List<String> readColumn(XSSFSheet sheet)  {
 		List<String> columns = new ArrayList<>();
 		XSSFRow row = sheet.getRow(0);
 		int columnCount = row.getLastCellNum();
@@ -31,7 +31,7 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 		return columns;
 	}
 
-	private Map<String, CellEntity> readRow(List<String> columns, XSSFRow row) throws Exception {
+	private Map<String, CellEntity> readRow(List<String> columns, XSSFRow row) {
 		Map<String, CellEntity> rowData = new HashMap<>();
 		for (int i = 0; i < columns.size(); i++) {
 			CellEntity entity = new CellEntity();
@@ -43,10 +43,12 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 	}
 
 	@Override
-	public void read() throws Exception {
+	public void read() {
 		// TODO Auto-generated method stub
 		int rowCount = this.sheet.getLastRowNum();
-		List<String> columns = this.readColumn(this.sheet);
+		List<String> columns = null;
+		columns = this.readColumn(this.sheet);
+		
 		if (!this.data.isEmpty())
 			this.data.clear();
 		for (int i = 1; i <= rowCount; i++) {
@@ -57,10 +59,12 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 	}
 
 	@Override
-	public Map<String, List<Map<String, CellEntity>>> groupBy(String columnName) throws Exception {
+	public Map<String, List<Map<String, CellEntity>>> groupBy(String columnName)  {
 		// TODO Auto-generated method stub
 		int rowCount = this.sheet.getLastRowNum();
-		List<String> columns = this.readColumn(this.sheet);
+		List<String> columns = null;
+		columns = this.readColumn(this.sheet);
+
 		Map<String, List<Map<String, CellEntity>>> groups = new HashMap<>();
 		int groupIndex = columns.indexOf(columnName);
 
@@ -69,6 +73,7 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 			XSSFRow row = this.sheet.getRow(1);
 			String groupKey = row.getCell(groupIndex).getRawValue();
 			rows.add(this.readRow(columns, row));
+
 			for (int i = 2; i < rowCount; i++) {
 				row = this.sheet.getRow(i);
 				if (row.getCell(groupIndex).getRawValue() != groupKey) {
@@ -76,7 +81,6 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 					groupKey = row.getCell(groupIndex).getRawValue();
 					rows = new ArrayList<>();
 				}
-
 				rows.add(this.readRow(columns, row));
 			}
 

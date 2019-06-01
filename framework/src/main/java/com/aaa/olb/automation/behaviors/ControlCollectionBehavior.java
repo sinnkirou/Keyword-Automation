@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
+import com.aaa.olb.automation.log.Log;
 
 public class ControlCollectionBehavior implements Behavior {
 
@@ -14,7 +15,7 @@ public class ControlCollectionBehavior implements Behavior {
 	}
 
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		List<?> target = (List<?>) this.facet.getTarget();
 		String behaviorName = this.facet.getBehaviorName();
@@ -37,10 +38,16 @@ public class ControlCollectionBehavior implements Behavior {
 	}
 
 	@Override
-	public void behaves(ControlAction func) throws InterruptedException {
+	public void behaves(ControlAction func) {
 		func.act();
 		if (this.facet.getAsync()) {
-			Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
+			try {
+				Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
+				Log.info("waited: " + RuntimeSettings.getInstance().getAsyncTimeout());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 		}
 	}
 

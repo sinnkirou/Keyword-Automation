@@ -11,7 +11,7 @@ public class CheckBoxBehavior extends ControlBehavior {
 	}
 	
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		
 		CheckBox target = (CheckBox) this.facet.getTarget();

@@ -7,6 +7,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -15,12 +16,26 @@ import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.listeners.ScreenScr;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.testng.BaseTestClass;
+import com.aaa.olb.automation.utils.DeleteFile;
+import com.aaa.olb.automation.utils.SystemProperty;
 
 public class TestClass extends BaseTestClass {
 
 	protected String previousPage = "";
 
 	protected String currentPage = "";
+	
+	@BeforeSuite
+	public void beforeSuite() {
+		String cyrPatn = SystemProperty.getWorkingDir();
+		if(SystemProperty.isWindows()){  
+			DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Failed_Testcases_Screentshots_Dir);
+			//DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Toverify_Testcases_Screenshots_Dir);
+		}else {
+			DeleteFile.delAllFile(cyrPatn + "/" + Constant.Failed_Testcases_Screentshots_Dir);
+			//DeleteFile.delAllFile(cyrPatn + "/" + Constant.Toverify_Testcases_Screenshots_Dir);
+		}
+	}
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -49,15 +64,15 @@ public class TestClass extends BaseTestClass {
 				System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			}
 			if(ts.getActionKeyWord().equals("takescreen")) {
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-		        String timestamp = df.format(new Date());// new Date()为获取当前系统时间
-				String takescreen = ts.getTestCaseID() + timestamp;
-				takescreen(takescreen, "ToVerifyTestCasesScreenshots");
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		        String timestamp = df.format(new Date());
+				String takescreen = ts.getTestCaseID() + "_" + timestamp;
+				takescreen(takescreen, Constant.Toverify_Testcases_Screenshots_Dir);
 			}
 		}
 	}
 
-	public Boolean pageNavigated(String currentPageName) throws Exception {
+	public Boolean pageNavigated(String currentPageName) {
 		previousPage = currentPage;
 		currentPage = currentPageName;
 		if (!previousPage.equals(currentPage)) {

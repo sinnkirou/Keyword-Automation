@@ -10,7 +10,7 @@ public class InputBehavior extends ControlBehavior {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		Input target = (Input) this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();
 		String parameter = (String) this.facet.getParameters()[0];

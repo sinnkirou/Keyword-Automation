@@ -16,9 +16,9 @@ public class TestngListener extends BaseTestngListener {
 
 	private void takeScreenShot(ITestResult tr) {
 		TestClass baseTestcase = (TestClass) tr.getInstance();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String timestamp = df.format(new Date());// new Date()为获取当前系统时间
-		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp, "FailedTestCasesScreenshoots");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timestamp = df.format(new Date());
+		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp, Constant.Failed_Testcases_Screentshots_Dir);
 	}
 
 	@Override

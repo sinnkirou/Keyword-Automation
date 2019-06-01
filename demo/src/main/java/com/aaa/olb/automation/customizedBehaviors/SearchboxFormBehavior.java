@@ -17,7 +17,7 @@ public class SearchboxFormBehavior extends ControlBehavior {
 	}
 	
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		SearchboxForm target = (SearchboxForm) this.facet.getTarget();
 		String text = this.facet.getParameters()[0].toString();

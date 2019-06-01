@@ -3,6 +3,7 @@ package com.aaa.olb.automation.behaviors;
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Control;
+import com.aaa.olb.automation.log.Log;
 
 public class ControlBehavior implements Behavior {
 
@@ -18,7 +19,7 @@ public class ControlBehavior implements Behavior {
 	 * otherwise invoke it by reflect, see more on BehaviorReflect.action(facet)
 	 * */
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		Control target = (Control) this.facet.getTarget();
 		String behaviorName = this.facet.getBehaviorName();
@@ -102,23 +103,56 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_DRAG_AND_DROP_BY_OFFSET: {
-			target.dragAndDropByOffset(parameter);;
+			final String newParameter = parameter;
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.dragAndDropByOffset(newParameter);;
+				}
+			});
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_CLICK_AND_HOLD: {
-			target.clickAndHold();
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.clickAndHold();
+				}
+			});
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_RIGHT_CLICK: {
-			target.rightClick();
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.rightClick();
+				}
+			});
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_SEND_KEY_BY_ROBOT: {
-			target.sendKeyByRobot(parameter);
+			final String newParameter = parameter;
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.sendKeyByRobot(newParameter);
+				}
+			});
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_SEND_KEY: {
-			target.sendKey(parameter);
+			final String newParameter = parameter;
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.sendKey(newParameter);
+				}
+			});
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: {
@@ -129,9 +163,16 @@ public class ControlBehavior implements Behavior {
 		}
 	}
 
-	public void behaves(ControlAction func) throws InterruptedException {
+	public void behaves(ControlAction func) {
 		if (this.facet.getAsync()) {
-			Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
+			try {
+				Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
+				Log.info("waited: " + RuntimeSettings.getInstance().getAsyncTimeout());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 		}
 		func.act();
 	}

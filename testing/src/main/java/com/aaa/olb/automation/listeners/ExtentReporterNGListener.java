@@ -14,6 +14,7 @@ import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.SystemProperty;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.ReporterType;
@@ -23,8 +24,12 @@ public class ExtentReporterNGListener implements IReporter {
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		// true, to replace existing report.
-		String workingDir = System.getProperty("user.dir");
-		ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "\\ExtentReports\\Extent.html");
+		String workingDir = SystemProperty.getWorkingDir(); 
+		if(SystemProperty.isWindows()){  
+			ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "\\ExtentReports\\Extent.html");
+		}else {
+			ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "/ExtentReports/Extent.html");
+		}
 
 		for (ISuite suite : suites) {
 			Map<String, ISuiteResult> result = suite.getResults();

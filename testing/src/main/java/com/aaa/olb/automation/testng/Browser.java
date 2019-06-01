@@ -1,6 +1,5 @@
 package com.aaa.olb.automation.testng;
 
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.SearchContext;
@@ -8,20 +7,21 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
+import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.SystemProperty;
 
 public abstract class Browser {
 
 	private WebDriver driver;
 
-	public Browser(String driverPath, String remoteHub) throws MalformedURLException{
-		String os = System.getProperty("os.name");  
-		if(os.toLowerCase().startsWith("win")){  
+	public Browser(String driverPath, String remoteHub) {
+		if(SystemProperty.isWindows()){  
 			driverPath+=".exe";
 		}  
 		this.driver = this.initialize(driverPath, remoteHub);
 	}
 
-	protected abstract WebDriver initialize(String driverPath, String remoteHub) throws MalformedURLException;
+	protected abstract WebDriver initialize(String driverPath, String remoteHub);
 
 	public SearchContext getDriver() {
 		return driver;
@@ -39,6 +39,7 @@ public abstract class Browser {
 			driver.manage().window().maximize();
 		} catch (Exception e) {
 			e.printStackTrace();
+			Log.error(e.getMessage());
 		}
 	}
 
@@ -47,6 +48,7 @@ public abstract class Browser {
 			driver.get(site);
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
+			Log.error(ex.getMessage());
 		}
 	}
 

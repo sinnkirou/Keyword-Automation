@@ -21,9 +21,9 @@ public class BehaviourAnalysis {
 
 		if (pageClazz != null) {
 			/*
-			 * should initialize page if the page is not initialized or page redirected is performed,
-			 * using PageRepository.create to initialize page instance
-			 * */
+			 * should initialize page if the page is not initialized or page redirected is
+			 * performed, using PageRepository.create to initialize page instance
+			 */
 			if (page == null || initializePage) {
 				page = PageRepository.create(driver, pageClazz);
 				page.waitForAvailable();
@@ -32,8 +32,9 @@ public class BehaviourAnalysis {
 
 			for (Method method : methods) {
 				/*
-				 * find the specific method and invoke it to get the web element instance, then execute the action
-				 * */
+				 * find the specific method and invoke it to get the web element instance, then
+				 * execute the action
+				 */
 				if (method.getAnnotation(ColumnName.class) != null && methodMathced(testStep.getTargetName(), method)) {
 					Object target = method.invoke(page);
 
@@ -64,11 +65,11 @@ public class BehaviourAnalysis {
 	}
 
 	/*
-	 * get BehaviorIndication by the method's annotation
-	 * if null, get BehaviorIndication from the method's return type
-	 * using the BehaviorIndication.provider() to get the specific BehaviorProvider clazz
-	 * */
-	public static BehaviorProvider getBehaviorProvider(Method method) throws Exception {
+	 * get BehaviorIndication by the method's annotation if null, get
+	 * BehaviorIndication from the method's return type using the
+	 * BehaviorIndication.provider() to get the specific BehaviorProvider clazz
+	 */
+	public static BehaviorProvider getBehaviorProvider(Method method) {
 		BehaviorIndication indication = method.getAnnotation(BehaviorIndication.class);
 
 		if (indication == null) {
@@ -77,19 +78,29 @@ public class BehaviourAnalysis {
 
 		if (indication != null) {
 			String providerType = indication.provider();
-			Class<?> providerClass = Class.forName(providerType);
-			Constructor<?> constructor = providerClass.getConstructor();
-			return (BehaviorProvider) constructor.newInstance();
+			Class<?> providerClass = null;
+			try {
+				providerClass = Class.forName(providerType);
+				Constructor<?> constructor = null;
+				constructor = providerClass.getConstructor();
+				return (BehaviorProvider) constructor.newInstance();
+			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 		}
 
 		return new DefaultBehaviorProvider();
 	}
 
 	/*
-	 * get behavior name from test step action value by highest priority,
-	 * get behavior name from method's BehaviorIndication annotaion by medium priority,
-	 * get behavior name from method return type's BehaviorIndication annotaion by low priority,
-	 * */
+	 * get behavior name from test step action value by highest priority, get
+	 * behavior name from method's BehaviorIndication annotaion by medium priority,
+	 * get behavior name from method return type's BehaviorIndication annotaion by
+	 * low priority,
+	 */
 	public static String getBehaviorName(Method method, TestStepEntity testStep) {
 		if (testStep.getActionKeyWord() != "" && testStep.getActionKeyWord() != null) {
 			return testStep.getActionKeyWord();
@@ -103,9 +114,8 @@ public class BehaviourAnalysis {
 
 	/*
 	 * create the BehaviorFacet by inputting target, teststep and method
-	 * */
-	public static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method)
-			throws Exception {
+	 */
+	public static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
 		BehaviorFacet facet = new BehaviorFacet();
 		facet.setBehaviorName(getBehaviorName(method, testStep));
 		facet.setParameters(new Object[] { testStep.getValue() });
@@ -114,10 +124,9 @@ public class BehaviourAnalysis {
 		facet.setBlur(method.getAnnotation(ColumnName.class).blur());
 
 		/*
-		 * handle the elements list
-		 * Besides the default facet values above,
-		 * index should also be set from teststep target name, like SuggestItems[1]
-		 * */
+		 * handle the elements list Besides the default facet values above, index should
+		 * also be set from teststep target name, like SuggestItems[1]
+		 */
 		if (testStep.getTargetName().contains("[")) {
 			ListItemBehaviorFacet listFacet = new ListItemBehaviorFacet();
 			listFacet.setDefault(facet);
@@ -128,6 +137,7 @@ public class BehaviourAnalysis {
 				int index = Integer.valueOf(listNum.substring(1, listNum.length() - 1));
 				listFacet.setIndex(index - 1);
 			} catch (Exception ex) {
+				Log.error(ex.getMessage());
 				listFacet.setIndex(0);
 			}
 
@@ -139,9 +149,17 @@ public class BehaviourAnalysis {
 
 	/*
 	 * invoke BehaviorProvider.get(BehaviorFacet) to get specific behavior
-	 * */
-	public static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) throws Exception {
-		return (Behavior) provider.getClass().getMethod("get", BehaviorFacet.class).invoke(provider, facet);
+	 */
+	public static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
+		try {
+			return (Behavior) provider.getClass().getMethod("get", BehaviorFacet.class).invoke(provider, facet);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+				| SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getMessage());
+		}
+		return null;
 	}
 
 }

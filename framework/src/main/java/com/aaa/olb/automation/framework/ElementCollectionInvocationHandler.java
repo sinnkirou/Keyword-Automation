@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import com.aaa.olb.automation.controls.Control;
+import com.aaa.olb.automation.log.Log;
 
 /*
  * 可以通过修改InvocationHandler里面的处理,比如 java element = this.locator.findElement(); 
@@ -33,6 +34,7 @@ public class ElementCollectionInvocationHandler implements InvocationHandler {
 			return method.invoke(this.getCollection(), args);
 		} catch (InvocationTargetException e) {
 			// Unwrap the underlying exception
+			Log.error(e.getMessage() + args);
 			throw e.getCause();
 		}
 	}

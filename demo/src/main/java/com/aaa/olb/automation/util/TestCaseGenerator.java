@@ -20,6 +20,7 @@ import com.aaa.olb.automation.flow.FlowDeclaration;
 import com.aaa.olb.automation.flow.FlowProvider;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.framework.PageRepository;
+import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.pages.PageClazzProvider;
 import com.aaa.olb.automation.utils.BaseTestCaseGenerator;
 import com.aaa.olb.automation.utils.ExcelUtils;
@@ -29,7 +30,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 	/*
 	 * param: excel file path
 	 * */
-	public Map<String, TestCaseEntity> createTestCases(String filePath) throws Exception {
+	public Map<String, TestCaseEntity> createTestCases(String filePath) {
 		DataProvider timeoutProvider = new ExcelProvider(
 				ExcelUtils.getSheet(filePath, ConfigurationOptions.CONFIG_SHEET_NAME));
 		DataProvider testcaseProvider = new ExcelProvider(
@@ -93,7 +94,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 	/*
 	 * get specific test steps by inputting flow entities 
 	 * */
-	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception {
+	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath){
 		List<TestStepEntity> allTestSteps = new ArrayList<>();
 		Map<String, List<TestStepEntity>> groups = new HashMap<>();
 
@@ -105,7 +106,13 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			/*
 			 * create page instance that the pageClass will retrieved by name afterwards
 			 * */
-			PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
+			try {
+				PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 
 			/*
 			 * when the template is enabled, 
@@ -124,6 +131,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 					provider = new ExcelProvider(sheet);
 				} catch (Exception ex) {
 					System.out.println("please check whether the sheet " + templateName + " is filled suitable");
+					Log.error(ex.getMessage());
 					throw ex;
 				}
 

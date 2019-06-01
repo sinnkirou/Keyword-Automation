@@ -72,7 +72,9 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickIfVisible";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT="selectPartialContext";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT="selectPartialContextByContext";
+	
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX="selectPartialContextByIndex";
 	
 	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT="selectPartialContextForInput";
 	

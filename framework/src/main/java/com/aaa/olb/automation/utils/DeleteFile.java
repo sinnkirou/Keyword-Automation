@@ -2,17 +2,23 @@ package com.aaa.olb.automation.utils;
 
 import java.io.File;
 
+import com.aaa.olb.automation.log.Log;
+
 public class DeleteFile {
 	public static void delFolder(String folderPath) {
 		try {
 			delAllFile(folderPath); // delete all files in this folder
+			
 			// comment this if do not want to delete this folder
-			// String filePath = folderPath;
-			// filePath = filePath.toString();
-			// java.io.File myFilePath = new java.io.File(filePath);
-			// myFilePath.delete(); // delete the folder
+			/*
+			String filePath = folderPath;
+			filePath = filePath.toString();
+			java.io.File myFilePath = new java.io.File(filePath);
+			myFilePath.delete(); // delete the folder
+			*/
 		} catch (Exception e) {
 			e.printStackTrace();
+			Log.error(e.getMessage());
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.aaa.olb.automation.behaviors;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.configuration.SystemConstants;
@@ -8,6 +9,7 @@ import com.aaa.olb.automation.controls.CheckBox;
 import com.aaa.olb.automation.controls.DropDown;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.controls.RadioButton;
+import com.aaa.olb.automation.log.Log;
 
 public class BehaviorRepository {
 
@@ -46,14 +48,22 @@ public class BehaviorRepository {
 		}
 	}
 
-	public BehaviorProvider getBehaviorProvider(Class<?> type) throws Exception {
+	public BehaviorProvider getBehaviorProvider(Class<?> type) {
 		BehaviorIndication indication = type.getAnnotation(BehaviorIndication.class);
 
 		if (indication != null) {
 			String providerType = indication.provider();
-			Class<?> providerClass = Class.forName(providerType);
-			Constructor<?> constructor = providerClass.getConstructor();
-			return (BehaviorProvider) constructor.newInstance();
+			Class<?> providerClass;
+			try {
+				providerClass = Class.forName(providerType);
+				Constructor<?> constructor = null;
+				constructor = providerClass.getConstructor();
+				return (BehaviorProvider) constructor.newInstance();
+			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException e) {
+				e.printStackTrace();
+				Log.error(e.getMessage());
+			}
 		}
 
 		return new DefaultBehaviorProvider();

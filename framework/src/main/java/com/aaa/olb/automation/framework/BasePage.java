@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.ActionRepository;
+import com.aaa.olb.automation.log.Log;
 import com.google.common.base.Function;
 
 public abstract class BasePage extends ActionRepository {
@@ -26,11 +27,12 @@ public abstract class BasePage extends ActionRepository {
 		try {
 			PageFactory.create(context, this);
 		} catch (Exception ex) {
+			Log.error(ex.getMessage());
 			ex.printStackTrace();
 		}
 	}
 
-	public void waitForAvailable() throws Exception {
+	public void waitForAvailable() {
 		try {
 			long startTime = System.currentTimeMillis();
 			long estimatedTime = 0;
@@ -40,6 +42,7 @@ public abstract class BasePage extends ActionRepository {
 			estimatedTime = System.currentTimeMillis() - startTime;
 			System.out.println("page should be ready, waited for " + estimatedTime);
 		} catch (Exception e) {
+			Log.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}

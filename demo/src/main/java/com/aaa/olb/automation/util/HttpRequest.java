@@ -15,6 +15,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import com.aaa.olb.automation.log.Log;
+
 public class HttpRequest {
 	public static String sendGet(String url, String param) {
 		String result = "";
@@ -45,6 +47,7 @@ public class HttpRequest {
 		} catch (Exception e) {
 			System.out.println("failed to send the GET: " + e);
 			e.printStackTrace();
+			Log.error(e.getMessage());
 		}
 
 		finally {
@@ -54,6 +57,7 @@ public class HttpRequest {
 				}
 			} catch (Exception e2) {
 				e2.printStackTrace();
+				Log.error(e2.getMessage());
 			}
 		}
 		return result;
@@ -76,12 +80,15 @@ public class HttpRequest {
 			executeHttpRequest(jsonData, httpPost);
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("error while encoding api url : " + e);
+			Log.error(e.getMessage());
 			throw e;
 		} catch (IOException e) {
 			System.out.println("ioException occured while sending http request : " + e);
+			Log.error(e.getMessage());
 			throw e;
 		} catch (Exception e) {
 			System.out.println("exception occured while sending http request : " + e);
+			Log.error(e.getMessage());
 			throw e;
 		} finally {
 			httpPost.releaseConnection();

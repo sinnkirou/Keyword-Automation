@@ -5,12 +5,13 @@ import java.lang.reflect.Method;
 
 import org.openqa.selenium.NotFoundException;
 
+import com.aaa.olb.automation.log.Log;
+
 /*
  * invoke a customized action defined in control type clazz by reflect
  * */
 public class BehaviorReflect {
-	public static Object action(BehaviorFacet facet)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
+	public static Object action(BehaviorFacet facet) {
 		Object target = facet.getTarget();
 		Method fieldMethods[] = target.getClass().getMethods();
 		int parameterAmounts = facet.getParameters() != null ? facet.getParameters().length : 0;
@@ -23,12 +24,24 @@ public class BehaviorReflect {
 			if (method.getName().equals(facet.getBehaviorName())) {
 				if (facet.getParameters() != null && method.getParameterTypes().length == parameterAmounts
 						&& checkIsParameterMatched(method, facet)) {
-					return method.invoke(target, facet.getParameters());
+					try {
+						return method.invoke(target, facet.getParameters());
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.error(e.getMessage());
+					}
 				}
 
 				if (facet.getParameters() != null && facet.getParameters()[0].equals("")
 						&& method.getParameterTypes().length == 0) {
-					return method.invoke(target);
+					try {
+						return method.invoke(target);
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.error(e.getMessage());
+					}
 				}
 			}
 		}

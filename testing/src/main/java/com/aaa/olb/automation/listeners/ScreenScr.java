@@ -8,17 +8,17 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.SystemProperty;
 
 public class ScreenScr {
 	public static void getScreen(TakesScreenshot driver, String filename, String dir) {
 
-		String cyrPatn = System.getProperty("user.dir");
+		String cyrPatn = SystemProperty.getWorkingDir();
 
 		File scrfile = driver.getScreenshotAs(OutputType.FILE);
 
 		try {
-			String os = System.getProperty("os.name");  
-			if(os.toLowerCase().startsWith("win")){  
+			if(SystemProperty.isWindows()){  
 				FileUtils.copyFile(scrfile, new File(cyrPatn + "\\"+ dir +"\\" + filename + ".png"));
 			}else {
 				FileUtils.copyFile(scrfile, new File(cyrPatn + "/"+ dir +"/" + filename + ".png"));

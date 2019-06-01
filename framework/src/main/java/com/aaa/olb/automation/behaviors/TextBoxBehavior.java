@@ -12,7 +12,7 @@ public class TextBoxBehavior extends ControlBehavior {
 	}
 
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		Textbox target = (Textbox)this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();
@@ -28,7 +28,7 @@ public class TextBoxBehavior extends ControlBehavior {
 			target.waitTextToBePresented(text);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT:{
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:{
 			String text = (String)this.facet.getParameters()[0];
 			target.selectPartialContextByIndex(text);
 			return null;

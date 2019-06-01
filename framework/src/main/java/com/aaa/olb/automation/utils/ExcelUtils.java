@@ -12,12 +12,14 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.aaa.olb.automation.log.Log;
+
 public class ExcelUtils {
 	private static XSSFSheet ExcelWSheet;
 	private static XSSFWorkbook ExcelWBook;
 	private static XSSFCell Cell;
 
-	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
+	public static Object[][] getTableArray(String FilePath, String SheetName){
 		String[][] tabArray = null;
 
 		try {
@@ -50,7 +52,7 @@ public class ExcelUtils {
 		return (tabArray);
 	}
 
-	public static String getCellData(int RowNum, int ColNum) throws Exception {
+	public static String getCellData(int RowNum, int ColNum) {
 		try {
 			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
 			@SuppressWarnings("deprecation")
@@ -70,42 +72,38 @@ public class ExcelUtils {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			Log.error(e.getMessage());
 			throw (e);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String getCellData(XSSFRow row, int ColNum) throws Exception {
-		try {
-			Cell = row.getCell(ColNum);
+	public static String getCellData(XSSFRow row, int ColNum) {
+		Cell = row.getCell(ColNum);
 
-			if (Cell != null)
-				switch (Cell.getCellType()) {
-				case HSSFCell.CELL_TYPE_STRING:
-					return Cell.getStringCellValue();
-				case HSSFCell.CELL_TYPE_NUMERIC:
-					String value = String.valueOf(Cell.getNumericCellValue());
-					if (value != null && value.substring(value.indexOf(".")).equals(".0")) {
-						value = value.substring(0, value.indexOf("."));
-					}
-					if (value.toString().indexOf("E") > 0){
-						value = String.valueOf((int)Cell.getNumericCellValue());
-					}
-					return value;
-				case HSSFCell.CELL_TYPE_BOOLEAN:
-					return String.valueOf(Cell.getBooleanCellValue());
-				case HSSFCell.CELL_TYPE_BLANK:
-				default:
-					return "";
+		if (Cell != null)
+			switch (Cell.getCellType()) {
+			case HSSFCell.CELL_TYPE_STRING:
+				return Cell.getStringCellValue();
+			case HSSFCell.CELL_TYPE_NUMERIC:
+				String value = String.valueOf(Cell.getNumericCellValue());
+				if (value != null && value.substring(value.indexOf(".")).equals(".0")) {
+					value = value.substring(0, value.indexOf("."));
 				}
-			return "";
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			throw (e);
-		}
+				if (value.toString().indexOf("E") > 0) {
+					value = String.valueOf((int) Cell.getNumericCellValue());
+				}
+				return value;
+			case HSSFCell.CELL_TYPE_BOOLEAN:
+				return String.valueOf(Cell.getBooleanCellValue());
+			case HSSFCell.CELL_TYPE_BLANK:
+			default:
+				return "";
+			}
+		return "";
 	}
 
-	public static void setExcelFile(String Path, String SheetName) throws Exception {
+	public static void setExcelFile(String Path, String SheetName) throws IOException  {
 		FileInputStream ExcelFile = new FileInputStream(Path);
 		ExcelWBook = new XSSFWorkbook(ExcelFile);
 		ExcelWSheet = ExcelWBook.getSheet(SheetName);
@@ -127,6 +125,8 @@ public class ExcelUtils {
 			ExcelWBook = new XSSFWorkbook(ExcelFile);
 			return ExcelWBook.getSheet(SheetName);
 		} catch (Exception ex) {
+			Log.error(ex.getMessage());
+			ex.printStackTrace();
 			return null;
 		}
 

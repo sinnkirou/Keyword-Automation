@@ -11,7 +11,7 @@ public class RadioButtonBehavior extends ControlBehavior {
 	}
 	
 	@Override
-	public Object Execute() throws Exception {
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		RadioButton target = (RadioButton) this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();

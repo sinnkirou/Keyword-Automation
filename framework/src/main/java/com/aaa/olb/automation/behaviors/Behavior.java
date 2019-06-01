@@ -2,7 +2,7 @@ package com.aaa.olb.automation.behaviors;
 
 public interface Behavior {
 
-	Object Execute() throws Exception;
+	Object Execute();
 	
-	void behaves(ControlAction func) throws InterruptedException;
+	void behaves(ControlAction func);
 }
