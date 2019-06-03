@@ -171,7 +171,7 @@ public class ControlBehavior implements Behavior {
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 			}
 		}
 		func.act();

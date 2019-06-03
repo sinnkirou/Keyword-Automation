@@ -27,7 +27,7 @@ public class Firefox extends Browser {
 			try {
 				return new RemoteWebDriver(new URL(remoteHub), DesiredCapabilities.firefox());
 			} catch (MalformedURLException e) {
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 				e.printStackTrace();
 			}
 		}

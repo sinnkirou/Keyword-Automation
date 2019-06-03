@@ -27,7 +27,7 @@ public class IE extends Browser {
 			try {
 				return new RemoteWebDriver(new URL(remoteHub), DesiredCapabilities.internetExplorer());
 			} catch (MalformedURLException e) {
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 				e.printStackTrace();
 			}
 		}

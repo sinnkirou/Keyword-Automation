@@ -42,7 +42,7 @@ public class RichTextBox extends Component {
 			target.selectPartialContextByContext(text);
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.error(e.getMessage());
+			Log.error(e.getCause().getMessage());
 		}
 	}
 }

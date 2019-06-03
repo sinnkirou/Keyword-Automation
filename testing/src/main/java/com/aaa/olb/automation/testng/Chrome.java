@@ -27,7 +27,7 @@ public class Chrome extends Browser {
 			try {
 				return new RemoteWebDriver(new URL(remoteHub), DesiredCapabilities.chrome());
 			} catch (MalformedURLException e) {
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 				e.printStackTrace();
 			}
 		}

@@ -27,7 +27,7 @@ public abstract class BasePage extends ActionRepository {
 		try {
 			PageFactory.create(context, this);
 		} catch (Exception ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			ex.printStackTrace();
 		}
 	}
@@ -42,7 +42,7 @@ public abstract class BasePage extends ActionRepository {
 			estimatedTime = System.currentTimeMillis() - startTime;
 			System.out.println("page should be ready, waited for " + estimatedTime);
 		} catch (Exception e) {
-			Log.error(e.getMessage());
+			Log.error(e.getCause().getMessage());
 			e.printStackTrace();
 		}
 	}

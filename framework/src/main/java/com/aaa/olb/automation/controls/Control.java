@@ -381,10 +381,10 @@ public class Control extends ActionRepository {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(false);", we);
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			ex.printStackTrace();
 		}
 	}
@@ -405,10 +405,10 @@ public class Control extends ActionRepository {
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			ex.printStackTrace();
 		}
 	}
@@ -626,7 +626,7 @@ public class Control extends ActionRepository {
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.error(e.getMessage());
+			Log.error(e.getCause().getMessage());
 		} 
 	 }
 	
@@ -703,10 +703,10 @@ public class Control extends ActionRepository {
 			executor.executeScript(script.toString(), we);
 			this.info(this, generateAction("selectPartialContextByIndex", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			ex.printStackTrace();
 		}
 	}
@@ -734,10 +734,10 @@ public class Control extends ActionRepository {
 			executor.executeScript(script.toString(), we);
 			this.info(this, generateAction("selectPartialContextByContext", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getMessage());
+			Log.error(ex.getCause().getMessage());
 			ex.printStackTrace();
 		}
 	}

@@ -62,7 +62,7 @@ public class BehaviorRepository {
 			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException e) {
 				e.printStackTrace();
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 			}
 		}
 

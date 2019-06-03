@@ -46,7 +46,7 @@ public class ControlCollectionBehavior implements Behavior {
 				Log.info("waited: " + RuntimeSettings.getInstance().getAsyncTimeout());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-				Log.error(e.getMessage());
+				Log.error(e.getCause().getMessage());
 			}
 		}
 	}
