@@ -4,6 +4,9 @@ import com.aaa.olb.automation.behaviors.Behavior;
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.BehaviorProvider;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
+import com.aaa.olb.automation.components.CCMDatePicker;
+import com.aaa.olb.automation.components.CCMMemberTabs;
+import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.components.SearchboxForm;
 
@@ -17,11 +20,17 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 
 		if (facet.getTarget() instanceof SearchboxForm) {
 			return new SearchboxFormBehavior(facet);
-		}
-		if (facet.getTarget() instanceof RichTextBox) {
+		}else if (facet.getTarget() instanceof RichTextBox) {
 			return new RichTextBoxBehavior(facet);
+		}else if (facet.getTarget() instanceof CCMOrRPMPanel) {
+			return new CCMOrRPMPanelBehavior(facet);
+		}else if (facet.getTarget() instanceof CCMMemberTabs) {
+			return new CCMMemberTabsBehavior(facet);
+		}else if (facet.getTarget() instanceof CCMDatePicker) {
+			return new CCMDatePickerBehavior(facet);
 		}
 		
 		return new ControlBehavior(facet);
+		
 	}
 }

@@ -20,7 +20,7 @@ public class SearchboxFormBehavior extends ControlBehavior {
 	public Object Execute() {
 		// TODO Auto-generated method stub
 		SearchboxForm target = (SearchboxForm) this.facet.getTarget();
-		String text = this.facet.getParameters()[0].toString();
+		String parameter = this.facet.getParameters()[0].toString();
 		
 		String behaviorName=this.facet.getBehaviorName();
 		if(behaviorName == null) {
@@ -28,12 +28,12 @@ public class SearchboxFormBehavior extends ControlBehavior {
 		}
 		switch (behaviorName.toLowerCase()) {
 		case SystemConstants.BEHAVIOR_ENTER:
-			if (text != "") {
+			if (parameter != "") {
 				behaves(new ControlAction() {
 
 					@Override
 					public void act() {
-						target.getKeyword().enter(text);
+						target.getKeyword().enter(parameter);
 						target.getSearchButton().click();
 					}
 				});

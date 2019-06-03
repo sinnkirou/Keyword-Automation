@@ -3,12 +3,12 @@ package com.aaa.olb.automation.customizedBehaviors;
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
-import com.aaa.olb.automation.components.RichTextBox;
+import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.configuration.SystemConstants;
 
-public class RichTextBoxBehavior extends ControlBehavior {
+public class CCMMemberTabsBehavior extends ControlBehavior {
 
-	public RichTextBoxBehavior(BehaviorFacet facet) {
+	public CCMMemberTabsBehavior(BehaviorFacet facet) {
 		super(facet);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,35 +16,24 @@ public class RichTextBoxBehavior extends ControlBehavior {
 	@Override
 	public Object Execute(){
 		// TODO Auto-generated method stub
-		RichTextBox target = (RichTextBox) this.facet.getTarget();
+		CCMMemberTabs target = (CCMMemberTabs) this.facet.getTarget();
 		String parameter = this.facet.getParameters()[0].toString();
 		
 		String behaviorName=this.facet.getBehaviorName();
 		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT;
+			behaviorName= SystemConstants.BEHAVIOR_CLICK;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT:
+		case SystemConstants.BEHAVIOR_CLICK:
 			if (parameter != "") {
 				behaves(new ControlAction() {
 
 					@Override
 					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByContext(parameter);
-					}
-				});
-				
-			}
-			return null;
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:
-			if (parameter != "") {
-				behaves(new ControlAction() {
-
-					@Override
-					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByIndex(parameter);
+						if(parameter.equals("enrollment")) {
+							target.getEnrollmentTab().waitForVisible();
+							target.getEnrollmentTab().click();
+						}
 					}
 				});
 				

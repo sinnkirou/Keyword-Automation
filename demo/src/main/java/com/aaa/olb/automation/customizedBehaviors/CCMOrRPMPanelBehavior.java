@@ -3,12 +3,12 @@ package com.aaa.olb.automation.customizedBehaviors;
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
-import com.aaa.olb.automation.components.RichTextBox;
+import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.configuration.SystemConstants;
 
-public class RichTextBoxBehavior extends ControlBehavior {
+public class CCMOrRPMPanelBehavior extends ControlBehavior {
 
-	public RichTextBoxBehavior(BehaviorFacet facet) {
+	public CCMOrRPMPanelBehavior(BehaviorFacet facet) {
 		super(facet);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,35 +16,27 @@ public class RichTextBoxBehavior extends ControlBehavior {
 	@Override
 	public Object Execute(){
 		// TODO Auto-generated method stub
-		RichTextBox target = (RichTextBox) this.facet.getTarget();
+		CCMOrRPMPanel target = (CCMOrRPMPanel) this.facet.getTarget();
 		String parameter = this.facet.getParameters()[0].toString();
 		
 		String behaviorName=this.facet.getBehaviorName();
 		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT;
+			behaviorName= SystemConstants.BEHAVIOR_CLICK;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT:
+		case SystemConstants.BEHAVIOR_CLICK:
 			if (parameter != "") {
 				behaves(new ControlAction() {
 
 					@Override
 					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByContext(parameter);
-					}
-				});
-				
-			}
-			return null;
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:
-			if (parameter != "") {
-				behaves(new ControlAction() {
-
-					@Override
-					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByIndex(parameter);
+						if(parameter.equals("CCM")) {
+							target.getCCMButton().waitForVisible();
+							target.getCCMButton().click();
+						}else if(parameter.equals("RPM")) {
+							target.getRPMButton().waitForVisible();
+							target.getRPMButton().click();
+						}
 					}
 				});
 				

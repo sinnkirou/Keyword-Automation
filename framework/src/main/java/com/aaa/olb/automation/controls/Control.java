@@ -403,7 +403,9 @@ public class Control extends ActionRepository {
 
 	public void clickByJS() {
 		try {
+			LocalDateTime startTime = LocalDateTime.now();
 			((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
+			this.info(this, generateAction("clickByJS", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
 			Log.error(ex.getCause().getMessage());
 			throw ex;
