@@ -22,8 +22,9 @@ public class DeleteFile {
 		}
 	}
 
-	/*
-	 * path: absolute path of the folder
+	/**
+	 * @param path: absolute path of the folder
+	 * @return
 	 */
 	public static boolean delAllFile(String path) {
 		boolean flag = false;

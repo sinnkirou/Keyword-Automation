@@ -7,9 +7,10 @@ import org.openqa.selenium.NotFoundException;
 
 import com.aaa.olb.automation.log.Log;
 
-/*
- * invoke a customized action defined in control type clazz by reflect
- * */
+/**
+ * invoke a customized action defined in control type class by reflect
+ * 
+ */
 public class BehaviorReflect {
 	public static Object action(BehaviorFacet facet) {
 		Object target = facet.getTarget();

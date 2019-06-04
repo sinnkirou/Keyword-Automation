@@ -27,9 +27,10 @@ import com.aaa.olb.automation.utils.ExcelUtils;
 
 public class TestCaseGenerator implements BaseTestCaseGenerator {
 
-	/*
-	 * param: excel file path
-	 * */
+	/**
+	 *	@param: excel file path
+	 *
+	 */
 	public Map<String, TestCaseEntity> createTestCases(String filePath) {
 		DataProvider timeoutProvider = new ExcelProvider(
 				ExcelUtils.getSheet(filePath, ConfigurationOptions.CONFIG_SHEET_NAME));
@@ -91,9 +92,10 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 	}
 
 	
-	/*
-	 * get specific test steps by inputting flow entities 
-	 * */
+	/**
+	 *	get specific test steps by inputting flow entities 
+	 *
+	 */
 	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath){
 		List<TestStepEntity> allTestSteps = new ArrayList<>();
 		Map<String, List<TestStepEntity>> groups = new HashMap<>();

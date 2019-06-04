@@ -6,9 +6,10 @@ import org.openqa.selenium.WebDriver;
 import com.aaa.olb.automation.configuration.EnvironmentVariable;
 import com.aaa.olb.automation.log.ActionRepository;
 
-/*
+/**
  * global variable for selenium environment
- * */
+ *
+ */
 public class SeleniumContext {
 	
 	protected WebDriver driver; 

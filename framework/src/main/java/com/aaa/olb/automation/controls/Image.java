@@ -27,6 +27,9 @@ public class Image extends Control {
 		return getSize().getWidth();
 	}
 
+	/**
+	 * @return element's src value
+	 */
 	public String getSource() {
 		return this.getAttribute("src");
 	}

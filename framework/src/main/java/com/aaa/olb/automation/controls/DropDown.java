@@ -21,7 +21,6 @@ public class DropDown extends Control {
 		super(context, webElement);
 	}
 
-
 	private Select getSelect() {
 		if (oSelect == null) {
 			oSelect = new Select(we);
@@ -29,6 +28,9 @@ public class DropDown extends Control {
 		return oSelect;
 	}
 
+	/**
+	 * @param text
+	 */
 	public void selectByText(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
@@ -37,6 +39,9 @@ public class DropDown extends Control {
 		this.info(this, generateAction(String.format("select '%s'", text), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * @param index
+	 */
 	public void selectByIndex(int index) {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
@@ -45,10 +50,16 @@ public class DropDown extends Control {
 		this.info(this, generateAction(String.format("select by index: '%s'", index), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * @return
+	 */
 	public Option getSelectedOption() {
 		return new Option(this.context, getSelect().getFirstSelectedOption());
 	}
 	
+	/**
+	 * @return text: string
+	 */
 	public String getSelectedOptionText() {
 		return getSelect().getFirstSelectedOption().getText();
 	}
@@ -62,10 +73,16 @@ public class DropDown extends Control {
 		return options;
 	}
 
+	/**
+	 * @return count: int
+	 */
 	public int getOptionsCount() {
 		return getSelect().getOptions().size();
 	}
 
+	/**
+	 * @return options' text: List<String>
+	 */
 	public List<String> getOptionsTexts() {
 		List<String> options = new ArrayList<String>();
 		for (int i = 0; i < getOptionsCount(); i++) {
@@ -74,10 +91,18 @@ public class DropDown extends Control {
 		return options;
 	}
 
+	/**
+	 * @param index
+	 * @return Option
+	 */
 	public Option getOption(int index) {
 		return getOptions().get(index);
 	}
 
+	/**
+	 * @param text
+	 * @return Opition
+	 */
 	public Option getOption(String text) {
 		for (int i = 0; i < getOptionsCount(); i++) {
 			if (getOption(i).getText().trim() == text.trim()) {
@@ -87,6 +112,9 @@ public class DropDown extends Control {
 		return null;
 	}
 	
+	/**
+	 * @param text
+	 */
 	public void waitForSelected(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
@@ -94,6 +122,10 @@ public class DropDown extends Control {
 		this.info(this, generateAction(String.format("wait '%s' for selected ", text), startTime, LocalDateTime.now()));
 	}
 	
+	/**
+	 * @param text
+	 * @param seconds
+	 */
 	public void waitForSelected(String text, long seconds) {
 		LocalDateTime startTime = LocalDateTime.now();
 		WebDriverWait wait=new WebDriverWait(this.driver, seconds);

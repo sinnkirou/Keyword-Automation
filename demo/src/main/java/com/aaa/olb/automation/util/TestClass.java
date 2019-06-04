@@ -44,9 +44,11 @@ public class TestClass extends BaseTestClass {
 		this.currentPage = "";
 	}
 
-	/*
+	/**
 	 * BehaviourAnalysis.action performs each action by test step
-	 * */
+	 * 
+	 * @throws Throwable
+	 */
 	@Test()
 	@Parameters()
 	public void testMethod() throws Throwable {

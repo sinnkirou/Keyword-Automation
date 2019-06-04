@@ -10,9 +10,12 @@ import com.aaa.olb.automation.datasource.DataProvider;
 
 public class FlowProvider {
 
-	/*
+	/**
 	 * get flows entities from flow sheet data
-	 * */
+	 * 
+	 * @param provider
+	 * @return
+	 */
 	public static List<FlowDeclaration> read(DataProvider provider) {
 		// TODO Auto-generated method stub
 		List<Map<String, CellEntity>> sources = provider.getData();

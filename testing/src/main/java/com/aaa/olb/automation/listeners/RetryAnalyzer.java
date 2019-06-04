@@ -6,8 +6,9 @@ import org.testng.ITestResult;
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
-	/*
-	 * (non-Javadoc)
+	/**
+	 *
+	 *  * (non-Javadoc)
 	 * 
 	 * @see org.testng.IRetryAnalyzer#retry(org.testng.ITestResult)
 	 * 
@@ -19,8 +20,6 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 	 * it not.
 	 *
 	 */
-	// private int counter = 0 ;
-
 	@Override
 	public boolean retry(ITestResult result) {
 		int retryLimit = RuntimeSettings.getInstance().getRetry();

@@ -5,8 +5,12 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RetryCountIfFailed {
-	// Specify how many times you want to
-	// retry the test if failed.
-	// Default value of retry count is 0
+	/**
+	 * Specify how many times you want to
+	 * retry the test if failed.
+	 * Default value of retry count is 0
+	 * 
+	 * @return int
+	 */
 	int value() default 0;
 }

@@ -33,6 +33,10 @@ public class Control extends ActionRepository {
 
 	protected SeleniumContext context;
 
+	/**
+	 * @param context
+	 * @param webElement
+	 */
 	protected Control(SeleniumContext context, WebElement webElement) {
 		super();
 		this.context = context;
@@ -40,6 +44,12 @@ public class Control extends ActionRepository {
 		we = webElement;
 	}
 
+	/**
+	 * @param actionName
+	 * @param startTime
+	 * @param endTime
+	 * @return action
+	 */
 	protected BaseAction generateAction(String actionName, LocalDateTime startTime, LocalDateTime endTime) {
 		String targetName = this.getClass().getName();
 		if (this.context != null && this.context.getRoute() != null) {
@@ -58,10 +68,11 @@ public class Control extends ActionRepository {
 	/**
 	 * The control is visible or not
 	 * 
-	 * return: True- visible, False- not
+	 * @return True- visible, False- not
 	 */
 	public boolean visible() {
 		try {
+			this.threadSleep();
 			return we.isDisplayed();
 		} catch (NoSuchElementException | StaleElementReferenceException | NullPointerException ex) {
 			// ex.printStackTrace();
@@ -75,10 +86,11 @@ public class Control extends ActionRepository {
 	/**
 	 * The control is enabled or not
 	 * 
-	 * return: True- enabled, False- not
+	 * @return True- enabled, False- not
 	 */
 	public boolean enabled() {
 		try {
+			this.threadSleep();
 			we.isEnabled();
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
 			Log.error(ex.getLocalizedMessage());
@@ -90,11 +102,8 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Get control's one css style value. Parameters: cssName: string - css style
-	 * attribute name
-	 * 
-	 * return css style value: string
-	 * 
+	 * @param cssName: style attribute name
+	 * @return css style value: string
 	 */
 	public String getCssValue(String cssName) {
 		return we.getCssValue(cssName);
@@ -103,8 +112,7 @@ public class Control extends ActionRepository {
 	/**
 	 * Get control's all applied css class
 	 * 
-	 * return all css class names: string
-	 * 
+	 * @return all css class names: string
 	 */
 	public String getClassName() {
 		return we.getAttribute("class");
@@ -113,8 +121,7 @@ public class Control extends ActionRepository {
 	/**
 	 * Get control's element tag
 	 * 
-	 * return tag name: string
-	 * 
+	 * @return tag name: string
 	 */
 	public String getTagName() {
 		return we.getTagName();
@@ -123,10 +130,8 @@ public class Control extends ActionRepository {
 	/**
 	 * Get control's one attribute
 	 * 
-	 * Parameters: name: string - attribute name
-	 * 
-	 * return attribute value: string
-	 * 
+	 * @param name: string - attribute name
+	 * @return attribute value: string
 	 */
 	public String getAttribute(String name) {
 		return we.getAttribute(name);
@@ -138,39 +143,45 @@ public class Control extends ActionRepository {
 	public void waitForVisible() {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
-		try {
-			wait.until(ExpectedConditions.visibilityOf(we));
-		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		} catch (TimeoutException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
+		if (!this.visible()) {
+			try {
+				wait.until(ExpectedConditions.visibilityOf(we));
+			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+				Log.error(ex.getLocalizedMessage());
+				throw ex;
+			} catch (TimeoutException ex) {
+				Log.error(ex.getLocalizedMessage());
+				throw ex;
+			}
 		}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
 	}
 
 	/**
-	 * Wait for control display *
+	 * Wait for control display
+	 * 
+	 * @param seconds
 	 */
 	public void waitForVisible(long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
-//		if (!this.visible())
-		try {
-			wait.until(ExpectedConditions.visibilityOf(we));
-		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		} catch (TimeoutException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
+		if (!this.visible()) {
+			try {
+				this.threadSleep();
+				wait.until(ExpectedConditions.visibilityOf(we));
+			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+				Log.error(ex.getLocalizedMessage());
+				throw ex;
+			} catch (TimeoutException ex) {
+				Log.error(ex.getLocalizedMessage());
+				throw ex;
+			}
 		}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
 	}
 
 	/**
-	 * Wait for control being clickable *
+	 * Wait for control being clickable
 	 */
 	public void waitForClickable() {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
@@ -189,7 +200,9 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Wait for control being clickable *
+	 * Wait for control being clickable
+	 * 
+	 * @param seconds
 	 */
 	public void waitForClickable(long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
@@ -207,7 +220,8 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Wait for control disappear *
+	 * Wait for control disappear
+	 * 
 	 */
 	public void waitForHidden() {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
@@ -224,7 +238,9 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Wait for control disappear *
+	 * Wait for control disappear
+	 * 
+	 * @param seconds
 	 */
 	public void waitForHidden(long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
@@ -240,6 +256,12 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("wait for hidden", startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * wait until control's attribute with specific value exits
+	 * 
+	 * @param attribute
+	 * @param value
+	 */
 	public void waitForSpecificAttribute(String attribute, String value) {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
@@ -257,6 +279,13 @@ public class Control extends ActionRepository {
 				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * wait until control's attribute with specific value exits
+	 * 
+	 * @param attribute
+	 * @param value
+	 * @param seconds
+	 */
 	public void waitForSpecificAttribute(String attribute, String value, long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
@@ -274,23 +303,13 @@ public class Control extends ActionRepository {
 				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
 	}
 
-	public void waitToPresent(String attribute, String value) {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
-		LocalDateTime startTime = LocalDateTime.now();
-
-		try {
-			wait.until(ExpectedConditions.attributeContains(we, attribute, value));
-		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		} catch (TimeoutException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		}
-		this.info(this,
-				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
-	}
-
+	/**
+	 * wait until control's attribute contained with specific value exits
+	 * 
+	 * @param attribute
+	 * @param value
+	 * @param seconds
+	 */
 	public void waitForAttributeContained(String attribute, String value, long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
@@ -308,6 +327,12 @@ public class Control extends ActionRepository {
 				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * wait until control's attribute contained with specific value exits
+	 * 
+	 * @param attribute
+	 * @param value
+	 */
 	public void waitForNotEmptyAttribute(String attribute) {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
@@ -325,6 +350,12 @@ public class Control extends ActionRepository {
 				generateAction(String.format("wait for attribute - %s", attribute), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * wait until control's attribute not empty
+	 * 
+	 * @param attribute
+	 * @param seconds
+	 */
 	public void waitForNotEmptyAttribute(String attribute, long seconds) {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
@@ -365,9 +396,9 @@ public class Control extends ActionRepository {
 	/**
 	 * @param Route
 	 * 
-	 *              see definition for getChildren
+	 *              for details, see definition for getChildren
 	 * 
-	 *              return children control instances: Control list
+	 * @return return children control instances: Control list
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Control> List<T> getChildrens(Route route) throws Exception {
@@ -381,8 +412,6 @@ public class Control extends ActionRepository {
 
 	/**
 	 * scroll to view element
-	 * 
-	 * @throws Exception
 	 * 
 	 */
 	public void scrollToViewElement() {
@@ -399,7 +428,7 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * click control
+	 * click control with mouse
 	 * 
 	 */
 	public void click() {
@@ -410,20 +439,21 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("click", startTime, LocalDateTime.now()));
 	}
 
-	public void clickByJS() {
-		try {
-			LocalDateTime startTime = LocalDateTime.now();
-			((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
-			this.info(this, generateAction("clickByJS", startTime, LocalDateTime.now()));
-		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		} catch (TimeoutException ex) {
-			Log.error(ex.getLocalizedMessage());
-			throw ex;
-		}
+	/**
+	 * click control by JS
+	 * 
+	 * @throws Exception
+	 */
+	public void clickByJS() throws Exception {
+		LocalDateTime startTime = LocalDateTime.now();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
+		this.info(this, generateAction("clickByJS", startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * context-click control with mouse
+	 * 
+	 */
 	public void rightClick() {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
@@ -469,8 +499,12 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * get parent
+	 * get Parent Control
 	 * 
+	 * @param <T>
+	 * @param type
+	 * @return Control
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Control> T getParent(Class<T> type) throws Exception {
@@ -489,7 +523,6 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * 
 	 * get WebElement
 	 * 
 	 */
@@ -497,8 +530,10 @@ public class Control extends ActionRepository {
 		return we;
 	}
 
-	/*
-	 * 鼠标拖拽元素动作 将 source 元素拖放到 target 元素的位置
+	/**
+	 * 鼠标拖拽元素动作 将 we 拖放到 target 元素的位置
+	 * 
+	 * @param target
 	 */
 	public void dragAndDrop(WebElement target) {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -508,8 +543,10 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("dragAndDrop", startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 鼠标拖拽元素动作 将 source 元素拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
+	/**
+	 * 鼠标拖拽元素动作 将 we 拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
+	 * 
+	 * @param text e.g.: text -> "xOffset, yOffset"
 	 */
 	public void dragAndDropByOffset(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -519,8 +556,10 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("dragAndDropBy with offset: " + text, startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 鼠标在当前位置拖拽,到当前元素的(xOffset, yOffset) 位置
+	/**
+	 * 鼠标在当前位置拖拽,拖动到相对于当前元素的(xOffset, yOffset) 位置
+	 * 
+	 * @param text e.g.: text -> "xOffset, yOffset"
 	 */
 	public void dragAndDropByOffsetFromCurrent(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -532,7 +571,7 @@ public class Control extends ActionRepository {
 				generateAction("dragAndDropByOffsetAtCurrent with offset: " + text, startTime, LocalDateTime.now()));
 	}
 
-	/*
+	/**
 	 * 鼠标悬停操作
 	 */
 	public void clickAndHold() {
@@ -542,7 +581,7 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("clickAndHold", startTime, LocalDateTime.now()));
 	}
 
-	/*
+	/**
 	 * 将鼠标移到元素中点
 	 */
 	public void moveToElement() {
@@ -552,8 +591,10 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("moveToElement", startTime, LocalDateTime.now()));
 	}
 
-	/*
+	/**
 	 * 以鼠标当前位置或者 (0,0) 为中心开始移动到 (xOffset, yOffset) 坐标轴
+	 * 
+	 * @param text e.g.: text -> "xOffset, yOffset"
 	 */
 	public void moveByOffsetFromStart(String text) {
 		Actions action = new Actions(this.driver);
@@ -563,9 +604,11 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("moveByOffsetFromStart with offset: " + text, startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 将鼠标移到元素 toElement 的 (xOffset, yOffset) 位置， 这里的 (xOffset, yOffset) 是以元素
-	 * toElement 的左上角为 (0,0) 开始的 (x, y) 坐标轴。
+	/**
+	 * 将鼠标移到当前元素 的 (xOffset, yOffset) 位置， 这里的 (xOffset, yOffset) 是以当前元素的左上角为 (0,0)
+	 * 开始的 (x, y) 坐标轴。
+	 * 
+	 * @param text e.g.: text -> "xOffset, yOffset"
 	 */
 	public void moveByOffsetFromElement(String text) {
 		Actions action = new Actions(this.driver);
@@ -575,8 +618,9 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("moveByOffsetFromElement with offset: " + text, startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 鼠标左键在当前停留的位置做单击操作
+	/**
+	 * 在当前停留的位置做单击操作，鼠标左键
+	 * 
 	 */
 	public void clickAtCurrentPosition() {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -585,8 +629,9 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 鼠标左键在当前停留的位置做右击操作
+	/**
+	 * 在当前停留的位置做右击操作，鼠标右键
+	 * 
 	 */
 	public void rightClickAtCurrentPosition() {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -595,8 +640,9 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("rightClickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
 
-	/*
+	/**
 	 * 释放鼠标
+	 * 
 	 */
 	public void release() {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -605,8 +651,10 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("release", startTime, LocalDateTime.now()));
 	}
 
-	/*
-	 * 键盘模拟
+	/**
+	 * 键盘模拟, 通过selenium原生方法
+	 * 
+	 * @param keyname
 	 */
 	public void sendKey(String keyname) {
 		LocalDateTime startTime = LocalDateTime.now();
@@ -616,9 +664,11 @@ public class Control extends ActionRepository {
 		this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
 	}
 
-	/*
+	/**
 	 * Robot模拟键盘模拟 字母键 a、b、c、d … z， 一些符号键比如：‘ {}\[] ’、‘ \ ’、‘。’、‘ ? ’、‘：’、‘ + ’、‘ -
 	 * ’、‘ = ’、、‘“”’， 还有一些不常用到的功能键如 PrtSc、ScrLk/NmLk
+	 * 
+	 * @param keyname
 	 */
 	@SuppressWarnings({ "restriction", "deprecation" })
 	public void sendKeyByRobot(String keyname) {
@@ -639,9 +689,12 @@ public class Control extends ActionRepository {
 		}
 	}
 
-	/*
-	 * @Param eg：text-> '50，60' select partial context from a span or div, eg:
-	 * <div>test context</div>
+	/**
+	 * select partial context from a span or div
+	 * 
+	 * @param text
+	 * 
+	 *             e.g.：text-> '50，60', e.g.: <div>test context</div>
 	 */
 	public void selectPartialContextByIndex(String text) {
 		this.focus();
@@ -719,9 +772,12 @@ public class Control extends ActionRepository {
 		}
 	}
 
-	/*
-	 * @Param eg：text-> 'some context' select partial context from a span or div,
-	 * eg: <div>test context</div>
+	/**
+	 * select partial context from a span or div
+	 * 
+	 * @param text
+	 * 
+	 *             e.g.：text-> 'some context', e.g.: <div>test context</div>
 	 */
 	public void selectPartialContextByContext(String text) {
 		this.focus();
@@ -749,6 +805,11 @@ public class Control extends ActionRepository {
 		}
 	}
 
+	/**
+	 * sleep for specific time
+	 * 
+	 * default time from WaitOrDelayTimeout from RuntimeSettings instance
+	 */
 	public void threadSleep() {
 		try {
 			LocalDateTime startTime = LocalDateTime.now();

@@ -13,14 +13,22 @@ import com.aaa.olb.automation.datasource.DataProvider;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.util.MapKeyComparator;
 
-/*
- * the default flow template, which transforms test steps sheet data into test step entities
- * the output test steps are sorted and grouped here
- * the hidden actions will be appended into each flow,
+/**
+ * the default flow template, 
  * 
- * eg: GoNext button is clicked by default in SimpleFlowTemplate at the end of each flow
+ * which transforms test steps sheet data into test step entities
+ * 
+ * the output test steps are sorted and grouped here
+ * 
+ * the hidden actions will be appended into each flow
+ * 
+ * e.g.: GoNext button is clicked by default in SimpleFlowTemplate 
+ * 
+ * at the end of each flow
+ * 
  * the default hidden action will be inherited by child template and able to be override.
- * */
+ *
+ */
 public abstract class SimpleFlowTemplate implements FlowTemplate {
 	protected String pageName;
 	protected String testcaseID;

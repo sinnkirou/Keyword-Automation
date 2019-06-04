@@ -10,9 +10,11 @@ import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.components.SearchboxForm;
 
-/*
- * With the given provider in behaviorIndication, so as to get the needed customized Behavior
- * */
+/**
+ * With the given provider in behaviorIndication
+ * 
+ * so as to get the needed customized Behavior
+ */
 public class CustomizedBehaviorProvider implements BehaviorProvider {
 	@Override
 	public Behavior get(BehaviorFacet facet) {

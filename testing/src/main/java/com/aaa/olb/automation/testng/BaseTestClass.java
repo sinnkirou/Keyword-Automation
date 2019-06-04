@@ -9,9 +9,10 @@ import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.RetryCounter;
 import com.aaa.olb.automation.log.Log;
 
-/*
+/**
  * default browser operations are defined here and then inherited by child class
- * */
+ *
+ */
 public abstract class BaseTestClass {
 
 	protected int Index;
@@ -44,7 +45,7 @@ public abstract class BaseTestClass {
 
 	@AfterMethod
 	public void clear() {
-		//this.browser.close();
+		this.browser.close();
 		Log.endTestCase(this.tc.getTestCaseID());
 	}
 

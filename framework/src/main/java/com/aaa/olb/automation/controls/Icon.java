@@ -14,7 +14,6 @@ public class Icon extends Textbox {
 		super(context, webElement);
 	}
 
-
 	public Dimension getSize() {
 		return we.getSize();
 	}

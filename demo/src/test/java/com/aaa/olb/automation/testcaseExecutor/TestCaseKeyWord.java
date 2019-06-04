@@ -24,9 +24,11 @@ import com.aaa.olb.automation.util.TestngListener;
 
 public class TestCaseKeyWord {
 
-	/*
+	/**
 	 * entry point
-	 * */
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new TestCaseKeyWord().run();
 	}

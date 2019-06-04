@@ -24,7 +24,7 @@ public class CCMMemberPage extends BasePage {
 		return nextPageButton;
 	}
 	
-	@ByXPath(".//td[text()='41']/following-sibling::td[1]//a")
+	@ByXPath(".//td[text()='51']/following-sibling::td[1]//a")
 	private A member40;
 	
 	@ColumnName("Member40")

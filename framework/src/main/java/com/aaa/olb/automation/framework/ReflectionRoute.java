@@ -26,10 +26,13 @@ public class ReflectionRoute extends Route{
 		this.field = field;
 	}
 	
-	/*
-	 *Class<?> getType() 返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型。
-     *Type getGenericType() 返回一个 Type 对象，它表示此 Field 对象所表示字段的声明类型。 
-	 * */
+	/**
+	 * Class<?> getType() 返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型。
+     * Type getGenericType() 返回一个 Type 对象，它表示此 Field 对象所表示字段的声明类型。 
+	 * 
+	 * @param field
+	 * @return
+	 */
 	public static ReflectionRoute create(Field field) {
 		boolean isControl = false;
 		ReflectionRoute route = new ReflectionRoute();

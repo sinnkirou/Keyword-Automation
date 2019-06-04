@@ -13,10 +13,16 @@ public class A extends Textbox {
 		super(context, webElement);
 	}
 
+	/**
+	 * @return control's href value
+	 */
 	public String getLink() {
 		return this.getAttribute("href");
 	}
 
+	/**
+	 * @return control's target value
+	 */
 	public String getTarget() {
 		return this.getAttribute("target");
 	}

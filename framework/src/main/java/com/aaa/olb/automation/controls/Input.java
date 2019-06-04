@@ -26,6 +26,9 @@ public class Input extends Control {
 	}
 
 
+	/**
+	 * @param keys
+	 */
 	public void enter(String keys) {
 		LocalDateTime startTime= LocalDateTime.now();
 		clear();
@@ -33,6 +36,10 @@ public class Input extends Control {
 		this.info(this, generateAction(String.format("enter '%s'", keys), startTime, LocalDateTime.now()));
 	}
 
+	/**
+	 * @param keys
+	 * @param blur
+	 */
 	public void enter(String keys, Boolean blur) {
 		enter(keys);
 		if (blur)
@@ -51,6 +58,9 @@ public class Input extends Control {
 		return we.getAttribute("value");
 	}
 
+	/**
+	 * @return input type
+	 */
 	public String getInputType() {
 		return this.getAttribute("type");
 	}
@@ -62,6 +72,11 @@ public class Input extends Control {
 		this.info(this, generateAction("blur", startTime, LocalDateTime.now()));
 	}
 	
+	/**
+	 * wait until text presented
+	 * 
+	 * @param value
+	 */
 	public void waitForValueEntered(String value) {
 		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime= LocalDateTime.now();
@@ -69,6 +84,12 @@ public class Input extends Control {
 		this.info(this, generateAction("Wait for entered", startTime, LocalDateTime.now()));
 	}
 		
+	/**
+	 * wait until text presented
+	 * 
+	 * @param value
+	 * @param seconds
+	 */
 	public void waitForValueEntered(String value, long seconds) {
 		WebDriverWait wait=new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime= LocalDateTime.now();
@@ -76,10 +97,13 @@ public class Input extends Control {
 		this.info(this, generateAction("Wait for entered", startTime, LocalDateTime.now()));
 	}
 	
-	/*
-	 * select partial context from a input,
-	 * eg: <input value="test context" />
-	 * */
+	/**
+	 * select partial context from a input with index
+	 * 
+	 * @param text: "0, 8"
+	 * 
+	 * e.g.: <input value="test context" />
+	 */
 	public void selectPartialContextForInput (String text) {
 		String[] parameters = PatameterExacter.getParamters(text, 2);
 		String start = !parameters[0].isEmpty() ? parameters[0] : "0";

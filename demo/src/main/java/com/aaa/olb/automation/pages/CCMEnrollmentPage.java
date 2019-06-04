@@ -114,7 +114,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("home_phone_number")
 	private Input homePhoneNumber;
 	
-	@ColumnName("HomePhoneNumber")
+	@ColumnName(value = "HomePhoneNumber", blur = true)
 	public Input getHomePhoneNumber() {
 		return homePhoneNumber;
 	}
@@ -122,7 +122,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("home_phone_number_ext")
 	private Input homePhoneNumberExt;
 	
-	@ColumnName("HomePhoneNumberExt")
+	@ColumnName(value = "HomePhoneNumberExt", blur = true)
 	public Input getHomePhoneNumberExt() {
 		return homePhoneNumberExt;
 	}
@@ -130,7 +130,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("cell_number")
 	private Input cellNumber;
 	
-	@ColumnName("CellNumber")
+	@ColumnName(value = "CellNumber", blur = true)
 	public Input getCellNumber() {
 		return cellNumber;
 	}
@@ -138,7 +138,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("cell_number_ext")
 	private Input cellNumberExt;
 	
-	@ColumnName("CellNumberExt")
+	@ColumnName(value = "CellNumberExt", blur = true)
 	public Input getCellNumberExt() {
 		return cellNumberExt;
 	}

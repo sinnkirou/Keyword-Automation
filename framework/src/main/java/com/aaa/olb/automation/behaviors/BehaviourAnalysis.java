@@ -47,12 +47,12 @@ public class BehaviourAnalysis {
 						if (facet.getShouldDelay()) {
 							threadSleep();
 						}
-						Object result =  behavior.getClass().getMethod("Execute").invoke(behavior);
+						Object result = behavior.getClass().getMethod("Execute").invoke(behavior);
 						if (facet.getShouldWait()) {
 							threadSleep();
 						}
 						return result;
-						
+
 					} catch (InvocationTargetException e) {
 						Log.info(e.getLocalizedMessage());
 						throw e.getCause();
@@ -73,10 +73,16 @@ public class BehaviourAnalysis {
 		}
 	}
 
-	/*
-	 * get BehaviorIndication by the method's annotation if null, get
-	 * BehaviorIndication from the method's return type using the
-	 * BehaviorIndication.provider() to get the specific BehaviorProvider clazz
+	/**
+	 * get BehaviorIndication by the method's annotation if null
+	 * 
+	 * get BehaviorIndication from the method's return type
+	 * 
+	 * using the BehaviorIndication.provider() to get the specific BehaviorProvider
+	 * class
+	 * 
+	 * @param method
+	 * @return
 	 */
 	public static BehaviorProvider getBehaviorProvider(Method method) {
 		BehaviorIndication indication = method.getAnnotation(BehaviorIndication.class);
@@ -104,11 +110,16 @@ public class BehaviourAnalysis {
 		return new DefaultBehaviorProvider();
 	}
 
-	/*
-	 * get behavior name from test step action value by highest priority, get
-	 * behavior name from method's BehaviorIndication annotaion by medium priority,
-	 * get behavior name from method return type's BehaviorIndication annotaion by
-	 * low priority,
+	/**
+	 * get behavior name from test step action value with highest priority, 
+	 * 
+	 * get behavior name from method's BehaviorIndication annotation with medium priority,
+	 * 
+	 * get behavior name from method return type's BehaviorIndication annotation with lowest priority,
+	 * 
+	 * @param method
+	 * @param testStep
+	 * @return
 	 */
 	public static String getBehaviorName(Method method, TestStepEntity testStep) {
 		if (testStep.getActionKeyWord() != "" && testStep.getActionKeyWord() != null) {
@@ -121,8 +132,13 @@ public class BehaviourAnalysis {
 		return null;
 	}
 
-	/*
+	/**
 	 * create the BehaviorFacet by inputting target, teststep and method
+	 * 
+	 * @param target
+	 * @param testStep
+	 * @param method
+	 * @return
 	 */
 	public static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
 		BehaviorFacet facet = new BehaviorFacet();
@@ -157,8 +173,12 @@ public class BehaviourAnalysis {
 		return facet;
 	}
 
-	/*
+	/**
 	 * invoke BehaviorProvider.get(BehaviorFacet) to get specific behavior
+	 * 
+	 * @param provider
+	 * @param facet
+	 * @return
 	 */
 	public static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
 		try {
@@ -171,8 +191,8 @@ public class BehaviourAnalysis {
 		}
 		return null;
 	}
-	
-	private  static void threadSleep() {
+
+	private static void threadSleep() {
 		try {
 			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
 			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());

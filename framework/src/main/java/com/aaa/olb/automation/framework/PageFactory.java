@@ -19,9 +19,13 @@ class PageFactory {
 		return metadatas;
 	}
 
-	/*
+	/**
 	 * initialize page element or elements list instance 
-	 * */
+	 * 
+	 * @param context
+	 * @return
+	 * @throws Exception
+	 */
 	private static Object initControl(SeleniumContext context) throws Exception {
 		if(context.getRoute().isGeneric()){
 			ControlCollectionFactory factory = new ControlCollectionFactory();
@@ -48,9 +52,13 @@ class PageFactory {
 		route.getField().set(pageClazz, value);
 	}
 
-	/*
+	/**
 	 * initialize page instance along with page elements instances
-	 * */
+	 * 
+	 * @param context
+	 * @param pageClazz
+	 * @throws Exception
+	 */
 	public static void create(SeleniumContext context, Object pageClazz) throws Exception {
 		List<Route> routes = scan(pageClazz.getClass());
 		for (Route route : routes) {

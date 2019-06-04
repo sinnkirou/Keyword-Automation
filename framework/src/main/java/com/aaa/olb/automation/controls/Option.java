@@ -22,6 +22,9 @@ public class Option extends Textbox {
 		return this.getAttribute("value");
 	}
 
+	/**
+	 * @param wait
+	 */
 	public void waitForSelected(WebDriverWait wait) {
 		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.elementToBeSelected(this.we));

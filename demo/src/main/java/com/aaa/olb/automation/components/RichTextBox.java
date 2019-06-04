@@ -20,16 +20,22 @@ public class RichTextBox extends Component {
 		// TODO Auto-generated constructor stub
 	}
 	
-	/*
-	 * @param
-	 * startxOffset, startyOffset, endxOffset, endyOffset
-	 * */
+	/**
+	 * @param text
+	 * 
+	 * e.g.: text -> "startxOffset, startyOffset, endxOffset, endyOffset"
+	 */
 	public void drogAndDropRichBox(String text) {
 		int[] parameters = PatameterExacter.getIntParameters(text, 4);
 		moveByOffsetFromElement(parameters[0]+","+parameters[1]);
 		dragAndDropByOffsetFromCurrent(parameters[2]+","+parameters[3]);
 	}
 	
+	/**
+	 * select context with specific context
+	 * 
+	 *	@param text
+	 */
 	public void selectPartialContextByContext(String text) {
 		Route route = new Route();
 		route.setFieldType(Span.class);

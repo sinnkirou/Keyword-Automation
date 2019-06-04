@@ -11,9 +11,12 @@ import com.aaa.olb.automation.configuration.TestCaseEntity;
 
 public class TestCaseProvider {
 	
-	/*
+	/**
 	 * get testcase entities from testcase sheets data
-	 * */
+	 * 
+	 * @param provider
+	 * @return
+	 */
 	public static Map<String, TestCaseEntity> read(DataProvider provider){
 		
 		Map<String, TestCaseEntity> testcases = new HashMap<>();
