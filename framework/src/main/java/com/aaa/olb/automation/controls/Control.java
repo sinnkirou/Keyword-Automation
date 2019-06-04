@@ -138,16 +138,15 @@ public class Control extends ActionRepository {
 	public void waitForVisible() {
 		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
-//		if (!this.visible())
-			try {
-				wait.until(ExpectedConditions.visibilityOf(we));
-			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-				Log.error(ex.getLocalizedMessage());
-				throw ex;
-			} catch (TimeoutException ex) {
-				Log.error(ex.getLocalizedMessage());
-				throw ex;
-			}
+		try {
+			wait.until(ExpectedConditions.visibilityOf(we));
+		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
+		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
+		}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
 	}
 
@@ -158,15 +157,15 @@ public class Control extends ActionRepository {
 		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		LocalDateTime startTime = LocalDateTime.now();
 //		if (!this.visible())
-			try {
-				wait.until(ExpectedConditions.visibilityOf(we));
-			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-				Log.error(ex.getLocalizedMessage());
-				throw ex;
-			} catch (TimeoutException ex) {
-				Log.error(ex.getLocalizedMessage());
-				throw ex;
-			}
+		try {
+			wait.until(ExpectedConditions.visibilityOf(we));
+		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
+		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
+		}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
 	}
 
@@ -344,27 +343,17 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Get child銆�
+	 * @Param Route
 	 * 
-	 * Parameters: locator: selenium.by - element locator type: control- child
-	 * control type.
+	 *        Route route = new Route(); route.setFieldType(Span.class);
+	 *        route.setLocationKind(LocationKind.XPATH);
+	 *        route.setLocation(".//span[contains(text(), '"+ text +"')]");
+	 *        route.setFieldName("span"); Span target = getChildren(route);
 	 * 
-	 * return child control instance: Control
-	 * 
-	 * @return
-	 * 
+	 * @return return child control instance: Control
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Control> T getChildren(Route route) throws Exception {
-		// WebElement element = we.findElement(locator);
-		// Constructor<?> constructor = type.getConstructor(SeleniumContext.class,
-		// WebElement.class);
-		// @SuppressWarnings("unchecked")
-		// SeleniumContext context =new SeleniumContext();
-		// context.setDriver(this.context.getDriver());
-		// T target = (T) constructor.newInstance(context, element);
-		// context.setRepository((ActionRepository)target);
-		// return target;
 		SeleniumContext context = new SeleniumContext();
 		context.setDriver(this.context.getDriver());
 		context.setParent(this.we);
@@ -374,12 +363,11 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * Get children with same type銆�
+	 * @param Route
 	 * 
-	 * Parameters: locator: selenium.by - element locator type: control- child
-	 * control type.
+	 *              see definition for getChildren
 	 * 
-	 * return children control instances: Control list
+	 *              return children control instances: Control list
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Control> List<T> getChildrens(Route route) throws Exception {
@@ -435,11 +423,11 @@ public class Control extends ActionRepository {
 			throw ex;
 		}
 	}
-	
+
 	public void rightClick() {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).contextClick().perform();
 		this.info(this, generateAction("rightClick", startTime, LocalDateTime.now()));
 	}
@@ -508,136 +496,134 @@ public class Control extends ActionRepository {
 	public WebElement getWebElement() {
 		return we;
 	}
-	
+
 	/*
-	 * 鼠标拖拽元素动作
-	 * 将 source 元素拖放到 target 元素的位置
-	 * */
+	 * 鼠标拖拽元素动作 将 source 元素拖放到 target 元素的位置
+	 */
 	public void dragAndDrop(WebElement target) {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(this.driver); 
-		action.moveToElement(we).dragAndDrop(we, target).perform();;
+		Actions action = new Actions(this.driver);
+		action.moveToElement(we).dragAndDrop(we, target).perform();
+		;
 		this.info(this, generateAction("dragAndDrop", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
-	 * 鼠标拖拽元素动作
-	 * 将 source 元素拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
-	 * */
+	 * 鼠标拖拽元素动作 将 source 元素拖放到 (xOffset, yOffset) 位置，其中 xOffset 为横坐标，yOffset 为纵坐标。
+	 */
 	public void dragAndDropByOffset(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		int[] parameters = PatameterExacter.getIntParameters(text, 2);
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).dragAndDropBy(we, parameters[0], parameters[1]).perform();
-		this.info(this, generateAction("dragAndDropBy with offset: "+ text, startTime, LocalDateTime.now()));
+		this.info(this, generateAction("dragAndDropBy with offset: " + text, startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 鼠标在当前位置拖拽,到当前元素的(xOffset, yOffset) 位置
-	 * */
+	 */
 	public void dragAndDropByOffsetFromCurrent(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		int[] parameters = PatameterExacter.getIntParameters(text, 2);
-		Actions action = new Actions(this.driver); 
-		action.clickAndHold().moveToElement(we, parameters[0], parameters[1]).perform(); 
+		Actions action = new Actions(this.driver);
+		action.clickAndHold().moveToElement(we, parameters[0], parameters[1]).perform();
 		action.release().perform();
-		this.info(this, generateAction("dragAndDropByOffsetAtCurrent with offset: "+ text, startTime, LocalDateTime.now()));
+		this.info(this,
+				generateAction("dragAndDropByOffsetAtCurrent with offset: " + text, startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 鼠标悬停操作
-	 * */
+	 */
 	public void clickAndHold() {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).clickAndHold(we).perform();
 		this.info(this, generateAction("clickAndHold", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 将鼠标移到元素中点
-	 * */
+	 */
 	public void moveToElement() {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).perform();
 		this.info(this, generateAction("moveToElement", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 以鼠标当前位置或者 (0,0) 为中心开始移动到 (xOffset, yOffset) 坐标轴
-	 * */
+	 */
 	public void moveByOffsetFromStart(String text) {
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		LocalDateTime startTime = LocalDateTime.now();
 		int[] parameters = PatameterExacter.getIntParameters(text, 2);
 		action.moveByOffset(parameters[0], parameters[1]).perform();
-		this.info(this, generateAction("moveByOffsetFromStart with offset: "+text, startTime, LocalDateTime.now()));
+		this.info(this, generateAction("moveByOffsetFromStart with offset: " + text, startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
-	 *  将鼠标移到元素 toElement 的 (xOffset, yOffset) 位置，
-	 *  这里的 (xOffset, yOffset) 是以元素 toElement 的左上角为 (0,0) 开始的 (x, y) 坐标轴。
-	 * */
+	 * 将鼠标移到元素 toElement 的 (xOffset, yOffset) 位置， 这里的 (xOffset, yOffset) 是以元素
+	 * toElement 的左上角为 (0,0) 开始的 (x, y) 坐标轴。
+	 */
 	public void moveByOffsetFromElement(String text) {
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		LocalDateTime startTime = LocalDateTime.now();
 		int[] parameters = PatameterExacter.getIntParameters(text, 2);
 		action.moveToElement(we, parameters[0], parameters[1]).perform();
-		this.info(this, generateAction("moveByOffsetFromElement with offset: "+ text, startTime, LocalDateTime.now()));
+		this.info(this, generateAction("moveByOffsetFromElement with offset: " + text, startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
-	 * 鼠标左键在当前停留的位置做单击操作 
-	 * */
+	 * 鼠标左键在当前停留的位置做单击操作
+	 */
 	public void clickAtCurrentPosition() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver);
 		action.click().perform();
 		this.info(this, generateAction("clickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
-	 * 鼠标左键在当前停留的位置做右击操作 
-	 * */
+	 * 鼠标左键在当前停留的位置做右击操作
+	 */
 	public void rightClickAtCurrentPosition() {
 		LocalDateTime startTime = LocalDateTime.now();
 		Actions action = new Actions(this.driver);
 		action.contextClick().perform();
 		this.info(this, generateAction("rightClickAtCurrentPosition", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 释放鼠标
-	 * */
+	 */
 	public void release() {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.release().perform();
 		this.info(this, generateAction("release", startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
 	 * 键盘模拟
-	 * */
+	 */
 	public void sendKey(String keyname) {
 		LocalDateTime startTime = LocalDateTime.now();
 		CharSequence cs = Keys.valueOf(keyname) != null ? Keys.valueOf(keyname) : keyname;
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).sendKeys(cs).perform();
 		this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
 	}
-	
+
 	/*
-	 * Robot模拟键盘模拟
-	 * 字母键 a、b、c、d … z，
-	 * 一些符号键比如：‘ {}\[] ’、‘ \ ’、‘。’、‘ ? ’、‘：’、‘ + ’、‘ - ’、‘ = ’、、‘“”’，
-	 * 还有一些不常用到的功能键如 PrtSc、ScrLk/NmLk
-	 * */
+	 * Robot模拟键盘模拟 字母键 a、b、c、d … z， 一些符号键比如：‘ {}\[] ’、‘ \ ’、‘。’、‘ ? ’、‘：’、‘ + ’、‘ -
+	 * ’、‘ = ’、、‘“”’， 还有一些不常用到的功能键如 PrtSc、ScrLk/NmLk
+	 */
 	@SuppressWarnings({ "restriction", "deprecation" })
-	public void sendKeyByRobot(String keyname) { 
+	public void sendKeyByRobot(String keyname) {
 		LocalDateTime startTime = LocalDateTime.now();
-		Actions action = new Actions(this.driver); 
+		Actions action = new Actions(this.driver);
 		action.moveToElement(we).build().perform();
 		Robot robot = null;
 		try {
@@ -650,13 +636,12 @@ public class Control extends ActionRepository {
 			// TODO Auto-generated catch block
 			Log.error(e.getLocalizedMessage());
 			e.printStackTrace();
-		} 
-	 }
-	
+		}
+	}
+
 	/*
-	 * @Param
-	 * eg：text-> '50，60'
-	 * select partial context from a span or div, eg: <div>test context</div>
+	 * @Param eg：text-> '50，60' select partial context from a span or div, eg:
+	 * <div>test context</div>
 	 */
 	public void selectPartialContextByIndex(String text) {
 		this.focus();
@@ -719,7 +704,7 @@ public class Control extends ActionRepository {
 		script.append("    textRange.select();\n");
 		script.append("  }\n");
 		script.append("}");
-		script.append("setSelectionRange(arguments[0], "+start+", "+ end +");");
+		script.append("setSelectionRange(arguments[0], " + start + ", " + end + ");");
 		try {
 			LocalDateTime startTime = LocalDateTime.now();
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -735,9 +720,8 @@ public class Control extends ActionRepository {
 	}
 
 	/*
-	 *  @Param
-	 * eg：text-> 'some context'
-	 * select partial context from a span or div, eg: <div>test context</div>
+	 * @Param eg：text-> 'some context' select partial context from a span or div,
+	 * eg: <div>test context</div>
 	 */
 	public void selectPartialContextByContext(String text) {
 		this.focus();
@@ -764,5 +748,17 @@ public class Control extends ActionRepository {
 			throw ex;
 		}
 	}
-	
+
+	public void threadSleep() {
+		try {
+			LocalDateTime startTime = LocalDateTime.now();
+			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
+			Thread.sleep(time);
+			this.info(this, generateAction("threadSleep: " + time, startTime, LocalDateTime.now()));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getLocalizedMessage());
+		}
+	}
 }

@@ -1,7 +1,6 @@
 package com.aaa.olb.automation.customizedBehaviors;
 
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
-import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.configuration.SystemConstants;
@@ -14,40 +13,26 @@ public class RichTextBoxBehavior extends ControlBehavior {
 	}
 
 	@Override
-	public Object Execute(){
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		RichTextBox target = (RichTextBox) this.facet.getTarget();
 		String parameter = this.facet.getParameters()[0].toString();
-		
-		String behaviorName=this.facet.getBehaviorName();
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT;
+
+		String behaviorName = this.facet.getBehaviorName();
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT;
 		}
 		switch (behaviorName.toLowerCase()) {
 		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT:
 			if (parameter != "") {
-				behaves(new ControlAction() {
-
-					@Override
-					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByContext(parameter);
-					}
-				});
-				
+				target.waitForVisible();
+				target.selectPartialContextByContext(parameter);
 			}
 			return null;
 		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:
 			if (parameter != "") {
-				behaves(new ControlAction() {
-
-					@Override
-					public void act() {
-						target.waitForVisible();
-						target.selectPartialContextByIndex(parameter);
-					}
-				});
-				
+				target.waitForVisible();
+				target.selectPartialContextByIndex(parameter);
 			}
 			return null;
 		default:

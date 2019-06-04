@@ -12,48 +12,28 @@ public class InputBehavior extends ControlBehavior {
 
 	public Object Execute() {
 		Input target = (Input) this.facet.getTarget();
-		String behaviorName=this.facet.getBehaviorName();
+		String behaviorName = this.facet.getBehaviorName();
 		String parameter = (String) this.facet.getParameters()[0];
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_ENTER;
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_ENTER;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_ENTER:{
+		case SystemConstants.BEHAVIOR_ENTER: {
 			Boolean blur = this.facet.getBlur();
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.enter(parameter, blur);
-				}
-			});
-			if(parameter != null && parameter != "")
+			target.enter(parameter, blur);
+			if (parameter != null && parameter != "")
 				target.waitForNotEmptyAttribute("value");
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_VALUE:{
+		case SystemConstants.BEHAVIOR_VALUE: {
 			return target.getValue();
 		}
-		case SystemConstants.BEHAVIOR_CLEAR:{
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.clear();
-				}
-			});
-			
+		case SystemConstants.BEHAVIOR_CLEAR: {
+			target.clear();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT:{
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.selectPartialContextForInput(parameter);
-				}
-			});
-			
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT: {
+			target.selectPartialContextForInput(parameter);
 			return null;
 		}
 		default:

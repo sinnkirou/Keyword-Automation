@@ -9,28 +9,21 @@ public class RadioButtonBehavior extends ControlBehavior {
 		super(facet);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public Object Execute() {
 		// TODO Auto-generated method stub
 		RadioButton target = (RadioButton) this.facet.getTarget();
-		String behaviorName=this.facet.getBehaviorName();
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_SELECT;
+		String behaviorName = this.facet.getBehaviorName();
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_SELECT;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_SELECT:{
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.select();
-				}
-			});
-			
+		case SystemConstants.BEHAVIOR_SELECT: {
+			target.select();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_WATI_TO_SELECT:{
+		case SystemConstants.BEHAVIOR_WATI_TO_SELECT: {
 			target.waitUtilSelected();
 			return null;
 		}

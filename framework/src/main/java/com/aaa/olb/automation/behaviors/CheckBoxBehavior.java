@@ -9,29 +9,22 @@ public class CheckBoxBehavior extends ControlBehavior {
 		super(facet);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public Object Execute() {
 		// TODO Auto-generated method stub
-		
+
 		CheckBox target = (CheckBox) this.facet.getTarget();
-		String behaviorName=this.facet.getBehaviorName();
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_CHECK;
+		String behaviorName = this.facet.getBehaviorName();
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_CHECK;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_CHECK:{
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.check();
-				}
-			});
-			
+		case SystemConstants.BEHAVIOR_CHECK: {
+			target.check();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_WATI_TO_CHECK:{
+		case SystemConstants.BEHAVIOR_WATI_TO_CHECK: {
 			target.waitForCheck();
 			return null;
 		}

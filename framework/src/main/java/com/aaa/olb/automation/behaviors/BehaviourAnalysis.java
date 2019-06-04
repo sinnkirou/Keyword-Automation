@@ -7,6 +7,7 @@ import org.openqa.selenium.SearchContext;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
+import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.PageRepository;
@@ -43,7 +44,15 @@ public class BehaviourAnalysis {
 					Behavior behavior = getBehavior(provider, facet);
 
 					try {
-						return behavior.getClass().getMethod("Execute").invoke(behavior);
+						if (facet.getShouldDelay()) {
+							threadSleep();
+						}
+						Object result =  behavior.getClass().getMethod("Execute").invoke(behavior);
+						if (facet.getShouldWait()) {
+							threadSleep();
+						}
+						return result;
+						
 					} catch (InvocationTargetException e) {
 						Log.info(e.getLocalizedMessage());
 						throw e.getCause();
@@ -161,6 +170,17 @@ public class BehaviourAnalysis {
 			Log.error(e.getLocalizedMessage());
 		}
 		return null;
+	}
+	
+	private  static void threadSleep() {
+		try {
+			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
+			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getLocalizedMessage());
+		}
 	}
 
 }

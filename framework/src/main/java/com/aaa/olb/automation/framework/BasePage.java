@@ -35,12 +35,11 @@ public abstract class BasePage extends ActionRepository {
 	public void waitForAvailable() {
 		try {
 			long startTime = System.currentTimeMillis();
-			long estimatedTime = 0;
-			Thread.sleep(RuntimeSettings.getInstance().getShortTimeout() * 1000);
+			long endTime = 0;
 			WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getRedirectTimeout());
 			wait.until(isPageLoaded());
-			estimatedTime = System.currentTimeMillis() - startTime;
-			System.out.println("page should be ready, waited for " + estimatedTime);
+			endTime = System.currentTimeMillis() - startTime;
+			System.out.println("page should be ready, waited for " + endTime);
 		} catch (Exception e) {
 			Log.error(e.getLocalizedMessage());
 			e.printStackTrace();

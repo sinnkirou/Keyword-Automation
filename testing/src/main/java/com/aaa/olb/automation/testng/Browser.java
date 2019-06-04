@@ -33,7 +33,7 @@ public abstract class Browser {
 
 			driver.manage().timeouts().pageLoadTimeout(RuntimeSettings.getInstance().getRedirectTimeout(),TimeUnit.SECONDS);
 
-			driver.manage().timeouts().setScriptTimeout(RuntimeSettings.getInstance().getWaitOrDelayTimeout(),
+			driver.manage().timeouts().setScriptTimeout(RuntimeSettings.getInstance().getTimeout(),
 					TimeUnit.SECONDS);
 			
 			driver.manage().window().maximize();

@@ -1,7 +1,6 @@
 package com.aaa.olb.automation.customizedBehaviors;
 
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
-import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.configuration.SystemConstants;
@@ -25,15 +24,8 @@ public class CCMMemberTabsBehavior extends ControlBehavior {
 		}
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.SELECT_ENROLLMENT:
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.getEnrollmentTab().waitForVisible();
-					target.getEnrollmentTab().click();
-				}
-			});
-
+			target.getEnrollmentTab().waitForVisible();
+			target.getEnrollmentTab().click();
 			return null;
 		default:
 			return super.Execute();

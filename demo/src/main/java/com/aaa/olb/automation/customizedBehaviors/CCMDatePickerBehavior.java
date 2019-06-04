@@ -1,7 +1,6 @@
 package com.aaa.olb.automation.customizedBehaviors;
 
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
-import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.CCMDatePicker;
 import com.aaa.olb.automation.configuration.SystemConstants;
@@ -25,14 +24,9 @@ public class CCMDatePickerBehavior extends ControlBehavior {
 		}
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.SELECT_FIRST_DATE_OF_NEXT_MONTH:
-			behaves(new ControlAction() {
-				@Override
-				public void act() {
-					target.input.focus();
-					target.nextMonthBtn.click();
-					target.firstDate.click();
-				}
-			});
+			target.input.focus();
+			target.nextMonthBtn.click();
+			target.firstDate.click();
 			return null;
 		default:
 			return super.Execute();

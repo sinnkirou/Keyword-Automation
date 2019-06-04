@@ -2,9 +2,7 @@ package com.aaa.olb.automation.behaviors;
 
 import java.util.List;
 
-import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
-import com.aaa.olb.automation.log.Log;
 
 public class ControlCollectionBehavior implements Behavior {
 
@@ -34,27 +32,6 @@ public class ControlCollectionBehavior implements Behavior {
 			default: {
 				throw new UnsupportedOperationException("unable to action this operation.");
 			}
-		}
-	}
-
-	private void threadSleep() {
-		try {
-			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
-			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
-		}
-	}
-
-	public void behaves(ControlAction func) {
-		if (this.facet.getShouldDelay()) {
-			threadSleep();
-		}
-		func.act();
-		if (this.facet.getShouldWait()) {
-			threadSleep();
 		}
 	}
 }

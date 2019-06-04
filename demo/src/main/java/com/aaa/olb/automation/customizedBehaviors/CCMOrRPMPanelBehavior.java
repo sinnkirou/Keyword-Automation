@@ -1,7 +1,6 @@
 package com.aaa.olb.automation.customizedBehaviors;
 
 import com.aaa.olb.automation.behaviors.BehaviorFacet;
-import com.aaa.olb.automation.behaviors.ControlAction;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.configuration.SystemConstants;
@@ -24,27 +23,17 @@ public class CCMOrRPMPanelBehavior extends ControlBehavior {
 			behaviorName = SystemConstants.BEHAVIOR_CLICK;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case CustomizedBehaviorConstants.SELECT_CCM :
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.getCCMButton().waitForVisible();
-					target.getCCMButton().click();
-				}
-			});
-
+		case CustomizedBehaviorConstants.SELECT_CCM_IF_VISIBLE:
+			if(target.visible()) {
+				target.getCCMButton().waitForVisible();
+				target.getCCMButton().click();
+			}
 			return null;
-		case CustomizedBehaviorConstants.SELECT_RPM:
-			behaves(new ControlAction() {
-
-				@Override
-				public void act() {
-					target.getRPMButton().waitForVisible();
-					target.getRPMButton().click();
-				}
-			});
-
+		case CustomizedBehaviorConstants.SELECT_RPM_IF_VISIBLE:
+			if(target.visible()) {
+				target.getRPMButton().waitForVisible();
+				target.getRPMButton().click();
+			}
 			return null;
 		default:
 			return super.Execute();

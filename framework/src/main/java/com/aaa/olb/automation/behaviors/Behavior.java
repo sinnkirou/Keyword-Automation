@@ -4,5 +4,4 @@ public interface Behavior {
 
 	Object Execute();
 	
-	void behaves(ControlAction func);
 }
