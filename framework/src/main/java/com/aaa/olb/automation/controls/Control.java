@@ -81,6 +81,7 @@ public class Control extends ActionRepository {
 		try {
 			we.isEnabled();
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
@@ -141,8 +142,10 @@ public class Control extends ActionRepository {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(we));
 			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+				Log.error(ex.getLocalizedMessage());
 				throw ex;
 			} catch (TimeoutException ex) {
+				Log.error(ex.getLocalizedMessage());
 				throw ex;
 			}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
@@ -158,8 +161,10 @@ public class Control extends ActionRepository {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(we));
 			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+				Log.error(ex.getLocalizedMessage());
 				throw ex;
 			} catch (TimeoutException ex) {
+				Log.error(ex.getLocalizedMessage());
 				throw ex;
 			}
 		this.info(this, generateAction("wait for visible", startTime, LocalDateTime.now()));
@@ -175,8 +180,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(we));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this, generateAction("wait for clickable", startTime, LocalDateTime.now()));
@@ -191,8 +198,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(we));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this, generateAction("wait for clickable", startTime, LocalDateTime.now()));
@@ -239,8 +248,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeToBe(we, attribute, value));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -254,8 +265,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeToBe(we, attribute, value));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -269,8 +282,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeContains(we, attribute, value));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -284,8 +299,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeContains(we, attribute, value));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -299,8 +316,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeToBeNotEmpty(we, attribute));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -314,8 +333,10 @@ public class Control extends ActionRepository {
 		try {
 			wait.until(ExpectedConditions.attributeToBeNotEmpty(we, attribute));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		}
 		this.info(this,
@@ -381,11 +402,11 @@ public class Control extends ActionRepository {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(false);", we);
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getCause().getMessage());
-			ex.printStackTrace();
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
 		}
 	}
 
@@ -407,11 +428,11 @@ public class Control extends ActionRepository {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
 			this.info(this, generateAction("clickByJS", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getCause().getMessage());
-			ex.printStackTrace();
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
 		}
 	}
 	
@@ -627,8 +648,8 @@ public class Control extends ActionRepository {
 			this.info(this, generateAction("sendKeyByRobot: " + keyname, startTime, LocalDateTime.now()));
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
+			Log.error(e.getLocalizedMessage());
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
 		} 
 	 }
 	
@@ -705,11 +726,11 @@ public class Control extends ActionRepository {
 			executor.executeScript(script.toString(), we);
 			this.info(this, generateAction("selectPartialContextByIndex", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getCause().getMessage());
-			ex.printStackTrace();
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
 		}
 	}
 
@@ -736,11 +757,11 @@ public class Control extends ActionRepository {
 			executor.executeScript(script.toString(), we);
 			this.info(this, generateAction("selectPartialContextByContext", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			Log.error(ex.getCause().getMessage());
-			ex.printStackTrace();
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
 		}
 	}
 	

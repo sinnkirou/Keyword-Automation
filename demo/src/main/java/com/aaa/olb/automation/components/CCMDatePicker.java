@@ -51,10 +51,10 @@ public class CCMDatePicker extends Component {
 	@ByClassName("ant-calendar-today-btn")
 	public A selectTodayBtn;
 	
-	@ByXPath(".//td[@class='ant-calendar-cell']/div")
+	@ByXPath(".//td[contains(@class,'ant-calendar-cell')]/div")
 	public List<Div> calendarDate;
 	
-	@ByXPath(".//td[@class='ant-calendar-cell']/div[text()='1']")
+	@ByXPath(".//td[contains(@class,'ant-calendar-cell')]/div[text()='1']")
 	public Div firstDate;
 	
 	@ByXPath(".//td[@title='Jan']/a")

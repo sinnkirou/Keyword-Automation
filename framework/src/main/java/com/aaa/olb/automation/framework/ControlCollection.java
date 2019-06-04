@@ -74,7 +74,7 @@ class ControlCollection<T extends Control> implements List<T> {
 		try {
 			return this.generateItem(element);
 		} catch (Exception e) {
-			Log.info(e.getCause().getMessage());
+			Log.info(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		return null;
@@ -151,7 +151,7 @@ class ControlCollection<T extends Control> implements List<T> {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.info(e.getCause().getMessage());
+			Log.info(e.getLocalizedMessage());
 		}
 		
 		return results;

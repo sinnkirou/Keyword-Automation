@@ -15,6 +15,7 @@ import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
@@ -105,9 +106,11 @@ public class Input extends Control {
 			executor.executeScript(script.toString(), we);
 			this.info(this, generateAction("selectPartialContextForInput", startTime, LocalDateTime.now()));
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
+			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
-			ex.printStackTrace();
+			Log.error(ex.getLocalizedMessage());
+			throw ex;
 		}
 	}
 }

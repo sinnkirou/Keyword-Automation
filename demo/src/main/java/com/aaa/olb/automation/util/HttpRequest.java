@@ -47,7 +47,7 @@ public class HttpRequest {
 		} catch (Exception e) {
 			System.out.println("failed to send the GET: " + e);
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 		}
 
 		finally {
@@ -57,7 +57,7 @@ public class HttpRequest {
 				}
 			} catch (Exception e2) {
 				e2.printStackTrace();
-				Log.error(e2.getCause().getMessage());
+				Log.error(e2.getLocalizedMessage());
 			}
 		}
 		return result;
@@ -80,15 +80,15 @@ public class HttpRequest {
 			executeHttpRequest(jsonData, httpPost);
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("error while encoding api url : " + e);
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 			throw e;
 		} catch (IOException e) {
 			System.out.println("ioException occured while sending http request : " + e);
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 			throw e;
 		} catch (Exception e) {
 			System.out.println("exception occured while sending http request : " + e);
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 			throw e;
 		} finally {
 			httpPost.releaseConnection();

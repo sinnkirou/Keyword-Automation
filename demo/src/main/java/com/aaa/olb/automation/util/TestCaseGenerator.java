@@ -111,7 +111,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.error(e.getCause().getMessage());
+				Log.error(e.getLocalizedMessage());
 			}
 
 			/*

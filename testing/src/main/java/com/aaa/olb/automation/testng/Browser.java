@@ -39,7 +39,7 @@ public abstract class Browser {
 			driver.manage().window().maximize();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 		}
 	}
 
@@ -48,7 +48,7 @@ public abstract class Browser {
 			driver.get(site);
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 		}
 	}
 

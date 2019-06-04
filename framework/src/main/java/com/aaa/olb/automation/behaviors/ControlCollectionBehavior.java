@@ -44,7 +44,7 @@ public class ControlCollectionBehavior implements Behavior {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 		}
 	}
 

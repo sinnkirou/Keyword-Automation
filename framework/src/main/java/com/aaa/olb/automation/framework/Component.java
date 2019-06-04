@@ -16,7 +16,7 @@ public abstract class Component extends Control {
 			ComponentFactory.create(context, this.element, this);
 		}
 		catch(Exception ex){
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			ex.printStackTrace();
 		}
 	}

@@ -29,7 +29,7 @@ public class BehaviorReflect {
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.error(e.getCause().getMessage());
+						Log.error(e.getLocalizedMessage());
 					}
 				}
 
@@ -40,7 +40,7 @@ public class BehaviorReflect {
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.error(e.getCause().getMessage());
+						Log.error(e.getLocalizedMessage());
 					}
 				}
 			}

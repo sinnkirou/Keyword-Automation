@@ -72,7 +72,7 @@ public class ExcelUtils {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 			throw (e);
 		}
 	}
@@ -125,7 +125,7 @@ public class ExcelUtils {
 			ExcelWBook = new XSSFWorkbook(ExcelFile);
 			return ExcelWBook.getSheet(SheetName);
 		} catch (Exception ex) {
-			Log.error(ex.getCause().getMessage());
+			Log.error(ex.getLocalizedMessage());
 			ex.printStackTrace();
 			return null;
 		}

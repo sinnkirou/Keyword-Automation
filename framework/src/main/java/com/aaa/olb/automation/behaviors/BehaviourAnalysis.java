@@ -45,7 +45,7 @@ public class BehaviourAnalysis {
 					try {
 						return behavior.getClass().getMethod("Execute").invoke(behavior);
 					} catch (InvocationTargetException e) {
-						Log.info(e.getCause().getMessage());
+						Log.info(e.getLocalizedMessage());
 						throw e.getCause();
 					}
 
@@ -88,7 +88,7 @@ public class BehaviourAnalysis {
 					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.error(e.getCause().getMessage());
+				Log.error(e.getLocalizedMessage());
 			}
 		}
 
@@ -138,7 +138,7 @@ public class BehaviourAnalysis {
 				int index = Integer.valueOf(listNum.substring(1, listNum.length() - 1));
 				listFacet.setIndex(index - 1);
 			} catch (Exception ex) {
-				Log.error(ex.getCause().getMessage());
+				Log.error(ex.getLocalizedMessage());
 				listFacet.setIndex(0);
 			}
 
@@ -158,7 +158,7 @@ public class BehaviourAnalysis {
 				| SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 		}
 		return null;
 	}

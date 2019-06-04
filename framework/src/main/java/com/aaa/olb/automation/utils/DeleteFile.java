@@ -18,7 +18,7 @@ public class DeleteFile {
 			*/
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.error(e.getCause().getMessage());
+			Log.error(e.getLocalizedMessage());
 		}
 	}
 
