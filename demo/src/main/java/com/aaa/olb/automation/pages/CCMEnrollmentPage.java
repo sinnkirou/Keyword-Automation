@@ -56,4 +56,9 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("date_of_birth")
 	private CCMDatePicker birthdate; 
 	
+	@ColumnName("BirthDate")
+	public CCMDatePicker getBirthDate() {
+		return birthdate;
+	}
+	
 }

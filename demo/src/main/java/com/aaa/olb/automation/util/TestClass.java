@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aaa.olb.automation.behaviors.BehaviourAnalysis;
+import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.listeners.ScreenScr;
 import com.aaa.olb.automation.log.Log;
@@ -63,7 +64,7 @@ public class TestClass extends BaseTestClass {
 				Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 				System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			}
-			if(ts.getActionKeyWord().equals("takescreen")) {
+			if(ts.getActionKeyWord().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		        String timestamp = df.format(new Date());
 				String takescreen = ts.getTestCaseID() + "_" + timestamp;

@@ -14,30 +14,26 @@ public class CCMMemberTabsBehavior extends ControlBehavior {
 	}
 
 	@Override
-	public Object Execute(){
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		CCMMemberTabs target = (CCMMemberTabs) this.facet.getTarget();
 		String parameter = this.facet.getParameters()[0].toString();
-		
-		String behaviorName=this.facet.getBehaviorName();
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_CLICK;
+
+		String behaviorName = this.facet.getBehaviorName();
+		if (behaviorName == null) {
+			behaviorName = CustomizedBehaviorConstants.SELECT_ENROLLMENT;
 		}
 		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_CLICK:
-			if (parameter != "") {
-				behaves(new ControlAction() {
+		case CustomizedBehaviorConstants.SELECT_ENROLLMENT:
+			behaves(new ControlAction() {
 
-					@Override
-					public void act() {
-						if(parameter.equals("enrollment")) {
-							target.getEnrollmentTab().waitForVisible();
-							target.getEnrollmentTab().click();
-						}
-					}
-				});
-				
-			}
+				@Override
+				public void act() {
+					target.getEnrollmentTab().waitForVisible();
+					target.getEnrollmentTab().click();
+				}
+			});
+
 			return null;
 		default:
 			return super.Execute();

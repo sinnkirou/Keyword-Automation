@@ -14,33 +14,38 @@ public class CCMOrRPMPanelBehavior extends ControlBehavior {
 	}
 
 	@Override
-	public Object Execute(){
+	public Object Execute() {
 		// TODO Auto-generated method stub
 		CCMOrRPMPanel target = (CCMOrRPMPanel) this.facet.getTarget();
 		String parameter = this.facet.getParameters()[0].toString();
-		
-		String behaviorName=this.facet.getBehaviorName();
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_CLICK;
-		}
-		switch (behaviorName.toLowerCase()) {
-		case SystemConstants.BEHAVIOR_CLICK:
-			if (parameter != "") {
-				behaves(new ControlAction() {
 
-					@Override
-					public void act() {
-						if(parameter.equals("CCM")) {
-							target.getCCMButton().waitForVisible();
-							target.getCCMButton().click();
-						}else if(parameter.equals("RPM")) {
-							target.getRPMButton().waitForVisible();
-							target.getRPMButton().click();
-						}
-					}
-				});
-				
-			}
+		String behaviorName = this.facet.getBehaviorName();
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_CLICK;
+		}
+		String a = CustomizedBehaviorConstants.SELECT_CCM.toLowerCase();
+		switch (behaviorName.toLowerCase()) {
+		case CustomizedBehaviorConstants.SELECT_CCM :
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.getCCMButton().waitForVisible();
+					target.getCCMButton().click();
+				}
+			});
+
+			return null;
+		case CustomizedBehaviorConstants.SELECT_RPM:
+			behaves(new ControlAction() {
+
+				@Override
+				public void act() {
+					target.getRPMButton().waitForVisible();
+					target.getRPMButton().click();
+				}
+			});
+
 			return null;
 		default:
 			return super.Execute();
