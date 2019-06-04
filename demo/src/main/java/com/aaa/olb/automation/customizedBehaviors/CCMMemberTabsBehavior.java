@@ -21,7 +21,7 @@ public class CCMMemberTabsBehavior extends ControlBehavior {
 
 		String behaviorName = this.facet.getBehaviorName();
 		if (behaviorName == null) {
-			behaviorName = CustomizedBehaviorConstants.SELECT_ENROLLMENT;
+			behaviorName = SystemConstants.BEHAVIOR_CLICK;
 		}
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.SELECT_ENROLLMENT:

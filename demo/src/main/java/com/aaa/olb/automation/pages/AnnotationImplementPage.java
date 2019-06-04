@@ -23,7 +23,7 @@ public class AnnotationImplementPage extends BasePage {
 	@ByXPath(".//div[@name='content']")
 	private RichTextBox textbox;
 	
-	@ColumnName(value = "RichTextBox", async = true)
+	@ColumnName(value = "RichTextBox", shouldDelay = true)
 	public RichTextBox getRichTextBox() {
 		return textbox;
 	}

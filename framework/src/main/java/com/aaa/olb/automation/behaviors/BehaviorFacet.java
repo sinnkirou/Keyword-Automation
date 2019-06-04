@@ -11,7 +11,9 @@ public class BehaviorFacet {
 
 	private Object[] parameters;
 	
-	private Boolean async = false;
+	private Boolean shouldWait = false;
+	
+	private Boolean shouldDelay = false;
 	
 	private Boolean blur = false;
 
@@ -39,12 +41,20 @@ public class BehaviorFacet {
 		this.parameters = parameters;
 	}
 	
-	public Boolean getAsync() {
-		return async;
+	public Boolean getShouldWait() {
+		return shouldWait;
 	}
 	
-	public void setAsync(Boolean async) {
-		this.async = async;
+	public void setShouldWait(Boolean shouldWait) {
+		this.shouldWait = shouldWait;
+	}
+	
+	public Boolean getShouldDelay() {
+		return shouldDelay;
+	}
+	
+	public void setShouldDelay(Boolean shouldDelay) {
+		this.shouldDelay = shouldDelay;
 	}
 
 	public Boolean getBlur() {

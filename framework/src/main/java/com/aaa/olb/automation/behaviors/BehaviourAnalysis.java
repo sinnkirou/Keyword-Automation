@@ -120,7 +120,8 @@ public class BehaviourAnalysis {
 		facet.setBehaviorName(getBehaviorName(method, testStep));
 		facet.setParameters(new Object[] { testStep.getValue() });
 		facet.setTarget(target);
-		facet.setAsync(method.getAnnotation(ColumnName.class).async());
+		facet.setShouldDelay(method.getAnnotation(ColumnName.class).shouldDelay());
+		facet.setShouldWait(method.getAnnotation(ColumnName.class).shouldWait());
 		facet.setBlur(method.getAnnotation(ColumnName.class).blur());
 
 		/*

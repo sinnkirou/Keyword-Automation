@@ -19,7 +19,7 @@ public class CCMChronicPage extends BasePage {
 	@ByClassName("ant-modal-content")
 	private CCMOrRPMPanel panel;
 	
-	@ColumnName("CCMOrRPMPanel")
+	@ColumnName(value = "CCMOrRPMPanel", shouldWait = true)
 	public CCMOrRPMPanel getCCMOrRPMPanel() {
 		return panel;
 	}

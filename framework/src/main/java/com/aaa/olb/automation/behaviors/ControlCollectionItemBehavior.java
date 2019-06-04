@@ -31,7 +31,8 @@ public class ControlCollectionItemBehavior extends ControlBehavior {
 		targetFacet.setBehaviorName(itemFacet.getBehaviorName());
 		targetFacet.setParameters(itemFacet.getParameters());
 		targetFacet.setTarget(item);
-		targetFacet.setAsync(itemFacet.getAsync());
+		targetFacet.setShouldDelay(itemFacet.getShouldDelay());
+		targetFacet.setShouldWait(itemFacet.getShouldWait());
 		targetFacet.setBlur(itemFacet.getBlur());
 		BehaviorProvider provider = null;
 		try {

@@ -36,7 +36,7 @@ public class AnnotationHomePage extends BasePage {
 	@ByXPath(".//div[@title='测试']")
 	private Div testTask;
 	
-	@ColumnName(value = "TestTask", async = true)
+	@ColumnName(value = "TestTask", shouldDelay = true)
 	public Div getTestTask() {
 		return testTask;
 	}
@@ -44,7 +44,7 @@ public class AnnotationHomePage extends BasePage {
 	@ByXPath(".//tbody//td[2]/span[2]")
 	private Span firstTask;
 	
-	@ColumnName(value = "FirstTask", async = true)
+	@ColumnName(value = "FirstTask", shouldDelay = true)
 	public Span getFirstTask() {
 		return firstTask;
 	}

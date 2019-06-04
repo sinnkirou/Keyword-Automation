@@ -67,8 +67,8 @@ public class TestClass extends BaseTestClass {
 			if(ts.getActionKeyWord().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		        String timestamp = df.format(new Date());
-				String takescreen = ts.getTestCaseID() + "_" + timestamp;
-				takescreen(takescreen, Constant.Toverify_Testcases_Screenshots_Dir);
+				String filename = ts.getTestCaseID() + "_" + timestamp;
+				takescreen(filename, Constant.Toverify_Testcases_Screenshots_Dir);
 			}
 		}
 	}

@@ -162,19 +162,26 @@ public class ControlBehavior implements Behavior {
 			return BehaviorReflect.action(facet);
 		}
 	}
+	
+	private void threadSleep() {
+		try {
+			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
+			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getCause().getMessage());
+		}
+	}
 
 	public void behaves(ControlAction func) {
-		if (this.facet.getAsync()) {
-			try {
-				Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
-				Log.info("waited: " + RuntimeSettings.getInstance().getAsyncTimeout());
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Log.error(e.getCause().getMessage());
-			}
+		if (this.facet.getShouldDelay()) {
+			threadSleep();
 		}
 		func.act();
+		if (this.facet.getShouldWait()) {
+			threadSleep();
+		}
 	}
 
 }

@@ -35,7 +35,7 @@ public class RuntimeSettings {
 	/**
 	 * async operation or request timeout - seconds
 	 */
-	private long asyncTimeout;
+	private long waitOrDealyTimeout;
 
 	/**
 	 * page jump or component jump timeout - seconds
@@ -60,14 +60,14 @@ public class RuntimeSettings {
 	private long sleepTime;
 
 	private RuntimeSettings() {
-		this.timeout = 10;
+		this.timeout = 5;
 		this.shortTimeout = 5;
-		this.longTimeout = 60;
-		this.operationTimeout = 15;
-		this.asyncTimeout = 30;
-		this.redirectTimeout = 300;
-		this.implicitTimeout = 30;
-		this.explicitTimeout = 60;
+		this.longTimeout = 10;
+		this.operationTimeout = 5;
+		this.waitOrDealyTimeout = 3;
+		this.redirectTimeout = 10;
+		this.implicitTimeout = 10;
+		this.explicitTimeout = 10;
 		this.sleepTime = 3;
 		this.retry = 0;
 	}
@@ -80,8 +80,8 @@ public class RuntimeSettings {
 		return operationTimeout;
 	}
 
-	public long getAsyncTimeout() {
-		return asyncTimeout;
+	public long getWaitOrDelayTimeout() {
+		return waitOrDealyTimeout;
 	}
 
 	public long getRedirectTimeout() {
@@ -142,8 +142,8 @@ public class RuntimeSettings {
 			this.redirectTimeout = value;
 			break;
 		}
-		case SystemConstants.SETTINGS_ASYNC_WAIT_TIME: {
-			this.asyncTimeout = value;
+		case SystemConstants.SETTINGS_WAIT_OR_DELAY_TIME: {
+			this.waitOrDealyTimeout = value;
 			break;
 		}
 		case SystemConstants.SETTINGS_RETRY: {

@@ -1,12 +1,15 @@
 package com.aaa.olb.automation.configuration;
 
 public final class SystemConstants {
+	/*
+	 * eclipse转换大小写快捷键ctrl+shift+x/y
+	 * */
 
 	public final static String SETTINGS_WAIT_TIME="default";
 	
 	public final static String SETTINGS_OPERATION_WAIT_TIME="operation";
 	
-	public final static String SETTINGS_ASYNC_WAIT_TIME="async";
+	public final static String SETTINGS_WAIT_OR_DELAY_TIME="waitordelay";
 	
 	public final static String SETTINGS_REDIRECT_WAIT_TIME="redirect";
 	
@@ -18,7 +21,7 @@ public final class SystemConstants {
 	
 	public final static String SETTINGS_EXPLICIT_WAIT_TIME="explicit";
 	
-	public final static String SETTINGS_SLEEP_TIME="sleepTime";
+	public final static String SETTINGS_SLEEP_TIME="sleeptime";
 	
 	public final static String SETTINGS_RETRY="retry";
 	
@@ -30,7 +33,7 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_ENTER="enter";
 	
-	public final static String BEHAVIOR_DOUBLECLICK="doubleClick";
+	public final static String BEHAVIOR_DOUBLECLICK="doubleclick";
 	
 	public final static String BEHAVIOR_FOCUS="focus";
 	
@@ -42,17 +45,17 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_INDEX="index";
 	
-	public final static String BEHAVIOR_WAIT_FOR_VISIBLE="waitForVisible";
+	public final static String BEHAVIOR_WAIT_FOR_VISIBLE="waitforvisible";
 	
-	public final static String BEHAVIOR_WATI_TO_CLICK="waitForClickable";
+	public final static String BEHAVIOR_WATI_TO_CLICK="waitforclickable";
 	
-	public final static String BEHAVIOR_WATI_TO_CHECK="waitForCheck";
+	public final static String BEHAVIOR_WATI_TO_CHECK="waitforcheck";
 	
-	public final static String BEHAVIOR_WATI_TO_SELECT="waitUtilSelected";
+	public final static String BEHAVIOR_WATI_TO_SELECT="waitutilselected";
 	
-	public final static String BEHAVIOR_WATI_TO_PRESENT="waitTextToBePresented";
+	public final static String BEHAVIOR_WATI_TO_PRESENT="waittexttobepresented";
 	
-	public final static String BEHAVIOR_WATI_TO_HIDE="waitForHidden";
+	public final static String BEHAVIOR_WATI_TO_HIDE="waitforhidden";
 	
 	public final static String BEHAVIOR_ATTRIBUTE="[attr]";
 	
@@ -70,23 +73,23 @@ public final class SystemConstants {
 	
 	public final static String LIST_BEHAVIOR_SIZE="size";
 	
-	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickIfVisible";
+	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickifvisible";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT="selectPartialContextByContext";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT="selectpartialcontextbycontext";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX="selectPartialContextByIndex";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX="selectpartialcontextbyindex";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT="selectPartialContextForInput";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT="selectpartialcontextforinput";
 	
-	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="dragAndDropByOffset";
+	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="draganddropbyoffset";
 	
-	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickAndHold";
+	public final static String BEHAVIOR_CLICK_AND_HOLD = "clickandhold";
 	
-	public final static String BEHAVIOR_RIGHT_CLICK = "rightClick";
+	public final static String BEHAVIOR_RIGHT_CLICK = "rightclick";
 	
-	public final static String BEHAVIOR_SEND_KEY = "sendKey";
+	public final static String BEHAVIOR_SEND_KEY = "sendkey";
 	
-	public final static String BEHAVIOR_SEND_KEY_BY_ROBOT = "sendKeyByRobot";
+	public final static String BEHAVIOR_SEND_KEY_BY_ROBOT = "sendkeybyrobot";
 	
 	public final static String BEHAVIOR_TAKE_SCREENSHOT = "takescreen";
 }

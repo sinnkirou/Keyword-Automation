@@ -37,18 +37,24 @@ public class ControlCollectionBehavior implements Behavior {
 		}
 	}
 
-	@Override
-	public void behaves(ControlAction func) {
-		func.act();
-		if (this.facet.getAsync()) {
-			try {
-				Thread.sleep(RuntimeSettings.getInstance().getAsyncTimeout() * 1000);
-				Log.info("waited: " + RuntimeSettings.getInstance().getAsyncTimeout());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				Log.error(e.getCause().getMessage());
-			}
+	private void threadSleep() {
+		try {
+			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
+			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getCause().getMessage());
 		}
 	}
 
+	public void behaves(ControlAction func) {
+		if (this.facet.getShouldDelay()) {
+			threadSleep();
+		}
+		func.act();
+		if (this.facet.getShouldWait()) {
+			threadSleep();
+		}
+	}
 }

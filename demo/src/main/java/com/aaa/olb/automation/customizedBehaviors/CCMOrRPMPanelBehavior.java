@@ -23,7 +23,6 @@ public class CCMOrRPMPanelBehavior extends ControlBehavior {
 		if (behaviorName == null) {
 			behaviorName = SystemConstants.BEHAVIOR_CLICK;
 		}
-		String a = CustomizedBehaviorConstants.SELECT_CCM.toLowerCase();
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.SELECT_CCM :
 			behaves(new ControlAction() {

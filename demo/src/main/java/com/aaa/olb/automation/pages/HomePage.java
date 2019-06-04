@@ -41,7 +41,7 @@ public class HomePage extends BasePage {
 		return searchboxForm;
 	}
 
-	@ColumnName(value = "Keyword", async = true, blur = true)
+	@ColumnName(value = "Keyword", shouldDelay = true, blur = true)
 	public Input getKeyword() {
 		return searchboxForm.getKeyword();
 	}
