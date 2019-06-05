@@ -174,4 +174,12 @@ public class CCMEnrollmentPage extends BasePage {
 	public List<Div> getErrorMessage(){
 		return errorMessage;
 	}
+	
+	@ById("email")
+	private Input email;
+	
+	@ColumnName("Email")
+	public Input getEmail() {
+		return email;
+	}
 }

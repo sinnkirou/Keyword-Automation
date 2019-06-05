@@ -9,7 +9,7 @@ import com.aaa.olb.automation.configuration.ConfigurationOptions;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.datasource.DataProvider;
 
-public class BasicFlowTemplate implements FlowTemplate{
+public class BasicFlowTemplate implements FlowTemplate {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -19,7 +19,7 @@ public class BasicFlowTemplate implements FlowTemplate{
 	public List<TestStepEntity> translate(DataProvider provider, String pageName) {
 		List<Map<String, CellEntity>> sources = provider.getData();
 		List<TestStepEntity> results = new ArrayList<>();
-		
+
 		for (Map<String, CellEntity> source : sources) {
 			TestStepEntity testStep = new TestStepEntity();
 			testStep.setPageName(pageName);
@@ -36,7 +36,15 @@ public class BasicFlowTemplate implements FlowTemplate{
 					testStep.setActionKeyWord(source.get(key).getValue());
 					break;
 				case ConfigurationOptions.TEMPLATE_OPTION_VALUE:
-					testStep.setValue(source.get(key).getValue());
+					String value = source.get(key).getValue();
+					if (value.indexOf("[regex]") >= 0) {
+						// String regex = value.substring(value.indexOf("(") + 1,
+						// value.lastIndexOf(")")).replace("^", "")
+						// .replace("$", "");
+						String regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+						
+					}
+					testStep.setValue(value);
 					break;
 				case ConfigurationOptions.TEMPLATE_GROUP_ID:
 					testStep.setTestGroupID(source.get(key).getValue());

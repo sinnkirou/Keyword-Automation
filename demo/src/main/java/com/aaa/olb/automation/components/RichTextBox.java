@@ -41,7 +41,7 @@ public class RichTextBox extends Component {
 		route.setFieldType(Span.class);
 		route.setLocationKind(LocationKind.XPATH);
 		route.setLocation(".//span[contains(text(), '"+ text +"')]");
-		route.setFieldName("span");
+		route.setFieldName("span"+text);
 		Span target = null;
 		try {
 			target = getChildren(route);

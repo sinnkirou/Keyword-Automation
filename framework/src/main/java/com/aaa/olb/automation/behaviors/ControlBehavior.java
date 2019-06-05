@@ -67,6 +67,7 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_ATTRIBUTE: {
+			target.threadSleep();
 			return target.getAttribute(parameter);
 		}
 		case SystemConstants.BEHAVIOR_STYLE: {
@@ -74,6 +75,7 @@ public class ControlBehavior implements Behavior {
 			return target.getCssValue(parameter);
 		}
 		case SystemConstants.BEHAVIOR_CLASS: {
+			target.threadSleep();
 			return target.getClassName();
 		}
 		case SystemConstants.BEHAVIOR_CLICK_IF_VISIBLE: {

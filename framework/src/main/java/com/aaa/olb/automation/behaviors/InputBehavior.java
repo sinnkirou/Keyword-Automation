@@ -26,6 +26,7 @@ public class InputBehavior extends ControlBehavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_VALUE: {
+			target.threadSleep();
 			return target.getValue();
 		}
 		case SystemConstants.BEHAVIOR_CLEAR: {
