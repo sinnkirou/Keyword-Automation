@@ -166,4 +166,12 @@ public class CCMEnrollmentPage extends BasePage {
 	public Button getSubmitButton() {
 		return submitButton;
 	}
+	
+	@ByClassName("ant-form-explain")
+	private List<Div> errorMessage;
+	
+	@ColumnName("ErrorMessage")
+	public List<Div> getErrorMessage(){
+		return errorMessage;
+	}
 }

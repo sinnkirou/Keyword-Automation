@@ -19,6 +19,10 @@ public class TemplateProvider {
 			case FlowNames.SEARCHING:
 				FlowTemplateRepository.getInstance().addTemplate(flow.getName(), new SearchingTemplate());
 				break;
+				
+			case FlowNames.LOGIN:
+				FlowTemplateRepository.getInstance().addTemplate(flow.getName(), new LoginTemplate());
+				break;
 			
 			default:
 				break;

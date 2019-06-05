@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aaa.olb.automation.behaviors.BehaviourAnalysis;
+import com.aaa.olb.automation.configuration.BrowserType;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.listeners.ScreenScr;
@@ -59,18 +60,25 @@ public class TestClass extends BaseTestClass {
 			/*
 			 * with [value] or [text] etc defined in test step, it means we should compare the value on real value with expected value
 			 * */
-			if (result != null && ts.getActionKeyWord().contains("[")) {
-				result = result.toString().replaceAll("\\u00a0|\\s*", "");
-				String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "");
-				Assert.assertEquals(result, expect);
-				Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
-				System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
-			}
-			if(ts.getActionKeyWord().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String timestamp = df.format(new Date());
-				String filename = ts.getTestCaseID() + "_" + timestamp;
-				takescreen(filename, Constant.Toverify_Testcases_Screenshots_Dir);
+			if(ts.getActionKeyWord() != null) {
+				if (result != null && ts.getActionKeyWord().contains("[")) {
+					result = result.toString().replaceAll("\\u00a0|\\s*", "");
+					String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "");
+					if(tc.getEnvironmentVariable().getBrowserType().equals(BrowserType.FIREFOX) && ts.getActionKeyWord().contains("color")) {
+						expect = expect.substring(expect.indexOf('(')+1, expect.lastIndexOf(','));
+						expect = "rgb(" + expect + ")";
+					}
+					
+					Assert.assertEquals(result, expect);
+					Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
+					System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
+				}
+				if(ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String timestamp = df.format(new Date());
+					String filename = ts.getTestCaseID() + "_" + timestamp;
+					takescreen(filename, Constant.Toverify_Testcases_Screenshots_Dir);
+				}
 			}
 		}
 	}

@@ -78,9 +78,13 @@ public abstract class SimpleFlowTemplate implements FlowTemplate {
 		return results;
 	}
 
-	/*
+	/**
 	 * GoNext button is clicked by default in SimpleFlowTemplate
-	 * */
+	 * 
+	 * @param originalSteps
+	 * @param results
+	 * @return
+	 */
 	public List<TestStepEntity> appendInfoByRow(Map<Integer, TestStepEntity> originalSteps,
 			List<TestStepEntity> results) {
 		List<TestStepEntity> teststeps = results;

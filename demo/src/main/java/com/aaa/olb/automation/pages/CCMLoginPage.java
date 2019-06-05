@@ -39,4 +39,9 @@ public class CCMLoginPage extends BasePage {
 	public Button getLoginButton() {
 		return loginButton;
 	}
+	
+	@ColumnName("GoNext")
+	public Button getNextButton() {
+		return loginButton;
+	}
 }
