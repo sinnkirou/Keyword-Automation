@@ -11,7 +11,9 @@ import com.aaa.olb.automation.configuration.ConfigurationOptions;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.datasource.DataProvider;
 import com.aaa.olb.automation.flow.FlowTemplate;
+import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.util.MapKeyComparator;
+import com.aaa.olb.automation.utils.GenerateValueByRegex;
 
 /**
  * the default flow template, 
@@ -61,7 +63,17 @@ public abstract class SimpleFlowTemplate implements FlowTemplate {
 				default:
 					TestStepEntity testStep = new TestStepEntity();
 					testStep.setTargetName(key);
-					testStep.setValue(source.get(key).getValue());
+					String value = source.get(key).getValue();
+					if (value.indexOf("[regex]") >= 0) {
+						try {
+							value = GenerateValueByRegex.getRandom(value);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							Log.error(e.getLocalizedMessage());
+						}
+					}
+					testStep.setValue(value);
 					testStep.setPageName(this.pageName);
 
 					int index = source.get(key).getIndex();

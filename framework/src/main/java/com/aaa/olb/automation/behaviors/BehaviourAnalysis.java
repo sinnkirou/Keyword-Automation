@@ -7,11 +7,11 @@ import org.openqa.selenium.SearchContext;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
-import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.PageRepository;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class BehaviourAnalysis {
 	private static BasePage page = null;
@@ -45,11 +45,11 @@ public class BehaviourAnalysis {
 
 					try {
 						if (facet.getShouldDelay()) {
-							threadSleep();
+							TestHelper.threadSleep();
 						}
 						Object result = behavior.getClass().getMethod("Execute").invoke(behavior);
 						if (facet.getShouldWait()) {
-							threadSleep();
+							TestHelper.threadSleep();
 						}
 						return result;
 
@@ -191,16 +191,4 @@ public class BehaviourAnalysis {
 		}
 		return null;
 	}
-
-	private static void threadSleep() {
-		try {
-			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
-			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
-		}
-	}
-
 }

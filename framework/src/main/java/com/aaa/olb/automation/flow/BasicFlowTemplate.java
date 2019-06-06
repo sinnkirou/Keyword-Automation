@@ -8,6 +8,8 @@ import com.aaa.olb.automation.configuration.CellEntity;
 import com.aaa.olb.automation.configuration.ConfigurationOptions;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.datasource.DataProvider;
+import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.GenerateValueByRegex;
 
 public class BasicFlowTemplate implements FlowTemplate {
 	@Override
@@ -38,11 +40,13 @@ public class BasicFlowTemplate implements FlowTemplate {
 				case ConfigurationOptions.TEMPLATE_OPTION_VALUE:
 					String value = source.get(key).getValue();
 					if (value.indexOf("[regex]") >= 0) {
-						// String regex = value.substring(value.indexOf("(") + 1,
-						// value.lastIndexOf(")")).replace("^", "")
-						// .replace("$", "");
-						String regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
-						
+						try {
+							value = GenerateValueByRegex.getRandom(value);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							Log.error(e.getLocalizedMessage());
+						}
 					}
 					testStep.setValue(value);
 					break;

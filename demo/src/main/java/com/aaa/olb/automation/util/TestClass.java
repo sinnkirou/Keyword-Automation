@@ -20,6 +20,7 @@ import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.testng.BaseTestClass;
 import com.aaa.olb.automation.utils.DeleteFile;
 import com.aaa.olb.automation.utils.SystemProperty;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class TestClass extends BaseTestClass {
 
@@ -74,6 +75,7 @@ public class TestClass extends BaseTestClass {
 					System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 				}
 				if(ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
+					//TestHelper.threadSleep(1000);
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String timestamp = df.format(new Date());
 					String filename = ts.getTestCaseID() + "_" + timestamp;
