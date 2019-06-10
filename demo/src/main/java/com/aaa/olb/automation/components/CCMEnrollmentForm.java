@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
+import com.aaa.olb.automation.annotations.ByClassName;
 import com.aaa.olb.automation.annotations.ById;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.annotations.ColumnName;
+import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.controls.Li;
@@ -20,7 +22,7 @@ public class CCMEnrollmentForm extends Component {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ById("Consent")
+	@ById("consent")
 	private Div consentDropdown;
 	
 	@ColumnName("Consent")
@@ -60,4 +62,11 @@ public class CCMEnrollmentForm extends Component {
 		return note;
 	}
 	
+	@ByClassName("ant-btn-primary")
+	private Button submitButton;
+	
+	@ColumnName("SubmitButton")
+	public Button getSubmitButton() {
+		return submitButton;
+	}
 }
