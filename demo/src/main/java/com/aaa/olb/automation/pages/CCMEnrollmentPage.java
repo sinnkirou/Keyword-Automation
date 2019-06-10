@@ -9,6 +9,7 @@ import com.aaa.olb.automation.annotations.ById;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.components.CCMDatePicker;
+import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.controls.Input;
@@ -21,6 +22,14 @@ public class CCMEnrollmentPage extends BasePage {
 	public CCMEnrollmentPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
+	}
+	
+	@ByXPath(".//div[contains(@class,'ccmMember')]//ul[@role='menu']")
+	private CCMMemberTabs tabs;
+	
+	@ColumnName("CCMMemberTabs")
+	public CCMMemberTabs getCCMMemberTabs() {
+		return tabs;
 	}
 	
 	@ByXPath(".//div[@id='demographics']//button")
@@ -178,7 +187,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ById("email")
 	private Input email;
 	
-	@ColumnName("Email")
+	@ColumnName(value = "Email", blur = true)
 	public Input getEmail() {
 		return email;
 	}

@@ -5,6 +5,7 @@ import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.BehaviorProvider;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.CCMDatePicker;
+import com.aaa.olb.automation.components.CCMLogDiff;
 import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.components.RichTextBox;
@@ -30,6 +31,8 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 			return new CCMMemberTabsBehavior(facet);
 		}else if (facet.getTarget() instanceof CCMDatePicker) {
 			return new CCMDatePickerBehavior(facet);
+		}else if (facet.getTarget() instanceof CCMLogDiff) {
+			return new CCMLogDiffBehavior(facet);
 		}
 		
 		return new ControlBehavior(facet);

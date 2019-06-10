@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ByXPath;
-import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Li;
 import com.aaa.olb.automation.framework.Component;
@@ -21,8 +20,14 @@ public class CCMMemberTabs extends Component {
 	@ByXPath(".//li[@class='ant-menu-item'][1]")
 	private Li enrollmentTab;
 	
-	@ColumnName("EnrollmentTab")
 	public Li getEnrollmentTab() {
 		return enrollmentTab;
+	}
+	
+	@ByXPath(".//li[@class='ant-menu-item'][5]")
+	private Li chronicLogTab;
+	
+	public Li getChronicLogTab() {
+		return chronicLogTab;
 	}
 }

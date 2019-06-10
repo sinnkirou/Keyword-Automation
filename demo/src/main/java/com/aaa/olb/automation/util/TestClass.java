@@ -63,11 +63,11 @@ public class TestClass extends BaseTestClass {
 			 * */
 			if(ts.getActionKeyWord() != null) {
 				if (result != null && ts.getActionKeyWord().contains("[")) {
-					result = result.toString().replaceAll("\\u00a0|\\s*", "");
-					String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "");
+					result = result.toString().replaceAll("\\u00a0|\\s*", "").toUpperCase();
+					String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "").toUpperCase();
 					if(tc.getEnvironmentVariable().getBrowserType().equals(BrowserType.FIREFOX) && ts.getActionKeyWord().contains("color")) {
 						expect = expect.substring(expect.indexOf('(')+1, expect.lastIndexOf(','));
-						expect = "rgb(" + expect + ")";
+						expect = "RGB(" + expect + ")";
 					}
 					
 					Assert.assertEquals(result, expect);

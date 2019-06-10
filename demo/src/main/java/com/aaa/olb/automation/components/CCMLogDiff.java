@@ -5,29 +5,28 @@ import org.openqa.selenium.WebElement;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.configuration.SystemConstants;
-import com.aaa.olb.automation.controls.Button;
+import com.aaa.olb.automation.controls.Span;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
-public class CCMOrRPMPanel extends Component {
+public class CCMLogDiff extends Component{
 
-	public CCMOrRPMPanel(SeleniumContext context, WebElement element) {
+	public CCMLogDiff(SeleniumContext context, WebElement element) {
 		super(context, element);
 		// TODO Auto-generated constructor stub
 	}
 
-	@ByXPath(".//button[1]")
-	private Button rPMButton;
+	@ByXPath(".//parent::div//span[contains(@class,'add')]")
+	protected Span add;
 	
-	public Button getRPMButton() {
-		return rPMButton;
-	}
+	@ByXPath(".//parent::div//span[contains(@class,'del')]")
+	protected Span delete;
 	
-	@ByXPath(".//button[2]")
-	private Button cCMButton;
-	
-	public Button getCCMButton() {
-		return cCMButton;
+	public Boolean isChanged() {
+		if(add.visible() && delete.visible()) {
+			return true;
+		}
+		return false;
 	}
 }

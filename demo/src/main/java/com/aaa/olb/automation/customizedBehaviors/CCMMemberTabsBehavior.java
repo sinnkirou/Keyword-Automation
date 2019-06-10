@@ -27,6 +27,10 @@ public class CCMMemberTabsBehavior extends ControlBehavior {
 			target.getEnrollmentTab().waitForVisible();
 			target.getEnrollmentTab().click();
 			return null;
+		case CustomizedBehaviorConstants.SELECT_CHRONIC_LOG:
+			target.getChronicLogTab().waitForVisible();
+			target.getChronicLogTab().click();
+			return null;
 		default:
 			return super.Execute();
 		}

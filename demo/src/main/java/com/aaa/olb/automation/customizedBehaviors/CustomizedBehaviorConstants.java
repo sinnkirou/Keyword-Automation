@@ -10,5 +10,9 @@ public class CustomizedBehaviorConstants {
 	
 	public static final String SELECT_ENROLLMENT = "select_enrollment";
 	
+	public static final String SELECT_CHRONIC_LOG = "select_chronic_log";
+	
 	public static final String SELECT_FIRST_DATE_OF_NEXT_MONTH = "select_first_date_of_next_month";
+	
+	public static final String LOG_IS_CHANGED = "[log_is_changed]";
 }
