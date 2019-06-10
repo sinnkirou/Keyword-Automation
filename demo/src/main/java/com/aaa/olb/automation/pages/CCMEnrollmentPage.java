@@ -6,6 +6,7 @@ import com.aaa.olb.automation.annotations.ByTag;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.components.CCMDemographicsForm;
+import com.aaa.olb.automation.components.CCMEnrollmentForm;
 import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Span;
@@ -34,6 +35,14 @@ public class CCMEnrollmentPage extends BasePage {
 		return demographicsButton;
 	}
 	
+	@ByXPath(".//div[@id='enrollment']//button")
+	private Button enrollmentButton;
+
+	@ColumnName("EnrollmentButton")
+	public Button gerEnrollmentButton() {
+		return enrollmentButton;
+	}
+	
 	@ByXPath(".//div[text()='Consent:']/parent::div//span")
 	private Span consentValue;
 	
@@ -48,5 +57,13 @@ public class CCMEnrollmentPage extends BasePage {
 	@ColumnName(nested = true)
 	public CCMDemographicsForm getCCMDemographicsForm() {
 		return demographicsForm;
+	}
+	
+	@ByTag("form")
+	private CCMEnrollmentForm enrollmentForm;
+	
+	@ColumnName(nested = true)
+	public CCMEnrollmentForm getCCMEnrollmentForm() {
+		return enrollmentForm;
 	}
 }
