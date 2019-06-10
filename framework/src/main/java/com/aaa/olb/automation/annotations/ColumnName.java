@@ -19,4 +19,5 @@ public @interface ColumnName {
 	boolean shouldWait() default false;
 	boolean shouldDelay() default false;
 	boolean blur() default false;
+	boolean nested() default false;
 }

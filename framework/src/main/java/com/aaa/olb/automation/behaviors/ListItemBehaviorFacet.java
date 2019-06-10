@@ -16,8 +16,6 @@ public class ListItemBehaviorFacet extends BehaviorFacet {
 		this.setTarget(facet.getTarget());
 		this.setBehaviorName(facet.getBehaviorName());
 		this.setParameters(facet.getParameters());
-		this.setShouldDelay(facet.getShouldDelay());
-		this.setShouldWait(facet.getShouldWait());
 		this.setBlur(facet.getBlur());
 	}
 	

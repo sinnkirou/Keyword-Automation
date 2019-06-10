@@ -11,12 +11,8 @@ public class BehaviorFacet {
 
 	private Object[] parameters;
 	
-	private Boolean shouldWait = false;
-	
-	private Boolean shouldDelay = false;
-	
 	private Boolean blur = false;
-
+	
 	public Object getTarget() {
 		return target;
 	}
@@ -40,22 +36,6 @@ public class BehaviorFacet {
 	public void setParameters(Object[] parameters) {
 		this.parameters = parameters;
 	}
-	
-	public Boolean getShouldWait() {
-		return shouldWait;
-	}
-	
-	public void setShouldWait(Boolean shouldWait) {
-		this.shouldWait = shouldWait;
-	}
-	
-	public Boolean getShouldDelay() {
-		return shouldDelay;
-	}
-	
-	public void setShouldDelay(Boolean shouldDelay) {
-		this.shouldDelay = shouldDelay;
-	}
 
 	public Boolean getBlur() {
 		return blur;
@@ -64,5 +44,4 @@ public class BehaviorFacet {
 	public void setBlur(Boolean blur) {
 		this.blur = blur;
 	}
-
 }

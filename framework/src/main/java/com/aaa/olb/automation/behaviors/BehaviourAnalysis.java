@@ -3,6 +3,8 @@ package com.aaa.olb.automation.behaviors;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import org.apache.poi.ss.formula.functions.Column;
 import org.openqa.selenium.SearchContext;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
@@ -75,11 +77,11 @@ public class BehaviourAnalysis {
 				Behavior behavior = getBehavior(provider, facet);
 
 				try {
-					if (facet.getShouldDelay()) {
+					if (method.getAnnotation(ColumnName.class).shouldDelay()) {
 						TestHelper.threadSleep();
 					}
 					result = behavior.getClass().getMethod("Execute").invoke(behavior);
-					if (facet.getShouldWait()) {
+					if (method.getAnnotation(ColumnName.class).shouldWait()) {
 						TestHelper.threadSleep();
 					}
 					methodMatched = true;
@@ -89,7 +91,7 @@ public class BehaviourAnalysis {
 					Log.info(e.getLocalizedMessage());
 					throw e.getCause();
 				}
-			}else if(Component.class.isAssignableFrom(method.getReturnType())) {
+			}else if(Component.class.isAssignableFrom(method.getReturnType()) && method.getAnnotation(ColumnName.class).nested()) {
 				result = behave(method.getReturnType(), testStep, method);
 			}
 		}
@@ -169,8 +171,6 @@ public class BehaviourAnalysis {
 		facet.setBehaviorName(getBehaviorName(method, testStep));
 		facet.setParameters(new Object[] { testStep.getValue() });
 		facet.setTarget(target);
-		facet.setShouldDelay(method.getAnnotation(ColumnName.class).shouldDelay());
-		facet.setShouldWait(method.getAnnotation(ColumnName.class).shouldWait());
 		facet.setBlur(method.getAnnotation(ColumnName.class).blur());
 
 		/*
