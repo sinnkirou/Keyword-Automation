@@ -36,7 +36,7 @@ public class CCMChronicPage extends BasePage {
 	@ByXPath(".//div[contains(@class,'rightConent')]")
 	private CCMChronicContent rightContent;
 	
-	@ColumnName(value = "CCMChronicContent", nested = true)
+	@ColumnName(nested = true)
 	public CCMChronicContent getCCMChronicContent() {
 		return rightContent;
 	}

@@ -45,7 +45,7 @@ public class CCMEnrollmentPage extends BasePage {
 	@ByTag("form")
 	private CCMDemographicsForm demographicsForm;
 	
-	@ColumnName(value = "CCMDemographicsForm", nested = true)
+	@ColumnName(nested = true)
 	public CCMDemographicsForm getCCMDemographicsForm() {
 		return demographicsForm;
 	}
