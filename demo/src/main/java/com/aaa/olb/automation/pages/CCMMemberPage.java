@@ -26,6 +26,14 @@ public class CCMMemberPage extends BasePage {
 		return nextPageButton;
 	}
 	
+	@ByXPath(".//li[contains(@class,'ant-pagination-item')][last()]")
+	private Li lastPageNumberButton;
+	
+	@ColumnName("LastPageNumberButton")
+	public Li getLastPageNumberButton() {
+		return lastPageNumberButton;
+	}
+	
 	@ByXPath(".//td[text()='40']/following-sibling::td[1]//a")
 	private A member40;
 	
@@ -40,5 +48,13 @@ public class CCMMemberPage extends BasePage {
 	@ColumnName("MembersList")
 	public CCMMemberList getMembers() {
 		return members;
+	}
+	
+	@ByXPath(".//tbody//tr[last()]/td/a")
+	private A lastMemberOfPage;
+	
+	@ColumnName("LastMemberOfPage")
+	public A getLastMemberOfPage() {
+		return lastMemberOfPage;
 	}
 }

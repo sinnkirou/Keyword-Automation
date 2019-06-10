@@ -115,7 +115,10 @@ public class Control extends ActionRepository {
 	 * @return all css class names: string
 	 */
 	public String getClassName() {
-		return we.getAttribute("class");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getAttribute("class");
+		this.info(this, generateAction(String.format("getClassName"), startTime, LocalDateTime.now()));
+		return value;
 	};
 
 	/**
@@ -124,7 +127,10 @@ public class Control extends ActionRepository {
 	 * @return tag name: string
 	 */
 	public String getTagName() {
-		return we.getTagName();
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getTagName();
+		this.info(this, generateAction(String.format("getTagName"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	/**
@@ -134,7 +140,10 @@ public class Control extends ActionRepository {
 	 * @return attribute value: string
 	 */
 	public String getAttribute(String name) {
-		return we.getAttribute(name);
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getAttribute(name);
+		this.info(this, generateAction(String.format("getAttribute"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	/**

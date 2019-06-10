@@ -26,11 +26,17 @@ public class CheckBox extends Control {
 	}
 
 	public boolean isChecked() {
-		return we.isSelected();
+		LocalDateTime startTime = LocalDateTime.now();
+		boolean value = we.isSelected();
+		this.info(this, generateAction(String.format("isChecked"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	public String getValue() {
-		return we.getAttribute("value");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getAttribute("value");
+		this.info(this, generateAction(String.format("getTarget"), startTime, LocalDateTime.now()));
+		return value;
 	}
 	
 	public void waitForCheck() {

@@ -4,17 +4,18 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.openqa.selenium.SearchContext;
-
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
+import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.PageRepository;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.TestHelper;
 
 public class BehaviourAnalysis {
 	private static BasePage page = null;
+	private static Boolean methodMatched = false;
 
 	public static Object action(SearchContext driver, TestStepEntity testStep, Boolean initializePage)
 			throws Throwable {
@@ -29,48 +30,71 @@ public class BehaviourAnalysis {
 				page = PageRepository.create(driver, pageClazz);
 				page.waitForAvailable();
 			}
-			Method[] methods = page.getClass().getMethods();
-
-			for (Method method : methods) {
-				/*
-				 * find the specific method and invoke it to get the web element instance, then
-				 * execute the action
-				 */
-				if (method.getAnnotation(ColumnName.class) != null && methodMathced(testStep.getTargetName(), method)) {
-					Object target = method.invoke(page);
-
-					BehaviorProvider provider = getBehaviorProvider(method);
-					BehaviorFacet facet = getBehaviorFacet(target, testStep, method);
-					Behavior behavior = getBehavior(provider, facet);
-
-					try {
-						if (facet.getShouldDelay()) {
-							TestHelper.threadSleep();
-						}
-						Object result = behavior.getClass().getMethod("Execute").invoke(behavior);
-						if (facet.getShouldWait()) {
-							TestHelper.threadSleep();
-						}
-						return result;
-
-					} catch (InvocationTargetException e) {
-						Log.info(e.getLocalizedMessage());
-						throw e.getCause();
-					}
-
-				}
+			
+			methodMatched = false;
+			Object result = behave(pageClazz, testStep, null);
+			if(methodMatched == false) {
+				Exception e = new Exception("Target not found: " + testStep.getTargetName());
+				Log.info(e.getLocalizedMessage());
+				throw e;
 			}
+			
+			return result;
 		}
 		return null;
 	}
 
-	public static Boolean methodMathced(String targetName, Method method) {
+	private static Boolean methodMathced(String targetName, Method method) {
 		String columnName = method.getAnnotation(ColumnName.class).value();
 		if (targetName.contains("[")) {
 			return targetName.substring(0, targetName.indexOf('[')).equals(columnName);
 		} else {
 			return targetName.equals(columnName);
 		}
+	}
+	
+	private static Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
+		Object result = null;
+		Method[] methods = clazz.getMethods();
+		for (Method method : methods) {
+			/*
+			 * find the specific method and invoke it to get the web element instance, then
+			 * execute the action
+			 */
+			if (method.getAnnotation(ColumnName.class) != null && methodMathced(testStep.getTargetName(), method)) {
+				Object target = null;
+				if(parentMethod == null) {
+					target = method.invoke(page);
+				}else{
+					Object parent = parentMethod.invoke(page);
+					target = method.invoke(parent);
+				}
+
+				BehaviorProvider provider = getBehaviorProvider(method);
+				BehaviorFacet facet = getBehaviorFacet(target, testStep, method);
+				Behavior behavior = getBehavior(provider, facet);
+
+				try {
+					if (facet.getShouldDelay()) {
+						TestHelper.threadSleep();
+					}
+					result = behavior.getClass().getMethod("Execute").invoke(behavior);
+					if (facet.getShouldWait()) {
+						TestHelper.threadSleep();
+					}
+					methodMatched = true;
+					return result;
+
+				} catch (InvocationTargetException e) {
+					Log.info(e.getLocalizedMessage());
+					throw e.getCause();
+				}
+			}else if(Component.class.isAssignableFrom(method.getReturnType())) {
+				result = behave(method.getReturnType(), testStep, method);
+			}
+		}
+		
+		return result;
 	}
 
 	/**
@@ -84,7 +108,7 @@ public class BehaviourAnalysis {
 	 * @param method
 	 * @return
 	 */
-	public static BehaviorProvider getBehaviorProvider(Method method) {
+	private static BehaviorProvider getBehaviorProvider(Method method) {
 		BehaviorIndication indication = method.getAnnotation(BehaviorIndication.class);
 
 		if (indication == null) {
@@ -121,7 +145,7 @@ public class BehaviourAnalysis {
 	 * @param testStep
 	 * @return
 	 */
-	public static String getBehaviorName(Method method, TestStepEntity testStep) {
+	private static String getBehaviorName(Method method, TestStepEntity testStep) {
 		if (testStep.getActionKeyWord() != "" && testStep.getActionKeyWord() != null) {
 			return testStep.getActionKeyWord();
 		} else if (method.getAnnotation(BehaviorIndication.class) != null) {
@@ -140,7 +164,7 @@ public class BehaviourAnalysis {
 	 * @param method
 	 * @return
 	 */
-	public static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
+	private static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
 		BehaviorFacet facet = new BehaviorFacet();
 		facet.setBehaviorName(getBehaviorName(method, testStep));
 		facet.setParameters(new Object[] { testStep.getValue() });
@@ -180,7 +204,7 @@ public class BehaviourAnalysis {
 	 * @param facet
 	 * @return
 	 */
-	public static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
+	private static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
 		try {
 			return (Behavior) provider.getClass().getMethod("get", BehaviorFacet.class).invoke(provider, facet);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

@@ -15,7 +15,10 @@ public class Textbox extends Control {
 	}
 
 	public String getText() {
-		return we.getText();
+		LocalDateTime startTime = LocalDateTime.now();
+		String text =  we.getText();
+		this.info(this, generateAction(String.format("getText"), startTime, LocalDateTime.now()));
+		return text;
 	}
 
 	public void waitTextToBePresented(String text) {

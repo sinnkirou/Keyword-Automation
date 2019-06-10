@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.aaa.olb.automation.annotations.ByClassName;
 import com.aaa.olb.automation.annotations.ByXPath;
 import com.aaa.olb.automation.annotations.ColumnName;
+import com.aaa.olb.automation.components.CCMChronicContent;
 import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.framework.BasePage;
@@ -30,5 +31,13 @@ public class CCMChronicPage extends BasePage {
 	@ColumnName("CCMMemberTabs")
 	public CCMMemberTabs getCCMMemberTabs() {
 		return tabs;
+	}
+	
+	@ByXPath(".//div[contains(@class,'rightConent')]")
+	private CCMChronicContent rightContent;
+	
+	@ColumnName("CCMChronicContent")
+	public CCMChronicContent getCCMChronicContent() {
+		return rightContent;
 	}
 }

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ByXPath;
+import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.framework.Component;
@@ -20,6 +21,7 @@ public class CCMOrRPMPanel extends Component {
 	@ByXPath(".//button[1]")
 	private Button rPMButton;
 	
+	@ColumnName("RPMButton")
 	public Button getRPMButton() {
 		return rPMButton;
 	}
@@ -27,6 +29,7 @@ public class CCMOrRPMPanel extends Component {
 	@ByXPath(".//button[2]")
 	private Button cCMButton;
 	
+	@ColumnName("CCMButton")
 	public Button getCCMButton() {
 		return cCMButton;
 	}

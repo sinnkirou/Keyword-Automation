@@ -55,14 +55,20 @@ public class Input extends Control {
 	}
 
 	public String getValue() {
-		return we.getAttribute("value");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getAttribute("value");
+		this.info(this, generateAction(String.format("getValue"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	/**
 	 * @return input type
 	 */
 	public String getInputType() {
-		return this.getAttribute("type");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value  = this.getAttribute("type");
+		this.info(this, generateAction(String.format("getInputType"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	public void blur() {

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ById;
+import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Input;
@@ -30,11 +31,12 @@ public class SearchboxForm extends Component {
 	@ById("sb_form_go")
 	private Button searchButton;
 	
-	
+	@ColumnName("Keyword")
 	public Input getKeyword() {
 		return keyword;
 	}
 	
+	@ColumnName("SearchButton")
 	public Button getSearchButton() {
 		return searchButton;
 	}

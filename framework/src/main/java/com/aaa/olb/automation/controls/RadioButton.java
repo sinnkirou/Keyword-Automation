@@ -25,11 +25,17 @@ public class RadioButton extends Control {
 	}
 
 	public boolean isSelected() {
-		return we.isSelected();
+		LocalDateTime startTime = LocalDateTime.now();
+		boolean value = we.isSelected();
+		this.info(this, generateAction(String.format("isSelected"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	public String getValue() {
-		return we.getAttribute("value");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = this.getAttribute("value");
+		this.info(this, generateAction(String.format("getValue"), startTime, LocalDateTime.now()));
+		return value;
 	}
 	
 	public void waitUtilSelected() {

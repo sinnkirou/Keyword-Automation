@@ -12,9 +12,4 @@ public class Header extends Textbox {
 	public Header(SeleniumContext context, WebElement webElement) {
 		super(context, webElement);
 	}
-
-
-	public String getText() {
-		return we.getText();
-	}
 }

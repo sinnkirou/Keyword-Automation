@@ -1,5 +1,7 @@
 package com.aaa.olb.automation.controls;
 
+import java.time.LocalDateTime;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
@@ -20,17 +22,26 @@ public class Image extends Control {
 	}
 
 	public int getHeight() {
-		return getSize().getHeight();
+		LocalDateTime startTime = LocalDateTime.now();
+		int value = getSize().getHeight();
+		this.info(this, generateAction(String.format("getHeight"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	public int getWidth() {
-		return getSize().getWidth();
+		LocalDateTime startTime = LocalDateTime.now();
+		int value = getSize().getWidth();
+		this.info(this, generateAction(String.format("getWidth"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	/**
 	 * @return element's src value
 	 */
 	public String getSource() {
-		return this.getAttribute("src");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = this.getAttribute("src");
+		this.info(this, generateAction(String.format("getSource"), startTime, LocalDateTime.now()));
+		return value;
 	}
 }

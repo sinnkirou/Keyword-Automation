@@ -83,6 +83,11 @@ public class ControlBehavior implements Behavior {
 				target.click();
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_CLICK_IF_ENABLED: {
+			if (target.enabled())
+				target.click();
+			return null;
+		}
 		case SystemConstants.BEHAVIOR_DRAG_AND_DROP_BY_OFFSET: {
 			String newParameter = parameter;
 			target.dragAndDropByOffset(newParameter);

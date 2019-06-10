@@ -75,6 +75,8 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickifvisible";
 	
+	public final static String BEHAVIOR_CLICK_IF_ENABLED="clickifenabled";
+	
 	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT="selectpartialcontextbycontext";
 	
 	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX="selectpartialcontextbyindex";

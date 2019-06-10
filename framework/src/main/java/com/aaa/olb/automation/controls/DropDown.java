@@ -61,7 +61,10 @@ public class DropDown extends Control {
 	 * @return text: string
 	 */
 	public String getSelectedOptionText() {
-		return getSelect().getFirstSelectedOption().getText();
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = getSelect().getFirstSelectedOption().getText();
+		this.info(this, generateAction(String.format("getSelectedOptionText"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	public List<Option> getOptions() {

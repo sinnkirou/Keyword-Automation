@@ -12,9 +12,4 @@ public class P extends Textbox {
 	public P(SeleniumContext context, WebElement webElement) {
 		super(context, webElement);
 	}
-
-
-	public String getText() {
-		return we.getText();
-	}
 }

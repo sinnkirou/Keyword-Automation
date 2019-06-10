@@ -1,9 +1,12 @@
 package com.aaa.olb.automation.components;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ByXPath;
+import com.aaa.olb.automation.annotations.ColumnName;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Li;
 import com.aaa.olb.automation.framework.Component;
@@ -17,17 +20,21 @@ public class CCMMemberTabs extends Component {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ByXPath(".//li[@class='ant-menu-item'][1]")
-	private Li enrollmentTab;
+	@ByXPath(".//li[contains(@class,'ant-menu-item')]")
+	private List<Li> tabs;
 	
+	@ColumnName("EnrollmentTab")
 	public Li getEnrollmentTab() {
-		return enrollmentTab;
+		return tabs.get(0);
 	}
 	
-	@ByXPath(".//li[@class='ant-menu-item'][5]")
-	private Li chronicLogTab;
+	@ColumnName("CarePlanTab")
+	public Li getCarePlanTab() {
+		return tabs.get(1);
+	}
 	
+	@ColumnName("ChronicLogTab")
 	public Li getChronicLogTab() {
-		return chronicLogTab;
+		return tabs.get(5);
 	}
 }

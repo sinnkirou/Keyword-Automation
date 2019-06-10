@@ -19,7 +19,10 @@ public class Option extends Textbox {
 	}
 
 	public String getValue() {
-		return this.getAttribute("value");
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = this.getAttribute("value");
+		this.info(this, generateAction(String.format("getValue"), startTime, LocalDateTime.now()));
+		return value;
 	}
 
 	/**

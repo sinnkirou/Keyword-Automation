@@ -15,6 +15,7 @@ import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.controls.Li;
 import com.aaa.olb.automation.controls.RadioButton;
+import com.aaa.olb.automation.controls.Span;
 import com.aaa.olb.automation.framework.BasePage;
 
 public class CCMEnrollmentPage extends BasePage {
@@ -38,6 +39,14 @@ public class CCMEnrollmentPage extends BasePage {
 	@ColumnName("DemographicsButton")
 	public Button gerDemographicsButton() {
 		return demographicsButton;
+	}
+	
+	@ByXPath(".//div[text()='Consent:']/parent::div//span")
+	private Span consentValue;
+	
+	@ColumnName("ConsentValue")
+	public Span getConsentValue() {
+		return consentValue;
 	}
 	
 	@ById("primary_care_id")
