@@ -47,7 +47,7 @@ public class BehaviorReflect {
 			}
 		}
 
-		throw new NotFoundException("unable to finish this operation");
+		throw new NotFoundException("unable to finish this operation: "+ facet.getTarget() + " with action " + facet.getBehaviorName());
 	}
 
 	private static Boolean checkIsParameterMatched(Method method, BehaviorFacet facet) {

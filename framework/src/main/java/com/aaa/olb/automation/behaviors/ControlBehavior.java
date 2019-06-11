@@ -78,6 +78,9 @@ public class ControlBehavior implements Behavior {
 			target.threadSleep();
 			return target.getClassName();
 		}
+		case SystemConstants.BEHAVIOR_VISIBLE: {
+			return target.visible();
+		}
 		case SystemConstants.BEHAVIOR_CLICK_IF_VISIBLE: {
 			if (target.visible())
 				target.click();

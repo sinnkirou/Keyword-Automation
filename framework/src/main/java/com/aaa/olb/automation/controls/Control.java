@@ -73,14 +73,16 @@ public class Control extends ActionRepository {
 	public boolean visible() {
 		try {
 			this.threadSleep();
-			return we.isDisplayed();
+			LocalDateTime startTime = LocalDateTime.now();
+			boolean value = we.isDisplayed();
+			this.info(this, generateAction(String.format("visible"), startTime, LocalDateTime.now()));
+			return value;
 		} catch (NoSuchElementException | StaleElementReferenceException | NullPointerException ex) {
 			// ex.printStackTrace();
-			return false;
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -91,14 +93,17 @@ public class Control extends ActionRepository {
 	public boolean enabled() {
 		try {
 			this.threadSleep();
-			we.isEnabled();
+			LocalDateTime startTime = LocalDateTime.now();
+			boolean value = we.isEnabled();
+			this.info(this, generateAction(String.format("isEnabled"), startTime, LocalDateTime.now()));
+			return value;
 		} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
 			Log.error(ex.getLocalizedMessage());
 			throw ex;
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
 		}
-		return we.isEnabled();
+		return false;
 	}
 
 	/**
@@ -106,7 +111,10 @@ public class Control extends ActionRepository {
 	 * @return css style value: string
 	 */
 	public String getCssValue(String cssName) {
-		return we.getCssValue(cssName);
+		LocalDateTime startTime = LocalDateTime.now();
+		String value = we.getCssValue(cssName);
+		this.info(this, generateAction(String.format("getCssValue"), startTime, LocalDateTime.now()));
+		return value;
 	};
 
 	/**

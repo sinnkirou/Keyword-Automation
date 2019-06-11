@@ -67,11 +67,13 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_TEXT="[text]";
 	
+	public final static String BEHAVIOR_VISIBLE="[visible]";
+
 	public final static String LIST_BEHAVIOR_GET="get";
 	
 	public final static String LIST_BEHAVIOR_INDEX="index";
 	
-	public final static String LIST_BEHAVIOR_SIZE="size";
+	public final static String LIST_BEHAVIOR_SIZE="[size]";
 	
 	public final static String BEHAVIOR_CLICK_IF_VISIBLE="clickifvisible";
 	
