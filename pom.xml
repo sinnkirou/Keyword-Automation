@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aaa.olb</groupId>
 	<artifactId>automation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>com.aaa.olb.automation</name>
 	<description>The automation testing project for aaa online binding</description>
 	<packaging>pom</packaging>
@@ -11,16 +11,10 @@
 		<module>framework</module>
 		<module>demo</module>
     	<module>testing</module>
-  </modules>
-
+    </modules>
 	<dependencies>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>3.8.1</version>
-		</dependency>
+		
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
