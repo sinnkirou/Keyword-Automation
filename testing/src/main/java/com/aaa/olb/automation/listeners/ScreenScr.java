@@ -18,11 +18,7 @@ public class ScreenScr {
 		File scrfile = driver.getScreenshotAs(OutputType.FILE);
 
 		try {
-			if(SystemProperty.isWindows()){  
-				FileUtils.copyFile(scrfile, new File(cyrPatn + "\\"+ dir +"\\" + filename + ".png"));
-			}else {
-				FileUtils.copyFile(scrfile, new File(cyrPatn + "/"+ dir +"/" + filename + ".png"));
-			}
+			FileUtils.copyFile(scrfile, new File(cyrPatn + "/"+ dir +"/" + filename + ".png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

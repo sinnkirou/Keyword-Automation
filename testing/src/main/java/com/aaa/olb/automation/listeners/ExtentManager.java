@@ -11,11 +11,7 @@ public class ExtentManager {
 		if (extent == null) {
 			// Set HTML reporting file location
 			String workingDir = SystemProperty.getWorkingDir();
-			if(SystemProperty.isWindows()){  
-				extent = new ExtentReports(workingDir + "\\ExtentReports\\Extent.html", true, DisplayOrder.NEWEST_FIRST);
-			}else {
-				extent = new ExtentReports(workingDir + "/ExtentReports/Extent.html", true, DisplayOrder.NEWEST_FIRST);
-			}
+			extent = new ExtentReports(workingDir + "/ExtentReports/Extent.html", true, DisplayOrder.NEWEST_FIRST);
 		}
 		return extent;
 	}

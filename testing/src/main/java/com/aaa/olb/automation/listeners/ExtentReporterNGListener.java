@@ -25,11 +25,7 @@ public class ExtentReporterNGListener implements IReporter {
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		// true, to replace existing report.
 		String workingDir = SystemProperty.getWorkingDir(); 
-		if(SystemProperty.isWindows()){  
-			ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "\\ExtentReports\\Extent.html");
-		}else {
-			ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "/ExtentReports/Extent.html");
-		}
+		ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "/ExtentReports/Extent.html");
 
 		for (ISuite suite : suites) {
 			Map<String, ISuiteResult> result = suite.getResults();
