@@ -31,7 +31,7 @@ public class BehaviorRepository {
 		Class<?> targetType = facet.getTarget().getClass();
 		if (facet instanceof ListItemBehaviorFacet) {
 			return new ControlCollectionItemBehavior(facet);
-		} else if (targetType.isAssignableFrom(List.class)) {
+		} else if (targetType.isAssignableFrom(List.class) || facet.getTarget() instanceof List) {
 			return new ControlCollectionBehavior(facet);
 		} else if (facet.getTarget() instanceof Input) {
 			return new InputBehavior(facet);
