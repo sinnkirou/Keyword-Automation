@@ -3,10 +3,13 @@ package com.aaa.olb.automation.behaviors;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.SearchContext;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
+import com.aaa.olb.automation.configuration.PageModelEntity;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.Component;
@@ -56,7 +59,7 @@ public class BehaviourAnalysis {
 	
 	private static Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
 		Object result = null;
-		Method[] methods = clazz.getMethods();
+		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			/*
 			 * find the specific method and invoke it to get the web element instance, then

@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import com.aaa.olb.automation.configuration.ConfigurationOptions;
+import com.aaa.olb.automation.configuration.PageModelEntity;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.customizedFlow.TemplateProvider;
@@ -109,8 +110,34 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			 * create page instance that the pageClass will retrieved by name afterwards
 			 * */
 			try {
-				PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
-			} catch (ClassNotFoundException e) {
+				if(!flow.isExcelModel()) {
+					PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
+				}else {
+					String packageName = "com.aaa.olb.automation.pages";
+					String pageName = flow.getPage();
+					List<PageModelEntity> targets = new ArrayList<PageModelEntity>();
+					PageModelEntity e1 = new PageModelEntity();
+					e1.setFindBy("ById");
+					e1.setFindByValue("username");
+					e1.setTargetName("UserName");
+					targets.add(e1);
+					PageModelEntity e2 = new PageModelEntity();
+					e2.setFindBy("ById");
+					e2.setFindByValue("password");
+					e2.setTargetName("Password");
+					targets.add(e2);
+					PageModelEntity e3 = new PageModelEntity();
+					e3.setFindBy("ByTag");
+					e3.setFindByValue("button");
+					e3.setTargetName("LoginButton");
+					targets.add(e3);
+					XSSFSheet pageModel = ExcelUtils.getSheet(filePath, pageName+"Model");
+					DataProvider provider = new ExcelProvider(sheet);
+					
+					Class<?> pageClazz = PageRepository.getInstance().createClazz(packageName, pageName, targets);
+					PageRepository.getInstance().addPage(pageName, pageClazz);
+				}
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Log.error(e.getLocalizedMessage());

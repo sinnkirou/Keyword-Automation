@@ -9,9 +9,9 @@ import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.framework.BasePage;
 
-public class CCMLoginPage extends BasePage {
+public class CCMLoginPageeeee extends BasePage {
 
-	public CCMLoginPage(WebDriver driver) {
+	public CCMLoginPageeeee(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}

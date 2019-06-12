@@ -37,6 +37,10 @@ public class FlowProvider {
 					flow.setTemplate(source.get(key).getValue().toLowerCase() == "true");
 					break;
 				}
+				case ConfigurationOptions.FLOW_OPTION_EXCEL_MODEL:{
+					flow.setExcelModel(source.get(key).getValue().toLowerCase() == "true");
+					break;
+				}
 				default: break;
 				}
 			}
