@@ -93,6 +93,8 @@ public class BehaviourAnalysis {
 			}else if(Component.class.isAssignableFrom(method.getReturnType()) && method.getAnnotation(ColumnName.class).nested()) {
 				result = behave(method.getReturnType(), testStep, method);
 			}
+			if(methodMatched == true)
+				break;
 		}
 		
 		return result;
