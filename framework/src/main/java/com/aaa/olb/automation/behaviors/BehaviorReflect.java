@@ -41,13 +41,13 @@ public class BehaviorReflect {
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.error(e.getLocalizedMessage());
+						Log.error(facet.getTarget() +" with action: " + facet.getBehaviorName() + "\n" + e.getLocalizedMessage());
 					}
 				}
 			}
 		}
 
-		throw new NotFoundException("unable to finish this operation: "+ facet.getTarget() + " with action " + facet.getBehaviorName());
+		throw new NotFoundException("unable to finish this operation: "+ facet.getTarget() + " with action: " + facet.getBehaviorName());
 	}
 
 	private static Boolean checkIsParameterMatched(Method method, BehaviorFacet facet) {
