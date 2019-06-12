@@ -3,6 +3,7 @@ package com.aaa.olb.automation.behaviors;
 import java.util.List;
 
 import com.aaa.olb.automation.configuration.SystemConstants;
+import com.aaa.olb.automation.log.Log;
 
 public class ControlCollectionBehavior implements Behavior {
 
@@ -30,7 +31,8 @@ public class ControlCollectionBehavior implements Behavior {
 				return target.size();
 			}
 			default: {
-				throw new UnsupportedOperationException("unable to action this operation.");
+				Log.error(this.facet.getTarget() +" with action: " + this.facet.getBehaviorName());
+				throw new UnsupportedOperationException("unable to finish this operation.");
 			}
 		}
 	}

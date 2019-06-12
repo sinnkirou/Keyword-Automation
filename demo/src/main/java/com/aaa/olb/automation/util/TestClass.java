@@ -31,8 +31,13 @@ public class TestClass extends BaseTestClass {
 	@BeforeSuite
 	public void beforeSuite() {
 		String cyrPatn = SystemProperty.getWorkingDir();
-		DeleteFile.delAllFile(cyrPatn + "/" + Constant.Failed_Testcases_Screentshots_Dir);
-		//DeleteFile.delAllFile(cyrPatn + "/" + Constant.Toverify_Testcases_Screenshots_Dir);
+		if(SystemProperty.isWindows()) {
+			DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Failed_Testcases_Screentshots_Dir);
+			//DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Toverify_Testcases_Screenshots_Dir);
+		}else {
+			DeleteFile.delAllFile(cyrPatn + "/" + Constant.Failed_Testcases_Screentshots_Dir);
+			//DeleteFile.delAllFile(cyrPatn + "/" + Constant.Toverify_Testcases_Screenshots_Dir);
+		}
 	}
 
 	@BeforeMethod
@@ -71,7 +76,7 @@ public class TestClass extends BaseTestClass {
 				}
 				if(ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
 					//TestHelper.threadSleep(1000);
-					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 					String timestamp = df.format(new Date());
 					String filename = ts.getTestCaseID() + "_" + timestamp;
 					takescreen(filename, Constant.Toverify_Testcases_Screenshots_Dir);

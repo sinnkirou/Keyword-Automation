@@ -40,7 +40,7 @@ public class ControlCollectionItemBehavior extends ControlBehavior {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
+			Log.error(this.facet.getTarget() +" with action: " + this.facet.getBehaviorName() + "\n" + e.getLocalizedMessage());
 		}
 		throw new NotFoundException("unable to finish this operation");
 	}
