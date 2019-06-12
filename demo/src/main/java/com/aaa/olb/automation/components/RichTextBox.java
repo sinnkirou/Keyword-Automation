@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Span;
-import com.aaa.olb.automation.framework.Component;
+import com.aaa.olb.automation.controls.Textbox;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
@@ -13,7 +13,7 @@ import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
-public class RichTextBox extends Component {
+public class RichTextBox extends Textbox {
 
 	public RichTextBox(SeleniumContext context, WebElement webElement) {
 		super(context, webElement);
