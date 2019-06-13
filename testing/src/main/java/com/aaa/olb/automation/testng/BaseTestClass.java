@@ -8,6 +8,7 @@ import com.aaa.olb.automation.configuration.EnvironmentVariable;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.RetryCounter;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.SystemProperty;
 
 /**
  * default browser operations are defined here and then inherited by child class
@@ -40,7 +41,7 @@ public abstract class BaseTestClass {
 		this.browser.open();
 		this.browser.navigate(env.getSiteURL());
 
-		Log.startTestCase(this.tc.getTestCaseID());
+		Log.startTestCase(this.tc.getTestCaseID() + " with Browser: " + env.getBrowserType() + " on "+ SystemProperty.getPlatform());
 	}
 
 	@AfterMethod

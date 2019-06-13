@@ -7,6 +7,7 @@ import java.net.URL;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -25,6 +26,10 @@ public class Firefox extends Browser {
 			System.setProperty("webdriver.gecko.driver", firefoxDriver.getAbsolutePath());
 			FirefoxOptions option = new FirefoxOptions();
 			option.setHeadless(headless);
+			FirefoxProfile profile = new FirefoxProfile();
+			profile.setPreference("intl.accept_languages", "zh-cn");
+			option.setProfile(profile);
+				
 			return new FirefoxDriver(option);
 		} else {
 			try {

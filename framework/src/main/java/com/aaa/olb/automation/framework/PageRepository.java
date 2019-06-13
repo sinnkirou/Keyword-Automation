@@ -70,7 +70,7 @@ public class PageRepository {
 
 		String sourceCode = getSourceCode(packageName, pageName, targets);
 		Log.info(sourceCode);
-		System.out.println(sourceCode);
+		//System.out.println(sourceCode);
 		try {
 			Map<String, byte[]> results = compiler.compile(pageName + ".java", sourceCode);
 			clazz = compiler.loadClass(packageName + "." + pageName, results);
