@@ -1,6 +1,6 @@
 package com.aaa.olb.automation.datasource;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +16,9 @@ public class PageModelProvider {
 	 * @param provider
 	 * @return
 	 */
-	public static Map<String, PageModelEntity> read(DataProvider provider){
+	public static List<PageModelEntity> read(DataProvider provider){
 		
-		Map<String, PageModelEntity> pageModels = new HashMap<>();
+		List<PageModelEntity> pageModels = new ArrayList<>();
 		List<Map<String, CellEntity>> sources = provider.getData();
 
 		for (Map<String, CellEntity> source : sources) {
@@ -43,10 +43,14 @@ public class PageModelProvider {
 				case ConfigurationOptions.PAGE_MODEL_TARGET_NAME:
 					entity.setTargetName(source.get(key).getValue());
 					break;
+				case ConfigurationOptions.PAGE_MODEL_FIELD_TYPE:
+					entity.setFiledType(source.get(key).getValue());
+					break;
 				default:
 					break;
 				}
 			}
+			pageModels.add(entity);
 		}
 		return pageModels;
 	}

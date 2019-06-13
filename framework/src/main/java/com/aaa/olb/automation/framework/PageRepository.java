@@ -67,13 +67,12 @@ public class PageRepository {
 	public Class<?> createClazz(String packageName, String pageName, List<PageModelEntity> targets) throws Exception {
 		Class<?> clazz = null;
 		JavaStringCompiler compiler = new JavaStringCompiler();
-		
 
 		String sourceCode = getSourceCode(packageName, pageName, targets);
+		Log.info(sourceCode);
 		System.out.println(sourceCode);
-		Map<String, byte[]> results;
 		try {
-			results = compiler.compile(pageName + ".java", sourceCode);
+			Map<String, byte[]> results = compiler.compile(pageName + ".java", sourceCode);
 			clazz = compiler.loadClass(packageName + "." + pageName, results);
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -84,10 +83,15 @@ public class PageRepository {
 	}
 
 	private static String getTargetMethodString(PageModelEntity e) {
-		return "	@" + e.getFindBy() + "(\"" + e.getFindByValue() + "\")\n" + "	private GenericControl "
-				+ e.getTargetName().toLowerCase() + ";\n" + "	@ColumnName(\"" + e.getTargetName() + "\")\n"
-				+ "	public GenericControl get" + e.getTargetName() + "() {\n" + "		return "
-				+ e.getTargetName().toLowerCase() + ";\n" + "	}\n";
+		StringBuilder sb = new StringBuilder();
+		sb.append("	@" + e.getFindBy() + "(\"" + e.getFindByValue() + "\")\n");
+		sb.append("	private " + e.getFiledType() + " " + e.getTargetName().toLowerCase() + ";\n");
+		sb.append("	@ColumnName(value = \"" + e.getTargetName() + "\", shouldWait = " + e.getShouldWait()
+				+ ", shouldDelay = " + e.getShouldDelay() + ", blur = " + e.getShouldBlur() + ")\n");
+		sb.append("	public " + e.getFiledType() + " get" + e.getTargetName() + "() {\n");
+		sb.append("		return " + e.getTargetName().toLowerCase() + ";\n");
+		sb.append("	}\n");
+		return sb.toString();
 	}
 
 	private static String getSourceCode(String packageName, String pageName, List<PageModelEntity> targets) {
@@ -96,12 +100,19 @@ public class PageRepository {
 		for (PageModelEntity e : targets) {
 			methods.append(getTargetMethodString(e));
 		}
-		sb.append("package " + packageName + ";\n" + "import java.util.List;\n"
-				+ "import org.openqa.selenium.WebDriver;\n" + "import com.aaa.olb.automation.annotations.*;\n"
-				+ "import com.aaa.olb.automation.controls.GenericControl;\n"
-				+ "import com.aaa.olb.automation.framework.BasePage;\n" + "public class " + pageName
-				+ " extends BasePage {\n" + "	public " + pageName + "(WebDriver driver) {\n"
-				+ "		super(driver);\n" + "	}\n" + methods.toString() + "}\n");
+		sb.append("package " + packageName + ";\n");
+		sb.append("import java.util.List;\n");
+		sb.append("import org.openqa.selenium.WebDriver;\n");
+		sb.append("import com.aaa.olb.automation.annotations.*;\n");
+		sb.append("import com.aaa.olb.automation.controls.*;\n");
+		sb.append("import com.aaa.olb.automation.framework.BasePage;\n");
+		sb.append("import com.aaa.olb.automation.components.*;\n");
+		sb.append("public class " + pageName + " extends BasePage {\n");
+		sb.append("	public " + pageName + "(WebDriver driver) {\n");
+		sb.append("		super(driver);\n");
+		sb.append("	}\n");
+		sb.append(methods.toString());
+		sb.append("}\n");
 		return sb.toString();
 	}
 

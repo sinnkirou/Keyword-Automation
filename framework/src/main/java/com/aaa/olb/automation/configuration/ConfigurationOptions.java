@@ -46,6 +46,8 @@ public final class ConfigurationOptions {
 	
 	public final static String PAGE_MODEL_TARGET_NAME = "target name";
 	
+	public final static String PAGE_MODEL_FIELD_TYPE = "field type";
+	
 	public final static String PAGE_MODEL_FIND_BY = "findby";
 
 	public final static String PAGE_MODEL_FIND_BY_VALUE = "findby value";

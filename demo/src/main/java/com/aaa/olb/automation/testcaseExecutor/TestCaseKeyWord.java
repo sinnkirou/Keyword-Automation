@@ -28,13 +28,14 @@ public class TestCaseKeyWord {
 	 * entry point
 	 * 
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		new TestCaseKeyWord().run();
 	}
 
 	@SuppressWarnings("deprecation")
-	public void run() {
+	public void run() throws Exception {
 		DOMConfigurator.configure("log4j.xml");
 		
 		/*

@@ -3,13 +3,9 @@ package com.aaa.olb.automation.behaviors;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.SearchContext;
 import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ColumnName;
-import com.aaa.olb.automation.configuration.PageModelEntity;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.Component;

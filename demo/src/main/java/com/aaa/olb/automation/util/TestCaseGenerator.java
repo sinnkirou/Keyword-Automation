@@ -15,6 +15,7 @@ import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.customizedFlow.TemplateProvider;
 import com.aaa.olb.automation.datasource.DataProvider;
 import com.aaa.olb.automation.datasource.ExcelProvider;
+import com.aaa.olb.automation.datasource.PageModelProvider;
 import com.aaa.olb.automation.datasource.RuntimeSettingProvider;
 import com.aaa.olb.automation.datasource.TestCaseProvider;
 import com.aaa.olb.automation.flow.FlowDeclaration;
@@ -30,9 +31,10 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 
 	/**
 	 *	@param: excel file path
+	 * @throws Exception 
 	 *
 	 */
-	public Map<String, TestCaseEntity> createTestCases(String filePath) {
+	public Map<String, TestCaseEntity> createTestCases(String filePath) throws Exception {
 		DataProvider timeoutProvider = new ExcelProvider(
 				ExcelUtils.getSheet(filePath, ConfigurationOptions.CONFIG_SHEET_NAME));
 		DataProvider testcaseProvider = new ExcelProvider(
@@ -95,9 +97,10 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 	
 	/**
 	 *	get specific test steps by inputting flow entities 
+	 * @throws Exception 
 	 *
 	 */
-	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath){
+	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception{
 		List<TestStepEntity> allTestSteps = new ArrayList<>();
 		Map<String, List<TestStepEntity>> groups = new HashMap<>();
 
@@ -115,32 +118,16 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 				}else {
 					String packageName = "com.aaa.olb.automation.pages";
 					String pageName = flow.getPage();
-					List<PageModelEntity> targets = new ArrayList<PageModelEntity>();
-					PageModelEntity e1 = new PageModelEntity();
-					e1.setFindBy("ById");
-					e1.setFindByValue("username");
-					e1.setTargetName("UserName");
-					targets.add(e1);
-					PageModelEntity e2 = new PageModelEntity();
-					e2.setFindBy("ById");
-					e2.setFindByValue("password");
-					e2.setTargetName("Password");
-					targets.add(e2);
-					PageModelEntity e3 = new PageModelEntity();
-					e3.setFindBy("ByTag");
-					e3.setFindByValue("button");
-					e3.setTargetName("LoginButton");
-					targets.add(e3);
 					XSSFSheet pageModel = ExcelUtils.getSheet(filePath, pageName+"Model");
-					DataProvider provider = new ExcelProvider(sheet);
-					
+					DataProvider provider = new ExcelProvider(pageModel);
+					List<PageModelEntity> targets = PageModelProvider.read(provider);
 					Class<?> pageClazz = PageRepository.getInstance().createClazz(packageName, pageName, targets);
 					PageRepository.getInstance().addPage(pageName, pageClazz);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 				Log.error(e.getLocalizedMessage());
+				throw e;
 			}
 
 			/*

@@ -10,9 +10,9 @@ import com.aaa.olb.automation.components.CCMLogDiff;
 import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.framework.BasePage;
 
-public class CCMChronicLogPage extends BasePage {
+public class CCMChronicLogPageeeee extends BasePage {
 
-	public CCMChronicLogPage(WebDriver driver) {
+	public CCMChronicLogPageeeee(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}

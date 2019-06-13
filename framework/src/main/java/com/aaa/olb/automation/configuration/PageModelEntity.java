@@ -7,6 +7,7 @@ public class PageModelEntity {
 	private Boolean shouldWait = false;
 	private Boolean shouldDelay = false;
 	private Boolean shouldBlur = false;
+	private String filedType;
 	
 	/**
 	 * @return the findBy
@@ -84,5 +85,17 @@ public class PageModelEntity {
 	 */
 	public void setShouldBlur(Boolean shouldBlur) {
 		this.shouldBlur = shouldBlur;
+	}
+	/**
+	 * @return the filedType
+	 */
+	public String getFiledType() {
+		return filedType;
+	}
+	/**
+	 * @param filedType the filedType to set
+	 */
+	public void setFiledType(String filedType) {
+		this.filedType = filedType;
 	}
 }

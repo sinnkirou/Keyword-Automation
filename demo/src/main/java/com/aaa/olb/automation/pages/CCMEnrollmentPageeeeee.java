@@ -12,9 +12,9 @@ import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Span;
 import com.aaa.olb.automation.framework.BasePage;
 
-public class CCMEnrollmentPage extends BasePage {
+public class CCMEnrollmentPageeeeee extends BasePage {
 
-	public CCMEnrollmentPage(WebDriver driver) {
+	public CCMEnrollmentPageeeeee(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
