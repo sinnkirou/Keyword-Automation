@@ -669,16 +669,22 @@ public class Control extends ActionRepository {
 	}
 
 	/**
-	 * 键盘模拟, 通过selenium原生方法
+	 * sendKeys键盘模拟, 通过selenium原生方法
 	 * 
 	 * @param keyname
 	 */
 	public void sendKey(String keyname) {
-		LocalDateTime startTime = LocalDateTime.now();
-		CharSequence cs = Keys.valueOf(keyname) != null ? Keys.valueOf(keyname) : keyname;
-		Actions action = new Actions(this.driver);
-		action.moveToElement(we).sendKeys(cs).perform();
-		this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
+		try {
+			if(Keys.valueOf(keyname) != null) {
+				LocalDateTime startTime = LocalDateTime.now();
+				CharSequence cs = Keys.valueOf(keyname);
+				Actions action = new Actions(this.driver);
+				action.moveToElement(we).sendKeys(cs).perform();
+				this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
+			}
+		}catch(Exception e) {
+			sendKeyByRobot(keyname);
+		}
 	}
 
 	/**

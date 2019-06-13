@@ -35,6 +35,12 @@ public class RichTextBoxBehavior extends ControlBehavior {
 				target.selectPartialContextByIndex(parameter);
 			}
 			return null;
+		case CustomizedBehaviorConstants.DRAG_AND_DROP_RICH_TEXTBOX:
+			if (parameter != "") {
+				target.waitForVisible();
+				target.drogAndDropRichBox(parameter);
+			}
+			return null;
 		default:
 			return super.Execute();
 		}
