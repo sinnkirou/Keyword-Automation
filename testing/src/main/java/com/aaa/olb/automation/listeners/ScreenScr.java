@@ -13,15 +13,10 @@ import com.aaa.olb.automation.utils.SystemProperty;
 public class ScreenScr {
 	public static void getScreen(TakesScreenshot driver, String filename, String dir) {
 
-		String cyrPatn = SystemProperty.getWorkingDir();
 		File scrfile = driver.getScreenshotAs(OutputType.FILE);
-		String filepath;
-		if(SystemProperty.isWindows()) {
-			filepath = cyrPatn + "\\"+ dir +"\\" + filename + ".png";
-		}else {
-			filepath = cyrPatn + "/"+ dir +"/" + filename + ".png";
-		}
-		
+		String filepath = SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + dir
+				+ SystemProperty.getFileSeparator() + filename + ".png";
+
 		try {
 			FileUtils.copyFile(scrfile, new File(filepath));
 		} catch (IOException e) {

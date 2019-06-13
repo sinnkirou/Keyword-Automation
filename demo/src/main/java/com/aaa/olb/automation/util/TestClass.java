@@ -31,13 +31,8 @@ public class TestClass extends BaseTestClass {
 	@BeforeSuite
 	public void beforeSuite() {
 		String cyrPatn = SystemProperty.getWorkingDir();
-		if(SystemProperty.isWindows()) {
-			DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Failed_Testcases_Screentshots_Dir);
-			//DeleteFile.delAllFile(cyrPatn + "\\" + Constant.Toverify_Testcases_Screenshots_Dir);
-		}else {
-			DeleteFile.delAllFile(cyrPatn + "/" + Constant.Failed_Testcases_Screentshots_Dir);
-			//DeleteFile.delAllFile(cyrPatn + "/" + Constant.Toverify_Testcases_Screenshots_Dir);
-		}
+		DeleteFile.delAllFile(cyrPatn + SystemProperty.getFileSeparator() + Constant.Failed_Testcases_Screentshots_Dir);
+		//DeleteFile.delAllFile(cyrPatn + SystemProperty.getFileSeparator() + Constant.Toverify_Testcases_Screenshots_Dir);
 	}
 
 	@BeforeMethod
