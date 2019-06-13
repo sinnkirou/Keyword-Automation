@@ -13,15 +13,14 @@ import com.aaa.olb.automation.utils.SystemProperty;
 public abstract class Browser {
 
 	private WebDriver driver;
-
-	public Browser(String driverPath, String remoteHub) {
+	public Browser(String driverPath, String remoteHub, Boolean headless) {
 		if(SystemProperty.isWindows()){  
 			driverPath+=".exe";
 		}  
-		this.driver = this.initialize(driverPath, remoteHub);
+		this.driver = this.initialize(driverPath, remoteHub, headless);
 	}
 
-	protected abstract WebDriver initialize(String driverPath, String remoteHub);
+	protected abstract WebDriver initialize(String driverPath, String remoteHub, Boolean headless);
 
 	public SearchContext getDriver() {
 		return driver;

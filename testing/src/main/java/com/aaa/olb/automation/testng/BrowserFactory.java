@@ -9,13 +9,14 @@ public class BrowserFactory {
 
 		String remoteHub = (env.getRemoteHub() != null && env.getRemoteHub().toUpperCase() != "N/A"
 				&& env.getRemoteHub().toUpperCase() != "") ? env.getRemoteHub() : "N/A";
+		Boolean headless = env.getHeadless() == true;
 		switch (env.getBrowserType().toLowerCase()) {
 		case BrowserType.FIREFOX:
-			return new Firefox(remoteHub);
+			return new Firefox(remoteHub, headless);
 		case BrowserType.IE:
 			return new IE(remoteHub);
 		default:
-			return new Chrome(remoteHub);
+			return new Chrome(remoteHub, headless);
 		}
 	}
 

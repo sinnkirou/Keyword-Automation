@@ -29,6 +29,8 @@ public final class ConfigurationOptions {
 	public final static String ENV_OPTION_SITE_URL = "site url";
 
 	public final static String ENV_OPTION_ENABLED = "enabled";
+	
+	public final static String ENV_OPTION_HEADLESS = "headless";
 
 	public final static String ENV_OPTION_REMOTE_HUB = "remote hub";
 
@@ -52,10 +54,10 @@ public final class ConfigurationOptions {
 
 	public final static String PAGE_MODEL_FIND_BY_VALUE = "findby value";
 
-	public final static String PAGE_MODEL_SHOULD_WAIT = "should wait";
+	public final static String PAGE_MODEL_SHOULD_WAIT = "shouldwait";
 
-	public final static String PAGE_MODEL_SHOULD_DELAY = "should delay";
+	public final static String PAGE_MODEL_SHOULD_DELAY = "shoulddelay";
 
-	public final static String PAGE_MODEL_SHOULD_BLUR = "should blur";
+	public final static String PAGE_MODEL_SHOULD_BLUR = "shouldblur";
 
 }

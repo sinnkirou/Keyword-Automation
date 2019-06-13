@@ -9,6 +9,8 @@ public class EnvironmentVariable {
 	private String remoteHub;
 	
 	private Boolean enabled = false;
+	
+	private Boolean headless = false;
 
 	public String getBrowserType() {
 		return browserType;
@@ -44,6 +46,20 @@ public class EnvironmentVariable {
 
 	public void setEnabled(String enabled) {
 		this.enabled = enabled.toLowerCase().equals("true") ? true : false;
+	}
+
+	/**
+	 * @return the headless
+	 */
+	public Boolean getHeadless() {
+		return headless;
+	}
+
+	/**
+	 * @param headless the headless to set
+	 */
+	public void setHeadless(Boolean headless) {
+		this.headless = headless;
 	}
 
 }

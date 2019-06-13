@@ -45,6 +45,9 @@ public class TestCaseProvider {
 				case ConfigurationOptions.ENV_OPTION_REMOTE_HUB:
 					env.setRemoteHub(source.get(key).getValue());
 					break;
+				case ConfigurationOptions.ENV_OPTION_HEADLESS:
+					env.setHeadless(source.get(key).getValue().toLowerCase() == "true");
+					break;
 				default:
 					break;
 				}

@@ -14,11 +14,11 @@ import com.aaa.olb.automation.log.Log;
 public class IE extends Browser {
 
 	public IE(String remoteHub) {
-		super("./driverLib/IEDriverServer", remoteHub);
+		super("./driverLib/IEDriverServer", remoteHub, null);
 	}
 
 	@Override
-	protected WebDriver initialize(String driverPath, String remoteHub) {
+	protected WebDriver initialize(String driverPath, String remoteHub, Boolean headless) {
 		if (remoteHub.toUpperCase().equals("N/A")) {
 			File ieDriver = new File(driverPath);
 			System.setProperty("webdriver.ie.driver", ieDriver.getAbsolutePath());
