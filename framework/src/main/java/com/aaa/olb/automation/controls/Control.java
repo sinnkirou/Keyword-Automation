@@ -729,4 +729,23 @@ public class Control extends ActionRepository {
 			Log.error(e.getLocalizedMessage());
 		}
 	}
+
+	/*
+	public void sendCompositeKey(String parameters) {
+		String[] keynames = parameters.split(",");
+		try {
+			if(Keys.valueOf(keynames[0]) != null) {
+				LocalDateTime startTime = LocalDateTime.now();
+				CharSequence cs1 = Keys.valueOf(keynames[0]);
+				Actions action = new Actions(this.driver);
+				action.moveToElement(we).keyDown(cs1).perform();
+				sendKey(keynames[1]);
+				this.info(this, generateAction("sendCompositeKey: " + parameters, startTime, LocalDateTime.now()));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	*/
 }
