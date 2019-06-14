@@ -19,7 +19,7 @@ public class TextBoxBehavior extends ControlBehavior {
 		if(behaviorName == null) {
 			behaviorName= SystemConstants.BEHAVIOR_CLICK;
 		}
-		switch (this.facet.getBehaviorName()) {
+		switch (this.facet.getBehaviorName().toLowerCase()) {
 		case SystemConstants.BEHAVIOR_TEXT:{
 			target.threadSleep();
 			return target.getText();
@@ -29,10 +29,14 @@ public class TextBoxBehavior extends ControlBehavior {
 			target.waitTextToBePresented(text);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:{
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX:{
 			String text = (String)this.facet.getParameters()[0];
-			target.selectPartialContextByIndex(text);
+			target.selectPartialContentByIndex(text);
 			return null;
+		}
+		case SystemConstants.BEHAVIOR_TEXT_CONTAINS:{
+			target.threadSleep();
+			return target.getText();
 		}
 		default:
 			return super.Execute();

@@ -49,6 +49,9 @@ public class TestClass extends BaseTestClass {
 	@Test()
 	@Parameters()
 	public void testMethod() throws Throwable {
+		long id = Thread.currentThread().getId();
+		System.out.println(this.tc.getTestCaseID() + " with thread id: "+id);
+		
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
 			Object result = BehaviourAnalysis.action(browser.getDriver(), ts, initializePage);
@@ -65,7 +68,11 @@ public class TestClass extends BaseTestClass {
 						expect = "RGB(" + expect + ")";
 					}
 					
-					Assert.assertEquals(result, expect);
+					if(!ts.getActionKeyWord().toLowerCase().contains("contains")) {
+						Assert.assertEquals(result, expect);
+					}else {
+						Assert.assertTrue(result.toString().contains(expect.toString()));
+					}
 					Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 					System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 				}

@@ -461,7 +461,7 @@ public class Control extends ActionRepository {
 	 * 
 	 * @throws Exception
 	 */
-	public void clickByJS() throws Exception {
+	public void clickByJS() {
 		LocalDateTime startTime = LocalDateTime.now();
 		((JavascriptExecutor) driver).executeScript("arguments[0].click()", we);
 		this.info(this, generateAction("clickByJS", startTime, LocalDateTime.now()));
@@ -723,6 +723,24 @@ public class Control extends ActionRepository {
 			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
 			Thread.sleep(time);
 			this.info(this, generateAction("threadSleep: " + time, startTime, LocalDateTime.now()));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getLocalizedMessage());
+		}
+	}
+	
+	/**
+	 * sleep for specific minutes
+	 * 
+	 */
+	public void threadSleepByMinutes(String parameter) {
+		try {
+			LocalDateTime startTime = LocalDateTime.now();
+			double minutes = Double.parseDouble(parameter);
+			long time = new Double(minutes * 60 * 1000).longValue();
+			Thread.sleep(time);
+			this.info(this, generateAction("threadSleepByMinutes: " + parameter, startTime, LocalDateTime.now()));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

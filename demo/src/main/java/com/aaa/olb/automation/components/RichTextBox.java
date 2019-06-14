@@ -45,7 +45,7 @@ public class RichTextBox extends Textbox {
 		Span target = null;
 		try {
 			target = getChildren(route);
-			target.selectPartialContextByContext(text);
+			target.selectPartialContextByContent(text);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getLocalizedMessage());

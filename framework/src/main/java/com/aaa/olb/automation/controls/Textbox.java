@@ -48,7 +48,7 @@ public class Textbox extends Control {
 	 * 
 	 *             e.g.：text-> '50，60', e.g.: <div>test context</div>
 	 */
-	public void selectPartialContextByIndex(String text) {
+	public void selectPartialContentByIndex(String text) {
 		this.focus();
 		String[] parameters = PatameterExacter.getParamters(text, 2);
 		String start = !parameters[0].isEmpty() ? parameters[0] : "0";
@@ -131,7 +131,7 @@ public class Textbox extends Control {
 	 * 
 	 *             e.g.：text-> 'some context', e.g.: <div>test context</div>
 	 */
-	public void selectPartialContextByContext(String text) {
+	public void selectPartialContextByContent(String text) {
 		this.focus();
 		StringBuilder script = new StringBuilder();
 		script.append("var start = arguments[0].textContent.indexOf('" + text + "');");

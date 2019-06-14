@@ -33,8 +33,8 @@ public class InputBehavior extends ControlBehavior {
 			target.clear();
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT: {
-			target.selectPartialContextForInput(parameter);
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_FOR_INPUT: {
+			target.selectPartialContentForInput(parameter);
 			return null;
 		}
 		default:

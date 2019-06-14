@@ -115,6 +115,14 @@ public class ControlBehavior implements Behavior {
 		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: {
 			return null;
 		}
+		case SystemConstants.BEHAVIOR_CLICK_BY_JS: {
+			target.clickByJS();
+			return null;
+		}
+		case SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES: {
+			target.threadSleepByMinutes(parameter);
+			return null;
+		}
 		default:
 			return BehaviorReflect.action(facet);
 		}

@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.internal.Locatable;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 

@@ -29,10 +29,10 @@ public class RichTextBoxBehavior extends ControlBehavior {
 				target.selectPartialContextByContext(parameter);
 			}
 			return null;
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX:
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX:
 			if (parameter != "") {
 				target.waitForVisible();
-				target.selectPartialContextByIndex(parameter);
+				target.selectPartialContentByIndex(parameter);
 			}
 			return null;
 		case CustomizedBehaviorConstants.DRAG_AND_DROP_RICH_TEXTBOX:

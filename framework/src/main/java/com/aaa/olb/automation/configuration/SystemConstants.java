@@ -67,6 +67,8 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_TEXT="[text]";
 	
+	public final static String BEHAVIOR_TEXT_CONTAINS="[textcontains]";
+	
 	public final static String BEHAVIOR_VISIBLE="[visible]";
 
 	public final static String LIST_BEHAVIOR_GET="get";
@@ -81,9 +83,9 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT="selectpartialcontextbycontext";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_INDEX="selectpartialcontextbyindex";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX="selectpartialcontentbyindex";
 	
-	public final static String BEHAVIOR_SELECT_PARTIAL_CONTEXT_FOR_INPUT="selectpartialcontextforinput";
+	public final static String BEHAVIOR_SELECT_PARTIAL_CONTENT_FOR_INPUT="selectpartialcontentforinput";
 	
 	public final static String BEHAVIOR_DRAG_AND_DROP_BY_OFFSET="draganddropbyoffset";
 	
@@ -96,4 +98,8 @@ public final class SystemConstants {
 	public final static String BEHAVIOR_SEND_KEY_BY_ROBOT = "sendkeybyrobot";
 	
 	public final static String BEHAVIOR_TAKE_SCREENSHOT = "takescreen";
+	
+	public final static String BEHAVIOR_THREAD_SLEEP_BY_MINUTES = "threadsleepbyminutes";
+	
+	public final static String BEHAVIOR_CLICK_BY_JS = "clickbyjs";
 }

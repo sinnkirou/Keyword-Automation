@@ -1,19 +1,21 @@
 package com.aaa.olb.automation.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+//import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+//import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
+/*
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+*/
 
 import com.aaa.olb.automation.log.Log;
 
@@ -63,6 +65,7 @@ public class HttpRequest {
 		return result;
 	}
 
+	/*
 	public static void sendPost(String url, String param) throws Exception {
 		HttpPost httpPost = createConnectivity(url);
 		executeReq(param, httpPost);
@@ -74,7 +77,9 @@ public class HttpRequest {
 		post.setHeader("Accept", "application/json");
 		return post;
 	}
+	*/
 
+	/*
 	private static void executeReq(String jsonData, HttpPost httpPost) throws Exception {
 		try {
 			executeHttpRequest(jsonData, httpPost);
@@ -115,4 +120,5 @@ public class HttpRequest {
 			System.exit(0);
 		}
 	}
+	*/
 }

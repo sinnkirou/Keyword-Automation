@@ -110,7 +110,7 @@ public class Input extends Control {
 	 * 
 	 * e.g.: <input value="test context" />
 	 */
-	public void selectPartialContextForInput (String text) {
+	public void selectPartialContentForInput (String text) {
 		String[] parameters = PatameterExacter.getParamters(text, 2);
 		String start = !parameters[0].isEmpty() ? parameters[0] : "0";
 		String end = !parameters[1].isEmpty() ? parameters[1] : String.valueOf(we.getText().length());

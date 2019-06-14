@@ -9,7 +9,6 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
-
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.AnnotationTransformer;
 import com.aaa.olb.automation.listeners.ExtentReporterNGListener;
@@ -46,6 +45,8 @@ public class TestCaseKeyWord {
 
 		/*
 		 * XmlSuite > XmlTest > XmlClass
+		 * 
+		 * XmlTest对应一个test case
 		 * */
 		TestSuiteWrapper testSuite = new TestSuiteWrapper(Constant.TS_File_Name);
 		List<TestCaseWrapper> testCases = new ArrayList<>();
@@ -69,7 +70,8 @@ public class TestCaseKeyWord {
 		TestNG testng = new TestNG();
 		XmlSuite suite = testSuite.getSuite();
 		testng.setXmlSuites(Arrays.asList(suite));
-		testng.setParallel(ParallelMode.NONE);
+		testng.setParallel(ParallelMode.TESTS);
+		testng.setThreadCount(2);
 		testng.addListener(new TestngListener());
 		testng.addListener(new AnnotationTransformer());
 		testng.addListener(new ExtentReporterNGListener());
