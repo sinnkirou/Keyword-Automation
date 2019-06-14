@@ -63,6 +63,8 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLASS="[class]";
 	
+	public final static String BEHAVIOR_CLASS_CONTAINS="[classcontains]";
+	
 	public final static String BEHAVIOR_VALUE="[value]";
 	
 	public final static String BEHAVIOR_TEXT="[text]";

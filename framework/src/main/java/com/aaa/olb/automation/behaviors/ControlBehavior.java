@@ -78,6 +78,10 @@ public class ControlBehavior implements Behavior {
 			target.threadSleep();
 			return target.getClassName();
 		}
+		case SystemConstants.BEHAVIOR_CLASS_CONTAINS: {
+			target.threadSleep();
+			return target.getClassName();
+		}
 		case SystemConstants.BEHAVIOR_VISIBLE: {
 			return target.visible();
 		}
