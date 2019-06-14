@@ -69,9 +69,9 @@ public class TestCaseKeyWord {
 
 		TestNG testng = new TestNG();
 		XmlSuite suite = testSuite.getSuite();
+		suite.setParallel(ParallelMode.TESTS);
+		suite.setThreadCount(2);
 		testng.setXmlSuites(Arrays.asList(suite));
-		testng.setParallel(ParallelMode.TESTS);
-		testng.setThreadCount(2);
 		testng.addListener(new TestngListener());
 		testng.addListener(new AnnotationTransformer());
 		testng.addListener(new ExtentReporterNGListener());
