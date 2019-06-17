@@ -10,11 +10,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.configuration.RuntimeSettings;
+import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
 public class Textbox extends Control {
 	protected Textbox(SeleniumContext context, WebElement webElement) {
 		super(context, webElement);

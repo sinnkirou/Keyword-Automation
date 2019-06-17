@@ -50,18 +50,21 @@ public class TestClass extends BaseTestClass {
 	@Parameters()
 	public void testMethod() {
 		long id = Thread.currentThread().getId();
+		String msg = String.format("Testcase %s is running on thread %d",this.tc.getTestCaseID(), id);
+		Log.info(msg);
 		System.out.println(this.tc.getTestCaseID() + " with thread id: "+id);
+		BehaviourAnalysis analyser = new BehaviourAnalysis();
 		
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
 			Object result = null;
 			try {
-				result = BehaviourAnalysis.action(browser.getDriver(), ts, initializePage, this.tc.getPageRepository().getPage(ts.getPageName()));
+				result = analyser.action(browser.getDriver(), ts, initializePage, this.tc.getPageRepository().getPage(ts.getPageName()));
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Log.error(e.getLocalizedMessage());
-				break;
+				Assert.fail(e.getLocalizedMessage());
 			}
 			
 			/*

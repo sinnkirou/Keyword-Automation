@@ -3,12 +3,15 @@ package com.aaa.olb.automation.behaviors;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import org.apache.poi.sl.usermodel.TextBox;
+
 import com.aaa.olb.automation.annotations.BehaviorIndication;
-import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.CheckBox;
 import com.aaa.olb.automation.controls.DropDown;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.controls.RadioButton;
+import com.aaa.olb.automation.controls.Textbox;
 import com.aaa.olb.automation.log.Log;
 
 public class BehaviorRepository {
@@ -29,9 +32,10 @@ public class BehaviorRepository {
 
 	Behavior getBuiltIn(BehaviorFacet facet) {
 		Class<?> targetType = facet.getTarget().getClass();
+		
 		if (facet instanceof ListItemBehaviorFacet) {
 			return new ControlCollectionItemBehavior(facet);
-		} else if (targetType.isAssignableFrom(List.class) || facet.getTarget() instanceof List) {
+		} else if (facet.getTarget() instanceof List || List.class.isAssignableFrom(targetType)) {
 			return new ControlCollectionBehavior(facet);
 		} else if (facet.getTarget() instanceof Input) {
 			return new InputBehavior(facet);
@@ -41,7 +45,7 @@ public class BehaviorRepository {
 			return new DropDownBehavior(facet);
 		} else if (facet.getTarget() instanceof CheckBox) {
 			return new CheckBoxBehavior(facet);
-		} else if (facet.getBehaviorName().equals(SystemConstants.BEHAVIOR_TEXT)) {
+		} else if (facet.getTarget() instanceof Textbox) {
 			return new TextBoxBehavior(facet);
 		} else {
 			return new ControlBehavior(facet);

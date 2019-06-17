@@ -14,10 +14,10 @@ import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.TestHelper;
 
 public class BehaviourAnalysis {
-	private static BasePage page = null;
-	private static Boolean methodMatched = false;
+	private BasePage page = null;
+	private Boolean methodMatched = false;
 
-	public static Object action(SearchContext driver, TestStepEntity testStep, Boolean initializePage,
+	public Object action(SearchContext driver, TestStepEntity testStep, Boolean initializePage,
 			Class<?> pageClazz) throws Throwable {
 
 		if (pageClazz != null) {
@@ -43,7 +43,7 @@ public class BehaviourAnalysis {
 		return null;
 	}
 
-	private static Boolean methodMathced(String targetName, Method method) {
+	private Boolean methodMathced(String targetName, Method method) {
 		String columnName = method.getAnnotation(ColumnName.class).value();
 		if (targetName.contains("[")) {
 			return targetName.substring(0, targetName.indexOf('[')).equals(columnName);
@@ -52,7 +52,7 @@ public class BehaviourAnalysis {
 		}
 	}
 
-	private static Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
+	private Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
 		Object result = null;
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
@@ -110,7 +110,7 @@ public class BehaviourAnalysis {
 	 * @param method
 	 * @return
 	 */
-	private static BehaviorProvider getBehaviorProvider(Method method) {
+	private BehaviorProvider getBehaviorProvider(Method method) {
 		BehaviorIndication indication = method.getAnnotation(BehaviorIndication.class);
 
 		if (indication == null) {
@@ -149,7 +149,7 @@ public class BehaviourAnalysis {
 	 * @param testStep
 	 * @return
 	 */
-	private static String getBehaviorName(Method method, TestStepEntity testStep) {
+	private String getBehaviorName(Method method, TestStepEntity testStep) {
 		if (testStep.getActionKeyWord() != "" && testStep.getActionKeyWord() != null) {
 			return testStep.getActionKeyWord();
 		} else if (method.getAnnotation(BehaviorIndication.class) != null) {
@@ -168,7 +168,7 @@ public class BehaviourAnalysis {
 	 * @param method
 	 * @return
 	 */
-	private static BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
+	private BehaviorFacet getBehaviorFacet(Object target, TestStepEntity testStep, Method method) {
 		BehaviorFacet facet = new BehaviorFacet();
 		facet.setBehaviorName(getBehaviorName(method, testStep));
 		facet.setParameters(new Object[] { testStep.getValue() });
@@ -206,7 +206,7 @@ public class BehaviourAnalysis {
 	 * @param facet
 	 * @return
 	 */
-	private static Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
+	private Behavior getBehavior(BehaviorProvider provider, BehaviorFacet facet) {
 		try {
 			return (Behavior) provider.getClass().getMethod("get", BehaviorFacet.class).invoke(provider, facet);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

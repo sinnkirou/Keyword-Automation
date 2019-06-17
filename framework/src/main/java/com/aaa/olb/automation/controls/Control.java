@@ -15,7 +15,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.configuration.RuntimeSettings;
+import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.ControlCollectionFactory;
 import com.aaa.olb.automation.framework.ControlFactory;
 import com.aaa.olb.automation.framework.LocationKind;
@@ -26,6 +28,7 @@ import com.aaa.olb.automation.log.BaseAction;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
 public class Control extends ActionRepository {
 	protected WebElement we;
 
@@ -75,7 +78,7 @@ public class Control extends ActionRepository {
 			this.threadSleep();
 			LocalDateTime startTime = LocalDateTime.now();
 			boolean value = we.isDisplayed();
-			this.info(this, generateAction(String.format("visible"), startTime, LocalDateTime.now()));
+			this.info(this, generateAction(String.format("check isVisible"), startTime, LocalDateTime.now()));
 			return value;
 		} catch (NoSuchElementException | StaleElementReferenceException | NullPointerException ex) {
 			// ex.printStackTrace();

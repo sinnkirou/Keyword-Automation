@@ -16,7 +16,7 @@ public class PageClazzProvider {
 	 * @return
 	 * @throws ClassNotFoundException
 	 */
-	public static Class<?> getPageClazz(String packageName, String pageName) throws ClassNotFoundException {
+	public static Class<?> getPageClazz(String pageName, String packageName) throws ClassNotFoundException {
 		return Class.forName(packageName + "." + pageName);
 	}
 

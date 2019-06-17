@@ -18,7 +18,7 @@ public class CCMOrRPMPanel extends Component {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ByXPath(".//button[1]")
+	@ByXPath(".//span[text()='RPM']/parent::button")
 	private Button rPMButton;
 	
 	@ColumnName("RPMButton")
@@ -26,7 +26,7 @@ public class CCMOrRPMPanel extends Component {
 		return rPMButton;
 	}
 	
-	@ByXPath(".//button[2]")
+	@ByXPath(".//span[text()='CCM']/parent::button")
 	private Button cCMButton;
 	
 	@ColumnName("CCMButton")
