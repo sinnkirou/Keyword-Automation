@@ -3,12 +3,15 @@ package com.aaa.olb.automation.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aaa.olb.automation.framework.PageRepository;
+
 public class TestCaseEntity {
 	private String testCaseID;
 	private String description;
 	
 	private List<TestStepEntity> testSteps = new ArrayList<TestStepEntity>();
 	private EnvironmentVariable env;
+	private PageRepository pageRepository = null;
 
 	public String getTestCaseID() {
 		return testCaseID;
@@ -40,5 +43,19 @@ public class TestCaseEntity {
 
 	public void setTestSteps(List<TestStepEntity> testSteps) {
 		this.testSteps = testSteps;
+	}
+
+	/**
+	 * @return the pageRepository
+	 */
+	public PageRepository getPageRepository() {
+		return this.pageRepository != null ? this.pageRepository : new PageRepository();
+	}
+
+	/**
+	 * @param pageRepository the pageRepository to set
+	 */
+	public void setPageRepository(PageRepository pageRepository) {
+		this.pageRepository = pageRepository;
 	}
 }

@@ -52,6 +52,8 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 		if (!this.data.isEmpty())
 			this.data.clear();
 		for (int i = 1; i <= rowCount; i++) {
+			if(this.sheet.getRow(i) == null)
+				break;
 			this.data.add(this.readRow(columns, this.sheet.getRow(i)));
 		}
 

@@ -18,7 +18,7 @@ public class RuntimeSettingProvider {
 		
 		for(Map<String, CellEntity> source : sources) {
 			for(String key: source.keySet()) {
-				RuntimeSettings.getInstance().set(key, Integer.valueOf(source.get(key).getValue()));
+				RuntimeSettings.getInstance().set(key, source.get(key).getValue());
 			}
 		}
 	}

@@ -48,13 +48,21 @@ public class TestClass extends BaseTestClass {
 	 */
 	@Test()
 	@Parameters()
-	public void testMethod() throws Throwable {
+	public void testMethod() {
 		long id = Thread.currentThread().getId();
 		System.out.println(this.tc.getTestCaseID() + " with thread id: "+id);
 		
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
-			Object result = BehaviourAnalysis.action(browser.getDriver(), ts, initializePage);
+			Object result = null;
+			try {
+				result = BehaviourAnalysis.action(browser.getDriver(), ts, initializePage, this.tc.getPageRepository().getPage(ts.getPageName()));
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.error(e.getLocalizedMessage());
+				break;
+			}
 			
 			/*
 			 * with [value] or [text] etc defined in test step, it means we should compare the value on real value with expected value

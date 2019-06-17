@@ -58,6 +58,8 @@ public class RuntimeSettings {
 	private int retry;
 
 	private long sleepTime;
+	
+	private boolean parallel = false;
 
 	private RuntimeSettings() {
 		this.timeout = 5;
@@ -120,52 +122,70 @@ public class RuntimeSettings {
 		return sleepTime * 1000;
 	}
 
-	public void set(String name, int value) {
+	public void set(String name, String value) {
 		switch (name.toLowerCase()) {
 		case SystemConstants.SETTINGS_WAIT_TIME: {
-			this.timeout = value;
+			this.timeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_LONG_WAIT_TIME: {
-			this.longTimeout = value;
+			this.longTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_SHORT_WAIT_TIME: {
-			this.shortTimeout = value;
+			this.shortTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_OPERATION_WAIT_TIME: {
-			this.operationTimeout = value;
+			this.operationTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_REDIRECT_WAIT_TIME: {
-			this.redirectTimeout = value;
+			this.redirectTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_WAIT_OR_DELAY_TIME: {
-			this.waitOrDealyTimeout = value;
+			this.waitOrDealyTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_RETRY: {
-			this.retry = value;
+			this.retry = Integer.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_EXPLICIT_WAIT_TIME: {
-			this.explicitTimeout = value;
+			this.explicitTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_IMPLICIT_WAIT_TIME: {
-			this.implicitTimeout = value;
+			this.implicitTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_SLEEP_TIME: {
-			this.sleepTime = value;
+			this.sleepTime = Long.valueOf(value);
+			break;
+		}
+		case SystemConstants.SETTINGS_PARALLEL: {
+			this.parallel = value.toLowerCase().equals("true");
 			break;
 		}
 		default: {
 			break;
 		}
 		}
+	}
+
+	/**
+	 * @return the parallel
+	 */
+	public boolean isParallel() {
+		return parallel;
+	}
+
+	/**
+	 * @param parallel the parallel to set
+	 */
+	public void setParallel(boolean parallel) {
+		this.parallel = parallel;
 	}
 
 }

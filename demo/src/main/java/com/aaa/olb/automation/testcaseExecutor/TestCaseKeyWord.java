@@ -9,6 +9,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
+
+import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.AnnotationTransformer;
 import com.aaa.olb.automation.listeners.ExtentReporterNGListener;
@@ -20,6 +22,7 @@ import com.aaa.olb.automation.testng.TestSuiteWrapper;
 import com.aaa.olb.automation.util.TestCaseGenerator;
 import com.aaa.olb.automation.util.TestClass;
 import com.aaa.olb.automation.util.TestngListener;
+import com.aaa.olb.automation.utils.SystemProperty;
 
 public class TestCaseKeyWord {
 
@@ -27,7 +30,7 @@ public class TestCaseKeyWord {
 	 * entry point
 	 * 
 	 * @param args
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
 		new TestCaseKeyWord().run();
@@ -35,19 +38,20 @@ public class TestCaseKeyWord {
 
 	@SuppressWarnings("deprecation")
 	public void run() throws Exception {
-		DOMConfigurator.configure("log4j.xml");
-		
+		DOMConfigurator.configure(SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + "log4j.xml");
+
 		/*
 		 * generate testcases from excel file
-		 * */
-		String filePath = Constant.Path_TestData + Constant.TS_File_Name;
-		Map<String, TestCaseEntity> testCaseEntities = new TestCaseGenerator().createTestCases(filePath);
+		 */
+		String filePath = SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator()
+				+ Constant.TestData_Dir_Name + SystemProperty.getFileSeparator() + Constant.TS_File_Name;
+		Map<String, TestCaseEntity> testCaseEntities = new TestCaseGenerator().getTestCases(filePath);
 
 		/*
 		 * XmlSuite > XmlTest > XmlClass
 		 * 
 		 * XmlTest对应一个test case
-		 * */
+		 */
 		TestSuiteWrapper testSuite = new TestSuiteWrapper(Constant.TS_File_Name);
 		List<TestCaseWrapper> testCases = new ArrayList<>();
 		int index = 0;
@@ -55,10 +59,10 @@ public class TestCaseKeyWord {
 			TestCaseEntity tc = testCaseEntities.get(key);
 			TestCaseWrapper testCase = new TestCaseWrapper(testSuite, tc, index++);
 			/*
-			 * notice we put TestClass into the TestClassWrapper,
-			 * each action process is defined inside TestClass,
-			 * by running the testng suite will perform the corresponding actions performed on website
-			 * */
+			 * notice we put TestClass into the TestClassWrapper, each action process is
+			 * defined inside TestClass, by running the testng suite will perform the
+			 * corresponding actions performed on website
+			 */
 			TestClassWrapper testClass = new TestClassWrapper(TestClass.class);
 			testCase.setTestCase(Arrays.asList(testClass));
 			testCases.add(testCase);
@@ -69,7 +73,8 @@ public class TestCaseKeyWord {
 
 		TestNG testng = new TestNG();
 		XmlSuite suite = testSuite.getSuite();
-		suite.setParallel(ParallelMode.TESTS);
+		if (RuntimeSettings.getInstance().isParallel())
+			suite.setParallel(ParallelMode.TESTS);
 		suite.setThreadCount(2);
 		testng.setXmlSuites(Arrays.asList(suite));
 		testng.addListener(new TestngListener());

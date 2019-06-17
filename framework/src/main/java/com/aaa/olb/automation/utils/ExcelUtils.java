@@ -79,7 +79,12 @@ public class ExcelUtils {
 
 	@SuppressWarnings("deprecation")
 	public static String getCellData(XSSFRow row, int ColNum) {
-		Cell = row.getCell(ColNum);
+		try {
+			Cell = row.getCell(ColNum);
+		}catch(Exception e) {
+			Log.error(e.getLocalizedMessage());
+			throw e;
+		}
 
 		if (Cell != null)
 			switch (Cell.getCellType()) {

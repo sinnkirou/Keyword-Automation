@@ -23,18 +23,22 @@ import com.aaa.olb.automation.flow.FlowProvider;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.framework.PageRepository;
 import com.aaa.olb.automation.log.Log;
-import com.aaa.olb.automation.pages.PageClazzProvider;
 import com.aaa.olb.automation.utils.BaseTestCaseGenerator;
 import com.aaa.olb.automation.utils.ExcelUtils;
+import com.aaa.olb.automation.utils.PageClazzProvider;
 
 public class TestCaseGenerator implements BaseTestCaseGenerator {
 
+	private String filePath;
+
 	/**
-	 *	@param: excel file path
-	 * @throws Exception 
+	 * @param: excel file path
+	 * @throws Exception
 	 *
 	 */
-	public Map<String, TestCaseEntity> createTestCases(String filePath) throws Exception {
+	public Map<String, TestCaseEntity> getTestCases(String filePath) throws Exception {
+		this.filePath = filePath;
+
 		DataProvider timeoutProvider = new ExcelProvider(
 				ExcelUtils.getSheet(filePath, ConfigurationOptions.CONFIG_SHEET_NAME));
 		DataProvider testcaseProvider = new ExcelProvider(
@@ -48,7 +52,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 		List<TestStepEntity> testSteps = getTestStepEntities(flows, filePath);
 
 		testSteps = sortTestSteps(testSteps);
-		testCases = appendTestStep(testSteps, testCases);
+		testCases = createTestcases(testSteps, testCases, flows);
 
 		return testCases;
 	}
@@ -64,15 +68,43 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 		return testSteps;
 	}
 
-	private Map<String, TestCaseEntity> appendTestStep(List<TestStepEntity> testSteps,
-			Map<String, TestCaseEntity> testCases) {
+	private Map<String, TestCaseEntity> createTestcases(List<TestStepEntity> testSteps,
+			Map<String, TestCaseEntity> testCases, List<FlowDeclaration> flows) throws Exception {
 		for (TestStepEntity testStep : testSteps) {
 			TestCaseEntity tc = testCases.get(testStep.getTestCaseID());
 			if (tc != null) {
 				tc.getTestSteps().add(testStep);
 				testStep = handleParameters(testStep);
 				testCases.put(tc.getTestCaseID(), tc);
+
+				for (FlowDeclaration flow : flows) {
+
+					/*
+					 * create page instance that the pageClass will retrieved by name afterwards
+					 */
+					try {
+						if(flow.getPage().equals(testStep.getPageName())) {
+							PageRepository pageRepository = tc.getPageRepository();
+							if (!flow.isExcelModel()) {
+								pageRepository.addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage(), Constant.PagePackageName));
+							} else {
+								String pageName = flow.getPage();
+								XSSFSheet pageModel = ExcelUtils.getSheet(this.filePath, pageName + "Model");
+								DataProvider provider = new ExcelProvider(pageModel);
+								List<PageModelEntity> targets = PageModelProvider.read(provider);
+								Class<?> pageClazz = PageClazzProvider.createClazz(Constant.PagePackageName, pageName, targets);
+								pageRepository.addPage(pageName, pageClazz);
+							}
+							tc.setPageRepository(pageRepository);
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						Log.error(e.getLocalizedMessage());
+						throw e;
+					}
+				}
 			}
+
 		}
 		return testCases;
 	}
@@ -94,13 +126,13 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 		return ts;
 	}
 
-	
 	/**
-	 *	get specific test steps by inputting flow entities 
-	 * @throws Exception 
+	 * get specific test steps by inputting flow entities
+	 * 
+	 * @throws Exception
 	 *
 	 */
-	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception{
+	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception {
 		List<TestStepEntity> allTestSteps = new ArrayList<>();
 		Map<String, List<TestStepEntity>> groups = new HashMap<>();
 
@@ -109,34 +141,18 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 			String templateName = flow.getName();
 			XSSFSheet sheet = ExcelUtils.getSheet(filePath, templateName);
 
-			/*
-			 * create page instance that the pageClass will retrieved by name afterwards
-			 * */
-			try {
-				if(!flow.isExcelModel()) {
-					PageRepository.getInstance().addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage()));
-				}else {
-					String packageName = "com.aaa.olb.automation.pages";
-					String pageName = flow.getPage();
-					XSSFSheet pageModel = ExcelUtils.getSheet(filePath, pageName+"Model");
-					DataProvider provider = new ExcelProvider(pageModel);
-					List<PageModelEntity> targets = PageModelProvider.read(provider);
-					Class<?> pageClazz = PageRepository.getInstance().createClazz(packageName, pageName, targets);
-					PageRepository.getInstance().addPage(pageName, pageClazz);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				Log.error(e.getLocalizedMessage());
-				throw e;
-			}
-
-			/*
-			 * when the template is enabled, 
-			 * */
 			if (flow.isTemplate() && sheet != null) {
+				/*
+				 * when the template is enabled, get the specific flow sheet, the use the
+				 * customized flowTemplate to get teststeps
+				 */
 				templateName = flow.getName();
 				TemplateProvider.addTemplate(flow);
 			} else {
+				/*
+				 * if the template is not enabled, get the basic page sheet, then use the basic
+				 * flowTemplate to get teststeps
+				 */
 				templateName = flow.getPage();
 				sheet = ExcelUtils.getSheet(filePath, templateName);
 			}
@@ -156,6 +172,7 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 				groups.put(templateName, teststeps);
 				allTestSteps.addAll(teststeps);
 			}
+
 		}
 
 		return allTestSteps;

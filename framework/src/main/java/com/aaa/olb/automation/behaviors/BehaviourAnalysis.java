@@ -17,9 +17,8 @@ public class BehaviourAnalysis {
 	private static BasePage page = null;
 	private static Boolean methodMatched = false;
 
-	public static Object action(SearchContext driver, TestStepEntity testStep, Boolean initializePage)
-			throws Throwable {
-		Class<?> pageClazz = PageRepository.getInstance().getPage(testStep.getPageName());
+	public static Object action(SearchContext driver, TestStepEntity testStep, Boolean initializePage,
+			Class<?> pageClazz) throws Throwable {
 
 		if (pageClazz != null) {
 			/*
@@ -30,15 +29,15 @@ public class BehaviourAnalysis {
 				page = PageRepository.create(driver, pageClazz);
 				page.waitForAvailable();
 			}
-			
+
 			methodMatched = false;
 			Object result = behave(pageClazz, testStep, null);
-			if(methodMatched == false) {
+			if (methodMatched == false) {
 				Exception e = new Exception("Target not found: " + testStep.getTargetName());
 				Log.info(e.getLocalizedMessage());
 				throw e;
 			}
-			
+
 			return result;
 		}
 		return null;
@@ -52,7 +51,7 @@ public class BehaviourAnalysis {
 			return targetName.equals(columnName);
 		}
 	}
-	
+
 	private static Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
 		Object result = null;
 		Method[] methods = clazz.getDeclaredMethods();
@@ -63,9 +62,9 @@ public class BehaviourAnalysis {
 			 */
 			if (method.getAnnotation(ColumnName.class) != null && methodMathced(testStep.getTargetName(), method)) {
 				Object target = null;
-				if(parentMethod == null) {
+				if (parentMethod == null) {
 					target = method.invoke(page);
-				}else{
+				} else {
 					Object parent = parentMethod.invoke(page);
 					target = method.invoke(parent);
 				}
@@ -89,13 +88,14 @@ public class BehaviourAnalysis {
 					Log.info(e.getLocalizedMessage());
 					throw e.getCause();
 				}
-			}else if(Component.class.isAssignableFrom(method.getReturnType()) && method.getAnnotation(ColumnName.class).nested()) {
+			} else if (Component.class.isAssignableFrom(method.getReturnType())
+					&& method.getAnnotation(ColumnName.class).nested()) {
 				result = behave(method.getReturnType(), testStep, method);
 			}
-			if(methodMatched == true)
+			if (methodMatched == true)
 				break;
 		}
-		
+
 		return result;
 	}
 
@@ -137,11 +137,13 @@ public class BehaviourAnalysis {
 	}
 
 	/**
-	 * get behavior name from test step action value with highest priority, 
+	 * get behavior name from test step action value with highest priority,
 	 * 
-	 * get behavior name from method's BehaviorIndication annotation with medium priority,
+	 * get behavior name from method's BehaviorIndication annotation with medium
+	 * priority,
 	 * 
-	 * get behavior name from method return type's BehaviorIndication annotation with lowest priority,
+	 * get behavior name from method return type's BehaviorIndication annotation
+	 * with lowest priority,
 	 * 
 	 * @param method
 	 * @param testStep

@@ -9,7 +9,7 @@ import com.aaa.olb.automation.flow.FlowDeclaration;
 
 public interface BaseTestCaseGenerator {
 
-	public Map<String, TestCaseEntity> createTestCases(String filePath) throws Exception;
+	Map<String, TestCaseEntity> getTestCases(String filePath) throws Exception;
 
-	public List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception;
+	List<TestStepEntity> getTestStepEntities(List<FlowDeclaration> flows, String filePath) throws Exception;
 }

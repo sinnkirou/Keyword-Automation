@@ -25,6 +25,8 @@ public final class SystemConstants {
 	
 	public final static String SETTINGS_RETRY="retry";
 	
+	public final static String SETTINGS_PARALLEL="parallel";
+	
 	public final static String BEHAVIOR_CLICK="click";
 	
 	public final static String BEHAVIOR_CHECK="check";
