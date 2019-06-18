@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.utils.SystemProperty;
 
 public class ScreenScr {
@@ -22,11 +23,11 @@ public class ScreenScr {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("GetScreenshot Fail");
-			Log.error("GetScreenshot Fail");
+			System.out.println(LoggerHelper.formatConsoleLog("ERROR") + "GetScreenshot Fail");
+			Log.error("GetScreenshot Fail" + e.getLocalizedMessage());
 		} finally {
 			String message = "GetScreenshot Successful" + filepath;
-			System.out.println(message);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 			Log.info(message);
 		}
 

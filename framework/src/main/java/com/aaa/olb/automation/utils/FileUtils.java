@@ -1,10 +1,12 @@
 package com.aaa.olb.automation.utils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.aaa.olb.automation.log.Log;
 
-public class DeleteFile {
+public class FileUtils {
 	public static void delFolder(String folderPath) {
 		try {
 			delAllFile(folderPath); // delete all files in this folder
@@ -29,10 +31,7 @@ public class DeleteFile {
 	public static boolean delAllFile(String path) {
 		boolean flag = false;
 		File file = new File(path);
-		if (!file.exists()) {
-			return flag;
-		}
-		if (!file.isDirectory()) {
+		if (!file.exists() || !file.isDirectory()) {
 			return flag;
 		}
 		String[] tempList = file.list();
@@ -53,5 +52,33 @@ public class DeleteFile {
 			}
 		}
 		return flag;
+	}
+	
+	/**
+	 * @param dir: absolute path of the folder
+	 * @return
+	 */
+	public static List<String> getFilePaths(String dir, String testname) {
+		File file = new File(dir);
+		List<String> filePaths = new ArrayList<>();
+		if (!file.exists() || !file.isDirectory()) {
+			return filePaths;
+		}
+		String[] tempList = file.list();
+		File temp = null;
+		for (int i = 0; i < tempList.length; i++) {
+			if (dir.endsWith(File.separator)) {
+				temp = new File(dir + tempList[i]);
+			} else {
+				temp = new File(dir + File.separator + tempList[i]);
+			}
+			if (temp.isFile() && temp.getAbsolutePath().contains(testname)) {
+				filePaths.add(temp.getAbsolutePath());
+			}
+			if (temp.isDirectory()) {
+				getFilePaths(dir + "/" + tempList[i], testname);
+			}
+		}
+		return filePaths;
 	}
 }

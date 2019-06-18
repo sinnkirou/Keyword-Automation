@@ -14,7 +14,9 @@ import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.FileUtils;
 import com.aaa.olb.automation.utils.SystemProperty;
+import com.aaa.olb.automation.utils.TestHelper;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.ReporterType;
@@ -24,7 +26,7 @@ public class ExtentReporterNGListener implements IReporter {
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		// true, to replace existing report.
-		String workingDir = SystemProperty.getWorkingDir(); 
+		String workingDir = SystemProperty.getWorkingDir();
 		ExtentManager.getReporter().startReporter(ReporterType.DB, workingDir + "/ExtentReports/Extent.html");
 
 		for (ISuite suite : suites) {
@@ -59,12 +61,20 @@ public class ExtentReporterNGListener implements IReporter {
 					test.assignCategory(group);
 
 				if (result.getThrowable() != null) {
-					test.log(status, test
-							.addScreenCapture("../screenshots/" + testName + "_" + result.getStartMillis() + ".png"));
+					String filename = TestHelper.getScreentshotFileName(testName, test.getEndedTime());
+					String filePath = TestHelper.getScreentshotFilePath(TestHelper.Failed_Testcases_Screentshots_Dir, filename);
+					/*
+					 * extentReport 加载test case截图
+					 * */
+					test.log(status, test.addScreenCapture(filePath));
 					test.log(status, result.getThrowable());
 					Log.error(testName + ">>>>>>>>>>> \r" + result.getThrowable().toString());
 				} else {
 					test.log(status, "Test " + status.toString().toLowerCase() + "ed");
+					List<String> paths = FileUtils.getFilePaths(TestHelper.getToVerifyScreenshotsPath(), testName);
+					for(String path : paths) {
+						test.log(status, test.addScreenCapture(path));
+					}
 				}
 
 				ExtentTestManager.endTest();

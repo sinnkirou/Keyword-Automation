@@ -1,11 +1,9 @@
 package com.aaa.olb.automation.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.testng.ITestResult;
 
 import com.aaa.olb.automation.listeners.BaseTestngListener;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class TestngListener extends BaseTestngListener {
 	@Override
@@ -16,9 +14,8 @@ public class TestngListener extends BaseTestngListener {
 
 	private void takeScreenShot(ITestResult tr) {
 		TestClass baseTestcase = (TestClass) tr.getInstance();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String timestamp = df.format(new Date());
-		baseTestcase.takescreen(getTestCaseName(tr) + "_" + timestamp, Constant.Failed_Testcases_Screentshots_Dir);
+        String filename = TestHelper.getScreentshotFileName(getTestCaseName(tr));
+		baseTestcase.takescreen(filename, TestHelper.Failed_Testcases_Screentshots_Dir);
 	}
 
 	@Override

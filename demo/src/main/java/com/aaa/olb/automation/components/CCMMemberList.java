@@ -1,5 +1,7 @@
 package com.aaa.olb.automation.components;
 
+import java.time.LocalDateTime;
+
 import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
@@ -9,7 +11,6 @@ import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
-import com.aaa.olb.automation.log.Log;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
 public class CCMMemberList extends Component {
@@ -25,6 +26,7 @@ public class CCMMemberList extends Component {
 	 *	@param text
 	 */
 	public void selectMemberByMID(String text) {
+		LocalDateTime startTime = LocalDateTime.now();
 		Route route = new Route();
 		route.setFieldType(A.class);
 		route.setLocationKind(LocationKind.XPATH);
@@ -35,8 +37,7 @@ public class CCMMemberList extends Component {
 			target = getChildren(route);
 			target.clickByJS();
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
+			this.error(this, generateAction("selectMemberByMID", startTime, LocalDateTime.now()), e.getLocalizedMessage(), e);
 		}
 	}
 

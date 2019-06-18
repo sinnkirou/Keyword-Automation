@@ -1,5 +1,7 @@
 package com.aaa.olb.automation.components;
 
+import java.time.LocalDateTime;
+
 import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
@@ -9,7 +11,6 @@ import com.aaa.olb.automation.controls.Textbox;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
-import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.PatameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
@@ -37,6 +38,7 @@ public class RichTextBox extends Textbox {
 	 *	@param text
 	 */
 	public void selectPartialContextByContext(String text) {
+		LocalDateTime startTime = LocalDateTime.now();
 		Route route = new Route();
 		route.setFieldType(Span.class);
 		route.setLocationKind(LocationKind.XPATH);
@@ -47,8 +49,7 @@ public class RichTextBox extends Textbox {
 			target = getChildren(route);
 			target.selectPartialContextByContent(text);
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
+			this.error(this, generateAction("selectPartialContextByContext", startTime, LocalDateTime.now()), e.getLocalizedMessage(), e);
 		}
 	}
 }

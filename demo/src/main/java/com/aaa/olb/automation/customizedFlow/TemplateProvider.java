@@ -1,12 +1,15 @@
 package com.aaa.olb.automation.customizedFlow;
 
+import java.lang.reflect.InvocationTargetException;
+
 import com.aaa.olb.automation.flow.BasicFlowTemplate;
 import com.aaa.olb.automation.flow.FlowDeclaration;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.flow.FlowTemplateRepository;
+import com.aaa.olb.automation.util.PackageConstants;
 
 /**
- * if there is a new template created, 
+ * if there is a new template created,
  * 
  * make sure append a case to add the template to the template repository
  *
@@ -15,16 +18,28 @@ public class TemplateProvider {
 	public static void addTemplate(FlowDeclaration flow) {
 		if (flow.isTemplate()) {
 			switch (flow.getName()) {
-			
+
 			case FlowNames.SEARCHING:
 				FlowTemplateRepository.getInstance().addTemplate(flow.getName(), new SearchingTemplate());
 				break;
-				
+
 			case FlowNames.LOGIN:
 				FlowTemplateRepository.getInstance().addTemplate(flow.getName(), new LoginTemplate());
 				break;
-			
+
 			default:
+				try {
+					FlowTemplate template = (FlowTemplate) Class
+							.forName(PackageConstants.CUSTOMIZED_FLOW_PACKAGE_NAME + "." + flow.getName() + "Template")
+							.getConstructor().newInstance();
+					FlowTemplateRepository.getInstance().addTemplate(flow.getName(), template);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException | SecurityException
+						| ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					//Log.info(e.getLocalizedMessage());
+				}
 				break;
 			}
 		}

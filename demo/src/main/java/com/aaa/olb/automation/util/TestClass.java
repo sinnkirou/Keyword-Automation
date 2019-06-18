@@ -1,8 +1,5 @@
 package com.aaa.olb.automation.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
@@ -17,9 +14,9 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.configuration.TestStepEntity;
 import com.aaa.olb.automation.listeners.ScreenScr;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.testng.BaseTestClass;
-import com.aaa.olb.automation.utils.DeleteFile;
-import com.aaa.olb.automation.utils.SystemProperty;
+import com.aaa.olb.automation.utils.FileUtils;
 import com.aaa.olb.automation.utils.TestHelper;
 
 public class TestClass extends BaseTestClass {
@@ -27,12 +24,11 @@ public class TestClass extends BaseTestClass {
 	protected String previousPage = "";
 
 	protected String currentPage = "";
-	
+
 	@BeforeSuite
 	public void beforeSuite() {
-		String cyrPatn = SystemProperty.getWorkingDir();
-		DeleteFile.delAllFile(cyrPatn + SystemProperty.getFileSeparator() + Constant.Failed_Testcases_Screentshots_Dir);
-		//DeleteFile.delAllFile(cyrPatn + SystemProperty.getFileSeparator() + Constant.Toverify_Testcases_Screenshots_Dir);
+		FileUtils.delAllFile(TestHelper.getFailedScreenshotsPath());
+		FileUtils.delAllFile(TestHelper.getToVerifyScreenshotsPath());
 	}
 
 	@BeforeMethod
@@ -50,49 +46,50 @@ public class TestClass extends BaseTestClass {
 	@Parameters()
 	public void testMethod() {
 		long id = Thread.currentThread().getId();
-		String msg = String.format("Testcase %s is running on thread %d",this.tc.getTestCaseID(), id);
+		String msg = String.format("Testcase %s is running on thread %d", this.tc.getTestCaseID(), id);
 		Log.info(msg);
-		System.out.println(this.tc.getTestCaseID() + " with thread id: "+id);
+		System.out.println(this.tc.getTestCaseID() + " with thread id: " + id);
 		BehaviourAnalysis analyser = new BehaviourAnalysis();
-		
+
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
 			Object result = null;
 			try {
-				result = analyser.action(browser.getDriver(), ts, initializePage, this.tc.getPageRepository().getPage(ts.getPageName()));
+				result = analyser.action(browser.getDriver(), ts, initializePage,
+						this.tc.getPageRepository().getPage(ts.getPageName()));
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Log.error(e.getLocalizedMessage());
 				Assert.fail(e.getLocalizedMessage());
 			}
-			
+
 			/*
-			 * with [value] or [text] etc defined in test step, it means we should compare the value on real value with expected value
-			 * */
-			if(ts.getActionKeyWord() != null) {
+			 * with [value] or [text] etc defined in test step, it means we should compare
+			 * the value on real value with expected value
+			 */
+			if (ts.getActionKeyWord() != null) {
 				if (result != null && ts.getActionKeyWord().contains("[")) {
 					result = result.toString().replaceAll("\\u00a0|\\s*", "").toUpperCase();
 					String expect = ts.getValue().replaceAll("\\u00a0|\\s*", "").toUpperCase();
-					if(tc.getEnvironmentVariable().getBrowserType().equals(BrowserType.FIREFOX) && ts.getActionKeyWord().contains("color")) {
-						expect = expect.substring(expect.indexOf('(')+1, expect.lastIndexOf(','));
+					if (tc.getEnvironmentVariable().getBrowserType().equals(BrowserType.FIREFOX)
+							&& ts.getActionKeyWord().contains("color")) {
+						expect = expect.substring(expect.indexOf('(') + 1, expect.lastIndexOf(','));
 						expect = "RGB(" + expect + ")";
 					}
-					
-					if(!ts.getActionKeyWord().toLowerCase().contains("contains")) {
+
+					if (!ts.getActionKeyWord().toLowerCase().contains("contains")) {
 						Assert.assertEquals(result, expect);
-					}else {
+					} else {
 						Assert.assertTrue(result.toString().contains(expect.toString()));
 					}
 					Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
-					System.out.println(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
+					System.out.println(LoggerHelper.formatConsoleLog("INFO") + ts.getTargetName()
+							+ " is displayed as expected: " + ts.getValue());
 				}
-				if(ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
-					//TestHelper.threadSleep(1000);
-					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-					String timestamp = df.format(new Date());
-					String filename = ts.getTestCaseID() + "_" + timestamp;
-					takescreen(filename, Constant.Toverify_Testcases_Screenshots_Dir);
+				if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
+					// TestHelper.threadSleep(1000);
+					takescreen(TestHelper.getScreentshotFileName(ts.getTestCaseID()), TestHelper.To_Verify_Testcases_Screenshots_Dir);
 				}
 			}
 		}

@@ -57,9 +57,17 @@ public class RuntimeSettings {
 	 */
 	private int retry;
 
+	/**
+	 * default thread sleep time
+	 */
 	private long sleepTime;
 	
-	private boolean parallel = false;
+	/**
+	 * should testcases parallel running
+	 */
+	private boolean parallel;
+	
+	private int threadCount;
 
 	private RuntimeSettings() {
 		this.timeout = 5;
@@ -72,6 +80,8 @@ public class RuntimeSettings {
 		this.explicitTimeout = 10;
 		this.sleepTime = 3;
 		this.retry = 0;
+		this.parallel = false;
+		this.threadCount = 1;
 	}
 
 	public long getTimeout() {
@@ -168,6 +178,10 @@ public class RuntimeSettings {
 			this.parallel = value.toLowerCase().equals("true");
 			break;
 		}
+		case SystemConstants.SETTINGS_THREAD_COUNT: {
+			this.threadCount = Integer.valueOf(value) > 1 ? Integer.valueOf(value) : 1;
+			break;
+		}
 		default: {
 			break;
 		}
@@ -186,6 +200,20 @@ public class RuntimeSettings {
 	 */
 	public void setParallel(boolean parallel) {
 		this.parallel = parallel;
+	}
+
+	/**
+	 * @return the threadCount
+	 */
+	public int getThreadCount() {
+		return threadCount;
+	}
+
+	/**
+	 * @param threadCount the threadCount to set
+	 */
+	public void setThreadCount(int threadCount) {
+		this.threadCount = threadCount;
 	}
 
 }

@@ -14,7 +14,6 @@ import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.AnnotationTransformer;
 import com.aaa.olb.automation.listeners.ExtentReporterNGListener;
-import com.aaa.olb.automation.util.Constant;
 import com.aaa.olb.automation.testng.SmartTestContext;
 import com.aaa.olb.automation.testng.TestCaseWrapper;
 import com.aaa.olb.automation.testng.TestClassWrapper;
@@ -23,6 +22,7 @@ import com.aaa.olb.automation.util.TestCaseGenerator;
 import com.aaa.olb.automation.util.TestClass;
 import com.aaa.olb.automation.util.TestngListener;
 import com.aaa.olb.automation.utils.SystemProperty;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class TestCaseKeyWord {
 
@@ -44,7 +44,7 @@ public class TestCaseKeyWord {
 		 * generate testcases from excel file
 		 */
 		String filePath = SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator()
-				+ Constant.TestData_Dir_Name + SystemProperty.getFileSeparator() + Constant.TS_File_Name;
+				+ TestHelper.TestData_Dir_Name + SystemProperty.getFileSeparator() + TestHelper.TS_File_Name;
 		Map<String, TestCaseEntity> testCaseEntities = new TestCaseGenerator().getTestCases(filePath);
 
 		/*
@@ -52,7 +52,7 @@ public class TestCaseKeyWord {
 		 * 
 		 * XmlTest对应一个test case
 		 */
-		TestSuiteWrapper testSuite = new TestSuiteWrapper(Constant.TS_File_Name);
+		TestSuiteWrapper testSuite = new TestSuiteWrapper(TestHelper.TS_File_Name);
 		List<TestCaseWrapper> testCases = new ArrayList<>();
 		int index = 0;
 		for (String key : testCaseEntities.keySet()) {
@@ -75,7 +75,7 @@ public class TestCaseKeyWord {
 		XmlSuite suite = testSuite.getSuite();
 		if (RuntimeSettings.getInstance().isParallel())
 			suite.setParallel(ParallelMode.TESTS);
-		suite.setThreadCount(2);
+		suite.setThreadCount(RuntimeSettings.getInstance().getThreadCount());
 		testng.setXmlSuites(Arrays.asList(suite));
 		testng.addListener(new TestngListener());
 		testng.addListener(new AnnotationTransformer());

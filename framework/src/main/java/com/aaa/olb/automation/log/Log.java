@@ -7,11 +7,11 @@ public class Log {
 	private static Logger Log = Logger.getLogger(Log.class.getName());//
 	// This is to print log for the beginning of the test case, as we usually run so
 	// many test cases as a test suite
-
+	
 	public static void startTestCase(String sTestCaseName) {
 		Log.info("****************************************************************************************");
 		Log.info("****************************************************************************************");
-		Log.info("$$$$$$$$$$$$$$$$$$$$$                 " + sTestCaseName + "       $$$$$$$$$$$$$$$$$$$$$$$$$");
+		Log.info("$$$$$$$$$$$$$$$$$$$$$   " + sTestCaseName + "  $$$$$$$$$$$$$$$$$$$$$$$$$");
 		Log.info("****************************************************************************************");
 		Log.info("****************************************************************************************");
 	}
@@ -27,22 +27,22 @@ public class Log {
 
 	// Need to create these methods, so that they can be called
 	public static void info(String message) {
-		Log.info(message);
+		Log.info(LoggerHelper.getPrefix() + message);
 	}
 
 	public static void warn(String message) {
-		Log.warn(message);
+		Log.warn(LoggerHelper.getPrefix() + message);
 	}
 
 	public static void error(String message) {
-		Log.error(message);
+		Log.error(LoggerHelper.getPrefix() + message);
 	}
 
 	public static void fatal(String message) {
-		Log.fatal(message);
+		Log.fatal(LoggerHelper.getPrefix() + message);
 	}
 
 	public static void debug(String message) {
-		Log.debug(message);
+		Log.debug(LoggerHelper.getPrefix() + message);
 	}
 }

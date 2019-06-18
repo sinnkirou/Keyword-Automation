@@ -20,17 +20,17 @@ public class PageClazzProvider {
 		return Class.forName(packageName + "." + pageName);
 	}
 
-	public static Class<?> createClazz(String packageName, String pageName, List<PageModelEntity> targets)
-			throws Exception {
+	public static Class<?> createClazz(String pagePackageName, String pageName, List<PageModelEntity> targets,
+			String componentPackageName) throws Exception {
 		Class<?> clazz = null;
 		JavaStringCompiler compiler = new JavaStringCompiler();
 
-		String sourceCode = getSourceCode(packageName, pageName, targets);
+		String sourceCode = getSourceCode(pagePackageName, pageName, targets, componentPackageName);
 		// Log.info(sourceCode);
 		// System.out.println(sourceCode);
 		try {
 			Map<String, byte[]> results = compiler.compile(pageName + ".java", sourceCode);
-			clazz = compiler.loadClass(packageName + "." + pageName, results);
+			clazz = compiler.loadClass(pagePackageName + "." + pageName, results);
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			Log.error(e.getLocalizedMessage());
@@ -51,19 +51,20 @@ public class PageClazzProvider {
 		return sb.toString();
 	}
 
-	private static String getSourceCode(String packageName, String pageName, List<PageModelEntity> targets) {
+	private static String getSourceCode(String pagePackageName, String pageName, List<PageModelEntity> targets,
+			String componentPackageName) {
 		StringBuilder sb = new StringBuilder();
 		StringBuilder methods = new StringBuilder();
 		for (PageModelEntity e : targets) {
 			methods.append(getTargetMethodString(e));
 		}
-		sb.append(String.format("package %s;\n", packageName));
+		sb.append(String.format("package %s;\n", pagePackageName));
 		sb.append("import java.util.List;\n");
 		sb.append("import org.openqa.selenium.WebDriver;\n");
 		sb.append("import com.aaa.olb.automation.annotations.*;\n");
 		sb.append("import com.aaa.olb.automation.controls.*;\n");
 		sb.append("import com.aaa.olb.automation.framework.BasePage;\n");
-		sb.append("import com.aaa.olb.automation.components.*;\n");
+		sb.append(String.format("import %s.*;\n", componentPackageName));
 		sb.append(String.format("public class %s extends BasePage {\n", pageName));
 		sb.append(String.format("	public %s(WebDriver driver) {\n", pageName));
 		sb.append("		super(driver);\n");

@@ -83,16 +83,18 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 					 * create page instance that the pageClass will retrieved by name afterwards
 					 */
 					try {
-						if(flow.getPage().equals(testStep.getPageName())) {
+						if (flow.getPage().equals(testStep.getPageName())) {
 							PageRepository pageRepository = tc.getPageRepository();
 							if (!flow.isExcelModel()) {
-								pageRepository.addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage(), Constant.PagePackageName));
+								pageRepository.addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage(),
+										PackageConstants.PAGES_PACKAGE_NAME));
 							} else {
 								String pageName = flow.getPage();
 								XSSFSheet pageModel = ExcelUtils.getSheet(this.filePath, pageName + "Model");
 								DataProvider provider = new ExcelProvider(pageModel);
 								List<PageModelEntity> targets = PageModelProvider.read(provider);
-								Class<?> pageClazz = PageClazzProvider.createClazz(Constant.PagePackageName, pageName, targets);
+								Class<?> pageClazz = PageClazzProvider.createClazz(PackageConstants.PAGES_PACKAGE_NAME,
+										pageName, targets, PackageConstants.COMPONENTS_PACKAGE_NAME);
 								pageRepository.addPage(pageName, pageClazz);
 							}
 							tc.setPageRepository(pageRepository);

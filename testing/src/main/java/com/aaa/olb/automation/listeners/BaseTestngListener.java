@@ -5,31 +5,33 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
+import com.aaa.olb.automation.log.LoggerHelper;
+
 public abstract class BaseTestngListener extends TestListenerAdapter {
-	protected Logger logger = Logger.getLogger(BaseTestngListener.class);
+	protected Logger logger = Logger.getLogger("TestngListener");
 
 	@Override
 	public void onTestStart(ITestResult tr) {
 		super.onTestStart(tr);
-		logger.info("【" + getTestCaseName(tr) + " Start】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Start】");
 	}
 
 	@Override
 	public void onTestFailure(ITestResult tr) {
 		super.onTestFailure(tr);
-		logger.info("【" + getTestCaseName(tr) + " Failure】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Failure】");
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult tr) {
 		super.onTestSkipped(tr);
-		logger.info("【" + getTestCaseName(tr) + " Skipped】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Skipped】");
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult tr) {
 		super.onTestSuccess(tr);
-		logger.info("【" + getTestCaseName(tr) + " Success】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Success】");
 	}
 
 	@Override

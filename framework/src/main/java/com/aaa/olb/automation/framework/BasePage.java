@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.ActionRepository;
-import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.BaseAction;
 import com.google.common.base.Function;
 
 public abstract class BasePage extends ActionRepository {
@@ -29,22 +29,34 @@ public abstract class BasePage extends ActionRepository {
 		try {
 			PageFactory.create(context, this);
 		} catch (Exception ex) {
-			Log.error(ex.getLocalizedMessage());
-			ex.printStackTrace();
+			this.error(this, generateAction("Page Initialization"), ex.getLocalizedMessage(), ex);
 		}
+	}
+	
+	protected BaseAction generateAction(String actionName) {
+		String targetName = this.getClass().getSimpleName();
+		if (this.context != null && this.context.getRoute() != null) {
+			targetName = this.context.getRoute().getFieldName();
+		}
+		BaseAction action = new BaseAction();
+		action.setTarget(this);
+		action.setTargetName(targetName);
+		action.setAction(actionName);
+		action.setCompleted(true);
+		return action;
 	}
 
 	public void waitForAvailable() {
 		try {
 			long startTime = System.currentTimeMillis();
-			long endTime = 0;
+			long totolSeconds = 0;
 			WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getRedirectTimeout());
 			wait.until(isPageLoaded());
-			endTime = System.currentTimeMillis() - startTime;
-			System.out.println("page should be ready, waited for " + endTime);
+			totolSeconds = System.currentTimeMillis() - startTime;
+			String message = "wait page ready for " + totolSeconds + " seconds";
+			this.info(this, generateAction(message));
 		} catch (Exception e) {
-			Log.error(e.getLocalizedMessage());
-			e.printStackTrace();
+			this.error(this, generateAction("waitForAvailable"), e.getLocalizedMessage(), e);
 		}
 	}
 
