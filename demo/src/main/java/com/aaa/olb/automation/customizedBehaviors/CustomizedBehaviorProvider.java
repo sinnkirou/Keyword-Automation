@@ -10,6 +10,7 @@ import com.aaa.olb.automation.components.CCMDatePicker;
 import com.aaa.olb.automation.components.CCMLogDiff;
 import com.aaa.olb.automation.components.CCMMemberTabs;
 import com.aaa.olb.automation.components.CCMOrRPMPanel;
+import com.aaa.olb.automation.components.CCMTimeLog;
 import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.components.SearchboxForm;
 import com.aaa.olb.automation.util.PackageConstants;
@@ -38,6 +39,8 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 			return new CCMDatePickerBehavior(facet);
 		} else if (facet.getTarget() instanceof CCMLogDiff) {
 			return new CCMLogDiffBehavior(facet);
+		} else if (facet.getTarget() instanceof CCMTimeLog) {
+			return new CCMTimeLogBehavior(facet);
 		}
 
 		try {

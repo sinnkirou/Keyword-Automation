@@ -1,6 +1,6 @@
 package com.aaa.olb.automation.utils;
 
-public class PatameterExacter {
+public class ParameterExacter {
 
 	public static String[] getParamters(String text, int length) {
 		String[] parameters = text.split(",");

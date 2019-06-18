@@ -62,5 +62,9 @@ public abstract class Browser {
 	public void close() {
 		driver.close();
 	}
+	
+	public void refresh() {
+		driver.navigate().refresh(); 
+	}
 
 }

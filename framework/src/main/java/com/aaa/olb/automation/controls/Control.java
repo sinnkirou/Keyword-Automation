@@ -26,7 +26,7 @@ import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.ActionRepository;
 import com.aaa.olb.automation.log.BaseAction;
 import com.aaa.olb.automation.log.Log;
-import com.aaa.olb.automation.utils.PatameterExacter;
+import com.aaa.olb.automation.utils.ParameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
 public class Control extends ActionRepository {
@@ -570,7 +570,7 @@ public class Control extends ActionRepository {
 	 */
 	public void dragAndDropByOffset(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		int[] parameters = ParameterExacter.getIntParameters(text, 2);
 		Actions action = new Actions(this.driver);
 		action.moveToElement(we).dragAndDropBy(we, parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("dragAndDropBy with offset: " + text, startTime, LocalDateTime.now()));
@@ -583,7 +583,7 @@ public class Control extends ActionRepository {
 	 */
 	public void dragAndDropByOffsetFromCurrent(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		int[] parameters = ParameterExacter.getIntParameters(text, 2);
 		Actions action = new Actions(this.driver);
 		action.clickAndHold().moveToElement(we, parameters[0], parameters[1]).perform();
 		action.release().perform();
@@ -619,7 +619,7 @@ public class Control extends ActionRepository {
 	public void moveByOffsetFromStart(String text) {
 		Actions action = new Actions(this.driver);
 		LocalDateTime startTime = LocalDateTime.now();
-		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		int[] parameters = ParameterExacter.getIntParameters(text, 2);
 		action.moveByOffset(parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("moveByOffsetFromStart with offset: " + text, startTime, LocalDateTime.now()));
 	}
@@ -633,7 +633,7 @@ public class Control extends ActionRepository {
 	public void moveByOffsetFromElement(String text) {
 		Actions action = new Actions(this.driver);
 		LocalDateTime startTime = LocalDateTime.now();
-		int[] parameters = PatameterExacter.getIntParameters(text, 2);
+		int[] parameters = ParameterExacter.getIntParameters(text, 2);
 		action.moveToElement(we, parameters[0], parameters[1]).perform();
 		this.info(this, generateAction("moveByOffsetFromElement with offset: " + text, startTime, LocalDateTime.now()));
 	}

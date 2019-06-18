@@ -15,7 +15,7 @@ import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
-import com.aaa.olb.automation.utils.PatameterExacter;
+import com.aaa.olb.automation.utils.ParameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
 public class Textbox extends Control {
@@ -53,7 +53,7 @@ public class Textbox extends Control {
 	 */
 	public void selectPartialContentByIndex(String text) {
 		this.focus();
-		String[] parameters = PatameterExacter.getParamters(text, 2);
+		String[] parameters = ParameterExacter.getParamters(text, 2);
 		String start = !parameters[0].isEmpty() ? parameters[0] : "0";
 		String end = !parameters[1].isEmpty() ? parameters[1] : String.valueOf(we.getText().length());
 		StringBuilder script = new StringBuilder();

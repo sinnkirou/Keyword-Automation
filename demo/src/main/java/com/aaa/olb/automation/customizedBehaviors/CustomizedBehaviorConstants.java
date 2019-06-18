@@ -19,4 +19,6 @@ public class CustomizedBehaviorConstants {
 	public static final String SELECT_FIRST_DATE_OF_NEXT_MONTH = "select_first_date_of_next_month";
 	
 	public static final String LOG_IS_CHANGED = "[log_is_changed]";
+	
+	public static final String IS_DURATION_CORRECT = "[is_duration_correct]";
 }

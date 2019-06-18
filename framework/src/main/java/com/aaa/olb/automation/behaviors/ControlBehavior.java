@@ -116,7 +116,8 @@ public class ControlBehavior implements Behavior {
 			target.sendKey(parameter);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: {
+		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: 
+		case SystemConstants.BEHAVIOR_REFRESH: {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_CLICK_BY_JS: {

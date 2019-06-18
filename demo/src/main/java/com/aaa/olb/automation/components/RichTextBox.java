@@ -11,7 +11,7 @@ import com.aaa.olb.automation.controls.Textbox;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
-import com.aaa.olb.automation.utils.PatameterExacter;
+import com.aaa.olb.automation.utils.ParameterExacter;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
 public class RichTextBox extends Textbox {
@@ -27,7 +27,7 @@ public class RichTextBox extends Textbox {
 	 * e.g.: text -> "startxOffset, startyOffset, endxOffset, endyOffset"
 	 */
 	public void drogAndDropRichBox(String text) {
-		int[] parameters = PatameterExacter.getIntParameters(text, 4);
+		int[] parameters = ParameterExacter.getIntParameters(text, 4);
 		moveByOffsetFromElement(parameters[0]+","+parameters[1]);
 		dragAndDropByOffsetFromCurrent(parameters[2]+","+parameters[3]);
 	}

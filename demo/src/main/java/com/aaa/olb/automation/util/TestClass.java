@@ -91,6 +91,9 @@ public class TestClass extends BaseTestClass {
 					// TestHelper.threadSleep(1000);
 					takescreen(TestHelper.getScreentshotFileName(ts.getTestCaseID()), TestHelper.To_Verify_Testcases_Screenshots_Dir);
 				}
+				if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_REFRESH)) {
+					this.browser.refresh();
+				}
 			}
 		}
 	}

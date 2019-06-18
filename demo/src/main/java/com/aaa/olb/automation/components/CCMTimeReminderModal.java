@@ -20,7 +20,7 @@ public class CCMTimeReminderModal extends Component {
 	@ByXPath(".//div/div[1]")
 	private Div reminderContent;
 	
-	@ByXPath(".//div[@class='ant-modal-content']//button")
+	@ByXPath(".//button")
 	private List<Button> buttons;
 	
 	public String getReminderContent() {

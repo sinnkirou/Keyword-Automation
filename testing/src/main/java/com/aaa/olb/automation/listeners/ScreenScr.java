@@ -23,7 +23,6 @@ public class ScreenScr {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println(LoggerHelper.formatConsoleLog("ERROR") + "GetScreenshot Fail");
 			Log.error("GetScreenshot Fail" + e.getLocalizedMessage());
 		} finally {
 			String message = "GetScreenshot Successful" + filepath;
