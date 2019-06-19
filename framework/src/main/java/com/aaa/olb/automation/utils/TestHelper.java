@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 
 public class TestHelper {
 
@@ -23,8 +24,11 @@ public class TestHelper {
 
 	public static void threadSleep() {
 		try {
-			Thread.sleep(RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000);
-			Log.info("waited: " + RuntimeSettings.getInstance().getWaitOrDelayTimeout());
+			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
+			String message = "waited for: " + time + " milliseconds";
+			Thread.sleep(time);
+			Log.info(message);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +39,9 @@ public class TestHelper {
 	public static void threadSleep(long time) {
 		try {
 			Thread.sleep(time);
-			Log.info("waited: " + time);
+			String message = "waited for " + time + " milliseconds";
+			Log.info(message);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +58,9 @@ public class TestHelper {
 			double minutes = Double.parseDouble(parameter);
 			long time = new Double(minutes * 60 * 1000).longValue();
 			Thread.sleep(time);
-			Log.info("waited: " + parameter + " minutes");
+			String message = "waited for " + parameter + " minutes";
+			Log.info(message);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

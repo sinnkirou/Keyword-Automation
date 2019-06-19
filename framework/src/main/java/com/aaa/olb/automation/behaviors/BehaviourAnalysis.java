@@ -195,6 +195,7 @@ public class BehaviourAnalysis {
 				listFacet.setIndex(index - 1);
 			} catch (Exception ex) {
 				Log.error(ex.getLocalizedMessage());
+				ex.printStackTrace();
 				listFacet.setIndex(0);
 			}
 

@@ -26,8 +26,14 @@ public class ScreenScr {
 			Log.error("GetScreenshot Fail" + e.getLocalizedMessage());
 		} finally {
 			String message = "GetScreenshot Successful" + filepath;
-			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
-			Log.info(message);
+			String level = "INFO";
+			if(dir.contains("Failed")) {
+				level = "ERROR";
+				Log.error(message);
+			}else {
+				Log.info(message);
+			}
+			System.out.println(LoggerHelper.formatConsoleLog(level) + message);
 		}
 
 	}

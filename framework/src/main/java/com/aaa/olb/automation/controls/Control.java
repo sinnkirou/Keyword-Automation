@@ -735,7 +735,7 @@ public class Control extends ActionRepository {
 			LocalDateTime startTime = LocalDateTime.now();
 			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
 			Thread.sleep(time);
-			this.info(this, generateAction("threadSleep: " + time, startTime, LocalDateTime.now()));
+			this.info(this, generateAction("threadSleep: " + time + " milliseconds", startTime, LocalDateTime.now()));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
