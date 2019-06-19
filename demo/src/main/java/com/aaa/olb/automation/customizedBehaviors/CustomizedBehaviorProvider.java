@@ -13,7 +13,7 @@ import com.aaa.olb.automation.components.CCMOrRPMPanel;
 import com.aaa.olb.automation.components.CCMTimeLog;
 import com.aaa.olb.automation.components.RichTextBox;
 import com.aaa.olb.automation.components.SearchboxForm;
-import com.aaa.olb.automation.util.PackageConstants;
+import com.aaa.olb.automation.util.Constants;
 
 /**
  * With the given provider in behaviorIndication
@@ -21,6 +21,7 @@ import com.aaa.olb.automation.util.PackageConstants;
  * so as to get the needed customized Behavior
  */
 public class CustomizedBehaviorProvider implements BehaviorProvider {
+	
 	@Override
 	public Behavior get(BehaviorFacet facet) {
 		// TODO Auto-generated method stub
@@ -45,7 +46,7 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 
 		try {
 			return (Behavior) Class
-					.forName(PackageConstants.CUSTOMIZED_BEHAVIORS_PACKAGE_NAME + "." + clazzType.getSimpleName() + "Behavior")
+					.forName(Constants.CUSTOMIZED_BEHAVIORS_PACKAGE_NAME + "." + clazzType.getSimpleName() + "Behavior")
 					.getConstructor(BehaviorFacet.class).newInstance(facet);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {

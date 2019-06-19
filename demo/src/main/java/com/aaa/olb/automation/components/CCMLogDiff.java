@@ -8,8 +8,9 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Span;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.util.Constants;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = Constants.CUSTOMIZED_BEHAVIOR_PROVIDER_CLASS)
 public class CCMLogDiff extends Component{
 
 	public CCMLogDiff(SeleniumContext context, WebElement element) {

@@ -17,7 +17,7 @@ import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.ParameterExacter;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class Textbox extends Control {
 	protected Textbox(SeleniumContext context, WebElement webElement) {
 		super(context, webElement);

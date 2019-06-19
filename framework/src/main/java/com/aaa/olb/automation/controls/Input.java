@@ -18,7 +18,7 @@ import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.ParameterExacter;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class Input extends Control {
 
 	public Input(SeleniumContext context, WebElement webElement) {

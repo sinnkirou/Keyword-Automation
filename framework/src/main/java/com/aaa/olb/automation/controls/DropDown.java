@@ -13,7 +13,7 @@ import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT, provider="com.aaa.olb.automation.behaviors.DefaultBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class DropDown extends Control {
 	private Select oSelect;
 

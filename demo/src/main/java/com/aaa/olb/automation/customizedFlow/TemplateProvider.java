@@ -6,7 +6,7 @@ import com.aaa.olb.automation.flow.BasicFlowTemplate;
 import com.aaa.olb.automation.flow.FlowDeclaration;
 import com.aaa.olb.automation.flow.FlowTemplate;
 import com.aaa.olb.automation.flow.FlowTemplateRepository;
-import com.aaa.olb.automation.util.PackageConstants;
+import com.aaa.olb.automation.util.Constants;
 
 /**
  * if there is a new template created,
@@ -30,7 +30,7 @@ public class TemplateProvider {
 			default:
 				try {
 					FlowTemplate template = (FlowTemplate) Class
-							.forName(PackageConstants.CUSTOMIZED_FLOW_PACKAGE_NAME + "." + flow.getName() + "Template")
+							.forName(Constants.CUSTOMIZED_FLOW_PACKAGE_NAME + "." + flow.getName() + "Template")
 							.getConstructor().newInstance();
 					FlowTemplateRepository.getInstance().addTemplate(flow.getName(), template);
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException

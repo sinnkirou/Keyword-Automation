@@ -11,9 +11,10 @@ import com.aaa.olb.automation.controls.Textbox;
 import com.aaa.olb.automation.framework.LocationKind;
 import com.aaa.olb.automation.framework.Route;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.util.Constants;
 import com.aaa.olb.automation.utils.ParameterExacter;
 
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTEXT_BY_CONTEXT, provider = Constants.CUSTOMIZED_BEHAVIOR_PROVIDER_CLASS)
 public class RichTextBox extends Textbox {
 
 	public RichTextBox(SeleniumContext context, WebElement webElement) {

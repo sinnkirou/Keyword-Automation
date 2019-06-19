@@ -2,12 +2,16 @@ package com.aaa.olb.automation.components;
 
 import org.openqa.selenium.WebElement;
 
+import com.aaa.olb.automation.annotations.BehaviorIndication;
 import com.aaa.olb.automation.annotations.ByXPath;
+import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.util.Constants;
 import com.aaa.olb.automation.utils.ParameterExacter;
 
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = Constants.CUSTOMIZED_BEHAVIOR_PROVIDER_CLASS)
 public class CCMTimeLog extends Component {
 
 	public CCMTimeLog(SeleniumContext context, WebElement element) {

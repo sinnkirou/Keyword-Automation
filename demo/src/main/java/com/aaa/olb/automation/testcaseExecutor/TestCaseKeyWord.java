@@ -39,7 +39,6 @@ public class TestCaseKeyWord {
 	@SuppressWarnings("deprecation")
 	public void run() throws Exception {
 		DOMConfigurator.configure(SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + "log4j.xml");
-
 		/*
 		 * generate testcases from excel file
 		 */

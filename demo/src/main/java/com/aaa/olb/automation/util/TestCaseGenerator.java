@@ -87,14 +87,14 @@ public class TestCaseGenerator implements BaseTestCaseGenerator {
 							PageRepository pageRepository = tc.getPageRepository();
 							if (!flow.isExcelModel()) {
 								pageRepository.addPage(flow.getPage(), PageClazzProvider.getPageClazz(flow.getPage(),
-										PackageConstants.PAGES_PACKAGE_NAME));
+										Constants.PAGES_PACKAGE_NAME));
 							} else {
 								String pageName = flow.getPage();
 								XSSFSheet pageModel = ExcelUtils.getSheet(this.filePath, pageName + "Model");
 								DataProvider provider = new ExcelProvider(pageModel);
 								List<PageModelEntity> targets = PageModelProvider.read(provider);
-								Class<?> pageClazz = PageClazzProvider.createClazz(PackageConstants.PAGES_PACKAGE_NAME,
-										pageName, targets, PackageConstants.COMPONENTS_PACKAGE_NAME);
+								Class<?> pageClazz = PageClazzProvider.createClazz(Constants.PAGES_PACKAGE_NAME,
+										pageName, targets, Constants.COMPONENTS_PACKAGE_NAME);
 								pageRepository.addPage(pageName, pageClazz);
 							}
 							tc.setPageRepository(pageRepository);

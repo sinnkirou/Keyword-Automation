@@ -10,6 +10,7 @@ import com.aaa.olb.automation.controls.Button;
 import com.aaa.olb.automation.controls.Input;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.util.Constants;
 
 /**
  *	Basically it's used like a page class
@@ -17,7 +18,7 @@ import com.aaa.olb.automation.framework.SeleniumContext;
  * a component which contains various of basic fields, mainly used for datepicker, radiobuttons, etc
  *
  */
-@BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = "com.aaa.olb.automation.customizedBehaviors.CustomizedBehaviorProvider")
+@BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = Constants.CUSTOMIZED_BEHAVIOR_PROVIDER_CLASS)
 public class SearchboxForm extends Component {
 
 	public SearchboxForm(SeleniumContext context, WebElement webElement) {

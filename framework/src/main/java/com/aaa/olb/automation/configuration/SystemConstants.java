@@ -4,6 +4,8 @@ public final class SystemConstants {
 	/*
 	 * eclipse转换大小写快捷键ctrl+shift+x/y
 	 * */
+	
+	public final static String DEFAULT_BEHAVIOR_PROVIDER_CLASS = "com.aaa.olb.automation.behaviors.DefaultBehaviorProvider";
 
 	public final static String SETTINGS_WAIT_TIME="default";
 	
