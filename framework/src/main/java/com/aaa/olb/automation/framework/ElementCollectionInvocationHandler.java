@@ -35,8 +35,8 @@ public class ElementCollectionInvocationHandler implements InvocationHandler {
 			return method.invoke(this.getCollection(), args);
 		} catch (InvocationTargetException e) {
 			// Unwrap the underlying exception
-			Log.error(e.getLocalizedMessage() + args);
-			throw e.getCause();
+			Log.error(e.getLocalizedMessage() + method.getName() + args[0].toString());
+			throw e;
 		}
 	}
 	

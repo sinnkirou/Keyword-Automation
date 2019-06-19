@@ -34,7 +34,7 @@ public class BehaviourAnalysis {
 			Object result = behave(pageClazz, testStep, null);
 			if (methodMatched == false) {
 				Exception e = new Exception("Target not found: " + testStep.getTargetName());
-				Log.info(e.getLocalizedMessage());
+				Log.error(e.getLocalizedMessage());
 				throw e;
 			}
 
@@ -54,6 +54,11 @@ public class BehaviourAnalysis {
 
 	private Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
 		Object result = null;
+		if (testStep.getTargetName().trim().length() == 0) {
+			methodMatched = true;
+			return result;
+		}
+		
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			/*

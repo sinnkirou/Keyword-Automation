@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.utils.SystemProperty;
 
 public abstract class Browser {
@@ -44,6 +45,8 @@ public abstract class Browser {
 			}else{
 				driver.manage().window().setSize(new Dimension(1920,1080));
 			}
+			
+			driver.switchTo().defaultContent();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getLocalizedMessage());
@@ -65,6 +68,9 @@ public abstract class Browser {
 	
 	public void refresh() {
 		driver.navigate().refresh(); 
+		String message = "Browser refreshed Successful";
+		System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
+		Log.info(message);
 	}
 
 }

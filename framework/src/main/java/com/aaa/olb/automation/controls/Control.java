@@ -433,6 +433,14 @@ public class Control extends ActionRepository {
 	/**
 	 * scroll to view element
 	 * 
+	 * 
+	 * 调用方法为 element.scrollIntoView() 参数默认为true。
+	 * 
+	 * 参数为true时调用该函数，页面（或容器）发生滚动，使element的顶部与视图（容器）顶部对齐；
+	 * 
+	 * 参数为false时，使element的底部与视图（容器）底部对齐。
+	 * 
+	 * TIPS：页面（容器）可滚动时才有用！
 	 */
 	public void scrollToViewElement() {
 		try {
@@ -502,7 +510,9 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		Actions actions = new Actions(this.driver);
-		actions.moveToElement(we).click().perform();
+		actions.moveToElement(we).click().build().perform();
+		//JavascriptExecutor executor = (JavascriptExecutor) driver;
+		//executor.executeScript("arguments[0].focus();", we);
 		this.info(this, generateAction("focus", startTime, LocalDateTime.now()));
 	}
 
@@ -759,8 +769,7 @@ public class Control extends ActionRepository {
 				LocalDateTime startTime = LocalDateTime.now();
 				CharSequence cs1 = Keys.valueOf(keynames[0]);
 				Actions action = new Actions(this.driver);
-				action.moveToElement(we).keyDown(cs1).perform();
-				sendKey(keynames[1]);
+				action.moveToElement(we).keyDown(cs1).sendKeys(keynames[1]).perform();
 				this.info(this, generateAction("sendCompositeKey: " + parameters, startTime, LocalDateTime.now()));
 			}
 		}catch(Exception e) {

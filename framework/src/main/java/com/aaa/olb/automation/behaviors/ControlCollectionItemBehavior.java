@@ -23,26 +23,25 @@ public class ControlCollectionItemBehavior extends ControlBehavior {
 	
 	@Override
 	public Object Execute() {
-		// TODO Auto-generated method stub
 		ListItemBehaviorFacet itemFacet= (ListItemBehaviorFacet)this.facet;
 		List<?> target = (List<?>) this.facet.getTarget();
-		Object item=  target.get(itemFacet.getIndex());
 		BehaviorFacet targetFacet=new BehaviorFacet();
-		targetFacet.setBehaviorName(itemFacet.getBehaviorName());
-		targetFacet.setParameters(itemFacet.getParameters());
-		targetFacet.setTarget(item);
-		targetFacet.setBlur(itemFacet.getBlur());
 		BehaviorProvider provider = null;
 		try {
+			Object item = target.get(itemFacet.getIndex());
+			targetFacet.setBehaviorName(itemFacet.getBehaviorName());
+			targetFacet.setParameters(itemFacet.getParameters());
+			targetFacet.setTarget(item);
+			targetFacet.setBlur(itemFacet.getBlur());
 			provider = BehaviorRepository.getInstance().getBehaviorProvider(item.getClass());
 			Behavior behavior=provider.get(targetFacet);
 			return behavior.Execute();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.error(this.facet.getTarget() +" with action: " + this.facet.getBehaviorName() + "\n" + e.getLocalizedMessage());
+			String message = this.facet.getTarget() +" with action: " + this.facet.getBehaviorName() + "\n" + e.getLocalizedMessage();
+			Log.error(message);
+			throw new NotFoundException("unable to finish this operation\n" + message);
 		}
-		throw new NotFoundException("unable to finish this operation");
 	}
 
 }

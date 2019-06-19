@@ -19,6 +19,7 @@ public class TestHelper {
 	public static final String Extent_Report_Dir = "ExtentReports";
 
 	public static final String Extent_Report_File_Name = "Extent.html";
+	
 
 	public static void threadSleep() {
 		try {
@@ -35,6 +36,23 @@ public class TestHelper {
 		try {
 			Thread.sleep(time);
 			Log.info("waited: " + time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getLocalizedMessage());
+		}
+	}
+	
+	/**
+	 * sleep for specific minutes
+	 * 
+	 */
+	public static void threadSleepByMinutes(String parameter) {
+		try {
+			double minutes = Double.parseDouble(parameter);
+			long time = new Double(minutes * 60 * 1000).longValue();
+			Thread.sleep(time);
+			Log.info("waited: " + parameter + " minutes");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
