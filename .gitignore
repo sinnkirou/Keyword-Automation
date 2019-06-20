@@ -18,3 +18,7 @@ extent\.db
 demo/testData/\.~testCase\.xlsx
 
 maven/
+
+demo/src/main/java/test/sample/ParameterSample\.java
+
+demo/test\.xml

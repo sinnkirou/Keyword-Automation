@@ -20,7 +20,7 @@ public class TestCaseWrapper implements Comparable<TestCaseWrapper>  {
 	private TestCaseEntity tc;
 
 	public TestCaseWrapper(TestSuiteWrapper testSuite, TestCaseEntity tc, int index) {
-		this.test = new XmlTest(testSuite.getSuite());
+		this.test = new XmlTest(testSuite.getSuite(), index);
 		this.name = tc.getTestCaseID();
 		this.suiteName = testSuite.getName();
 		this.Index = index;
