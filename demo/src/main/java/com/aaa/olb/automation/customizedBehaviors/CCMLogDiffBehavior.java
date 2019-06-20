@@ -24,7 +24,7 @@ public class CCMLogDiffBehavior extends ControlBehavior {
 		}
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.LOG_IS_CHANGED:
-			return target.isChanged().toString().toUpperCase();
+			return target.isChanged();
 		default:
 			return super.Execute();
 		}

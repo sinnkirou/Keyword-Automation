@@ -85,11 +85,7 @@ public class TestClass extends BaseTestClass {
 				expect = "RGB(" + expect + ")";
 			}
 
-			if (!ts.getActionKeyWord().toLowerCase().contains("contains")) {
-				Assert.assertEquals(result, expect);
-			} else {
-				Assert.assertTrue(result.toString().contains(expect.toString()));
-			}
+			Assert.assertEquals(result, expect);
 			Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + ts.getTargetName()
 					+ " is displayed as expected: " + ts.getValue());

@@ -16,6 +16,7 @@ public class TextBoxBehavior extends ControlBehavior {
 		// TODO Auto-generated method stub
 		Textbox target = (Textbox)this.facet.getTarget();
 		String behaviorName=this.facet.getBehaviorName();
+		String parameter = (String) this.facet.getParameters()[0];
 		if(behaviorName == null) {
 			behaviorName= SystemConstants.BEHAVIOR_CLICK;
 		}
@@ -24,17 +25,15 @@ public class TextBoxBehavior extends ControlBehavior {
 			return target.getText();
 		}
 		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT:{
-			String text = (String)this.facet.getParameters()[0];
-			target.waitTextToBePresented(text);
+			target.waitTextToBePresented(parameter);
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX:{
-			String text = (String)this.facet.getParameters()[0];
-			target.selectPartialContentByIndex(text);
+			target.selectPartialContentByIndex(parameter);
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_TEXT_CONTAINS:{
-			return target.getText();
+			return target.getText().contains(parameter);
 		}
 		default:
 			return super.Execute();

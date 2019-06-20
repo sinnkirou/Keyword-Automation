@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
+import org.testng.xml.XmlSuite.ParallelMode;
+
+import com.aaa.olb.automation.configuration.RuntimeSettings;
 
 public class TestSuiteWrapper {
 
@@ -33,6 +36,9 @@ public class TestSuiteWrapper {
 
 	public void setSuite(List<TestCaseWrapper> testCases) {
 		this.suite.setName(this.name);
+		if (RuntimeSettings.getInstance().isParallel())
+			this.suite.setParallel(ParallelMode.TESTS);
+		this.suite.setThreadCount(RuntimeSettings.getInstance().getThreadCount());
 		List<XmlTest> tests = new ArrayList<>();
 		this.testCases = testCases;
 		if (!testCases.isEmpty()) {

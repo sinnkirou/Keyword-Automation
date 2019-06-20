@@ -31,9 +31,25 @@ public class CCMMemberTabsBehavior extends ControlBehavior {
 			target.getCarePlanTab().waitForVisible();
 			target.getCarePlanTab().click();
 			return null;
-		case CustomizedBehaviorConstants.SELECT_CHRONIC_LOG:
+		case CustomizedBehaviorConstants.SELECT_NOTE:
+			target.getNoteTab().waitForVisible();
+			target.getNoteTab().click();
+			return null;
+		case CustomizedBehaviorConstants.SELECT_RPM:
+			target.getRPMTab().waitForVisible();
+			target.getRPMTab().click();
+			return null;
+		case CustomizedBehaviorConstants.SELECT_TIME:
+			target.getTimeTab().waitForVisible();
+			target.getTimeTab().click();
+			return null;
+		case CustomizedBehaviorConstants.SELECT_CARE_PLAN_LOG:
 			target.getCarePlanLogTab().waitForVisible();
 			target.getCarePlanLogTab().click();
+			return null;
+		case CustomizedBehaviorConstants.SELECT_DOCUMENT:
+			target.getDocumentTab().waitForVisible();
+			target.getDocumentTab().click();
 			return null;
 		default:
 			return super.Execute();

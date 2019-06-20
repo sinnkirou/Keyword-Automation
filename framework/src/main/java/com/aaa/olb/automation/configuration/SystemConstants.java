@@ -61,15 +61,15 @@ public final class SystemConstants {
 	
 	public final static String BEHAVIOR_CLASS="[class]";
 	
-	public final static String BEHAVIOR_CLASS_CONTAINS="[classcontains]";
+	public final static String BEHAVIOR_CLASS_CONTAINS="[isclasscontained]";
 	
 	public final static String BEHAVIOR_VALUE="[value]";
 	
 	public final static String BEHAVIOR_TEXT="[text]";
 	
-	public final static String BEHAVIOR_TEXT_CONTAINS="[textcontains]";
+	public final static String BEHAVIOR_TEXT_CONTAINS="[istextcontained]";
 	
-	public final static String BEHAVIOR_VISIBLE="[visible]";
+	public final static String BEHAVIOR_VISIBLE="[isvisible]";
 
 	public final static String LIST_BEHAVIOR_GET="get";
 	

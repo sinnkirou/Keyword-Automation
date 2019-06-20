@@ -24,7 +24,7 @@ public class ParameterExacter {
 		String[] parameters = getParamters(text, length);
 		double[] intParameters = new double[length];
 		for(int i =0; i< length; i++) {
-			intParameters[i] = parameters[i] != null ? Integer.parseInt(parameters[i]) : 0;
+			intParameters[i] = parameters[i] != null ? Double.parseDouble(parameters[i]) : 0;
 		}
 		return intParameters;
 	}

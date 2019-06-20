@@ -8,10 +8,6 @@ import java.util.Map;
 
 import org.apache.log4j.xml.DOMConfigurator;
 import org.testng.TestNG;
-import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlSuite.ParallelMode;
-
-import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 import com.aaa.olb.automation.listeners.AnnotationTransformer;
 import com.aaa.olb.automation.listeners.ExtentReporterNGListener;
@@ -73,12 +69,7 @@ public class TestCaseKeyWord {
 		SmartTestContext.getInstance().addTestSuite(testSuite.getName(), testSuite);
 
 		TestNG testng = new TestNG();
-		XmlSuite suite = testSuite.getSuite();
-		if (RuntimeSettings.getInstance().isParallel())
-			suite.setParallel(ParallelMode.TESTS);
-		suite.setThreadCount(RuntimeSettings.getInstance().getThreadCount());
-		suite.setPreserveOrder(true);
-		testng.setXmlSuites(Arrays.asList(suite));
+		testng.setXmlSuites(Arrays.asList(testSuite.getSuite()));
 		testng.addListener(new TestngListener());
 		testng.addListener(new AnnotationTransformer());
 		testng.addListener(new ExtentReporterNGListener());

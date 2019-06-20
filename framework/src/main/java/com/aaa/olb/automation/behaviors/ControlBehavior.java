@@ -77,7 +77,7 @@ public class ControlBehavior implements Behavior {
 			return target.getClassName();
 		}
 		case SystemConstants.BEHAVIOR_CLASS_CONTAINS: {
-			return target.getClassName();
+			return target.getClassName().contains(parameter);
 		}
 		case SystemConstants.BEHAVIOR_VISIBLE: {
 			return target.visible();
