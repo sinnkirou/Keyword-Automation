@@ -68,7 +68,7 @@ public class ExtentReporterNGListener implements IReporter {
 					 * */
 					test.log(status, test.addScreenCapture(filePath));
 					test.log(status, result.getThrowable());
-					Log.error(testName + ">>>>>>>>>>> \r" + result.getThrowable().toString());
+					Log.error(testName + ">>>>>>>>>>> \r" + "ThreadID: " + Thread.currentThread().getId() + "\n" + result.getThrowable().toString());
 				} else {
 					test.log(status, "Test " + status.toString().toLowerCase() + "ed");
 					List<String> paths = FileUtils.getFilePaths(TestHelper.getToVerifyScreenshotsPath(), testName);

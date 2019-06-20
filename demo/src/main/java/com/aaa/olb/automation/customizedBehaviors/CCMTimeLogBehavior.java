@@ -26,6 +26,9 @@ public class CCMTimeLogBehavior extends ControlBehavior {
 		case CustomizedBehaviorConstants.IS_DURATION_CORRECT:
 			target.waitForVisible();
 			return target.isDurationCorrect(parameter);
+		case CustomizedBehaviorConstants.IS_LOGED_BY:
+			target.waitForVisible();
+			return target.isLoggedBy(parameter);
 		default:
 			return super.Execute();
 		}

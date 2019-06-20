@@ -57,10 +57,16 @@ public class TestHelper {
 		try {
 			double minutes = Double.parseDouble(parameter);
 			long time = new Double(minutes * 60 * 1000).longValue();
+			
+			String message1 = "start waiting for " + time + " minutes";
+			Log.info(message1);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message1);
+			
 			Thread.sleep(time);
-			String message = "waited for " + parameter + " minutes";
-			Log.info(message);
-			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
+			
+			String message2 = "waited for " + parameter + " minutes";
+			Log.info(message2);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,8 +33,8 @@ public class CCMTimeLog extends Component {
 	 * @return boolean
 	 */
 	public boolean isDurationCorrect(String text){
-		int[] parameters =  ParameterExacter.getIntParameters(text, 2);
-		String[] timestamp = duration.getText().split(" ");
+		double[] parameters =  ParameterExacter.getDoubleParameters(text, 2);
+		String[] timestamp = this.duration.getText().split(" ");
 		int seconds = 0;
 		int minutes = 0;
 		for(String arr: timestamp) {
@@ -50,5 +50,9 @@ public class CCMTimeLog extends Component {
 		}
 		
 		return false;
+	}
+	
+	public boolean isLoggedBy(String text) {
+		return this.loggedBy.getText().toLowerCase().contains(text.toLowerCase());
 	}
 }
