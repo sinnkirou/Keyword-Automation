@@ -39,7 +39,7 @@ public class RadioButton extends Control {
 	}
 	
 	public void waitUtilSelected() {
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime= LocalDateTime.now();
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("wait for selectable", startTime, LocalDateTime.now()));

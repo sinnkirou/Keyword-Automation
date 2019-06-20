@@ -31,6 +31,8 @@ public final class ConfigurationOptions {
 	public final static String ENV_OPTION_ENABLED = "enabled";
 	
 	public final static String ENV_OPTION_HEADLESS = "headless";
+	
+	public final static String ENV_OPTION_PRIORITY = "priority";
 
 	public final static String ENV_OPTION_REMOTE_HUB = "remote hub";
 

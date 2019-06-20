@@ -17,6 +17,7 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.ParameterExacter;
+import com.aaa.olb.automation.utils.TestHelper;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class Input extends Control {
@@ -56,6 +57,7 @@ public class Input extends Control {
 
 	public String getValue() {
 		LocalDateTime startTime = LocalDateTime.now();
+		TestHelper.threadSleep();
 		String value = we.getAttribute("value");
 		this.info(this, generateAction(String.format("getValue"), startTime, LocalDateTime.now()));
 		return value;
@@ -84,7 +86,7 @@ public class Input extends Control {
 	 * @param value
 	 */
 	public void waitForValueEntered(String value) {
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime= LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElementValue(we, value));
 		this.info(this, generateAction("Wait for entered", startTime, LocalDateTime.now()));

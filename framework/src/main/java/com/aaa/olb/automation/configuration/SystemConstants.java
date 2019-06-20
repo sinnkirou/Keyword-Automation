@@ -9,21 +9,13 @@ public final class SystemConstants {
 
 	public final static String SETTINGS_WAIT_TIME="default";
 	
-	public final static String SETTINGS_OPERATION_WAIT_TIME="operation";
-	
 	public final static String SETTINGS_WAIT_OR_DELAY_TIME="waitordelay";
 	
 	public final static String SETTINGS_REDIRECT_WAIT_TIME="redirect";
 	
-	public final static String SETTINGS_LONG_WAIT_TIME="long";
-	
-	public final static String SETTINGS_SHORT_WAIT_TIME="short";
-	
 	public final static String SETTINGS_IMPLICIT_WAIT_TIME="implicit";
 	
 	public final static String SETTINGS_EXPLICIT_WAIT_TIME="explicit";
-	
-	public final static String SETTINGS_SLEEP_TIME="sleeptime";
 	
 	public final static String SETTINGS_RETRY="retry";
 	

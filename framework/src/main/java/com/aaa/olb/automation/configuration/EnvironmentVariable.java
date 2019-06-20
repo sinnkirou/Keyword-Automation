@@ -11,6 +11,8 @@ public class EnvironmentVariable {
 	private Boolean enabled = false;
 	
 	private Boolean headless = false;
+	
+	private int priority = 100;
 
 	public String getBrowserType() {
 		return browserType;
@@ -60,6 +62,20 @@ public class EnvironmentVariable {
 	 */
 	public void setHeadless(Boolean headless) {
 		this.headless = headless;
+	}
+
+	/**
+	 * @return the priority
+	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * @param priority the priority to set
+	 */
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
 }

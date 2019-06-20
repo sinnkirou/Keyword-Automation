@@ -7,6 +7,10 @@ import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.log.LoggerHelper;
 
+/**
+ * @author ziv
+ *
+ */
 public class TestHelper {
 
 	public static final String TestData_Dir_Name = "testData";
@@ -21,8 +25,10 @@ public class TestHelper {
 
 	public static final String Extent_Report_File_Name = "Extent.html";
 	
-
-	public static void threadSleep() {
+	/**
+	 * thread sleep for default wait or delay timeout
+	 */
+	public static void waitOrDealy() {
 		try {
 			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
 			String message = "waited for: " + time + " milliseconds";
@@ -36,10 +42,32 @@ public class TestHelper {
 		}
 	}
 
+	/**
+	 * thread sleep for default timeout
+	 * 
+	 */
+	public static void threadSleep() {
+		try {
+			long time = RuntimeSettings.getInstance().getTimeout() * 1000;
+			String message = "sleeped for: " + time + " milliseconds";
+			Thread.sleep(time);
+			Log.info(message);
+			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.error(e.getLocalizedMessage());
+		}
+	}
+
+	/**
+	 * thread sleep for specific millseconds
+	 * @param time
+	 */
 	public static void threadSleep(long time) {
 		try {
 			Thread.sleep(time);
-			String message = "waited for " + time + " milliseconds";
+			String message = "sleeped for " + time + " milliseconds";
 			Log.info(message);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 		} catch (InterruptedException e) {
@@ -58,13 +86,13 @@ public class TestHelper {
 			double minutes = Double.parseDouble(parameter);
 			long time = new Double(minutes * 60 * 1000).longValue();
 			
-			String message1 = "start waiting for " + time + " minutes";
+			String message1 = "start sleeped for " + parameter + " minutes";
 			Log.info(message1);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message1);
 			
 			Thread.sleep(time);
 			
-			String message2 = "waited for " + parameter + " minutes";
+			String message2 = "sleeped for " + parameter + " minutes";
 			Log.info(message2);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message2);
 		} catch (InterruptedException e) {
@@ -74,6 +102,10 @@ public class TestHelper {
 		}
 	}
 
+	/**
+	 * @param testcaseID
+	 * @return
+	 */
 	public static String getScreentshotFileName(String testcaseID) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		String timestamp = df.format(new Date());
@@ -81,6 +113,11 @@ public class TestHelper {
 		return filename;
 	}
 
+	/**
+	 * @param testcaseID
+	 * @param time
+	 * @return
+	 */
 	public static String getScreentshotFileName(String testcaseID, Date time) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		String timestamp = df.format(time);
@@ -88,6 +125,11 @@ public class TestHelper {
 		return filename;
 	}
 
+	/**
+	 * @param dir
+	 * @param filename
+	 * @return
+	 */
 	public static String getScreentshotFilePath(String dir, String filename) {
 		return SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + dir
 				+ SystemProperty.getFileSeparator() + filename + ".png";

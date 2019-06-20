@@ -48,6 +48,10 @@ public class TestCaseProvider {
 				case ConfigurationOptions.ENV_OPTION_HEADLESS:
 					env.setHeadless(source.get(key).getValue().toLowerCase() == "true");
 					break;
+				case ConfigurationOptions.ENV_OPTION_PRIORITY:
+					int priority = source.get(key).getValue().trim().length() == 0 ? 100 : Integer.valueOf(source.get(key).getValue());
+					env.setPriority(priority);
+					break;
 				default:
 					break;
 				}

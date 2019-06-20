@@ -7,7 +7,7 @@ import org.testng.xml.XmlTest;
 
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 
-public class TestCaseWrapper {
+public class TestCaseWrapper implements Comparable<TestCaseWrapper>  {
 
 	private String name;
 
@@ -21,6 +21,7 @@ public class TestCaseWrapper {
 
 	public TestCaseWrapper(TestSuiteWrapper testSuite, TestCaseEntity tc, int index) {
 		this.test = new XmlTest(testSuite.getSuite());
+		this.test.setPreserveOrder(true);
 		this.name = tc.getTestCaseID();
 		this.suiteName = testSuite.getName();
 		this.Index = index;
@@ -65,6 +66,12 @@ public class TestCaseWrapper {
 
 	public void setIndex(int index) {
 		this.Index = index;
+	}
+
+	@Override
+	public int compareTo(TestCaseWrapper o) {
+		return this.getTestCaseEntity().getEnvironmentVariable().getPriority()
+				- o.getTestCaseEntity().getEnvironmentVariable().getPriority();
 	}
 
 }

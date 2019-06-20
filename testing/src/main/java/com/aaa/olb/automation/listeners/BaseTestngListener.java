@@ -13,13 +13,13 @@ public abstract class BaseTestngListener extends TestListenerAdapter {
 	@Override
 	public void onTestStart(ITestResult tr) {
 		super.onTestStart(tr);
-		logger.info(LoggerHelper.getPrefix() + LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Start】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Start】");
 	}
 
 	@Override
 	public void onTestFailure(ITestResult tr) {
 		super.onTestFailure(tr);
-		logger.info(LoggerHelper.getPrefix() + LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Failure】");
+		logger.info(LoggerHelper.getPrefix() + "【" + getTestCaseName(tr) + " Failure】");
 		String message = LoggerHelper.getPrefix() + tr.getThrowable().toString();
 		logger.error(message);
 		System.out.println(message);

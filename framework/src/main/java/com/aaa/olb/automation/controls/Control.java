@@ -27,6 +27,7 @@ import com.aaa.olb.automation.log.ActionRepository;
 import com.aaa.olb.automation.log.BaseAction;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.ParameterExacter;
+import com.aaa.olb.automation.utils.TestHelper;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class Control extends ActionRepository {
@@ -75,7 +76,7 @@ public class Control extends ActionRepository {
 	 */
 	public boolean visible() {
 		try {
-			this.threadSleep();
+			TestHelper.threadSleep();
 			LocalDateTime startTime = LocalDateTime.now();
 			boolean value = we.isDisplayed();
 			this.info(this, generateAction(String.format("check isVisible"), startTime, LocalDateTime.now()));
@@ -95,7 +96,7 @@ public class Control extends ActionRepository {
 	 */
 	public boolean enabled() {
 		try {
-			this.threadSleep();
+			TestHelper.threadSleep();
 			LocalDateTime startTime = LocalDateTime.now();
 			boolean value = we.isEnabled();
 			this.info(this, generateAction(String.format("isEnabled"), startTime, LocalDateTime.now()));
@@ -115,6 +116,7 @@ public class Control extends ActionRepository {
 	 */
 	public String getCssValue(String cssName) {
 		LocalDateTime startTime = LocalDateTime.now();
+		TestHelper.threadSleep();
 		String value = we.getCssValue(cssName);
 		this.info(this, generateAction(String.format("getCssValue"), startTime, LocalDateTime.now()));
 		return value;
@@ -127,6 +129,7 @@ public class Control extends ActionRepository {
 	 */
 	public String getClassName() {
 		LocalDateTime startTime = LocalDateTime.now();
+		TestHelper.threadSleep();
 		String value = we.getAttribute("class");
 		this.info(this, generateAction(String.format("getClassName"), startTime, LocalDateTime.now()));
 		return value;
@@ -152,6 +155,7 @@ public class Control extends ActionRepository {
 	 */
 	public String getAttribute(String name) {
 		LocalDateTime startTime = LocalDateTime.now();
+		TestHelper.threadSleep();
 		String value = we.getAttribute(name);
 		this.info(this, generateAction(String.format("getAttribute"), startTime, LocalDateTime.now()));
 		return value;
@@ -161,7 +165,7 @@ public class Control extends ActionRepository {
 	 * Wait for control display *
 	 */
 	public void waitForVisible() {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 		if (!this.visible()) {
 			try {
@@ -187,7 +191,6 @@ public class Control extends ActionRepository {
 		LocalDateTime startTime = LocalDateTime.now();
 		if (!this.visible()) {
 			try {
-				this.threadSleep();
 				wait.until(ExpectedConditions.visibilityOf(we));
 			} catch (NoSuchElementException | NullPointerException | StaleElementReferenceException ex) {
 				Log.error(ex.getLocalizedMessage());
@@ -204,7 +207,7 @@ public class Control extends ActionRepository {
 	 * Wait for control being clickable
 	 */
 	public void waitForClickable() {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 
 		try {
@@ -244,7 +247,7 @@ public class Control extends ActionRepository {
 	 * 
 	 */
 	public void waitForHidden() {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 		if (this.visible()) {
 			try {
@@ -283,7 +286,7 @@ public class Control extends ActionRepository {
 	 * @param value
 	 */
 	public void waitForSpecificAttribute(String attribute, String value) {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 
 		try {
@@ -354,7 +357,7 @@ public class Control extends ActionRepository {
 	 * @param value
 	 */
 	public void waitForNotEmptyAttribute(String attribute) {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 
 		try {
@@ -722,42 +725,6 @@ public class Control extends ActionRepository {
 			// TODO Auto-generated catch block
 			Log.error(e.getLocalizedMessage());
 			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * sleep for specific time
-	 * 
-	 * default time from WaitOrDelayTimeout from RuntimeSettings instance
-	 */
-	public void threadSleep() {
-		try {
-			LocalDateTime startTime = LocalDateTime.now();
-			long time = RuntimeSettings.getInstance().getWaitOrDelayTimeout() * 1000;
-			Thread.sleep(time);
-			this.info(this, generateAction("threadSleep: " + time + " milliseconds", startTime, LocalDateTime.now()));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
-		}
-	}
-	
-	/**
-	 * sleep for specific minutes
-	 * 
-	 */
-	public void threadSleepByMinutes(String parameter) {
-		try {
-			LocalDateTime startTime = LocalDateTime.now();
-			double minutes = Double.parseDouble(parameter);
-			long time = new Double(minutes * 60 * 1000).longValue();
-			Thread.sleep(time);
-			this.info(this, generateAction("threadSleepByMinutes: " + parameter, startTime, LocalDateTime.now()));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.error(e.getLocalizedMessage());
 		}
 	}
 

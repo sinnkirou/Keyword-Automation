@@ -4,6 +4,7 @@ import com.aaa.olb.automation.behaviors.BehaviorFacet;
 import com.aaa.olb.automation.behaviors.ControlBehavior;
 import com.aaa.olb.automation.components.CCMDatePicker;
 import com.aaa.olb.automation.configuration.SystemConstants;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class CCMDatePickerBehavior extends ControlBehavior {
 
@@ -27,7 +28,7 @@ public class CCMDatePickerBehavior extends ControlBehavior {
 			target.input.focus();
 			target.nextMonthBtn.click();
 			target.firstDate.click();
-			target.threadSleep();
+			TestHelper.threadSleep();
 			return null;
 		default:
 			return super.Execute();

@@ -99,10 +99,10 @@ public class TestClass extends BaseTestClass {
 	private void handleGlobalAction(TestStepEntity ts) {
 		if (ts.getTargetName().trim().length() == 0)
 			if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
-				// TestHelper.threadSleep(1000);
 				takescreen(TestHelper.getScreentshotFileName(ts.getTestCaseID()), TestHelper.To_Verify_Testcases_Screenshots_Dir);
 			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_REFRESH)) {
 				this.browser.refresh();
+				TestHelper.threadSleep();
 			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES)) {
 				TestHelper.threadSleepByMinutes(ts.getValue());
 			}

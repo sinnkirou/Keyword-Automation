@@ -41,7 +41,7 @@ public class CheckBox extends Control {
 	
 	public void waitForCheck() {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("waitForCheck", startTime, LocalDateTime.now()));
 	}

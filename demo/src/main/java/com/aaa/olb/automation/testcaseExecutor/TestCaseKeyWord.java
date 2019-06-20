@@ -2,6 +2,7 @@ package com.aaa.olb.automation.testcaseExecutor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,7 @@ public class TestCaseKeyWord {
 			testCases.add(testCase);
 		}
 
+		Collections.sort(testCases);
 		testSuite.setSuite(testCases);
 		SmartTestContext.getInstance().addTestSuite(testSuite.getName(), testSuite);
 
@@ -75,6 +77,7 @@ public class TestCaseKeyWord {
 		if (RuntimeSettings.getInstance().isParallel())
 			suite.setParallel(ParallelMode.TESTS);
 		suite.setThreadCount(RuntimeSettings.getInstance().getThreadCount());
+		suite.setPreserveOrder(true);
 		testng.setXmlSuites(Arrays.asList(suite));
 		testng.addListener(new TestngListener());
 		testng.addListener(new AnnotationTransformer());

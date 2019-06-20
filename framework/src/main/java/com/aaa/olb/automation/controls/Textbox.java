@@ -16,6 +16,7 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.utils.ParameterExacter;
+import com.aaa.olb.automation.utils.TestHelper;
 
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_CLICK, provider = SystemConstants.DEFAULT_BEHAVIOR_PROVIDER_CLASS)
 public class Textbox extends Control {
@@ -25,13 +26,14 @@ public class Textbox extends Control {
 
 	public String getText() {
 		LocalDateTime startTime = LocalDateTime.now();
+		TestHelper.threadSleep();
 		String text =  we.getText();
 		this.info(this, generateAction(String.format("getText"), startTime, LocalDateTime.now()));
 		return text;
 	}
 
 	public void waitTextToBePresented(String text) {
-		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElement(we, text));
 		this.info(this, generateAction(String.format("wait for text - %s", text), startTime, LocalDateTime.now()));

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class ControlCollectionBehavior implements Behavior {
 
@@ -28,6 +29,7 @@ public class ControlCollectionBehavior implements Behavior {
 				return target.get(index);
 			}
 			case SystemConstants.LIST_BEHAVIOR_SIZE: {
+				TestHelper.threadSleep();
 				return target.size();
 			}
 			default: {

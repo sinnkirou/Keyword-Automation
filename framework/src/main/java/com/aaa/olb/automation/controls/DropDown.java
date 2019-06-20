@@ -120,7 +120,7 @@ public class DropDown extends Control {
 	 */
 	public void waitForSelected(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getOperationTimeout());
+		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		getOption(text).waitForSelected(wait);
 		this.info(this, generateAction(String.format("wait '%s' for selected ", text), startTime, LocalDateTime.now()));
 	}

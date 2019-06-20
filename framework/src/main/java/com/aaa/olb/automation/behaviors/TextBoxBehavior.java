@@ -21,7 +21,6 @@ public class TextBoxBehavior extends ControlBehavior {
 		}
 		switch (this.facet.getBehaviorName().toLowerCase()) {
 		case SystemConstants.BEHAVIOR_TEXT:{
-			target.threadSleep();
 			return target.getText();
 		}
 		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT:{
@@ -35,7 +34,6 @@ public class TextBoxBehavior extends ControlBehavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_TEXT_CONTAINS:{
-			target.threadSleep();
 			return target.getText();
 		}
 		default:

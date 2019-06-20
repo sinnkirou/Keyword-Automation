@@ -2,6 +2,7 @@ package com.aaa.olb.automation.behaviors;
 
 import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Control;
+import com.aaa.olb.automation.utils.TestHelper;
 
 public class ControlBehavior implements Behavior {
 
@@ -67,19 +68,15 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_ATTRIBUTE: {
-			target.threadSleep();
 			return target.getAttribute(parameter);
 		}
 		case SystemConstants.BEHAVIOR_STYLE: {
-			target.threadSleep();
 			return target.getCssValue(parameter);
 		}
 		case SystemConstants.BEHAVIOR_CLASS: {
-			target.threadSleep();
 			return target.getClassName();
 		}
 		case SystemConstants.BEHAVIOR_CLASS_CONTAINS: {
-			target.threadSleep();
 			return target.getClassName();
 		}
 		case SystemConstants.BEHAVIOR_VISIBLE: {
@@ -125,7 +122,7 @@ public class ControlBehavior implements Behavior {
 			return null;
 		}
 		case SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES: {
-			target.threadSleepByMinutes(parameter);
+			TestHelper.threadSleepByMinutes(parameter);
 			return null;
 		}
 		default:

@@ -28,11 +28,6 @@ public class RuntimeSettings {
 	private long timeout;
 
 	/**
-	 * control operation timeout - seconds
-	 */
-	private long operationTimeout;
-
-	/**
 	 * async operation or request timeout - seconds
 	 */
 	private long waitOrDealyTimeout;
@@ -43,24 +38,9 @@ public class RuntimeSettings {
 	private long redirectTimeout;
 
 	/**
-	 * max timeout - seconds
-	 */
-	private long longTimeout;
-
-	/**
-	 * min timeout - seconds
-	 */
-	private long shortTimeout;
-
-	/**
 	 * the retry count
 	 */
 	private int retry;
-
-	/**
-	 * default thread sleep time
-	 */
-	private long sleepTime;
 	
 	/**
 	 * should testcases parallel running
@@ -70,15 +50,11 @@ public class RuntimeSettings {
 	private int threadCount;
 
 	private RuntimeSettings() {
-		this.timeout = 5;
-		this.shortTimeout = 5;
-		this.longTimeout = 10;
-		this.operationTimeout = 5;
+		this.timeout = 1;
 		this.waitOrDealyTimeout = 3;
 		this.redirectTimeout = 10;
-		this.implicitTimeout = 10;
-		this.explicitTimeout = 10;
-		this.sleepTime = 3;
+		this.implicitTimeout = 5;
+		this.explicitTimeout = 5;
 		this.retry = 0;
 		this.parallel = false;
 		this.threadCount = 1;
@@ -88,24 +64,12 @@ public class RuntimeSettings {
 		return timeout;
 	}
 
-	public long getOperationTimeout() {
-		return operationTimeout;
-	}
-
 	public long getWaitOrDelayTimeout() {
 		return waitOrDealyTimeout;
 	}
 
 	public long getRedirectTimeout() {
 		return redirectTimeout;
-	}
-
-	public long getLongTimeout() {
-		return longTimeout;
-	}
-
-	public long getShortTimeout() {
-		return shortTimeout;
 	}
 
 	public int getRetry() {
@@ -128,26 +92,10 @@ public class RuntimeSettings {
 		this.explicitTimeout = explicitTimeout;
 	}
 
-	public long getSleepTime() {
-		return sleepTime * 1000;
-	}
-
 	public void set(String name, String value) {
 		switch (name.toLowerCase()) {
 		case SystemConstants.SETTINGS_WAIT_TIME: {
 			this.timeout = Long.valueOf(value);
-			break;
-		}
-		case SystemConstants.SETTINGS_LONG_WAIT_TIME: {
-			this.longTimeout = Long.valueOf(value);
-			break;
-		}
-		case SystemConstants.SETTINGS_SHORT_WAIT_TIME: {
-			this.shortTimeout = Long.valueOf(value);
-			break;
-		}
-		case SystemConstants.SETTINGS_OPERATION_WAIT_TIME: {
-			this.operationTimeout = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_REDIRECT_WAIT_TIME: {
@@ -168,10 +116,6 @@ public class RuntimeSettings {
 		}
 		case SystemConstants.SETTINGS_IMPLICIT_WAIT_TIME: {
 			this.implicitTimeout = Long.valueOf(value);
-			break;
-		}
-		case SystemConstants.SETTINGS_SLEEP_TIME: {
-			this.sleepTime = Long.valueOf(value);
 			break;
 		}
 		case SystemConstants.SETTINGS_PARALLEL: {

@@ -80,11 +80,11 @@ public class BehaviourAnalysis {
 
 				try {
 					if (method.getAnnotation(ColumnName.class).shouldDelay()) {
-						TestHelper.threadSleep();
+						TestHelper.waitOrDealy();
 					}
 					result = behavior.getClass().getMethod("Execute").invoke(behavior);
 					if (method.getAnnotation(ColumnName.class).shouldWait()) {
-						TestHelper.threadSleep();
+						TestHelper.waitOrDealy();
 					}
 					methodMatched = true;
 					return result;
