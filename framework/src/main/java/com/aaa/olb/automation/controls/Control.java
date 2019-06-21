@@ -514,8 +514,8 @@ public class Control extends ActionRepository {
 		scrollToViewElement();
 		Actions actions = new Actions(this.driver);
 		actions.moveToElement(we).click().build().perform();
-		//JavascriptExecutor executor = (JavascriptExecutor) driver;
-		//executor.executeScript("arguments[0].focus();", we);
+		// JavascriptExecutor executor = (JavascriptExecutor) driver;
+		// executor.executeScript("arguments[0].focus();", we);
 		this.info(this, generateAction("focus", startTime, LocalDateTime.now()));
 	}
 
@@ -691,14 +691,14 @@ public class Control extends ActionRepository {
 	 */
 	public void sendKey(String keyname) {
 		try {
-			if(Keys.valueOf(keyname) != null) {
+			if (Keys.valueOf(keyname) != null) {
 				LocalDateTime startTime = LocalDateTime.now();
 				CharSequence cs = Keys.valueOf(keyname);
 				Actions action = new Actions(this.driver);
 				action.moveToElement(we).sendKeys(cs).perform();
 				this.info(this, generateAction("sendKey: " + keyname, startTime, LocalDateTime.now()));
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			sendKeyByRobot(keyname);
 		}
 	}
@@ -729,20 +729,13 @@ public class Control extends ActionRepository {
 	}
 
 	/*
-	public void sendCompositeKey(String parameters) {
-		String[] keynames = parameters.split(",");
-		try {
-			if(Keys.valueOf(keynames[0]) != null) {
-				LocalDateTime startTime = LocalDateTime.now();
-				CharSequence cs1 = Keys.valueOf(keynames[0]);
-				Actions action = new Actions(this.driver);
-				action.moveToElement(we).keyDown(cs1).sendKeys(keynames[1]).perform();
-				this.info(this, generateAction("sendCompositeKey: " + parameters, startTime, LocalDateTime.now()));
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
-	*/
+	 * public void sendCompositeKey(String parameters) { String[] keynames =
+	 * parameters.split(","); try { if(Keys.valueOf(keynames[0]) != null) {
+	 * LocalDateTime startTime = LocalDateTime.now(); CharSequence cs1 =
+	 * Keys.valueOf(keynames[0]); Actions action = new Actions(this.driver);
+	 * action.moveToElement(we).keyDown(cs1).sendKeys(keynames[1]).perform();
+	 * this.info(this, generateAction("sendCompositeKey: " + parameters, startTime,
+	 * LocalDateTime.now())); } }catch(Exception e) { e.printStackTrace(); throw e;
+	 * } }
+	 */
 }

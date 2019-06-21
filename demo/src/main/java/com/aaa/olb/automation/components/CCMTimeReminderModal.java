@@ -19,10 +19,10 @@ public class CCMTimeReminderModal extends Component {
 
 	@ByXPath(".//div/div[1]")
 	private Div reminderContent;
-	
+
 	@ByXPath(".//button")
 	private List<Button> buttons;
-	
+
 	public String getReminderContent() {
 		return reminderContent.getText();
 	}

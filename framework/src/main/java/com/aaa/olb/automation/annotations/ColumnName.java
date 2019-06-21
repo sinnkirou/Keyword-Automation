@@ -16,8 +16,12 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ColumnName {
 	String value() default "";
+
 	boolean shouldWait() default false;
+
 	boolean shouldDelay() default false;
+
 	boolean blur() default false;
+
 	boolean nested() default false;
 }

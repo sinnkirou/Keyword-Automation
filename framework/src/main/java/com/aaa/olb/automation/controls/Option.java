@@ -33,10 +33,10 @@ public class Option extends Textbox {
 		wait.until(ExpectedConditions.elementToBeSelected(this.we));
 		this.info(this, generateAction("waitForSelected", startTime, LocalDateTime.now()));
 	}
-	
+
 	public void waitForSelected() {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		wait.until(ExpectedConditions.elementToBeSelected(this.we));
 		this.info(this, generateAction("waitForSelected", startTime, LocalDateTime.now()));
 	}

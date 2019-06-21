@@ -20,7 +20,7 @@ public class RetryCounter {
 	public int getCounter() {
 		return count;
 	}
-	
+
 	public int setCounter(int count) {
 		return this.count = count;
 	}

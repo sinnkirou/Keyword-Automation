@@ -47,7 +47,7 @@ public class TestStepEntity {
 	public void setPageName(String pageClazz) {
 		this.pageName = pageClazz;
 	}
-	
+
 	public String getTestGroupID() {
 		return testGroupID;
 	}

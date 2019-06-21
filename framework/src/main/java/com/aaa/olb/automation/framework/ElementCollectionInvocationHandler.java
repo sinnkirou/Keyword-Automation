@@ -14,7 +14,7 @@ import com.aaa.olb.automation.controls.Control;
 import com.aaa.olb.automation.log.Log;
 
 /**
- * 可以通过修改InvocationHandler里面的处理,比如 java element = this.locator.findElement(); 
+ * 可以通过修改InvocationHandler里面的处理,比如 java element = this.locator.findElement();
  *
  */
 public class ElementCollectionInvocationHandler implements InvocationHandler {
@@ -39,12 +39,12 @@ public class ElementCollectionInvocationHandler implements InvocationHandler {
 			throw e;
 		}
 	}
-	
-	private <T extends Control> List<T> getCollection() throws ReflectiveOperationException, Exception{
+
+	private <T extends Control> List<T> getCollection() throws ReflectiveOperationException {
 		List<T> results = new ArrayList<T>();
-		Class<?> targetClass = (Class<?>)this.context.getRoute().getFieldType(); 
+		Class<?> targetClass = (Class<?>) this.context.getRoute().getFieldType();
 		Constructor<?> constructor = targetClass.getConstructor(SeleniumContext.class, WebElement.class);
-		List<WebElement> sources= this.locator.findElements();
+		List<WebElement> sources = this.locator.findElements();
 		for (WebElement source : sources) {
 			@SuppressWarnings("unchecked")
 			T target = (T) constructor.newInstance(this.context, source);

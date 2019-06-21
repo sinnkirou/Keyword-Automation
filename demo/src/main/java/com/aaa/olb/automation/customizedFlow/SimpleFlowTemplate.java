@@ -16,7 +16,7 @@ import com.aaa.olb.automation.util.MapKeyComparator;
 import com.aaa.olb.automation.utils.GenerateValueByRegex;
 
 /**
- * the default flow template, 
+ * the default flow template,
  * 
  * which transforms test steps sheet data into test step entities
  * 
@@ -24,11 +24,12 @@ import com.aaa.olb.automation.utils.GenerateValueByRegex;
  * 
  * the hidden actions will be appended into each flow
  * 
- * e.g.: GoNext button is clicked by default in SimpleFlowTemplate 
+ * e.g.: GoNext button is clicked by default in SimpleFlowTemplate
  * 
  * at the end of each flow
  * 
- * the default hidden action will be inherited by child template and able to be override.
+ * the default hidden action will be inherited by child template and able to be
+ * override.
  *
  */
 public abstract class SimpleFlowTemplate implements FlowTemplate {

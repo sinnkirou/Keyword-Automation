@@ -5,7 +5,6 @@ import com.aaa.olb.automation.controls.Textbox;
 
 public class TextBoxBehavior extends ControlBehavior {
 
-
 	public TextBoxBehavior(BehaviorFacet facet) {
 		super(facet);
 		// TODO Auto-generated constructor stub
@@ -14,25 +13,25 @@ public class TextBoxBehavior extends ControlBehavior {
 	@Override
 	public Object Execute() {
 		// TODO Auto-generated method stub
-		Textbox target = (Textbox)this.facet.getTarget();
-		String behaviorName=this.facet.getBehaviorName();
+		Textbox target = (Textbox) this.facet.getTarget();
+		String behaviorName = this.facet.getBehaviorName();
 		String parameter = (String) this.facet.getParameters()[0];
-		if(behaviorName == null) {
-			behaviorName= SystemConstants.BEHAVIOR_CLICK;
+		if (behaviorName == null) {
+			behaviorName = SystemConstants.BEHAVIOR_CLICK;
 		}
 		switch (this.facet.getBehaviorName().toLowerCase()) {
-		case SystemConstants.BEHAVIOR_TEXT:{
+		case SystemConstants.BEHAVIOR_TEXT: {
 			return target.getText();
 		}
-		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT:{
+		case SystemConstants.BEHAVIOR_WATI_TO_PRESENT: {
 			target.waitTextToBePresented(parameter);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX:{
+		case SystemConstants.BEHAVIOR_SELECT_PARTIAL_CONTENT_BY_INDEX: {
 			target.selectPartialContentByIndex(parameter);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_TEXT_CONTAINS:{
+		case SystemConstants.BEHAVIOR_TEXT_CONTAINS: {
 			return target.getText().contains(parameter);
 		}
 		default:

@@ -26,7 +26,7 @@ public class Chrome extends Browser {
 			ChromeOptions option = new ChromeOptions();
 			option.setHeadless(headless);
 			option.addArguments("--lang=zh-CN");
-			if(headless)
+			if (headless)
 				option.addArguments("window-size=1920x1080");
 			return new ChromeDriver(option);
 		} else {

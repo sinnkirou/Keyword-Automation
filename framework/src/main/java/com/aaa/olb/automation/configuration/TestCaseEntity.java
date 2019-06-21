@@ -8,7 +8,7 @@ import com.aaa.olb.automation.framework.PageRepository;
 public class TestCaseEntity {
 	private String testCaseID;
 	private String description;
-	
+
 	private List<TestStepEntity> testSteps = new ArrayList<TestStepEntity>();
 	private EnvironmentVariable env;
 	private PageRepository pageRepository = null;
@@ -28,11 +28,11 @@ public class TestCaseEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public void setEnvironmentVariable(EnvironmentVariable env) {
 		this.env = env;
 	}
-	
+
 	public EnvironmentVariable getEnvironmentVariable() {
 		return this.env;
 	}

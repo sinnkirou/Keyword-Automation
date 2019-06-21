@@ -16,7 +16,7 @@ public class Button extends Textbox {
 	}
 
 	public void submit() {
-		LocalDateTime startTime= LocalDateTime.now();
+		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		we.submit();
 		this.info(this, generateAction("submit", startTime, LocalDateTime.now()));

@@ -21,25 +21,25 @@ public class CCMChronicContent extends Component {
 
 	@ByXPath(".//div[@id='problem']//p[@class='ant-empty-description']")
 	private P carePlanEmptyProblem;
-	
+
 	@ColumnName("CarePlanProblem")
 	public P getCarePlanEmptyProblem() {
 		return carePlanEmptyProblem;
 	}
-	
+
 	@ByXPath(".//div[@id='problem']//button")
 	private Button carePlanButton;
-	
+
 	@ColumnName("CarePlanButton")
-	public Button getCarePlanButton(){
+	public Button getCarePlanButton() {
 		return carePlanButton;
 	}
-	
+
 	@ByXPath(".//div[@id='problem']//tbody/tr")
 	private List<Div> problemList;
-	
+
 	@ColumnName("ProblemList")
-	public List<Div> getProblemList(){
+	public List<Div> getProblemList() {
 		return problemList;
 	}
 }

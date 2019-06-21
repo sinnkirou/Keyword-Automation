@@ -8,7 +8,7 @@ import com.aaa.olb.automation.log.BaseAction;
 public abstract class Component extends Control {
 
 	private WebElement element;
-	
+
 	protected BaseAction generateAction(String actionName) {
 		String targetName = this.getClass().getSimpleName();
 		if (this.context != null && this.context.getRoute() != null) {
@@ -21,16 +21,16 @@ public abstract class Component extends Control {
 		action.setCompleted(true);
 		return action;
 	}
-	
-	public Component(SeleniumContext context, WebElement element ) {
+
+	public Component(SeleniumContext context, WebElement element) {
 		super(context, element);
-		this.element=element;
-		try{
+		this.element = element;
+		try {
 			ComponentFactory.create(context, this.element, this);
 			this.info(this, generateAction("Component Initialization"));
-		}
-		catch(Exception ex){
+		} catch (Exception ex) {
 			this.error(this, generateAction("Component Initialization"), ex.getLocalizedMessage(), ex);
+			ex.printStackTrace();
 		}
 	}
 }

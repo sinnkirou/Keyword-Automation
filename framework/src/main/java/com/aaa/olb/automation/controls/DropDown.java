@@ -56,7 +56,7 @@ public class DropDown extends Control {
 	public Option getSelectedOption() {
 		return new Option(this.context, getSelect().getFirstSelectedOption());
 	}
-	
+
 	/**
 	 * @return text: string
 	 */
@@ -114,24 +114,24 @@ public class DropDown extends Control {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @param text
 	 */
 	public void waitForSelected(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		getOption(text).waitForSelected(wait);
 		this.info(this, generateAction(String.format("wait '%s' for selected ", text), startTime, LocalDateTime.now()));
 	}
-	
+
 	/**
 	 * @param text
 	 * @param seconds
 	 */
 	public void waitForSelected(String text, long seconds) {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, seconds);
+		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		getOption(text).waitForSelected(wait);
 		this.info(this, generateAction(String.format("wait '%s' for selected ", text), startTime, LocalDateTime.now()));
 	}

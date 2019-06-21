@@ -37,20 +37,20 @@ public class RadioButton extends Control {
 		this.info(this, generateAction(String.format("getValue"), startTime, LocalDateTime.now()));
 		return value;
 	}
-	
+
 	public void waitUtilSelected() {
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
-		LocalDateTime startTime= LocalDateTime.now();
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
+		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("wait for selectable", startTime, LocalDateTime.now()));
 	}
-	
+
 	/**
 	 * @param seconds
 	 */
 	public void waitUtilSelected(long seconds) {
-		WebDriverWait wait=new WebDriverWait(this.driver, seconds);
-		LocalDateTime startTime= LocalDateTime.now();
+		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
+		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("wait for selectable", startTime, LocalDateTime.now()));
 	}

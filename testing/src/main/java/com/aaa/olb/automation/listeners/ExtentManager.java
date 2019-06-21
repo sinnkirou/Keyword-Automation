@@ -10,7 +10,7 @@ public class ExtentManager {
 	public synchronized static ExtentReports getReporter() {
 		if (extent == null) {
 			// Set HTML reporting file location
-			extent = new ExtentReports(TestHelper.getExtendReportFilePath() , true, DisplayOrder.NEWEST_FIRST);
+			extent = new ExtentReports(TestHelper.getExtendReportFilePath(), true, DisplayOrder.NEWEST_FIRST);
 		}
 		return extent;
 	}

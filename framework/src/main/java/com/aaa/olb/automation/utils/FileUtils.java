@@ -10,14 +10,13 @@ public class FileUtils {
 	public static void delFolder(String folderPath) {
 		try {
 			delAllFile(folderPath); // delete all files in this folder
-			
+
 			// comment this if do not want to delete this folder
 			/*
-			String filePath = folderPath;
-			filePath = filePath.toString();
-			java.io.File myFilePath = new java.io.File(filePath);
-			myFilePath.delete(); // delete the folder
-			*/
+			 * String filePath = folderPath; filePath = filePath.toString(); java.io.File
+			 * myFilePath = new java.io.File(filePath); myFilePath.delete(); // delete the
+			 * folder
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getLocalizedMessage());
@@ -53,7 +52,7 @@ public class FileUtils {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * @param dir: absolute path of the folder
 	 * @return

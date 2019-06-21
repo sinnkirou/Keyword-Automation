@@ -18,7 +18,6 @@ public class CheckBox extends Control {
 		super(context, webElement);
 	}
 
-
 	public void check() {
 		LocalDateTime startTime = LocalDateTime.now();
 		click();
@@ -38,17 +37,17 @@ public class CheckBox extends Control {
 		this.info(this, generateAction(String.format("getTarget"), startTime, LocalDateTime.now()));
 		return value;
 	}
-	
+
 	public void waitForCheck() {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("waitForCheck", startTime, LocalDateTime.now()));
 	}
-	
+
 	public void waitForCheck(Long seconds) {
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait=new WebDriverWait(this.driver, seconds);
+		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
 		wait.until(ExpectedConditions.elementToBeSelected(we));
 		this.info(this, generateAction("waitForCheck", startTime, LocalDateTime.now()));
 	}

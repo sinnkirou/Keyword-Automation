@@ -24,47 +24,47 @@ public class CCMEnrollmentForm extends Component {
 
 	@ById("consent")
 	private Div consentDropdown;
-	
+
 	@ColumnName("Consent")
 	public Div getGenderDropdown() {
 		return consentDropdown;
 	}
-	
+
 	@ById("member_status")
 	private Div memberStatus;
-	
+
 	@ColumnName("MemberStatus")
 	public Div getMemberStatus() {
 		return memberStatus;
 	}
-	
+
 	@ById("enrollment_date")
 	private CCMDatePicker enrollmentDate;
-	
+
 	@ColumnName("EnrollmentDate")
 	public CCMDatePicker getEnrollmentDate() {
 		return enrollmentDate;
 	}
-	
+
 	@ByXPath(".//div[contains(@class, 'ant-select-dropdown') and not(contains(@class,'ant-select-dropdown-hidden'))]//li")
 	private List<Li> options;
-	
+
 	@ColumnName("ActiveOptions")
-	public List<Li> getOptions(){
+	public List<Li> getOptions() {
 		return options;
 	}
-	
+
 	@ById("description")
 	private Input note;
-	
+
 	@ColumnName("Note")
 	public Input getNote() {
 		return note;
 	}
-	
+
 	@ByClassName("ant-btn-primary")
 	private Button submitButton;
-	
+
 	@ColumnName("SubmitButton")
 	public Button getSubmitButton() {
 		return submitButton;

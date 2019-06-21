@@ -10,9 +10,9 @@ public class BehaviorFacet {
 	private String behaviorName;
 
 	private Object[] parameters;
-	
+
 	private Boolean blur = false;
-	
+
 	public Object getTarget() {
 		return target;
 	}

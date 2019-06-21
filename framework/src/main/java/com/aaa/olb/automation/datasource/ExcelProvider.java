@@ -15,13 +15,13 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 
 	private XSSFSheet sheet;
 
-	public ExcelProvider(XSSFSheet sheet)  {
+	public ExcelProvider(XSSFSheet sheet) {
 		// TODO Auto-generated constructor stub
 		this.sheet = sheet;
 		read();
 	}
 
-	private List<String> readColumn(XSSFSheet sheet)  {
+	private List<String> readColumn(XSSFSheet sheet) {
 		List<String> columns = new ArrayList<>();
 		XSSFRow row = sheet.getRow(0);
 		int columnCount = row.getLastCellNum();
@@ -48,11 +48,11 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 		int rowCount = this.sheet.getLastRowNum();
 		List<String> columns = null;
 		columns = this.readColumn(this.sheet);
-		
+
 		if (!this.data.isEmpty())
 			this.data.clear();
 		for (int i = 1; i <= rowCount; i++) {
-			if(this.sheet.getRow(i) == null)
+			if (this.sheet.getRow(i) == null)
 				break;
 			this.data.add(this.readRow(columns, this.sheet.getRow(i)));
 		}
@@ -61,7 +61,7 @@ public class ExcelProvider extends DataProvider implements DataReader, DataGroup
 	}
 
 	@Override
-	public Map<String, List<Map<String, CellEntity>>> groupBy(String columnName)  {
+	public Map<String, List<Map<String, CellEntity>>> groupBy(String columnName) {
 		// TODO Auto-generated method stub
 		int rowCount = this.sheet.getLastRowNum();
 		List<String> columns = null;

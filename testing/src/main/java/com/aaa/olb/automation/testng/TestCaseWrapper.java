@@ -7,7 +7,7 @@ import org.testng.xml.XmlTest;
 
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 
-public class TestCaseWrapper implements Comparable<TestCaseWrapper>  {
+public class TestCaseWrapper implements Comparable<TestCaseWrapper> {
 
 	private String name;
 
@@ -16,7 +16,7 @@ public class TestCaseWrapper implements Comparable<TestCaseWrapper>  {
 	private int Index;
 
 	private XmlTest test;
-	
+
 	private TestCaseEntity tc;
 
 	public TestCaseWrapper(TestSuiteWrapper testSuite, TestCaseEntity tc, int index) {
@@ -30,7 +30,7 @@ public class TestCaseWrapper implements Comparable<TestCaseWrapper>  {
 	public XmlTest getTestCase() {
 		return this.test;
 	}
-	
+
 	public TestCaseEntity getTestCaseEntity() {
 		return this.tc;
 	}

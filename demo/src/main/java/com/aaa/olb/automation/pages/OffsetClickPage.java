@@ -16,7 +16,7 @@ public class OffsetClickPage extends BasePage {
 
 	@ById("bgImgie")
 	private Image bgImgie;
-	
+
 	@ColumnName("BgImgie")
 	public Image getBgImgie() {
 		return bgImgie;

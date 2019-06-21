@@ -29,7 +29,7 @@ public class Firefox extends Browser {
 			FirefoxProfile profile = new FirefoxProfile();
 			profile.setPreference("intl.accept_languages", "zh-cn");
 			option.setProfile(profile);
-				
+
 			return new FirefoxDriver(option);
 		} else {
 			try {

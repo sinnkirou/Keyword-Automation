@@ -11,15 +11,15 @@ import com.aaa.olb.automation.log.ActionRepository;
  *
  */
 public class SeleniumContext {
-	
-	protected WebDriver driver; 
-	
+
+	protected WebDriver driver;
+
 	protected SearchContext parent;
-	
+
 	protected Route route;
-	
+
 	protected ActionRepository repository;
-	
+
 	protected EnvironmentVariable env;
 
 	public WebDriver getDriver() {

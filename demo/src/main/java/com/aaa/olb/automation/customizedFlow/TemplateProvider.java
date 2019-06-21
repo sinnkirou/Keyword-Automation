@@ -19,6 +19,13 @@ public class TemplateProvider {
 		if (flow.isTemplate()) {
 			switch (flow.getName()) {
 
+			/*
+			 * a option is to add the template manually, which will provide the customized
+			 * template here more clearly
+			 * 
+			 * if not, will then use class.forName with flow name to dynamically add the
+			 * template by default
+			 */
 			case FlowNames.SEARCHING:
 				FlowTemplateRepository.getInstance().addTemplate(flow.getName(), new SearchingTemplate());
 				break;
@@ -37,8 +44,8 @@ public class TemplateProvider {
 						| InvocationTargetException | NoSuchMethodException | SecurityException
 						| ClassNotFoundException e) {
 					// TODO Auto-generated catch block
-					//e.printStackTrace();
-					//Log.info(e.getLocalizedMessage());
+					// e.printStackTrace();
+					// Log.info(e.getLocalizedMessage());
 				}
 				break;
 			}

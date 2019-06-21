@@ -6,7 +6,7 @@ import java.util.Map;
 import com.aaa.olb.automation.configuration.CellEntity;
 
 public interface DataGroupBy {
-	
+
 	Map<String, List<Map<String, CellEntity>>> groupBy(String columnName);
 
 }

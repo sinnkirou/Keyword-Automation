@@ -2,6 +2,7 @@ package com.aaa.olb.automation.components;
 
 import java.time.LocalDateTime;
 
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
@@ -20,25 +21,27 @@ public class CCMMemberList extends Component {
 		super(context, element);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * select member with MID
 	 * 
-	 *	@param text
+	 * @param text
 	 */
 	public void selectMemberByMID(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		Route route = new Route();
 		route.setFieldType(A.class);
 		route.setLocationKind(LocationKind.XPATH);
-		route.setLocation(".//td[text()='"+ text +"']/following-sibling::td[1]//a");
-		route.setFieldName("member"+text);
+		route.setLocation(".//td[text()='" + text + "']/following-sibling::td[1]//a");
+		route.setFieldName("member" + text);
 		A target = null;
 		try {
 			target = getChildren(route);
 			target.clickByJS();
 		} catch (Exception e) {
-			this.error(this, generateAction("selectMemberByMID", startTime, LocalDateTime.now()), e.getLocalizedMessage(), e);
+			this.error(this, generateAction("selectMemberByMID", startTime, LocalDateTime.now()),
+					e.getLocalizedMessage(), e);
+			throw new NotFoundException(e.getMessage());
 		}
 	}
 

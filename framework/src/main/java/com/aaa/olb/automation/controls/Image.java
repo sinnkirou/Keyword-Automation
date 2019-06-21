@@ -16,7 +16,6 @@ public class Image extends Control {
 		super(context, webElement);
 	}
 
-
 	public Dimension getSize() {
 		return we.getSize();
 	}

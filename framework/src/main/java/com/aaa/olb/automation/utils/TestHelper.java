@@ -24,7 +24,7 @@ public class TestHelper {
 	public static final String Extent_Report_Dir = "ExtentReports";
 
 	public static final String Extent_Report_File_Name = "Extent.html";
-	
+
 	/**
 	 * thread sleep for default wait or delay timeout
 	 */
@@ -62,6 +62,7 @@ public class TestHelper {
 
 	/**
 	 * thread sleep for specific millseconds
+	 * 
 	 * @param time
 	 */
 	public static void threadSleep(long time) {
@@ -76,7 +77,7 @@ public class TestHelper {
 			Log.error(e.getLocalizedMessage());
 		}
 	}
-	
+
 	/**
 	 * sleep for specific minutes
 	 * 
@@ -85,13 +86,13 @@ public class TestHelper {
 		try {
 			double minutes = Double.parseDouble(parameter);
 			long time = new Double(minutes * 60 * 1000).longValue();
-			
+
 			String message1 = "start sleeping for " + parameter + " minutes";
 			Log.info(message1);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message1);
-			
+
 			Thread.sleep(time);
-			
+
 			String message2 = "sleeped for " + parameter + " minutes";
 			Log.info(message2);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message2);
@@ -139,7 +140,7 @@ public class TestHelper {
 		return SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + Extent_Report_Dir
 				+ SystemProperty.getFileSeparator() + Extent_Report_File_Name;
 	}
-	
+
 	public static String getFailedScreenshotsPath() {
 		return SystemProperty.getWorkingDir() + SystemProperty.getFileSeparator() + Failed_Testcases_Screentshots_Dir;
 	}

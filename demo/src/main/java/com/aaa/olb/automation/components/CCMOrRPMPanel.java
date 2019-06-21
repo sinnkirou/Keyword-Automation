@@ -21,15 +21,15 @@ public class CCMOrRPMPanel extends Component {
 
 	@ByXPath(".//span[text()='RPM']/parent::button")
 	private Button rPMButton;
-	
+
 	@ColumnName("RPMButton")
 	public Button getRPMButton() {
 		return rPMButton;
 	}
-	
+
 	@ByXPath(".//span[text()='CCM']/parent::button")
 	private Button cCMButton;
-	
+
 	@ColumnName("CCMButton")
 	public Button getCCMButton() {
 		return cCMButton;

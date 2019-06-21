@@ -18,40 +18,38 @@ public class CCMTimeLog extends Component {
 		super(context, element);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@ByXPath(".//td[2]")
 	private Div duration;
-	
+
 	@ByXPath(".//td[6]")
 	private Div loggedBy;
 
 	/**
-	 * @param text
-	 * e.g.: text => "4.5,5"
-	 * => 4.5 to 5 minutes
+	 * @param text e.g.: text => "4.5,5" => 4.5 to 5 minutes
 	 * 
 	 * @return boolean
 	 */
-	public boolean isDurationCorrect(String text){
-		double[] parameters =  ParameterExacter.getDoubleParameters(text, 2);
+	public boolean isDurationCorrect(String text) {
+		double[] parameters = ParameterExacter.getDoubleParameters(text, 2);
 		String[] timestamp = this.duration.getText().split(" ");
 		int seconds = 0;
 		int minutes = 0;
-		for(String arr: timestamp) {
-			if(arr.toLowerCase().contains("m")) {
-				minutes = Integer.valueOf(arr.substring(0, arr.length()-1));
-			}else if(arr.toLowerCase().contains("s")) {
-				seconds = Integer.valueOf(arr.substring(0, arr.length()-1));
+		for (String arr : timestamp) {
+			if (arr.toLowerCase().contains("m")) {
+				minutes = Integer.valueOf(arr.substring(0, arr.length() - 1));
+			} else if (arr.toLowerCase().contains("s")) {
+				seconds = Integer.valueOf(arr.substring(0, arr.length() - 1));
 			}
 		}
 		int totalSeconds = seconds + minutes * 60;
-		if(parameters[0]*60 <totalSeconds && totalSeconds < parameters[1]*60) {
+		if (parameters[0] * 60 < totalSeconds && totalSeconds < parameters[1] * 60) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean isLoggedBy(String text) {
 		return this.loggedBy.getText().toLowerCase().contains(text.toLowerCase());
 	}

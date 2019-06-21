@@ -17,7 +17,6 @@ public class SmartTestContext {
 
 	private Map<String, TestSuiteWrapper> suites;
 
-
 	private SmartTestContext() {
 		suites = new HashMap<>();
 	}

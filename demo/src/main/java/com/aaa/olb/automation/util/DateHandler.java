@@ -12,7 +12,7 @@ public class DateHandler {
 		c.add(Calendar.DAY_OF_MONTH, i);
 		return sdf.format(c.getTime());
 	}
-	
+
 	public String getFormattedDateByMonth(int i) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar c = Calendar.getInstance();
@@ -20,7 +20,7 @@ public class DateHandler {
 		c.add(Calendar.MONTH, i);
 		return sdf.format(c.getTime());
 	}
-	
+
 	public String getFormattedDateByYear(int i) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar c = Calendar.getInstance();

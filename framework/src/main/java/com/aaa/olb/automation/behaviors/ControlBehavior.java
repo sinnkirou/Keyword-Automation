@@ -14,11 +14,11 @@ public class ControlBehavior implements Behavior {
 
 	/**
 	 *
-	 * execute the action, 
+	 * execute the action,
 	 * 
 	 * perform the default behavior defined in Control type,
 	 * 
-	 * otherwise invoke it by reflect, 
+	 * otherwise invoke it by reflect,
 	 * 
 	 * see more on BehaviorReflect.action(facet)
 	 *
@@ -113,7 +113,7 @@ public class ControlBehavior implements Behavior {
 			target.sendKey(parameter);
 			return null;
 		}
-		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT: 
+		case SystemConstants.BEHAVIOR_TAKE_SCREENSHOT:
 		case SystemConstants.BEHAVIOR_REFRESH: {
 			return null;
 		}

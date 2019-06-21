@@ -16,9 +16,9 @@ public class RichTextTestPage extends BasePage {
 
 	@ByXPath(".//textarea")
 	private RichTextBox results;
-	
+
 	@ColumnName("RichTextBox")
-	public RichTextBox getRichTextbox(){
+	public RichTextBox getRichTextbox() {
 		return results;
 	}
 }

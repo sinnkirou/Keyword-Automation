@@ -41,7 +41,8 @@ public abstract class BaseTestClass {
 		this.browser.open();
 		this.browser.navigate(env.getSiteURL());
 
-		Log.startTestCase(this.tc.getTestCaseID() + " with Browser: " + env.getBrowserType() + " on "+ SystemProperty.getPlatform());
+		Log.startTestCase(this.tc.getTestCaseID() + " with Browser: " + env.getBrowserType() + " on "
+				+ SystemProperty.getPlatform());
 	}
 
 	@AfterMethod

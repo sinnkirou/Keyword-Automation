@@ -1,29 +1,29 @@
 package com.aaa.olb.automation.log;
 
 public class RepositoryFactory {
-	
+
 	private static RepositoryFactory _instance;
-	
+
 	private ActionLogger logger;
-	
+
 	private RepositoryListener listener;
-	
-	static{
-		_instance =new RepositoryFactory();
+
+	static {
+		_instance = new RepositoryFactory();
 	}
-	
-	private RepositoryFactory(){
+
+	private RepositoryFactory() {
 		logger = new ConsoleLogger();
 		listener = new RepositoryListener() {
-			
+
 			@Override
 			public void listen(Object sender) {
 				// TODO Auto-generated method stub
 			}
 		};
 	}
-	
-	public static RepositoryFactory getInstance(){
+
+	public static RepositoryFactory getInstance() {
 		return _instance;
 	}
 
@@ -42,5 +42,5 @@ public class RepositoryFactory {
 	public void setListener(RepositoryListener listener) {
 		this.listener = listener;
 	}
-	
+
 }

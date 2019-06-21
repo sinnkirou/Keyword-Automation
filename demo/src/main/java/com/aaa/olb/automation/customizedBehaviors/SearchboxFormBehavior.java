@@ -6,7 +6,7 @@ import com.aaa.olb.automation.components.SearchboxForm;
 import com.aaa.olb.automation.configuration.SystemConstants;
 
 /**
- * generate different actions cases 
+ * generate different actions cases
  * 
  * depends on each given behavior name defined in BehaviorIndication
  *

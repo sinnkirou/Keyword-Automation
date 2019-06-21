@@ -49,7 +49,7 @@ public class TestClass extends BaseTestClass {
 		String msg = String.format("Testcase %s is running on thread %d", this.tc.getTestCaseID(), id);
 		Log.info(msg);
 		System.out.println(this.tc.getTestCaseID() + " with thread id: " + id);
-		
+
 		BehaviourAnalysis analyser = new BehaviourAnalysis();
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
 			Boolean initializePage = pageNavigated(ts.getPageName().toString());
@@ -70,7 +70,7 @@ public class TestClass extends BaseTestClass {
 			}
 		}
 	}
-	
+
 	private void handleAssert(Object result, TestStepEntity ts) {
 		/*
 		 * with [value] or [text] etc defined in test step, it means we should compare
@@ -87,7 +87,7 @@ public class TestClass extends BaseTestClass {
 
 			if (ts.getActionKeyWord().contains("[is")) {
 				Assert.assertTrue(result.equals(expect.equals("FALSE") ? "FALSE" : "TRUE"));
-			}else{
+			} else {
 				Assert.assertEquals(result, expect);
 			}
 			Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
@@ -95,15 +95,17 @@ public class TestClass extends BaseTestClass {
 					+ " is displayed as expected: " + ts.getValue());
 		}
 	}
-	
+
 	private void handleGlobalAction(TestStepEntity ts) {
 		if (ts.getTargetName().trim().length() == 0)
 			if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_TAKE_SCREENSHOT)) {
-				takescreen(TestHelper.getScreentshotFileName(ts.getTestCaseID()), TestHelper.To_Verify_Testcases_Screenshots_Dir);
+				takescreen(TestHelper.getScreentshotFileName(ts.getTestCaseID()),
+						TestHelper.To_Verify_Testcases_Screenshots_Dir);
 			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_REFRESH)) {
 				this.browser.refresh();
 				TestHelper.threadSleep();
-			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES)) {
+			} else if (ts.getActionKeyWord().toLowerCase().trim()
+					.equals(SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES)) {
 				TestHelper.threadSleepByMinutes(ts.getValue());
 			}
 	}

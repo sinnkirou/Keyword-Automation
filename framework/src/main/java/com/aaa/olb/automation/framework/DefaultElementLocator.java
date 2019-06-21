@@ -16,9 +16,8 @@ public class DefaultElementLocator implements ElementLocator {
 	private SeleniumContext context;
 	private final By by;
 
-
 	public DefaultElementLocator(SeleniumContext context) {
-		this.context=context;
+		this.context = context;
 		this.by = this.context.getRoute().getFinder();
 	}
 

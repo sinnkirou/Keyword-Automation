@@ -27,73 +27,73 @@ public class CCMDatePicker extends Component {
 
 	@ByTag("Input")
 	public Input input;
-	
+
 	@ByClassName("ant-calendar-prev-year-btn")
 	public A prevYearBtn;
-	
+
 	@ByClassName("ant-calendar-prev-month-btn")
 	public A prevMonthBtn;
-	
+
 	@ByClassName("ant-calendar-next-year-btn")
 	public A nextYearBtn;
-	
+
 	@ByClassName("ant-calendar-next-month-btn")
 	public A nextMonthBtn;
-	
+
 	@ByClassName("ant-calendar-month-select")
 	public A selectMonthBtn;
-	
+
 	@ByClassName("ant-calendar-year-select")
 	public A selectYearBtn;
-	
+
 	@ByClassName("ant-calendar-year-panel-decade-select-content")
 	public Span selectDecadeYearBtn;
-	
+
 	@ByClassName("ant-calendar-today-btn")
 	public A selectTodayBtn;
-	
+
 	@ByXPath(".//td[contains(@class,'ant-calendar-cell')]/div")
 	public List<Div> calendarDate;
-	
+
 	@ByXPath(".//td[contains(@class,'ant-calendar-cell')]/div[text()='1']")
 	public Div firstDate;
-	
+
 	@ByXPath(".//td[@title='Jan']/a")
 	public A jan;
-	
+
 	@ByXPath(".//td[@title='Feb']/a")
 	public A feb;
-	
+
 	@ByXPath(".//td[@title='Mar']/a")
 	public A mar;
-	
+
 	@ByXPath(".//td[@title='Apr']/a")
 	public A apr;
-	
+
 	@ByXPath(".//td[@title='May']/a")
 	public A may;
-	
+
 	@ByXPath(".//td[@title='Jun']/a")
 	public A jun;
-	
+
 	@ByXPath(".//td[@title='Jul']/a")
 	public A jul;
-	
+
 	@ByXPath(".//td[@title='Aug']/a")
 	public A aug;
-	
+
 	@ByXPath(".//td[@title='Sep']/a")
 	public A sep;
-	
+
 	@ByXPath(".//td[@title='Oct']/a")
 	public A oct;
-	
+
 	@ByXPath(".//td[@title='Nov']/a")
 	public A nov;
-	
+
 	@ByXPath(".//td[@title='Dec']/a")
 	public A dec;
-	
+
 	@ByClassName("ant-calendar-year-panel-year")
 	public A calendarYear;
 }

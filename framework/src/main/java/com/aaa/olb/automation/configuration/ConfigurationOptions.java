@@ -7,7 +7,7 @@ public final class ConfigurationOptions {
 	public final static String FLOW_OPTION_TEMPLATE = "template";
 
 	public final static String FLOW_OPTION_PAGE = "page";
-	
+
 	public final static String FLOW_OPTION_EXCEL_MODEL = "excelmodel";
 
 	public final static String TEST_CASE_SHEET_NAME = "testcases";
@@ -29,15 +29,15 @@ public final class ConfigurationOptions {
 	public final static String ENV_OPTION_SITE_URL = "site url";
 
 	public final static String ENV_OPTION_ENABLED = "enabled";
-	
+
 	public final static String ENV_OPTION_HEADLESS = "headless";
-	
+
 	public final static String ENV_OPTION_PRIORITY = "priority";
 
 	public final static String ENV_OPTION_REMOTE_HUB = "remote hub";
 
 	public final static String TEMPLATE_OPTION_ID = "testcase id";
-	
+
 	public final static String TEMPLATE_GROUP_ID = "testgroup id";
 
 	public final static String TEMPLATE_OPTION_STEP_ID = "teststep id";
@@ -47,11 +47,11 @@ public final class ConfigurationOptions {
 	public final static String TEMPLATE_OPTION_ACTION = "action";
 
 	public final static String TEMPLATE_OPTION_VALUE = "value";
-	
+
 	public final static String PAGE_MODEL_TARGET_NAME = "target name";
-	
+
 	public final static String PAGE_MODEL_FIELD_TYPE = "field type";
-	
+
 	public final static String PAGE_MODEL_FIND_BY = "findby";
 
 	public final static String PAGE_MODEL_FIND_BY_VALUE = "findby value";

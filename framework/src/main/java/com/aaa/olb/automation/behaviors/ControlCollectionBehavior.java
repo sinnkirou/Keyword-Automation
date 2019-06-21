@@ -24,18 +24,18 @@ public class ControlCollectionBehavior implements Behavior {
 			behaviorName = SystemConstants.LIST_BEHAVIOR_GET;
 		}
 		switch (behaviorName.toLowerCase()) {
-			case SystemConstants.LIST_BEHAVIOR_GET: {
-				int index= Integer.parseInt(parameter);
-				return target.get(index);
-			}
-			case SystemConstants.LIST_BEHAVIOR_SIZE: {
-				TestHelper.threadSleep();
-				return target.size();
-			}
-			default: {
-				Log.error(this.facet.getTarget() +" with action: " + this.facet.getBehaviorName());
-				throw new UnsupportedOperationException("unable to finish this operation.");
-			}
+		case SystemConstants.LIST_BEHAVIOR_GET: {
+			int index = Integer.parseInt(parameter);
+			return target.get(index);
+		}
+		case SystemConstants.LIST_BEHAVIOR_SIZE: {
+			TestHelper.threadSleep();
+			return target.size();
+		}
+		default: {
+			Log.error(this.facet.getTarget() + " with action: " + this.facet.getBehaviorName());
+			throw new UnsupportedOperationException("unable to finish this operation.");
+		}
 		}
 	}
 }

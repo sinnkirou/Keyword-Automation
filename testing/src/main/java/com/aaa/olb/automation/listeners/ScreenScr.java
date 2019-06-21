@@ -27,10 +27,10 @@ public class ScreenScr {
 		} finally {
 			String message = "GetScreenshot Successful" + filepath;
 			String level = "INFO";
-			if(dir.contains("Failed")) {
+			if (dir.contains("Failed")) {
 				level = "ERROR";
 				Log.error(message);
-			}else {
+			} else {
 				Log.info(message);
 			}
 			System.out.println(LoggerHelper.formatConsoleLog(level) + message);

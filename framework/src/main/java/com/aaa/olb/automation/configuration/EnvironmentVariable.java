@@ -1,17 +1,17 @@
 package com.aaa.olb.automation.configuration;
 
 public class EnvironmentVariable {
-	
+
 	private String browserType;
-	
+
 	private String siteURL;
-	
+
 	private String remoteHub;
-	
+
 	private Boolean enabled = false;
-	
+
 	private Boolean headless = false;
-	
+
 	private int priority = 100;
 
 	public String getBrowserType() {
@@ -29,15 +29,15 @@ public class EnvironmentVariable {
 	public void setSiteURL(String siteURL) {
 		this.siteURL = siteURL;
 	}
-	
+
 	public String getRemoteHub() {
 		return remoteHub;
 	}
-	
+
 	public void setRemoteHub(String remoteHub) {
 		this.remoteHub = remoteHub;
 	}
-	
+
 	public RuntimeSettings getSettings() {
 		return RuntimeSettings.getInstance();
 	}

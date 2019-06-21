@@ -13,10 +13,9 @@ import com.aaa.olb.automation.annotations.ByPartialLinkText;
 import com.aaa.olb.automation.annotations.ByTag;
 import com.aaa.olb.automation.annotations.ByXPath;
 
-public class ReflectionRoute extends Route{
-	
+public class ReflectionRoute extends Route {
+
 	protected Field field;
-	
 
 	public Field getField() {
 		return field;
@@ -25,10 +24,10 @@ public class ReflectionRoute extends Route{
 	public void setField(Field field) {
 		this.field = field;
 	}
-	
+
 	/**
-	 * Class<?> getType() 返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型。
-     * Type getGenericType() 返回一个 Type 对象，它表示此 Field 对象所表示字段的声明类型。 
+	 * Class<?> getType() 返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型。 Type
+	 * getGenericType() 返回一个 Type 对象，它表示此 Field 对象所表示字段的声明类型。
 	 * 
 	 * @param field
 	 * @return
@@ -39,19 +38,19 @@ public class ReflectionRoute extends Route{
 		route.setField(field);
 		route.setFieldType(field.getType());
 		route.setFieldName(field.getName());
-		
+
 		/*
 		 * handle the list control such as List<Input>
-		 * */
-		if(field.getType().isAssignableFrom(List.class)){
-			ParameterizedType fieldType= (ParameterizedType) field.getGenericType();
-			if(fieldType == null) {
+		 */
+		if (List.class.isAssignableFrom(field.getType())) {
+			ParameterizedType fieldType = (ParameterizedType) field.getGenericType();
+			if (fieldType == null) {
 				throw new UnsupportedOperationException("Cannot extract the target field type.");
 			}
 			route.setGeneric(true);
 			route.setFieldType(fieldType.getActualTypeArguments()[0]);
 		}
-		
+
 		ById byId = field.getAnnotation(ById.class);
 		if (byId != null) {
 			isControl = true;
@@ -86,21 +85,21 @@ public class ReflectionRoute extends Route{
 			route.setLocationKind(LocationKind.TAG);
 			route.setLocation(byTag.value());
 		}
-		
+
 		ByLinkText byLinkText = field.getAnnotation(ByLinkText.class);
 		if (byLinkText != null) {
 			isControl = true;
 			route.setLocationKind(LocationKind.LINKTEXT);
 			route.setLocation(byLinkText.value());
 		}
-		
+
 		ByPartialLinkText byPLinkText = field.getAnnotation(ByPartialLinkText.class);
 		if (byPLinkText != null) {
 			isControl = true;
 			route.setLocationKind(LocationKind.PARTIALLINKTEXT);
 			route.setLocation(byPLinkText.value());
 		}
-		
+
 		ByName byName = field.getAnnotation(ByName.class);
 		if (byName != null) {
 			isControl = true;

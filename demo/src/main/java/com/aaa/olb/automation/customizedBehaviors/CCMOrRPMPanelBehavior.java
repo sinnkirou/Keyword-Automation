@@ -24,12 +24,12 @@ public class CCMOrRPMPanelBehavior extends ControlBehavior {
 		}
 		switch (behaviorName.toLowerCase()) {
 		case CustomizedBehaviorConstants.SELECT_CCM_IF_VISIBLE:
-			if(target.visible()) {
+			if (target.visible()) {
 				target.getCCMButton().click();
 			}
 			return null;
 		case CustomizedBehaviorConstants.SELECT_RPM_IF_VISIBLE:
-			if(target.visible()) {
+			if (target.visible()) {
 				target.getRPMButton().click();
 			}
 			return null;

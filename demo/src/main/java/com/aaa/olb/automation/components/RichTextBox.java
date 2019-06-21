@@ -2,6 +2,7 @@ package com.aaa.olb.automation.components;
 
 import java.time.LocalDateTime;
 
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 
 import com.aaa.olb.automation.annotations.BehaviorIndication;
@@ -21,36 +22,39 @@ public class RichTextBox extends Textbox {
 		super(context, webElement);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @param text
 	 * 
-	 * e.g.: text -> "startxOffset, startyOffset, endxOffset, endyOffset"
+	 *             e.g.: text -> "startxOffset, startyOffset, endxOffset,
+	 *             endyOffset"
 	 */
 	public void drogAndDropRichBox(String text) {
 		int[] parameters = ParameterExacter.getIntParameters(text, 4);
-		moveByOffsetFromElement(parameters[0]+","+parameters[1]);
-		dragAndDropByOffsetFromCurrent(parameters[2]+","+parameters[3]);
+		moveByOffsetFromElement(parameters[0] + "," + parameters[1]);
+		dragAndDropByOffsetFromCurrent(parameters[2] + "," + parameters[3]);
 	}
-	
+
 	/**
 	 * select context with specific context
 	 * 
-	 *	@param text
+	 * @param text
 	 */
 	public void selectPartialContextByContext(String text) {
 		LocalDateTime startTime = LocalDateTime.now();
 		Route route = new Route();
 		route.setFieldType(Span.class);
 		route.setLocationKind(LocationKind.XPATH);
-		route.setLocation(".//span[contains(text(), '"+ text +"')]");
-		route.setFieldName("span"+text);
+		route.setLocation(".//span[contains(text(), '" + text + "')]");
+		route.setFieldName("span" + text);
 		Span target = null;
 		try {
 			target = getChildren(route);
 			target.selectPartialContextByContent(text);
 		} catch (Exception e) {
-			this.error(this, generateAction("selectPartialContextByContext", startTime, LocalDateTime.now()), e.getLocalizedMessage(), e);
+			this.error(this, generateAction("selectPartialContextByContext", startTime, LocalDateTime.now()),
+					e.getLocalizedMessage(), e);
+			throw new NotFoundException(e.getMessage());
 		}
 	}
 }

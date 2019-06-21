@@ -10,15 +10,15 @@ import com.aaa.olb.automation.configuration.EnvironmentVariable;
 import com.aaa.olb.automation.configuration.TestCaseEntity;
 
 public class TestCaseProvider {
-	
+
 	/**
 	 * get testcase entities from testcase sheets data
 	 * 
 	 * @param provider
 	 * @return
 	 */
-	public static Map<String, TestCaseEntity> read(DataProvider provider){
-		
+	public static Map<String, TestCaseEntity> read(DataProvider provider) {
+
 		Map<String, TestCaseEntity> testcases = new HashMap<>();
 		List<Map<String, CellEntity>> sources = provider.getData();
 
@@ -49,7 +49,8 @@ public class TestCaseProvider {
 					env.setHeadless(source.get(key).getValue().toLowerCase() == "true");
 					break;
 				case ConfigurationOptions.ENV_OPTION_PRIORITY:
-					int priority = source.get(key).getValue().trim().length() == 0 ? 100 : Integer.valueOf(source.get(key).getValue());
+					int priority = source.get(key).getValue().trim().length() == 0 ? 100
+							: Integer.valueOf(source.get(key).getValue());
 					env.setPriority(priority);
 					break;
 				default:

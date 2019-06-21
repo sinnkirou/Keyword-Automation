@@ -19,7 +19,7 @@ public class ExcelUtils {
 	private static XSSFWorkbook ExcelWBook;
 	private static XSSFCell Cell;
 
-	public static Object[][] getTableArray(String FilePath, String SheetName){
+	public static Object[][] getTableArray(String FilePath, String SheetName) {
 		String[][] tabArray = null;
 
 		try {
@@ -81,7 +81,7 @@ public class ExcelUtils {
 	public static String getCellData(XSSFRow row, int ColNum) {
 		try {
 			Cell = row.getCell(ColNum);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			Log.error(e.getLocalizedMessage());
 			throw e;
 		}
@@ -108,7 +108,7 @@ public class ExcelUtils {
 		return "";
 	}
 
-	public static void setExcelFile(String Path, String SheetName) throws IOException  {
+	public static void setExcelFile(String Path, String SheetName) throws IOException {
 		FileInputStream ExcelFile = new FileInputStream(Path);
 		ExcelWBook = new XSSFWorkbook(ExcelFile);
 		ExcelWSheet = ExcelWBook.getSheet(SheetName);

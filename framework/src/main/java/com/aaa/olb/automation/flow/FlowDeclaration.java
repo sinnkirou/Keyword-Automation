@@ -3,11 +3,11 @@ package com.aaa.olb.automation.flow;
 public class FlowDeclaration {
 
 	private String name;
-	
+
 	private boolean template;
-	
+
 	private String page;
-	
+
 	private boolean excelModel;
 
 	public String getName() {

@@ -62,8 +62,8 @@ class ControlCollection<T extends Control> implements List<T> {
 
 	@SuppressWarnings("unchecked")
 	private T generateItem(WebElement element) throws Exception {
-		ParameterizedType type= (ParameterizedType) this.getClass().getGenericSuperclass();
-		Class<T> targetClass = (Class<T>)type.getActualTypeArguments()[0];
+		ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+		Class<T> targetClass = (Class<T>) type.getActualTypeArguments()[0];
 		Constructor<T> constructor = targetClass.getConstructor(SeleniumContext.class, WebElement.class);
 		return constructor.newInstance(this.context, element);
 	};
@@ -153,7 +153,7 @@ class ControlCollection<T extends Control> implements List<T> {
 			e.printStackTrace();
 			Log.info(e.getLocalizedMessage());
 		}
-		
+
 		return results;
 	}
 

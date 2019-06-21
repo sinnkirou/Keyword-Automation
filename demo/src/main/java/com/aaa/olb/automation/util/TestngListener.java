@@ -14,7 +14,7 @@ public class TestngListener extends BaseTestngListener {
 
 	private void takeScreenShot(ITestResult tr) {
 		TestClass baseTestcase = (TestClass) tr.getInstance();
-        String filename = TestHelper.getScreentshotFileName(getTestCaseName(tr));
+		String filename = TestHelper.getScreentshotFileName(getTestCaseName(tr));
 		baseTestcase.takescreen(filename, TestHelper.Failed_Testcases_Screentshots_Dir);
 	}
 

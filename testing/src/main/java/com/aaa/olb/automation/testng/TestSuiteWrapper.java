@@ -14,14 +14,14 @@ public class TestSuiteWrapper {
 	private String name;
 
 	private XmlSuite suite;
-	
+
 	private List<TestCaseWrapper> testCases;
 
 	public TestSuiteWrapper(String name) {
 		this.suite = new XmlSuite();
 		this.name = name;
 	}
-	
+
 	public TestCaseWrapper getTestCaseWrapper(int index) {
 		return this.testCases.get(index);
 	}

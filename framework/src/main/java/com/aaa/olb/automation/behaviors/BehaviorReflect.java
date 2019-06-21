@@ -19,9 +19,9 @@ public class BehaviorReflect {
 		for (Method method : fieldMethods) {
 
 			/*
-			 * get the right method with same method name and consistent parameters, 
-			 * then invoke it by the instance stored in BehaviorFacet
-			 * */
+			 * get the right method with same method name and consistent parameters, then
+			 * invoke it by the instance stored in BehaviorFacet
+			 */
 			if (method.getName().equals(facet.getBehaviorName())) {
 				if (facet.getParameters() != null && method.getParameterTypes().length == parameterAmounts
 						&& checkIsParameterMatched(method, facet)) {
@@ -41,13 +41,16 @@ public class BehaviorReflect {
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						Log.error(facet.getTarget() +" with action: " + facet.getBehaviorName() + "\n" + e.getLocalizedMessage());
+						String message = facet.getTarget() + " with action: " + facet.getBehaviorName() + "\n"
+								+ e.getLocalizedMessage();
+						Log.error(message);
 					}
 				}
 			}
 		}
 
-		throw new NotFoundException("unable to finish this operation: \n"+ facet.getTarget() + " with action: " + facet.getBehaviorName());
+		throw new NotFoundException(
+				"Action not found: \n" + facet.getTarget() + " with action: " + facet.getBehaviorName());
 	}
 
 	private static Boolean checkIsParameterMatched(Method method, BehaviorFacet facet) {

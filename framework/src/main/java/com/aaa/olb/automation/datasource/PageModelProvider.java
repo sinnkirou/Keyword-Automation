@@ -16,8 +16,8 @@ public class PageModelProvider {
 	 * @param provider
 	 * @return
 	 */
-	public static List<PageModelEntity> read(DataProvider provider){
-		
+	public static List<PageModelEntity> read(DataProvider provider) {
+
 		List<PageModelEntity> pageModels = new ArrayList<>();
 		List<Map<String, CellEntity>> sources = provider.getData();
 

@@ -11,17 +11,17 @@ public class Route {
 	protected String location;
 
 	/**
-	 * The control class type.
-	 * if the field is a list, it should be the special parameter type
+	 * The control class type. if the field is a list, it should be the special
+	 * parameter type
 	 * 
-	 * */
+	 */
 	protected Type fieldType;
-	
+
 	protected String fieldName;
-	
+
 	/**
 	 * is a generic collection or not.
-	 * */
+	 */
 	protected boolean generic = false;
 
 	public String getFieldName() {
@@ -66,30 +66,30 @@ public class Route {
 
 	public By getFinder() {
 		switch (this.getLocationKind()) {
-			case ID: {
-				return By.id(this.getLocation());
-			}
-			case CSS: {
-				return By.cssSelector(this.getLocation());
-			}
-			case CLASSNAME: {
-				return By.className(this.getLocation());
-			}
-			case TAG: {
-				return By.tagName(this.getLocation());
-			}
-			case LINKTEXT: {
-				return By.linkText(this.getLocation());
-			}
-			case PARTIALLINKTEXT: {
-				return By.partialLinkText(this.getLocation());
-			}
-			case NAME: {
-				return By.name(this.getLocation());
-			}
-			default: {
-				return By.xpath(this.getLocation());
-			}
+		case ID: {
+			return By.id(this.getLocation());
+		}
+		case CSS: {
+			return By.cssSelector(this.getLocation());
+		}
+		case CLASSNAME: {
+			return By.className(this.getLocation());
+		}
+		case TAG: {
+			return By.tagName(this.getLocation());
+		}
+		case LINKTEXT: {
+			return By.linkText(this.getLocation());
+		}
+		case PARTIALLINKTEXT: {
+			return By.partialLinkText(this.getLocation());
+		}
+		case NAME: {
+			return By.name(this.getLocation());
+		}
+		default: {
+			return By.xpath(this.getLocation());
+		}
 		}
 	}
 

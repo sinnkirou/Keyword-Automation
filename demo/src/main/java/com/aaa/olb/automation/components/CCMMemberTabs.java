@@ -23,37 +23,37 @@ public class CCMMemberTabs extends Component {
 
 	@ByXPath(".//li[contains(@class,'ant-menu-item')]")
 	private List<Li> tabs;
-	
+
 	@ColumnName("EnrollmentTab")
 	public Li getEnrollmentTab() {
 		return tabs.get(0);
 	}
-	
+
 	@ColumnName("CarePlanTab")
 	public Li getCarePlanTab() {
 		return tabs.get(1);
 	}
-	
+
 	@ColumnName("NoteTan")
 	public Li getNoteTab() {
 		return tabs.get(2);
 	}
-	
+
 	@ColumnName("RPMTab")
 	public Li getRPMTab() {
 		return tabs.get(3);
 	}
-	
+
 	@ColumnName("TimeTab")
 	public Li getTimeTab() {
 		return tabs.get(4);
 	}
-	
+
 	@ColumnName("CarePlanLogTab")
 	public Li getCarePlanLogTab() {
 		return tabs.get(5);
 	}
-	
+
 	@ColumnName("DocumentTab")
 	public Li getDocumentTab() {
 		return tabs.get(6);

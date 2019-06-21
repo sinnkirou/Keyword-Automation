@@ -30,9 +30,10 @@ public abstract class BasePage extends ActionRepository {
 			PageFactory.create(context, this);
 		} catch (Exception ex) {
 			this.error(this, generateAction("Page Initialization"), ex.getLocalizedMessage(), ex);
+			ex.printStackTrace();
 		}
 	}
-	
+
 	protected BaseAction generateAction(String actionName) {
 		String targetName = this.getClass().getSimpleName();
 		if (this.context != null && this.context.getRoute() != null) {
@@ -57,6 +58,7 @@ public abstract class BasePage extends ActionRepository {
 			this.info(this, generateAction(message));
 		} catch (Exception e) {
 			this.error(this, generateAction("waitForAvailable"), e.getLocalizedMessage(), e);
+			throw e;
 		}
 	}
 

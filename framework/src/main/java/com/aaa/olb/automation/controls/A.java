@@ -19,7 +19,7 @@ public class A extends Textbox {
 	 */
 	public String getLink() {
 		LocalDateTime startTime = LocalDateTime.now();
-		String href =  this.getAttribute("href");
+		String href = this.getAttribute("href");
 		this.info(this, generateAction(String.format("getLink"), startTime, LocalDateTime.now()));
 		return href;
 	}
@@ -29,7 +29,7 @@ public class A extends Textbox {
 	 */
 	public String getTarget() {
 		LocalDateTime startTime = LocalDateTime.now();
-		String value  = this.getAttribute("target");
+		String value = this.getAttribute("target");
 		this.info(this, generateAction(String.format("getTarget"), startTime, LocalDateTime.now()));
 		return value;
 	}

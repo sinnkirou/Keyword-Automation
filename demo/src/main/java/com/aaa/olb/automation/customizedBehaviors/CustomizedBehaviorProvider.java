@@ -21,13 +21,20 @@ import com.aaa.olb.automation.util.Constants;
  * so as to get the needed customized Behavior
  */
 public class CustomizedBehaviorProvider implements BehaviorProvider {
-	
+
 	@Override
 	public Behavior get(BehaviorFacet facet) {
 		// TODO Auto-generated method stub
 
 		Class<?> clazzType = facet.getTarget().getClass();
-		
+
+		/*
+		 * a option is to provide the behavior manually, which will provide the
+		 * customized behavior list here more clearly
+		 * 
+		 * if not, will then use class.forName with clazzType to dynamically get the
+		 * behavior
+		 */
 		if (facet.getTarget() instanceof SearchboxForm) {
 			return new SearchboxFormBehavior(facet);
 		} else if (facet.getTarget() instanceof RichTextBox) {
@@ -50,8 +57,8 @@ public class CustomizedBehaviorProvider implements BehaviorProvider {
 					.getConstructor(BehaviorFacet.class).newInstance(facet);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-			//e.printStackTrace();
-			//Log.info(e.getLocalizedMessage());
+			// e.printStackTrace();
+			// Log.info(e.getLocalizedMessage());
 			return new ControlBehavior(facet);
 		}
 	}

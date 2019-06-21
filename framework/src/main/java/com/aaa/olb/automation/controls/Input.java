@@ -26,12 +26,11 @@ public class Input extends Control {
 		super(context, webElement);
 	}
 
-
 	/**
 	 * @param keys
 	 */
 	public void enter(String keys) {
-		LocalDateTime startTime= LocalDateTime.now();
+		LocalDateTime startTime = LocalDateTime.now();
 		clear();
 		new Actions(driver).sendKeys(we, keys).perform();
 		this.info(this, generateAction(String.format("enter '%s'", keys), startTime, LocalDateTime.now()));
@@ -48,9 +47,9 @@ public class Input extends Control {
 	}
 
 	public void clear() {
-		LocalDateTime startTime= LocalDateTime.now();
+		LocalDateTime startTime = LocalDateTime.now();
 		focus();
-		//we.sendKeys(Keys.BACK_SPACE);
+		// we.sendKeys(Keys.BACK_SPACE);
 		we.clear();
 		this.info(this, generateAction("clear", startTime, LocalDateTime.now()));
 	}
@@ -68,30 +67,30 @@ public class Input extends Control {
 	 */
 	public String getInputType() {
 		LocalDateTime startTime = LocalDateTime.now();
-		String value  = this.getAttribute("type");
+		String value = this.getAttribute("type");
 		this.info(this, generateAction(String.format("getInputType"), startTime, LocalDateTime.now()));
 		return value;
 	}
 
 	public void blur() {
-		LocalDateTime startTime= LocalDateTime.now();
+		LocalDateTime startTime = LocalDateTime.now();
 		scrollToViewElement();
 		we.sendKeys(Keys.TAB);
 		this.info(this, generateAction("blur", startTime, LocalDateTime.now()));
 	}
-	
+
 	/**
 	 * wait until text presented
 	 * 
 	 * @param value
 	 */
 	public void waitForValueEntered(String value) {
-		WebDriverWait wait=new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
-		LocalDateTime startTime= LocalDateTime.now();
+		WebDriverWait wait = new WebDriverWait(this.driver, RuntimeSettings.getInstance().getExplicitTimeout());
+		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElementValue(we, value));
 		this.info(this, generateAction("Wait for entered", startTime, LocalDateTime.now()));
 	}
-		
+
 	/**
 	 * wait until text presented
 	 * 
@@ -99,20 +98,20 @@ public class Input extends Control {
 	 * @param seconds
 	 */
 	public void waitForValueEntered(String value, long seconds) {
-		WebDriverWait wait=new WebDriverWait(this.driver, seconds);
-		LocalDateTime startTime= LocalDateTime.now();
+		WebDriverWait wait = new WebDriverWait(this.driver, seconds);
+		LocalDateTime startTime = LocalDateTime.now();
 		wait.until(ExpectedConditions.textToBePresentInElementValue(we, value));
 		this.info(this, generateAction("Wait for entered", startTime, LocalDateTime.now()));
 	}
-	
+
 	/**
 	 * select partial context from a input with index
 	 * 
 	 * @param text: "0, 8"
 	 * 
-	 * e.g.: <input value="test context" />
+	 *              e.g.: <input value="test context" />
 	 */
-	public void selectPartialContentForInput (String text) {
+	public void selectPartialContentForInput(String text) {
 		String[] parameters = ParameterExacter.getParamters(text, 2);
 		String start = !parameters[0].isEmpty() ? parameters[0] : "0";
 		String end = !parameters[1].isEmpty() ? parameters[1] : String.valueOf(we.getText().length());
@@ -120,16 +119,16 @@ public class Input extends Control {
 		script.append("if( arguments[0].createTextRange ) {");
 		script.append("      var selRange = arguments[0].createTextRange();");
 		script.append("      selRange.collapse(true);");
-		script.append("      selRange.moveStart('character', "+start+");");
-		script.append("      selRange.moveEnd('character', "+end+");");
+		script.append("      selRange.moveStart('character', " + start + ");");
+		script.append("      selRange.moveEnd('character', " + end + ");");
 		script.append("      selRange.select();");
 		script.append("      arguments[0].focus();");
 		script.append("} else if( arguments[0].setSelectionRange ) {");
 		script.append("      arguments[0].focus();");
-		script.append("      arguments[0].setSelectionRange("+start+", "+end+");");
+		script.append("      arguments[0].setSelectionRange(" + start + ", " + end + ");");
 		script.append("} else if( typeof arguments[0].selectionStart != 'undefined' ) {");
-		script.append("      arguments[0].selectionStart = "+start+";");
-		script.append("      arguments[0].selectionEnd = "+end+";");
+		script.append("      arguments[0].selectionStart = " + start + ";");
+		script.append("      arguments[0].selectionEnd = " + end + ";");
 		script.append("      arguments[0].focus();");
 		script.append("}");
 		try {

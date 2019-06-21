@@ -103,12 +103,12 @@ public class HttpRequest {
 		httpPost.setEntity(new StringEntity(jsonData));
 		HttpClient client = HttpClientBuilder.create().build();
 		response = client.execute(httpPost);
-		//System.out.println("Post parameters : " + jsonData);
+		// System.out.println("Post parameters : " + jsonData);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 		while ((line = reader.readLine()) != null) {
 			result.append(line);
 		}
-		
+
 		if (response.getStatusLine().getStatusCode() != 200) {
 			System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
 			System.out.println(result.toString());

@@ -13,9 +13,10 @@ import com.aaa.olb.automation.framework.SeleniumContext;
 import com.aaa.olb.automation.util.Constants;
 
 /**
- *	Basically it's used like a page class
+ * Basically it's used like a page class
  *
- * a component which contains various of basic fields, mainly used for datepicker, radiobuttons, etc
+ * a component which contains various of basic fields, mainly used for
+ * datepicker, radiobuttons, etc
  *
  */
 @BehaviorIndication(name = SystemConstants.BEHAVIOR_ENTER, provider = Constants.CUSTOMIZED_BEHAVIOR_PROVIDER_CLASS)
@@ -25,18 +26,18 @@ public class SearchboxForm extends Component {
 		super(context, webElement);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@ById("sb_form_q")
 	private Input keyword;
 
 	@ById("sb_form_go")
 	private Button searchButton;
-	
+
 	@ColumnName("Keyword")
 	public Input getKeyword() {
 		return keyword;
 	}
-	
+
 	@ColumnName("SearchButton")
 	public Button getSearchButton() {
 		return searchButton;

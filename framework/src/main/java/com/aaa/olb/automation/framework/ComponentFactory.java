@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-
 public class ComponentFactory {
 
 	private static List<Route> scan(Class<?> type) {
@@ -23,23 +22,20 @@ public class ComponentFactory {
 		return metadatas;
 	}
 
-	private static Object initControl(SeleniumContext context)
-			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
-		if(context.getRoute().isGeneric()){
+	private static Object initControl(SeleniumContext context) throws NoSuchMethodException, SecurityException,
+			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		if (context.getRoute().isGeneric()) {
 			ControlCollectionFactory factory = new ControlCollectionFactory();
 			return factory.create(context);
-		}
-		else{
+		} else {
 			ControlFactory factory = new ControlFactory();
 			return factory.create(context);
 		}
 	}
 
-
-	private static void init(Object component, SeleniumContext context ) throws Exception {
+	private static void init(Object component, SeleniumContext context) throws Exception {
 		Object value = initControl(context);
-		ReflectionRoute route = (ReflectionRoute)context.getRoute();
+		ReflectionRoute route = (ReflectionRoute) context.getRoute();
 		route.getField().setAccessible(true);
 		route.getField().set(component, value);
 	}

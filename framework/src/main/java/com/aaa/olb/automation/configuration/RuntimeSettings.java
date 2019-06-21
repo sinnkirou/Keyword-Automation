@@ -21,7 +21,7 @@ public class RuntimeSettings {
 	 * explicit time out -seconds
 	 */
 	private long explicitTimeout;
-	
+
 	/**
 	 * explicit time out -seconds
 	 */
@@ -46,12 +46,12 @@ public class RuntimeSettings {
 	 * the retry count
 	 */
 	private int retry;
-	
+
 	/**
 	 * should testcases parallel running
 	 */
 	private boolean parallel;
-	
+
 	private int threadCount;
 
 	private RuntimeSettings() {

@@ -27,7 +27,7 @@ public class Textbox extends Control {
 	public String getText() {
 		LocalDateTime startTime = LocalDateTime.now();
 		TestHelper.threadSleep();
-		String text =  we.getText();
+		String text = we.getText();
 		this.info(this, generateAction(String.format("getText"), startTime, LocalDateTime.now()));
 		return text;
 	}
@@ -45,7 +45,7 @@ public class Textbox extends Control {
 		wait.until(ExpectedConditions.textToBePresentInElement(we, text));
 		this.info(this, generateAction(String.format("wait for text - %s", text), startTime, LocalDateTime.now()));
 	}
-	
+
 	/**
 	 * select partial context from a span or div
 	 * 
