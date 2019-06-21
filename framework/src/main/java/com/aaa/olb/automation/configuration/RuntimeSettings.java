@@ -21,6 +21,11 @@ public class RuntimeSettings {
 	 * explicit time out -seconds
 	 */
 	private long explicitTimeout;
+	
+	/**
+	 * explicit time out -seconds
+	 */
+	private long scriptTimeout;
 
 	/**
 	 * default timeout - seconds
@@ -28,7 +33,7 @@ public class RuntimeSettings {
 	private long timeout;
 
 	/**
-	 * async operation or request timeout - seconds
+	 * operation delay or wait - seconds
 	 */
 	private long waitOrDealyTimeout;
 
@@ -50,14 +55,15 @@ public class RuntimeSettings {
 	private int threadCount;
 
 	private RuntimeSettings() {
-		this.timeout = 1;
+		this.timeout = 2;
 		this.waitOrDealyTimeout = 3;
-		this.redirectTimeout = 10;
-		this.implicitTimeout = 5;
-		this.explicitTimeout = 5;
+		this.redirectTimeout = 15;
+		this.implicitTimeout = 10;
+		this.explicitTimeout = 10;
 		this.retry = 0;
 		this.parallel = false;
 		this.threadCount = 1;
+		this.setScriptTimeout(10);
 	}
 
 	public long getTimeout() {
@@ -118,6 +124,10 @@ public class RuntimeSettings {
 			this.implicitTimeout = Long.valueOf(value);
 			break;
 		}
+		case SystemConstants.SETTINGS_SCRIPT_WAIT_TIME: {
+			this.scriptTimeout = Long.valueOf(value);
+			break;
+		}
 		case SystemConstants.SETTINGS_PARALLEL: {
 			this.parallel = value.toLowerCase().equals("true");
 			break;
@@ -158,6 +168,20 @@ public class RuntimeSettings {
 	 */
 	public void setThreadCount(int threadCount) {
 		this.threadCount = threadCount;
+	}
+
+	/**
+	 * @return the scriptTimeout
+	 */
+	public long getScriptTimeout() {
+		return scriptTimeout;
+	}
+
+	/**
+	 * @param scriptTimeout the scriptTimeout to set
+	 */
+	public void setScriptTimeout(long scriptTimeout) {
+		this.scriptTimeout = scriptTimeout;
 	}
 
 }

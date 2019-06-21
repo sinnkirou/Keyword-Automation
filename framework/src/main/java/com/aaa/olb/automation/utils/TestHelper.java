@@ -86,7 +86,7 @@ public class TestHelper {
 			double minutes = Double.parseDouble(parameter);
 			long time = new Double(minutes * 60 * 1000).longValue();
 			
-			String message1 = "start sleeped for " + parameter + " minutes";
+			String message1 = "start sleeping for " + parameter + " minutes";
 			Log.info(message1);
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + message1);
 			

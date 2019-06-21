@@ -16,11 +16,11 @@ public abstract class Browser {
 
 	private WebDriver driver;
 	private Boolean headless;
-	
+
 	public Browser(String driverPath, String remoteHub, Boolean headless) {
-		if(SystemProperty.isWindows()){  
-			driverPath+=".exe";
-		}  
+		if (SystemProperty.isWindows()) {
+			driverPath += ".exe";
+		}
 		this.driver = this.initialize(driverPath, remoteHub, headless);
 		this.headless = headless;
 	}
@@ -33,19 +33,21 @@ public abstract class Browser {
 
 	public void open() {
 		try {
-			driver.manage().timeouts().implicitlyWait(RuntimeSettings.getInstance().getImplicitTimeout(), TimeUnit.SECONDS);
-
-			driver.manage().timeouts().pageLoadTimeout(RuntimeSettings.getInstance().getRedirectTimeout(),TimeUnit.SECONDS);
-
-			driver.manage().timeouts().setScriptTimeout(RuntimeSettings.getInstance().getTimeout(),
+			driver.manage().timeouts().implicitlyWait(RuntimeSettings.getInstance().getImplicitTimeout(),
 					TimeUnit.SECONDS);
-			
-			if(!this.headless) {
+
+			driver.manage().timeouts().pageLoadTimeout(RuntimeSettings.getInstance().getRedirectTimeout(),
+					TimeUnit.SECONDS);
+
+			driver.manage().timeouts().setScriptTimeout(RuntimeSettings.getInstance().getScriptTimeout(),
+					TimeUnit.SECONDS);
+
+			if (!this.headless) {
 				driver.manage().window().maximize();
-			}else{
-				driver.manage().window().setSize(new Dimension(1920,1080));
+			} else {
+				driver.manage().window().setSize(new Dimension(1920, 1080));
 			}
-			
+
 			driver.switchTo().defaultContent();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,9 +67,9 @@ public abstract class Browser {
 	public void close() {
 		driver.close();
 	}
-	
+
 	public void refresh() {
-		driver.navigate().refresh(); 
+		driver.navigate().refresh();
 		String message = "Browser refreshed Successful";
 		System.out.println(LoggerHelper.formatConsoleLog("INFO") + message);
 		Log.info(message);

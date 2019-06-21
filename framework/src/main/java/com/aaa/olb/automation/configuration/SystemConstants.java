@@ -17,6 +17,8 @@ public final class SystemConstants {
 	
 	public final static String SETTINGS_EXPLICIT_WAIT_TIME="explicit";
 	
+	public final static String SETTINGS_SCRIPT_WAIT_TIME="script";
+	
 	public final static String SETTINGS_RETRY="retry";
 	
 	public final static String SETTINGS_PARALLEL="parallel";

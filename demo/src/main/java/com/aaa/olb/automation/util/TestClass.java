@@ -85,7 +85,11 @@ public class TestClass extends BaseTestClass {
 				expect = "RGB(" + expect + ")";
 			}
 
-			Assert.assertEquals(result, expect);
+			if (ts.getActionKeyWord().contains("[is")) {
+				Assert.assertTrue(result.equals(expect.equals("FALSE") ? "FALSE" : "TRUE"));
+			}else{
+				Assert.assertEquals(result, expect);
+			}
 			Log.info(ts.getTargetName() + " is displayed as expected: " + ts.getValue());
 			System.out.println(LoggerHelper.formatConsoleLog("INFO") + ts.getTargetName()
 					+ " is displayed as expected: " + ts.getValue());
