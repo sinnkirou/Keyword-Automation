@@ -43,7 +43,7 @@ public class CCMTimeLog extends Component {
 			}
 		}
 		int totalSeconds = seconds + minutes * 60;
-		if (parameters[0] * 60 < totalSeconds && totalSeconds < parameters[1] * 60) {
+		if (parameters[0] * 60 <= totalSeconds && totalSeconds < parameters[1] * 60) {
 			return true;
 		}
 
