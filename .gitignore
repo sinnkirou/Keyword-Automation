@@ -22,3 +22,5 @@ maven/
 demo/src/main/java/test/sample/ParameterSample\.java
 
 demo/test\.xml
+
+*.log

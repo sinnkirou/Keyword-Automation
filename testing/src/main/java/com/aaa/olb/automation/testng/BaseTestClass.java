@@ -22,7 +22,7 @@ public abstract class BaseTestClass {
 
 	protected TestSuiteWrapper suite;
 
-	protected TestCaseEntity tc;
+	public TestCaseEntity tc;
 
 	@BeforeClass
 	public void beforeClass() {

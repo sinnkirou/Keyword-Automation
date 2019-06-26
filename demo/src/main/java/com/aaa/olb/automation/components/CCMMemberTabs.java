@@ -34,28 +34,32 @@ public class CCMMemberTabs extends Component {
 		return tabs.get(1);
 	}
 
-	@ColumnName("NoteTan")
-	public Li getNoteTab() {
-		return tabs.get(2);
-	}
-
 	@ColumnName("RPMTab")
 	public Li getRPMTab() {
+		return tabs.get(2);
+	}
+	@ColumnName("DocumentTab")
+	public Li getDocumentTab() {
 		return tabs.get(3);
+	}
+	@ColumnName("NoteTan")
+	public Li getNoteTab() {
+		return tabs.get(4);
+	}
+
+	@ColumnName("QuestionnaireTab")
+	public Li getQuestionnaireTab() {
+		return tabs.get(5);
 	}
 
 	@ColumnName("TimeTab")
 	public Li getTimeTab() {
-		return tabs.get(4);
+		return tabs.get(6);
 	}
 
 	@ColumnName("CarePlanLogTab")
 	public Li getCarePlanLogTab() {
-		return tabs.get(5);
+		return tabs.get(7);
 	}
 
-	@ColumnName("DocumentTab")
-	public Li getDocumentTab() {
-		return tabs.get(6);
-	}
 }

@@ -6,6 +6,7 @@ import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
 import com.aaa.olb.automation.log.LoggerHelper;
+import com.aaa.olb.automation.testng.BaseTestClass;
 
 public abstract class BaseTestngListener extends TestListenerAdapter {
 	protected Logger logger = Logger.getLogger("TestngListener");
@@ -46,10 +47,15 @@ public abstract class BaseTestngListener extends TestListenerAdapter {
 	}
 
 	protected String getTestCaseName(ITestResult tr) {
+		/*
 		if (tr.getTestContext() != null && tr.getTestContext().getName() != null) {
 			return tr.getTestContext().getName();
 		} else {
 			return tr.getName();
 		}
+		*/
+		
+		BaseTestClass baseTestcase = (BaseTestClass) tr.getInstance();
+		return baseTestcase.tc.getTestCaseID();
 	}
 }
