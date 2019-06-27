@@ -8,6 +8,8 @@ import com.aaa.olb.automation.configuration.SystemConstants;
 import com.aaa.olb.automation.controls.Div;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.SeleniumContext;
+import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.util.Constants;
 import com.aaa.olb.automation.utils.ParameterExacter;
 
@@ -32,7 +34,8 @@ public class CCMTimeLog extends Component {
 	 */
 	public boolean isDurationCorrect(String text) {
 		double[] parameters = ParameterExacter.getDoubleParameters(text, 2);
-		String[] timestamp = this.duration.getText().split(" ");
+		String expect = this.duration.getText();
+		String[] timestamp = expect.split(" ");
 		int seconds = 0;
 		int minutes = 0;
 		for (String arr : timestamp) {
@@ -47,10 +50,20 @@ public class CCMTimeLog extends Component {
 			return true;
 		}
 
+		String message = "Expected: " + text + " ,actual: " + expect;
+		Log.error(message);
+		System.out.println(LoggerHelper.formatConsoleLog("Error") + message);
 		return false;
 	}
 
 	public boolean isLoggedBy(String text) {
-		return this.loggedBy.getText().toLowerCase().contains(text.toLowerCase());
+		String expect = this.loggedBy.getText();
+		boolean result = expect.toLowerCase().contains(text.toLowerCase());
+		if (!result) {
+			String message = "Expected: " + text + " ,actual: " + expect;
+			Log.error(message);
+			System.out.println(LoggerHelper.formatConsoleLog("Error") + message);
+		}
+		return result;
 	}
 }

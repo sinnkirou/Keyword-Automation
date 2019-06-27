@@ -24,7 +24,7 @@ public class TestClass extends BaseTestClass {
 	protected String previousPage = "";
 
 	protected String currentPage = "";
-	
+
 	protected String testcaseId = "";
 
 	@BeforeSuite
@@ -49,9 +49,9 @@ public class TestClass extends BaseTestClass {
 	@Parameters()
 	public void testMethod() {
 		long id = Thread.currentThread().getId();
-		String msg = String.format("Testcase %s is running on thread %d", this.testcaseId , id);
+		String msg = String.format("Testcase %s is running on thread %d", this.testcaseId, id);
 		Log.info(msg);
-		System.out.println(this.testcaseId  + " with thread id: " + id);
+		System.out.println(this.testcaseId + " with thread id: " + id);
 
 		BehaviourAnalysis analyser = new BehaviourAnalysis();
 		for (TestStepEntity ts : this.tc.getTestSteps()) {
@@ -61,7 +61,6 @@ public class TestClass extends BaseTestClass {
 				result = analyser.action(browser.getDriver(), ts, initializePage,
 						this.tc.getPageRepository().getPage(ts.getPageName()));
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Log.error(e.getLocalizedMessage());
 				Assert.fail(e.getLocalizedMessage());

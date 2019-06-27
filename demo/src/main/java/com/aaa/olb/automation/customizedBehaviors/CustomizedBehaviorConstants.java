@@ -30,5 +30,5 @@ public class CustomizedBehaviorConstants {
 
 	public static final String IS_DURATION_CORRECT = "[is_duration_correct]";
 
-	public static final String IS_LOGED_BY = "[is_loged_by]";
+	public static final String IS_LOGGED_BY = "[is_logged_by]";
 }
