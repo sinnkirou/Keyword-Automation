@@ -8,6 +8,7 @@ import com.aaa.olb.automation.framework.BasePage;
 import com.aaa.olb.automation.framework.Component;
 import com.aaa.olb.automation.framework.PageRepository;
 import com.aaa.olb.automation.log.Log;
+import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.utils.TestHelper;
 
 public class BehaviourAnalysis {
@@ -92,6 +93,7 @@ public class BehaviourAnalysis {
 					message.append("Target: " + testStep.getTargetName() + "\n");
 					message.append("Action: " + testStep.getActionKeyWord() + "\n");
 					Log.error(message.toString());
+					System.out.println(LoggerHelper.formatConsoleLog("Error") + message.toString());
 					throw e;
 				}
 			} else if (Component.class.isAssignableFrom(method.getReturnType())
