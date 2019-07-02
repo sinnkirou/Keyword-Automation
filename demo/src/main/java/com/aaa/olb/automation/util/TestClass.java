@@ -2,6 +2,7 @@ package com.aaa.olb.automation.util;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -17,6 +18,7 @@ import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.log.LoggerHelper;
 import com.aaa.olb.automation.testng.BaseTestClass;
 import com.aaa.olb.automation.utils.FileUtils;
+import com.aaa.olb.automation.utils.MockNetworkUtils;
 import com.aaa.olb.automation.utils.TestHelper;
 
 public class TestClass extends BaseTestClass {
@@ -109,6 +111,10 @@ public class TestClass extends BaseTestClass {
 			} else if (ts.getActionKeyWord().toLowerCase().trim()
 					.equals(SystemConstants.BEHAVIOR_THREAD_SLEEP_BY_MINUTES)) {
 				TestHelper.threadSleepByMinutes(ts.getValue());
+			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_NETWORK_SHUTDOWN)) {
+				MockNetworkUtils.mockNetworkShutdown((WebDriver) this.browser.getDriver());
+			} else if (ts.getActionKeyWord().toLowerCase().trim().equals(SystemConstants.BEHAVIOR_NETWORK_RECOVER)) {
+				MockNetworkUtils.mockNetworkRecover((WebDriver) this.browser.getDriver());
 			}
 	}
 

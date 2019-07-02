@@ -6,7 +6,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-
 import com.aaa.olb.automation.configuration.RuntimeSettings;
 import com.aaa.olb.automation.log.Log;
 import com.aaa.olb.automation.log.LoggerHelper;
@@ -49,6 +48,7 @@ public abstract class Browser {
 			}
 
 			driver.switchTo().defaultContent();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getLocalizedMessage());

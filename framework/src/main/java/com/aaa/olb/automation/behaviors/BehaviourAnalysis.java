@@ -52,6 +52,10 @@ public class BehaviourAnalysis {
 
 	private Object behave(Class<?> clazz, TestStepEntity testStep, Method parentMethod) throws Throwable {
 		Object result = null;
+		
+		/*
+		 * if no target, means a global action should be performed
+		 * */
 		if (testStep.getTargetName().trim().length() == 0) {
 			methodMatched = true;
 			return result;

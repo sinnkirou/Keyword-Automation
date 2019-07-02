@@ -104,6 +104,10 @@ public final class SystemConstants {
 	public final static String BEHAVIOR_REFRESH = "refresh";
 
 	public final static String BEHAVIOR_THREAD_SLEEP_BY_MINUTES = "threadsleepbyminutes";
+	
+	public final static String BEHAVIOR_NETWORK_SHUTDOWN = "networkshutdown";
+	
+	public final static String BEHAVIOR_NETWORK_RECOVER = "networkrecover";
 
 	public final static String BEHAVIOR_CLICK_BY_JS = "clickbyjs";
 }
